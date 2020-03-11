@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports Scripting
 Imports System.Text.RegularExpressions
+Imports System.Data.OleDb
 
 
 
@@ -16,6 +17,7 @@ Public Module GlobalVariables
     'Public excelTemplateFilePath As String = "D:\ES.xlsx"
     Public excelTemplateFilePath As String = ConfigurationManager.ConnectionStrings("excelPath").ConnectionString
     Public excelFilesBasePath As String = ConfigurationManager.ConnectionStrings("excelBasePath").ConnectionString
+    Public excelInventoryGarm As String = "C:\Users\Yousefi\Desktop\springDataBase\garm.xlsx"
 
     '' ----------------------------------------------------------  User Info  --------------------------------------------------------
 
@@ -54,6 +56,43 @@ Public Module GlobalVariables
 End Module
 
 Public Module globalFunctions
+
+    Public Function LoadDataTable(sql As String) As DataTable
+        '' This function gets an SQL Query then returns data in a datatable
+        Dim dt = New DataTable
+        Using dbcon As New OleDbConnection(connectionString)
+            Using cmd As New OleDbCommand(sql, dbcon)
+                dbcon.Open()
+                dt.Load(cmd.ExecuteReader())
+                dbcon.Close()
+            End Using
+        End Using
+        Return dt
+    End Function
+
+
+    Public Function ImportExceltoDatatable(filepath As String) As DataTable
+        '' This function import data from an excel file and return the data in a data table
+        ' string sqlquery= "Select * From [SheetName$] Where YourCondition";
+        Dim dt As New DataTable
+        Try
+            Dim ds As New DataSet()
+            Dim constring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & filepath & ";Extended Properties=""Excel 12.0;HDR=YES;"""
+            Dim con As New OleDbConnection(constring & "")
+            con.Open()
+            Dim myTableName = con.GetSchema("Tables").Rows(0)("TABLE_NAME")
+            Dim sqlquery As String = String.Format("SELECT * FROM [{0}]", myTableName) ' "Select * From " & myTableName  
+            Dim da As New OleDbDataAdapter(sqlquery, con)
+            da.Fill(ds)
+            dt = ds.Tables(0)
+            con.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(Err.Description, MsgBoxStyle.Critical)
+            Return dt
+        End Try
+    End Function
+
     Public Function getDate()
         Dim pc As New Globalization.PersianCalendar
         Return pc.GetYear(Now).ToString & "-" & pc.GetMonth(Now).ToString & "-" & pc.GetDayOfMonth(Now).ToString
@@ -174,9 +213,9 @@ End Module
 '       [✔] Prevent using of unwanted characters in the file name
 '       [✔] Prevent overwriting previous excel files with the same name
 '       [✔] Password Protect The DataBase
-'       [  ] Try a better database server (Preferably PostgreSQL)
-'       [  ]
-'       [  ]
+'       [✔] Try a better database server (Preferably PostgreSQL) -> it works fine with minimal change
+'       [  ] Migrate to postgreSQL
+'       [  ] Make all calls to database async
 '       [  ]
 '
 '
