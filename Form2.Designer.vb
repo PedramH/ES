@@ -82,6 +82,8 @@ Partial Class productForm
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.BTCheckMandrelInventory = New System.Windows.Forms.Button()
+        Me.BTWireInventory = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -207,6 +209,8 @@ Partial Class productForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.BTWireInventory)
+        Me.GroupBox1.Controls.Add(Me.BTCheckMandrelInventory)
         Me.GroupBox1.Controls.Add(Me.Label27)
         Me.GroupBox1.Controls.Add(Me.TBMaxLoad)
         Me.GroupBox1.Controls.Add(Me.Label26)
@@ -266,10 +270,10 @@ Partial Class productForm
         Me.GroupBox1.Controls.Add(Me.TBOD)
         Me.GroupBox1.Controls.Add(Me.TBWireDiameter)
         Me.GroupBox1.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(16, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(16, -2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.GroupBox1.Size = New System.Drawing.Size(776, 477)
+        Me.GroupBox1.Size = New System.Drawing.Size(776, 490)
         Me.GroupBox1.TabIndex = 14
         Me.GroupBox1.TabStop = False
         '
@@ -278,7 +282,7 @@ Partial Class productForm
         Me.Label27.AutoSize = True
         Me.Label27.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label27.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label27.Location = New System.Drawing.Point(78, 223)
+        Me.Label27.Location = New System.Drawing.Point(329, 267)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(78, 26)
         Me.Label27.TabIndex = 59
@@ -287,10 +291,10 @@ Partial Class productForm
         '
         'TBMaxLoad
         '
-        Me.TBMaxLoad.Location = New System.Drawing.Point(10, 222)
+        Me.TBMaxLoad.Location = New System.Drawing.Point(224, 267)
         Me.TBMaxLoad.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMaxLoad.Name = "TBMaxLoad"
-        Me.TBMaxLoad.Size = New System.Drawing.Size(60, 29)
+        Me.TBMaxLoad.Size = New System.Drawing.Size(79, 29)
         Me.TBMaxLoad.TabIndex = 58
         Me.TBMaxLoad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -339,7 +343,7 @@ Partial Class productForm
         Me.Label24.AutoSize = True
         Me.Label24.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label24.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label24.Location = New System.Drawing.Point(245, 223)
+        Me.Label24.Location = New System.Drawing.Point(536, 267)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(37, 26)
         Me.Label24.TabIndex = 53
@@ -348,7 +352,7 @@ Partial Class productForm
         '
         'TBSolidStress
         '
-        Me.TBSolidStress.Location = New System.Drawing.Point(162, 222)
+        Me.TBSolidStress.Location = New System.Drawing.Point(438, 268)
         Me.TBSolidStress.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBSolidStress.Name = "TBSolidStress"
         Me.TBSolidStress.Size = New System.Drawing.Size(79, 29)
@@ -398,7 +402,7 @@ Partial Class productForm
         'BTNew
         '
         Me.BTNew.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTNew.Location = New System.Drawing.Point(425, 424)
+        Me.BTNew.Location = New System.Drawing.Point(425, 446)
         Me.BTNew.Margin = New System.Windows.Forms.Padding(1)
         Me.BTNew.Name = "BTNew"
         Me.BTNew.Size = New System.Drawing.Size(131, 37)
@@ -409,7 +413,7 @@ Partial Class productForm
         'BTDelete
         '
         Me.BTDelete.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTDelete.Location = New System.Drawing.Point(567, 424)
+        Me.BTDelete.Location = New System.Drawing.Point(567, 446)
         Me.BTDelete.Margin = New System.Windows.Forms.Padding(1)
         Me.BTDelete.Name = "BTDelete"
         Me.BTDelete.Size = New System.Drawing.Size(57, 37)
@@ -420,7 +424,7 @@ Partial Class productForm
         'BTModify
         '
         Me.BTModify.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTModify.Location = New System.Drawing.Point(635, 424)
+        Me.BTModify.Location = New System.Drawing.Point(635, 446)
         Me.BTModify.Margin = New System.Windows.Forms.Padding(1)
         Me.BTModify.Name = "BTModify"
         Me.BTModify.Size = New System.Drawing.Size(101, 37)
@@ -430,7 +434,7 @@ Partial Class productForm
         '
         'TBComment
         '
-        Me.TBComment.Location = New System.Drawing.Point(10, 277)
+        Me.TBComment.Location = New System.Drawing.Point(10, 308)
         Me.TBComment.Multiline = True
         Me.TBComment.Name = "TBComment"
         Me.TBComment.Size = New System.Drawing.Size(392, 125)
@@ -462,7 +466,7 @@ Partial Class productForm
         Me.Label20.AutoSize = True
         Me.Label20.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label20.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label20.Location = New System.Drawing.Point(536, 376)
+        Me.Label20.Location = New System.Drawing.Point(536, 405)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(39, 26)
         Me.Label20.TabIndex = 41
@@ -471,7 +475,7 @@ Partial Class productForm
         '
         'TBL3
         '
-        Me.TBL3.Location = New System.Drawing.Point(439, 375)
+        Me.TBL3.Location = New System.Drawing.Point(439, 404)
         Me.TBL3.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBL3.Name = "TBL3"
         Me.TBL3.Size = New System.Drawing.Size(79, 29)
@@ -483,7 +487,7 @@ Partial Class productForm
         Me.Label19.AutoSize = True
         Me.Label19.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label19.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label19.Location = New System.Drawing.Point(536, 327)
+        Me.Label19.Location = New System.Drawing.Point(536, 357)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(39, 26)
         Me.Label19.TabIndex = 39
@@ -492,7 +496,7 @@ Partial Class productForm
         '
         'TBL2
         '
-        Me.TBL2.Location = New System.Drawing.Point(439, 326)
+        Me.TBL2.Location = New System.Drawing.Point(439, 356)
         Me.TBL2.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBL2.Name = "TBL2"
         Me.TBL2.Size = New System.Drawing.Size(79, 29)
@@ -504,7 +508,7 @@ Partial Class productForm
         Me.Label18.AutoSize = True
         Me.Label18.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label18.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label18.Location = New System.Drawing.Point(536, 278)
+        Me.Label18.Location = New System.Drawing.Point(536, 312)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(39, 26)
         Me.Label18.TabIndex = 37
@@ -513,7 +517,7 @@ Partial Class productForm
         '
         'TBL1
         '
-        Me.TBL1.Location = New System.Drawing.Point(439, 277)
+        Me.TBL1.Location = New System.Drawing.Point(439, 311)
         Me.TBL1.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBL1.Name = "TBL1"
         Me.TBL1.Size = New System.Drawing.Size(79, 29)
@@ -525,7 +529,7 @@ Partial Class productForm
         Me.Label17.AutoSize = True
         Me.Label17.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label17.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label17.Location = New System.Drawing.Point(679, 376)
+        Me.Label17.Location = New System.Drawing.Point(679, 404)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(65, 26)
         Me.Label17.TabIndex = 35
@@ -534,7 +538,7 @@ Partial Class productForm
         '
         'TBF3
         '
-        Me.TBF3.Location = New System.Drawing.Point(589, 375)
+        Me.TBF3.Location = New System.Drawing.Point(589, 404)
         Me.TBF3.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBF3.Name = "TBF3"
         Me.TBF3.Size = New System.Drawing.Size(79, 29)
@@ -546,7 +550,7 @@ Partial Class productForm
         Me.Label16.AutoSize = True
         Me.Label16.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label16.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label16.Location = New System.Drawing.Point(679, 327)
+        Me.Label16.Location = New System.Drawing.Point(679, 357)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(62, 26)
         Me.Label16.TabIndex = 33
@@ -555,7 +559,7 @@ Partial Class productForm
         '
         'TBF2
         '
-        Me.TBF2.Location = New System.Drawing.Point(589, 326)
+        Me.TBF2.Location = New System.Drawing.Point(589, 356)
         Me.TBF2.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBF2.Name = "TBF2"
         Me.TBF2.Size = New System.Drawing.Size(79, 29)
@@ -567,7 +571,7 @@ Partial Class productForm
         Me.Label15.AutoSize = True
         Me.Label15.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label15.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label15.Location = New System.Drawing.Point(679, 278)
+        Me.Label15.Location = New System.Drawing.Point(679, 312)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(58, 26)
         Me.Label15.TabIndex = 31
@@ -576,7 +580,7 @@ Partial Class productForm
         '
         'TBF1
         '
-        Me.TBF1.Location = New System.Drawing.Point(589, 277)
+        Me.TBF1.Location = New System.Drawing.Point(589, 311)
         Me.TBF1.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBF1.Name = "TBF1"
         Me.TBF1.Size = New System.Drawing.Size(79, 29)
@@ -588,7 +592,7 @@ Partial Class productForm
         Me.Label14.AutoSize = True
         Me.Label14.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label14.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label14.Location = New System.Drawing.Point(375, 223)
+        Me.Label14.Location = New System.Drawing.Point(681, 268)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(37, 26)
         Me.Label14.TabIndex = 29
@@ -597,7 +601,7 @@ Partial Class productForm
         '
         'TBSpringRate
         '
-        Me.TBSpringRate.Location = New System.Drawing.Point(294, 222)
+        Me.TBSpringRate.Location = New System.Drawing.Point(589, 267)
         Me.TBSpringRate.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBSpringRate.Name = "TBSpringRate"
         Me.TBSpringRate.Size = New System.Drawing.Size(79, 29)
@@ -609,7 +613,7 @@ Partial Class productForm
         Me.Label13.AutoSize = True
         Me.Label13.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Label13.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label13.Location = New System.Drawing.Point(503, 223)
+        Me.Label13.Location = New System.Drawing.Point(330, 222)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(77, 26)
         Me.Label13.TabIndex = 27
@@ -618,7 +622,7 @@ Partial Class productForm
         '
         'TBWireLength
         '
-        Me.TBWireLength.Location = New System.Drawing.Point(422, 222)
+        Me.TBWireLength.Location = New System.Drawing.Point(224, 222)
         Me.TBWireLength.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBWireLength.Name = "TBWireLength"
         Me.TBWireLength.Size = New System.Drawing.Size(79, 29)
@@ -628,7 +632,7 @@ Partial Class productForm
         'TBdbID
         '
         Me.TBdbID.Enabled = False
-        Me.TBdbID.Location = New System.Drawing.Point(6, 432)
+        Me.TBdbID.Location = New System.Drawing.Point(6, 447)
         Me.TBdbID.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBdbID.Name = "TBdbID"
         Me.TBdbID.Size = New System.Drawing.Size(92, 29)
@@ -681,7 +685,7 @@ Partial Class productForm
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label12.Location = New System.Drawing.Point(104, 435)
+        Me.Label12.Location = New System.Drawing.Point(104, 450)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(76, 26)
         Me.Label12.TabIndex = 25
@@ -748,6 +752,25 @@ Partial Class productForm
         Me.Label9.TabIndex = 19
         Me.Label9.Text = "جهت پیچش"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'BTCheckMandrelInventory
+        '
+        Me.BTCheckMandrelInventory.Location = New System.Drawing.Point(438, 222)
+        Me.BTCheckMandrelInventory.Name = "BTCheckMandrelInventory"
+        Me.BTCheckMandrelInventory.Size = New System.Drawing.Size(131, 28)
+        Me.BTCheckMandrelInventory.TabIndex = 60
+        Me.BTCheckMandrelInventory.Text = "بررسی موجودی شفت"
+        Me.BTCheckMandrelInventory.UseVisualStyleBackColor = True
+        '
+        'BTWireInventory
+        '
+        Me.BTWireInventory.Enabled = False
+        Me.BTWireInventory.Location = New System.Drawing.Point(72, 222)
+        Me.BTWireInventory.Name = "BTWireInventory"
+        Me.BTWireInventory.Size = New System.Drawing.Size(131, 28)
+        Me.BTWireInventory.TabIndex = 61
+        Me.BTWireInventory.Text = "بررسی موجودی مفتول"
+        Me.BTWireInventory.UseVisualStyleBackColor = True
         '
         'productForm
         '
@@ -826,4 +849,6 @@ Partial Class productForm
     Friend WithEvents TBtipThickness As TextBox
     Friend WithEvents Label27 As Label
     Friend WithEvents TBMaxLoad As TextBox
+    Friend WithEvents BTWireInventory As Button
+    Friend WithEvents BTCheckMandrelInventory As Button
 End Class

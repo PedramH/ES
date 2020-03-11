@@ -118,7 +118,7 @@ Partial Class emkanSanjiForm
         Me.LOutsideDiameter = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Label36 = New System.Windows.Forms.Label()
+        Me.LMandrelInventory = New System.Windows.Forms.Label()
         Me.LMandrelDiameter = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.RadioButton6 = New System.Windows.Forms.RadioButton()
@@ -1231,7 +1231,7 @@ Partial Class emkanSanjiForm
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.Label36)
+        Me.GroupBox4.Controls.Add(Me.LMandrelInventory)
         Me.GroupBox4.Controls.Add(Me.LMandrelDiameter)
         Me.GroupBox4.Controls.Add(Me.Label35)
         Me.GroupBox4.Controls.Add(Me.RadioButton6)
@@ -1246,16 +1246,17 @@ Partial Class emkanSanjiForm
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "وضعیت مندرل"
         '
-        'Label36
+        'LMandrelInventory
         '
-        Me.Label36.AutoSize = True
-        Me.Label36.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label36.Location = New System.Drawing.Point(691, 24)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(113, 26)
-        Me.Label36.TabIndex = 80
-        Me.Label36.Text = "موجودی مندرل : "
-        Me.Label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LMandrelInventory.AutoSize = True
+        Me.LMandrelInventory.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LMandrelInventory.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.LMandrelInventory.Location = New System.Drawing.Point(691, 24)
+        Me.LMandrelInventory.Name = "LMandrelInventory"
+        Me.LMandrelInventory.Size = New System.Drawing.Size(113, 26)
+        Me.LMandrelInventory.TabIndex = 80
+        Me.LMandrelInventory.Text = "موجودی مندرل : "
+        Me.LMandrelInventory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LMandrelDiameter
         '
@@ -1737,7 +1738,7 @@ Partial Class emkanSanjiForm
     Friend WithEvents Label37 As Label
     Friend WithEvents LOutsideDiameter As Label
     Friend WithEvents Label39 As Label
-    Friend WithEvents Label36 As Label
+    Friend WithEvents LMandrelInventory As Label
     Friend WithEvents LMandrelDiameter As Label
     Friend WithEvents Label35 As Label
     Friend WithEvents LProductWeight As Label

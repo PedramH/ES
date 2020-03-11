@@ -418,4 +418,9 @@ Public Class productForm
             Logger.LogFatal("Error Calculating load length data", ex)
         End Try
     End Sub
+
+    Private Sub BTCheckMandrelInventory_Click(sender As Object, e As EventArgs) Handles BTCheckMandrelInventory.Click
+        mandrels.Show()
+        mandrels.SearchMandrelDataBase(TBMandrelDiameter.Text)
+    End Sub
 End Class

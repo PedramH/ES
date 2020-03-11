@@ -43,6 +43,9 @@ Public Module GlobalVariables
      " emkansanji.r1_code AS [کد مفتول رزرو 1], emkansanji.r1_q AS [مقدار1], emkansanji.r2_code AS [کد مفتول رزرو 2], emkansanji.r2_q AS [مقدار 2], emkansanji.r3_code AS [کد مفتول رزرو 3], emkansanji.r3_q AS [مقدار 3], emkansanji.wireState AS [وضعیت موجودی مفتول], " &
      " emkansanji.verificationNo AS [شماره تاییدیه], emkansanji.verificationDate AS [تاریخ تاییدیه], emkansanji.comment AS [توضیحات] "
 
+    Public mandrelsColumnName As String = " ID AS [شماره شناسایی], mandrelCode AS [کد کالا] , mandrelDiameter AS [قطر شفت] "
+
+
     '' ----------------------------------------------------  Form State Variables  ----------------------------------------------------
     Public productFormState As String = "modify"
     Public customerFormState As String = "modify"
@@ -164,8 +167,8 @@ End Module
 '       [  ] Add product reservation 
 '       [  ] The Excel file should be opened from inside the program
 '       [✔] Add Production Method to springDataBase
-'       [  ] Mandrel DataBase
-'               [  ] Check if mandrel is present by clicking on mandrel Label
+'       [✔] Mandrel DataBase
+'               [✔] Check if mandrel is present by clicking on a button
 '       [✔] Add an aproppriate Icon
 '       [✔] Prevent deleting of a product or customer for which emkansanji exists
 '       [✔] Prevent using of unwanted characters in the file name

@@ -121,7 +121,6 @@ Public Class customerForm
                         TBP_1_mobile.Text & "','" & TBP_1_email.Text & "','" & TBP_2_Name.Text & "','" & TBP_2_job.Text & "','" & TBP_2_phone.Text & "','" &
                         TBP_2_mobile.Text & "','" & TBP_2_email.Text & "','" & TBP_3_Name.Text & "','" & TBP_3_job.Text & "','" & TBP_3_phone.Text & "','" & TBP_3_mobile.Text & "','" & TBP_3_email.Text & "','" & TBRequierments.Text & "','" & TBComment.Text & "' )"
 
-
                     cmd.CommandText = "INSERT INTO customers" & columnNames & " VALUES " & valueString & ";"
                     Try
                         cn.Open()
@@ -133,7 +132,6 @@ Public Class customerForm
                         MsgBox("خطا در ثبت اطلاعات مشتری. پارامتر های ورودی را کنترل کرده و مجددا سعی کنید", vbCritical + vbMsgBoxRight, "خطا در ثبت اطلاعات مشتری")
                         Logger.LogFatal(ex.Message, ex)
                     End Try
-
                 End Using
             End Using
         End If

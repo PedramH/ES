@@ -491,7 +491,7 @@ Partial Class mainForm
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView2.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView2.Size = New System.Drawing.Size(1049, 414)
+        Me.DataGridView2.Size = New System.Drawing.Size(1049, 405)
         Me.DataGridView2.TabIndex = 20
         '
         'TabPage3

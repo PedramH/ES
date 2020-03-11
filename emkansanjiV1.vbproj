@@ -127,6 +127,12 @@
     <Compile Include="Login.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="mandrels.Designer.vb">
+      <DependentUpon>mandrels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mandrels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mandrels.resx">
+      <DependentUpon>mandrels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

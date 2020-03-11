@@ -245,8 +245,34 @@ Public Class emkanSanjiForm
         End If
     End Sub
 
-    Private Sub Label36_Click(sender As Object, e As EventArgs) Handles Label36.Click
+    Private Sub LMandrelInventory_Click(sender As Object, e As EventArgs) Handles LMandrelInventory.Click
         'TODO: Check to see if mandrel is in the inventory
+        ' Dim mandrelState As Boolean
+        If IsNumeric(LMandrelDiameter.Text) Then
+            Using cn As New OleDbConnection(connectionString)
+                Using cmd As New OleDbCommand With {.Connection = cn}
+                    cmd.CommandText = "SELECT COUNT(*) FROM mandrels WHERE mandrelDiameter = '" + LMandrelDiameter.Text + "' ;"
+                    Try
+                        cn.Open()
+                        If cmd.ExecuteScalar() > 0 Then
+                            'Mandrel is in the inventory
+                            RadioButton5.Checked = True
+                        Else
+                            'Mandrel is not Present
+                            RadioButton6.Checked = True
+                        End If
+                    Catch ex As Exception
+                        MsgBox("خطا در ارتباط با دیتابیس", vbCritical + vbMsgBoxRight, "خطا")
+                        Logger.LogFatal(ex.Message, ex)
+                    Finally
+                        cn.Close()
+                    End Try
+                End Using
+            End Using
+        End If
+        mandrels.Show()
+        mandrels.SearchMandrelDataBase(LMandrelDiameter.Text)
+
     End Sub
 
     Private Sub Rpack1_CheckedChanged(sender As Object, e As EventArgs) Handles Rpack1.CheckedChanged

@@ -74,7 +74,7 @@ Public Class mainForm
 
             End Using
         End Using
-        forms_loaded = True
+
 
     End Sub
 
@@ -228,6 +228,7 @@ Public Class mainForm
         '' When the third tab is selected, it fills customer and product name for emkansanji
         Dim indexOfSelectedTab As Integer = TabControl1.SelectedIndex
         If indexOfSelectedTab = 2 Then
+            On Error Resume Next
             TBEnergySazProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
             TBCustomerProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
             TBProductIDES.Text = DataGridView1.SelectedRows(0).Cells("شماره شناسایی").Value.ToString
@@ -351,7 +352,7 @@ Public Class mainForm
     End Sub
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
-        LoginForm.Show()
+        mandrels.Show()
         'Logger.LogInfo("Hello World!")
     End Sub
 End Class
