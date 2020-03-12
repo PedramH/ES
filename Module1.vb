@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Threading
 Imports Scripting
 Imports System.Text.RegularExpressions
 Imports System.Data.OleDb
@@ -17,7 +18,10 @@ Public Module GlobalVariables
     'Public excelTemplateFilePath As String = "D:\ES.xlsx"
     Public excelTemplateFilePath As String = ConfigurationManager.ConnectionStrings("excelPath").ConnectionString
     Public excelFilesBasePath As String = ConfigurationManager.ConnectionStrings("excelBasePath").ConnectionString
-    Public excelInventoryGarm As String = "C:\Users\Yousefi\Desktop\springDataBase\garm.xlsx"
+    Public excelInventoryGarmPath As String = "C:\Users\Yousefi\Desktop\springDataBase\garm.xlsx"
+    Public excelInventorySardPath As String = "D:\sard.xlsx"
+    Public excelInventoryPurchasedPath As String = "D:\purchased.xlsx"
+
 
     '' ----------------------------------------------------------  User Info  --------------------------------------------------------
 
@@ -71,28 +75,65 @@ Public Module globalFunctions
     End Function
 
 
-    Public Function ImportExceltoDatatable(filepath As String) As DataTable
-        '' This function import data from an excel file and return the data in a data table
-        ' string sqlquery= "Select * From [SheetName$] Where YourCondition";
+    Public Function ImportExceltoDatatable(filePath As String, fileDesc As String) As DataTable
+        '' This function import data from an excel file and return the data in a datatable
+
+
+        '' Check to see if the filepath provided in the config file exist, if not ask for the path
+        '' This portion of the code uses a seprate thread with STA, because winforms can't open a openfilediaglog()
+        ''    in the same thread as the form! For whatever fucked up reason.
+
+        '' TODO: there is some bug here! :-?
+        Dim t As New Thread(
+            Sub()
+                While (System.IO.File.Exists(filePath) = False)
+                    MsgBox(String.Format("فایل {0} یافت نشد. لطفا این فایل را انتخاب کنید.", fileDesc), MsgBoxStyle.Critical + MsgBoxStyle.MsgBoxRtlReading + vbMsgBoxRight, "خطا")
+                    Dim fd As OpenFileDialog = New OpenFileDialog()
+                    fd.Title = "Open File Dialog"
+                    fd.InitialDirectory = "C:\"
+                    fd.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm"
+                    fd.FilterIndex = 2
+                    fd.RestoreDirectory = True
+                    If fd.ShowDialog() = DialogResult.OK Then
+                        filePath = fd.FileName
+                    ElseIf fd.ShowDialog() = DialogResult.Cancel Then
+                        MsgBox(String.Format("عملیات خواندن اطلاعات از فایل {0} به انتخاب کاربر لغو شد.", fileDesc), MsgBoxStyle.Critical + MsgBoxStyle.MsgBoxRtlReading + vbMsgBoxRight, "خطا")
+                        Exit Sub
+                    End If
+                End While
+            End Sub
+        )
+
+        '' Run the code from a thread that joins the STA Thread
+        t.SetApartmentState(ApartmentState.STA)
+        t.Start()
+        t.Join()
+
         Dim dt As New DataTable
-        Try
-            Dim ds As New DataSet()
-            Dim constring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & filepath & ";Extended Properties=""Excel 12.0;HDR=YES;"""
-            Dim con As New OleDbConnection(constring & "")
-            con.Open()
-            Dim myTableName = con.GetSchema("Tables").Rows(0)("TABLE_NAME")
-            Dim sqlquery As String = String.Format("SELECT * FROM [{0}]", myTableName) ' "Select * From " & myTableName  
-            Dim da As New OleDbDataAdapter(sqlquery, con)
-            da.Fill(ds)
-            dt = ds.Tables(0)
-            con.Close()
-            Return dt
-        Catch ex As Exception
-            MsgBox(Err.Description, MsgBoxStyle.Critical)
-            Return dt
-        End Try
+                Try
+                    Dim ds As New DataSet()
+                    Dim constring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & filePath & ";Extended Properties=""Excel 12.0;HDR=YES;"""
+                    Dim con As New OleDbConnection(constring & "")
+                    con.Open()
+                    Dim myTableName = con.GetSchema("Tables").Rows(0)("TABLE_NAME")
+                    Dim sqlquery As String = String.Format("SELECT * FROM [{0}]", myTableName) ' "Select * From " & myTableName  
+                    Dim da As New OleDbDataAdapter(sqlquery, con)
+                    da.Fill(ds)
+                    dt = ds.Tables(0)
+                    con.Close()
+                    Return dt
+                Catch ex As Exception
+                    MsgBox(String.Format("خطا در خواندن اطلاعات از فایل {0}. فایل را بررسی کنید و مجددا سعی کنید.", fileDesc), MsgBoxStyle.Critical + MsgBoxStyle.MsgBoxRtlReading + vbMsgBoxRight, "خطا")
+                    Logger.LogFatal(ex.Message, ex)
+                    Return dt
+                End Try
     End Function
 
+    Public Function CalculateWireWeight(d As Double, L As Double) As Double
+        '' Calculates the weight of each wire rod
+        Dim rho As Double = 0.00000783
+        Return Math.Round(((d * d * Math.PI) / 4) * L * rho, 2)
+    End Function
     Public Function getDate()
         Dim pc As New Globalization.PersianCalendar
         Return pc.GetYear(Now).ToString & "-" & pc.GetMonth(Now).ToString & "-" & pc.GetDayOfMonth(Now).ToString
@@ -147,7 +188,6 @@ Public Module globalFunctions
             Case Else
                 Return True
         End Select
-
     End Function
 
     Public Function stripFileName(fileName As String)
@@ -216,6 +256,13 @@ End Module
 '       [✔] Try a better database server (Preferably PostgreSQL) -> it works fine with minimal change
 '       [  ] Migrate to postgreSQL
 '       [  ] Make all calls to database async
+'       [  ] Make a script to change the reserve for every emkansanji where a future bought wire is used when the wire arrives to the factory
+'       [  ]
+'       [  ]
+'       [  ]
+'       [  ]
+'       [  ]
+'       [  ]
 '       [  ]
 '
 '
