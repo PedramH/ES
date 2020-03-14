@@ -1,18 +1,15 @@
 ﻿Imports System.Data.OleDb
-
 Imports System.Configuration
 Imports Excel = Microsoft.Office.Interop.Excel
-
 
 
 Public Class mainForm
 
 
-
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message,
                                            ByVal keyData As System.Windows.Forms.Keys) _
                                            As Boolean
-        ' This code send Tab key everytime Enterkey is pressed INSIDE OF A TEXTBOX
+        ' Sends Tab key everytime Enter is pressed INSIDE OF A TEXTBOX
 
         If msg.WParam.ToInt32() = CInt(Keys.Enter) AndAlso TypeOf Me.ActiveControl Is TextBox Then
             If Me.ActiveControl.Name <> "TBComment" Then

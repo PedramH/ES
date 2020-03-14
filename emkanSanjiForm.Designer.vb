@@ -53,12 +53,13 @@ Partial Class emkanSanjiForm
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.LemkansanjiID = New System.Windows.Forms.Label()
         Me.CBMOrderState = New System.Windows.Forms.ComboBox()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
-        Me.TBMValidationNo = New System.Windows.Forms.TextBox()
+        Me.TBMVerificationNo = New System.Windows.Forms.TextBox()
         Me.Label32 = New System.Windows.Forms.Label()
-        Me.TBMValidationDate = New System.Windows.Forms.TextBox()
+        Me.TBMVerificationDate = New System.Windows.Forms.TextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TBMOrderNo = New System.Windows.Forms.TextBox()
@@ -143,12 +144,18 @@ Partial Class emkanSanjiForm
         Me.TBMRQ2 = New System.Windows.Forms.TextBox()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.TBMRQ1 = New System.Windows.Forms.TextBox()
-        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Lwire3 = New System.Windows.Forms.Label()
         Me.TBMR3 = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Lwire2 = New System.Windows.Forms.Label()
         Me.TBMR2 = New System.Windows.Forms.TextBox()
-        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Lwire1 = New System.Windows.Forms.Label()
         Me.TBMR1 = New System.Windows.Forms.TextBox()
+        Me.Lw1Weight = New System.Windows.Forms.Label()
+        Me.Lw2Weight = New System.Windows.Forms.Label()
+        Me.Lw3Weight = New System.Windows.Forms.Label()
+        Me.Lw1Unit = New System.Windows.Forms.Label()
+        Me.Lw2Unit = New System.Windows.Forms.Label()
+        Me.Lw3Unit = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -224,7 +231,7 @@ Partial Class emkanSanjiForm
         '
         Me.CBOrderState.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         Me.CBOrderState.FormattingEnabled = True
-        Me.CBOrderState.Items.AddRange(New Object() {"امکان سنجی اولیه کیفیت", "امکان سنجی اولیه تولید", "بررسی نهایی تولید", "ارسال به واحد بازرگانی", "تایید شده", "تولید شده", "منقضی شده"})
+        Me.CBOrderState.Items.AddRange(New Object() {"امکان سنجی اولیه کیفیت", "امکان سنجی اولیه تولید", "امکان سنجی نهایی تولید", "امکان سنجی نهایی کیفی", "امکان سنجی تکمیل شده", "تایید شده", "تولید شده", "منقضی شده"})
         Me.CBOrderState.Location = New System.Drawing.Point(253, 320)
         Me.CBOrderState.Name = "CBOrderState"
         Me.CBOrderState.Size = New System.Drawing.Size(233, 29)
@@ -493,12 +500,13 @@ Partial Class emkanSanjiForm
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.LemkansanjiID)
         Me.GroupBox2.Controls.Add(Me.CBMOrderState)
         Me.GroupBox2.Controls.Add(Me.Label34)
         Me.GroupBox2.Controls.Add(Me.Label33)
-        Me.GroupBox2.Controls.Add(Me.TBMValidationNo)
+        Me.GroupBox2.Controls.Add(Me.TBMVerificationNo)
         Me.GroupBox2.Controls.Add(Me.Label32)
-        Me.GroupBox2.Controls.Add(Me.TBMValidationDate)
+        Me.GroupBox2.Controls.Add(Me.TBMVerificationDate)
         Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.TBMOrderNo)
@@ -542,10 +550,22 @@ Partial Class emkanSanjiForm
         Me.GroupBox2.TabIndex = 23
         Me.GroupBox2.TabStop = False
         '
+        'LemkansanjiID
+        '
+        Me.LemkansanjiID.AutoSize = True
+        Me.LemkansanjiID.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.LemkansanjiID.Location = New System.Drawing.Point(300, 49)
+        Me.LemkansanjiID.Name = "LemkansanjiID"
+        Me.LemkansanjiID.Size = New System.Drawing.Size(158, 26)
+        Me.LemkansanjiID.TabIndex = 69
+        Me.LemkansanjiID.Text = "شماره ردیابی امکان سنجی"
+        Me.LemkansanjiID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LemkansanjiID.Visible = False
+        '
         'CBMOrderState
         '
         Me.CBMOrderState.FormattingEnabled = True
-        Me.CBMOrderState.Items.AddRange(New Object() {"امکان سنجی اولیه کیفیت", "امکان سنجی اولیه تولید", "بررسی نهایی تولید", "ارسال به واحد بازرگانی", "تایید شده", "تولید شده", "منقضی شده"})
+        Me.CBMOrderState.Items.AddRange(New Object() {"امکان سنجی اولیه کیفیت", "امکان سنجی اولیه تولید", "امکان سنجی نهایی تولید", "امکان سنجی نهایی کیفی", "امکان سنجی تکمیل شده", "تایید شده", "تولید شده", "منقضی شده"})
         Me.CBMOrderState.Location = New System.Drawing.Point(16, 401)
         Me.CBMOrderState.Name = "CBMOrderState"
         Me.CBMOrderState.Size = New System.Drawing.Size(154, 29)
@@ -557,9 +577,9 @@ Partial Class emkanSanjiForm
         Me.Label34.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         Me.Label34.Location = New System.Drawing.Point(207, 404)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(125, 26)
+        Me.Label34.Size = New System.Drawing.Size(101, 26)
         Me.Label34.TabIndex = 68
-        Me.Label34.Text = "وضعیت امکان سنجی"
+        Me.Label34.Text = "وضعیت سفارش"
         Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label33
@@ -573,14 +593,14 @@ Partial Class emkanSanjiForm
         Me.Label33.Text = "شماره نامه تاییدیه"
         Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TBMValidationNo
+        'TBMVerificationNo
         '
-        Me.TBMValidationNo.Location = New System.Drawing.Point(374, 401)
-        Me.TBMValidationNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBMValidationNo.Name = "TBMValidationNo"
-        Me.TBMValidationNo.Size = New System.Drawing.Size(154, 29)
-        Me.TBMValidationNo.TabIndex = 19
-        Me.TBMValidationNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBMVerificationNo.Location = New System.Drawing.Point(374, 401)
+        Me.TBMVerificationNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBMVerificationNo.Name = "TBMVerificationNo"
+        Me.TBMVerificationNo.Size = New System.Drawing.Size(154, 29)
+        Me.TBMVerificationNo.TabIndex = 19
+        Me.TBMVerificationNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label32
         '
@@ -593,14 +613,14 @@ Partial Class emkanSanjiForm
         Me.Label32.Text = "تاریخ تاییدیه"
         Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TBMValidationDate
+        'TBMVerificationDate
         '
-        Me.TBMValidationDate.Location = New System.Drawing.Point(752, 401)
-        Me.TBMValidationDate.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBMValidationDate.Name = "TBMValidationDate"
-        Me.TBMValidationDate.Size = New System.Drawing.Size(154, 29)
-        Me.TBMValidationDate.TabIndex = 18
-        Me.TBMValidationDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBMVerificationDate.Location = New System.Drawing.Point(752, 401)
+        Me.TBMVerificationDate.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBMVerificationDate.Name = "TBMVerificationDate"
+        Me.TBMVerificationDate.Size = New System.Drawing.Size(154, 29)
+        Me.TBMVerificationDate.TabIndex = 18
+        Me.TBMVerificationDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button2
         '
@@ -880,7 +900,7 @@ Partial Class emkanSanjiForm
         '
         'TBQuantity
         '
-        Me.TBQuantity.Location = New System.Drawing.Point(298, 151)
+        Me.TBQuantity.Location = New System.Drawing.Point(300, 151)
         Me.TBQuantity.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBQuantity.Name = "TBQuantity"
         Me.TBQuantity.Size = New System.Drawing.Size(84, 29)
@@ -1306,6 +1326,12 @@ Partial Class emkanSanjiForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Lw3Unit)
+        Me.GroupBox1.Controls.Add(Me.Lw2Unit)
+        Me.GroupBox1.Controls.Add(Me.Lw1Unit)
+        Me.GroupBox1.Controls.Add(Me.Lw3Weight)
+        Me.GroupBox1.Controls.Add(Me.Lw2Weight)
+        Me.GroupBox1.Controls.Add(Me.Lw1Weight)
         Me.GroupBox1.Controls.Add(Me.LProductWeight)
         Me.GroupBox1.Controls.Add(Me.Label45)
         Me.GroupBox1.Controls.Add(Me.LWireLength)
@@ -1320,11 +1346,11 @@ Partial Class emkanSanjiForm
         Me.GroupBox1.Controls.Add(Me.TBMRQ2)
         Me.GroupBox1.Controls.Add(Me.Label31)
         Me.GroupBox1.Controls.Add(Me.TBMRQ1)
-        Me.GroupBox1.Controls.Add(Me.Label28)
+        Me.GroupBox1.Controls.Add(Me.Lwire3)
         Me.GroupBox1.Controls.Add(Me.TBMR3)
-        Me.GroupBox1.Controls.Add(Me.Label27)
+        Me.GroupBox1.Controls.Add(Me.Lwire2)
         Me.GroupBox1.Controls.Add(Me.TBMR2)
-        Me.GroupBox1.Controls.Add(Me.Label26)
+        Me.GroupBox1.Controls.Add(Me.Lwire1)
         Me.GroupBox1.Controls.Add(Me.TBMR1)
         Me.GroupBox1.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(9, 2)
@@ -1497,10 +1523,10 @@ Partial Class emkanSanjiForm
         '
         'TBMRQ3
         '
-        Me.TBMRQ3.Location = New System.Drawing.Point(13, 135)
+        Me.TBMRQ3.Location = New System.Drawing.Point(93, 135)
         Me.TBMRQ3.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMRQ3.Name = "TBMRQ3"
-        Me.TBMRQ3.Size = New System.Drawing.Size(154, 29)
+        Me.TBMRQ3.Size = New System.Drawing.Size(74, 29)
         Me.TBMRQ3.TabIndex = 68
         Me.TBMRQ3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1517,10 +1543,10 @@ Partial Class emkanSanjiForm
         '
         'TBMRQ2
         '
-        Me.TBMRQ2.Location = New System.Drawing.Point(371, 135)
+        Me.TBMRQ2.Location = New System.Drawing.Point(450, 135)
         Me.TBMRQ2.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMRQ2.Name = "TBMRQ2"
-        Me.TBMRQ2.Size = New System.Drawing.Size(154, 29)
+        Me.TBMRQ2.Size = New System.Drawing.Size(74, 29)
         Me.TBMRQ2.TabIndex = 66
         Me.TBMRQ2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1537,23 +1563,24 @@ Partial Class emkanSanjiForm
         '
         'TBMRQ1
         '
-        Me.TBMRQ1.Location = New System.Drawing.Point(749, 135)
+        Me.TBMRQ1.Location = New System.Drawing.Point(829, 135)
         Me.TBMRQ1.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMRQ1.Name = "TBMRQ1"
-        Me.TBMRQ1.Size = New System.Drawing.Size(154, 29)
+        Me.TBMRQ1.Size = New System.Drawing.Size(74, 29)
         Me.TBMRQ1.TabIndex = 64
         Me.TBMRQ1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Label28
+        'Lwire3
         '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label28.Location = New System.Drawing.Point(204, 106)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(110, 26)
-        Me.Label28.TabIndex = 71
-        Me.Label28.Text = "کد مفتول رزرو 3"
-        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Lwire3.AutoSize = True
+        Me.Lwire3.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Lwire3.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lwire3.Location = New System.Drawing.Point(204, 106)
+        Me.Lwire3.Name = "Lwire3"
+        Me.Lwire3.Size = New System.Drawing.Size(110, 26)
+        Me.Lwire3.TabIndex = 71
+        Me.Lwire3.Text = "کد مفتول رزرو 3"
+        Me.Lwire3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TBMR3
         '
@@ -1564,16 +1591,17 @@ Partial Class emkanSanjiForm
         Me.TBMR3.TabIndex = 67
         Me.TBMR3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Label27
+        'Lwire2
         '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label27.Location = New System.Drawing.Point(560, 106)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(110, 26)
-        Me.Label27.TabIndex = 70
-        Me.Label27.Text = "کد مفتول رزرو 2"
-        Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Lwire2.AutoSize = True
+        Me.Lwire2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Lwire2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lwire2.Location = New System.Drawing.Point(560, 106)
+        Me.Lwire2.Name = "Lwire2"
+        Me.Lwire2.Size = New System.Drawing.Size(110, 26)
+        Me.Lwire2.TabIndex = 70
+        Me.Lwire2.Text = "کد مفتول رزرو 2"
+        Me.Lwire2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TBMR2
         '
@@ -1584,16 +1612,17 @@ Partial Class emkanSanjiForm
         Me.TBMR2.TabIndex = 65
         Me.TBMR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Label26
+        'Lwire1
         '
-        Me.Label26.AutoSize = True
-        Me.Label26.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label26.Location = New System.Drawing.Point(930, 106)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(110, 26)
-        Me.Label26.TabIndex = 69
-        Me.Label26.Text = "کد مفتول رزرو 1"
-        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Lwire1.AutoSize = True
+        Me.Lwire1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Lwire1.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lwire1.Location = New System.Drawing.Point(930, 106)
+        Me.Lwire1.Name = "Lwire1"
+        Me.Lwire1.Size = New System.Drawing.Size(110, 26)
+        Me.Lwire1.TabIndex = 69
+        Me.Lwire1.Text = "کد مفتول رزرو 1"
+        Me.Lwire1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TBMR1
         '
@@ -1603,6 +1632,72 @@ Partial Class emkanSanjiForm
         Me.TBMR1.Size = New System.Drawing.Size(154, 29)
         Me.TBMR1.TabIndex = 63
         Me.TBMR1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Lw1Weight
+        '
+        Me.Lw1Weight.AutoSize = True
+        Me.Lw1Weight.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw1Weight.Location = New System.Drawing.Point(978, 135)
+        Me.Lw1Weight.Name = "Lw1Weight"
+        Me.Lw1Weight.Size = New System.Drawing.Size(46, 26)
+        Me.Lw1Weight.TabIndex = 83
+        Me.Lw1Weight.Text = "LW1"
+        Me.Lw1Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw2Weight
+        '
+        Me.Lw2Weight.AutoSize = True
+        Me.Lw2Weight.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw2Weight.Location = New System.Drawing.Point(610, 138)
+        Me.Lw2Weight.Name = "Lw2Weight"
+        Me.Lw2Weight.Size = New System.Drawing.Size(46, 26)
+        Me.Lw2Weight.TabIndex = 84
+        Me.Lw2Weight.Text = "LW2"
+        Me.Lw2Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw3Weight
+        '
+        Me.Lw3Weight.AutoSize = True
+        Me.Lw3Weight.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw3Weight.Location = New System.Drawing.Point(259, 138)
+        Me.Lw3Weight.Name = "Lw3Weight"
+        Me.Lw3Weight.Size = New System.Drawing.Size(46, 26)
+        Me.Lw3Weight.TabIndex = 85
+        Me.Lw3Weight.Text = "LW3"
+        Me.Lw3Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw1Unit
+        '
+        Me.Lw1Unit.AutoSize = True
+        Me.Lw1Unit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw1Unit.Location = New System.Drawing.Point(749, 136)
+        Me.Lw1Unit.Name = "Lw1Unit"
+        Me.Lw1Unit.Size = New System.Drawing.Size(19, 26)
+        Me.Lw1Unit.TabIndex = 86
+        Me.Lw1Unit.Text = "-"
+        Me.Lw1Unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw2Unit
+        '
+        Me.Lw2Unit.AutoSize = True
+        Me.Lw2Unit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw2Unit.Location = New System.Drawing.Point(371, 136)
+        Me.Lw2Unit.Name = "Lw2Unit"
+        Me.Lw2Unit.Size = New System.Drawing.Size(19, 26)
+        Me.Lw2Unit.TabIndex = 87
+        Me.Lw2Unit.Text = "-"
+        Me.Lw2Unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw3Unit
+        '
+        Me.Lw3Unit.AutoSize = True
+        Me.Lw3Unit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw3Unit.Location = New System.Drawing.Point(13, 136)
+        Me.Lw3Unit.Name = "Lw3Unit"
+        Me.Lw3Unit.Size = New System.Drawing.Size(19, 26)
+        Me.Lw3Unit.TabIndex = 88
+        Me.Lw3Unit.Text = "-"
+        Me.Lw3Unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'emkanSanjiForm
         '
@@ -1703,9 +1798,9 @@ Partial Class emkanSanjiForm
     Friend WithEvents CBMOrderState As ComboBox
     Friend WithEvents Label34 As Label
     Friend WithEvents Label33 As Label
-    Friend WithEvents TBMValidationNo As TextBox
+    Friend WithEvents TBMVerificationNo As TextBox
     Friend WithEvents Label32 As Label
-    Friend WithEvents TBMValidationDate As TextBox
+    Friend WithEvents TBMVerificationDate As TextBox
     Friend WithEvents BTModify As Button
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents GroupBox1 As GroupBox
@@ -1715,11 +1810,11 @@ Partial Class emkanSanjiForm
     Friend WithEvents TBMRQ2 As TextBox
     Friend WithEvents Label31 As Label
     Friend WithEvents TBMRQ1 As TextBox
-    Friend WithEvents Label28 As Label
+    Friend WithEvents Lwire3 As Label
     Friend WithEvents TBMR3 As TextBox
-    Friend WithEvents Label27 As Label
+    Friend WithEvents Lwire2 As Label
     Friend WithEvents TBMR2 As TextBox
-    Friend WithEvents Label26 As Label
+    Friend WithEvents Lwire1 As Label
     Friend WithEvents TBMR1 As TextBox
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents GroupBox3 As GroupBox
@@ -1763,4 +1858,11 @@ Partial Class emkanSanjiForm
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents LPack As Label
     Friend WithEvents LMaftolStatus As Label
+    Friend WithEvents LemkansanjiID As Label
+    Friend WithEvents Lw3Unit As Label
+    Friend WithEvents Lw2Unit As Label
+    Friend WithEvents Lw1Unit As Label
+    Friend WithEvents Lw3Weight As Label
+    Friend WithEvents Lw2Weight As Label
+    Friend WithEvents Lw1Weight As Label
 End Class

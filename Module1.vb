@@ -45,17 +45,22 @@ Public Module GlobalVariables
 
     Public ESColumnNames As String = " springDataBase.ID, customers.ID, springDataBase.wireDiameter, springDataBase.OD, springDataBase.L0, springDataBase.wireLength, springDataBase.mandrelDiameter , emkansanji.ID AS [شماره ردیابی سفارش], springDataBase.productName AS [نام محصول], customers.customerName AS [نام مشتری], emkansanji.customerProductName AS [نام محصول مشتری], emkansanji.orderState AS [وضعیت سفارش], " &
      " emkansanji.customerDwgNo AS [شماره نقشه], emkansanji.quantity AS [تعداد سفارش], emkansanji.letterNo AS [شماره نامه], emkansanji.letterDate AS [تاریخ نامه], emkansanji.orderNo AS [شماره سفارش], " &
-     " emkansanji.dateOfProccessing AS [تاریخ بررسی], emkansanji.standard AS [استاندارد], emkansanji.grade AS [گرید], emkansanji.productCode AS [کد قطعه مشتری], " &
+     " emkansanji.dateOfProccessing AS [تاریخ بررسی], emkansanji.standard AS [استاندارد], emkansanji.grade AS [گرید], emkansanji.productCode AS [کد قطعه مشتری], emkansanji.mandrelState AS [موجودی مندرل], " &
      " emkansanji.r1_code AS [کد مفتول رزرو 1], emkansanji.r1_q AS [مقدار1], emkansanji.r2_code AS [کد مفتول رزرو 2], emkansanji.r2_q AS [مقدار 2], emkansanji.r3_code AS [کد مفتول رزرو 3], emkansanji.r3_q AS [مقدار 3], emkansanji.wireState AS [وضعیت موجودی مفتول], " &
      " emkansanji.verificationNo AS [شماره تاییدیه], emkansanji.verificationDate AS [تاریخ تاییدیه], emkansanji.comment AS [توضیحات] "
 
     Public mandrelsColumnName As String = " ID AS [شماره شناسایی], mandrelCode AS [کد کالا] , mandrelDiameter AS [قطر شفت] "
+
+    Public wiresColumnName As String = ""
+
 
 
     '' ----------------------------------------------------  Form State Variables  ----------------------------------------------------
     Public productFormState As String = "modify"
     Public customerFormState As String = "modify"
 
+    Public wiresFormState As String = "normal"  ' normal - selection 
+    Public wireFormCaller As String = ""
 
 End Module
 
@@ -257,12 +262,12 @@ End Module
 '       [  ] Migrate to postgreSQL
 '       [  ] Make all calls to database async
 '       [  ] Make a script to change the reserve for every emkansanji where a future bought wire is used when the wire arrives to the factory
-'       [  ]
-'       [  ]
-'       [  ]
-'       [  ]
-'       [  ]
-'       [  ]
-'       [  ]
+'       [✔] Generate wire reservation table
+'       [  ] Consider wire state in generation of reservation table
+'       [  ] Use regex to extract wire Length
+'       [  ] 
+'       [  ] 
+'       [  ] 
+'       [  ] 
 '
 '

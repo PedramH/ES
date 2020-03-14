@@ -30,7 +30,7 @@ Partial Class wires
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.BTUpdateInventory = New System.Windows.Forms.Button()
-        Me.BTTest = New System.Windows.Forms.Button()
+        Me.BTSelectWire = New System.Windows.Forms.Button()
         Me.BTModify = New System.Windows.Forms.Button()
         Me.TBProductID = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -77,7 +77,7 @@ Partial Class wires
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.BTUpdateInventory)
-        Me.GroupBox1.Controls.Add(Me.BTTest)
+        Me.GroupBox1.Controls.Add(Me.BTSelectWire)
         Me.GroupBox1.Controls.Add(Me.BTModify)
         Me.GroupBox1.Controls.Add(Me.TBProductID)
         Me.GroupBox1.Controls.Add(Me.Label6)
@@ -111,16 +111,17 @@ Partial Class wires
         Me.BTUpdateInventory.Text = "به‌روزرسانی موجودی"
         Me.BTUpdateInventory.UseVisualStyleBackColor = True
         '
-        'BTTest
+        'BTSelectWire
         '
-        Me.BTTest.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTTest.Location = New System.Drawing.Point(182, 66)
-        Me.BTTest.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTTest.Name = "BTTest"
-        Me.BTTest.Size = New System.Drawing.Size(105, 33)
-        Me.BTTest.TabIndex = 9
-        Me.BTTest.Text = "تست"
-        Me.BTTest.UseVisualStyleBackColor = True
+        Me.BTSelectWire.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTSelectWire.Location = New System.Drawing.Point(162, 66)
+        Me.BTSelectWire.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTSelectWire.Name = "BTSelectWire"
+        Me.BTSelectWire.Size = New System.Drawing.Size(105, 33)
+        Me.BTSelectWire.TabIndex = 9
+        Me.BTSelectWire.Text = "انتخاب مفتول"
+        Me.BTSelectWire.UseVisualStyleBackColor = True
+        Me.BTSelectWire.Visible = False
         '
         'BTModify
         '
@@ -340,7 +341,7 @@ Partial Class wires
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents BTUpdateInventory As Button
-    Friend WithEvents BTTest As Button
+    Friend WithEvents BTSelectWire As Button
     Friend WithEvents BTModify As Button
     Friend WithEvents TBProductID As TextBox
     Friend WithEvents Label6 As Label

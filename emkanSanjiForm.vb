@@ -21,39 +21,7 @@ Public Class emkanSanjiForm
 
     Private Sub emkanSanjiForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Loading Springs table into datagridview1
-        Using cn As New OleDbConnection(connectionString)
-            Using cmd As New OleDbCommand With {.Connection = cn}
-
-                Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
-
-                'the paranthesis in the query are mandatory
-                cmd.CommandText = "SELECT " & ESColumnNames & " FROM (emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID" &
-                    " ;"
-
-                Dim dt As New DataTable With {.TableName = "emkansanji"}
-                'Try
-                cn.Open()
-                Dim ds As New DataSet
-                Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
-                ds.Tables.Add(emkansanji)
-                ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
-                DataGridView1.DataSource = ds.Tables("emkansanji")
-                'DataGridView1.Columns(0).Visible = False
-                'Catch ex As Exception
-                ' very common for a developer to simply ignore errors, unwise.
-                ' MsgBox("error")
-                ' End Try
-                cn.Close()
-                DataGridView1.Columns(0).Visible = False
-                DataGridView1.Columns(1).Visible = False
-                DataGridView1.Columns(2).Visible = False
-                DataGridView1.Columns(3).Visible = False
-                DataGridView1.Columns(4).Visible = False
-                DataGridView1.Columns(5).Visible = False
-                DataGridView1.Columns(6).Visible = False
-
-            End Using
-        End Using
+        LoadEmkansanjiTable()
     End Sub
 
     Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
@@ -99,8 +67,9 @@ Public Class emkanSanjiForm
         End Using
     End Sub
 
-    Private Sub BTModify_Click(sender As Object, e As EventArgs) Handles BTModify.Click
+    Private Async Sub BTModify_Click(sender As Object, e As EventArgs) Handles BTModify.Click
         'TBCustomerName.Text = DataGridView1.SelectedRows(0).Cells("نام مشتری").Value.ToString
+        LemkansanjiID.Text = DataGridView1.SelectedRows(0).Cells("شماره ردیابی سفارش").Value.ToString
         TBMEnergySazProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
         TBMCustomerProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول مشتری").Value.ToString
         TBProductIDES.Text = DataGridView1.SelectedRows(0).Cells(0).Value.ToString
@@ -127,8 +96,8 @@ Public Class emkanSanjiForm
         TBMRQ2.Text = DataGridView1.SelectedRows(0).Cells("مقدار 2").Value.ToString
         TBMRQ3.Text = DataGridView1.SelectedRows(0).Cells("مقدار 3").Value.ToString
 
-        TBMValidationDate.Text = DataGridView1.SelectedRows(0).Cells("تاریخ تاییدیه").Value.ToString
-        TBMValidationNo.Text = DataGridView1.SelectedRows(0).Cells("شماره تاییدیه").Value.ToString
+        TBMVerificationDate.Text = DataGridView1.SelectedRows(0).Cells("تاریخ تاییدیه").Value.ToString
+        TBMVerificationNo.Text = DataGridView1.SelectedRows(0).Cells("شماره تاییدیه").Value.ToString
         CBMOrderState.Text = DataGridView1.SelectedRows(0).Cells("وضعیت سفارش").Value.ToString
 
         LOrderQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString
@@ -139,6 +108,8 @@ Public Class emkanSanjiForm
         LMandrelDiameter.Text = DataGridView1.SelectedRows(0).Cells("mandrelDiameter").Value.ToString
 
         Dim wireState As String = DataGridView1.SelectedRows(0).Cells("وضعیت موجودی مفتول").Value.ToString
+        '' ---------------------------------------------------------------------------------------------------------------------------
+
         If wireState = "موجود است" Then
             RMaftol1.Checked = True
         ElseIf wireState = "پیل و پولیش شود" Then
@@ -148,53 +119,117 @@ Public Class emkanSanjiForm
         ElseIf wireState = "ارسال شده به پیل و پولیش" Then
             RMaftol4.Checked = True
         End If
+        '' ---------------------------------------------------------------------------------------------------------------------------
+        Dim mandrelState As String = DataGridView1.SelectedRows(0).Cells("موجودی مندرل").Value.ToString
+        If mandrelState = "موجود است" Then
+            RadioButton5.Checked = True
+        Else
+            RadioButton6.Checked = True
+        End If
+        '' ---------------------------------------------------------------------------------------------------------------------------
+        If TBMR1.Text <> "" Then
+            Dim sql_command = String.Format("SELECT wireWeight FROM wireInventory WHERE wireCode = '{0}'", TBMR1.Text)
+            Console.WriteLine(sql_command)
+            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+            Dim selectedWireWeight As String = dt.Rows(0)(0).ToString
+            If IsNumeric(selectedWireWeight) Then
+                Lw1Weight.Text = selectedWireWeight
+                Lw1Unit.Text = "شاخه"
+                TBMRQ1.Text = (Math.Round(Val(TBMRQ1.Text) / Val(selectedWireWeight), 0)).ToString
+            Else
+                Lw1Weight.Text = "-"
+                Lw1Unit.Text = "کیلوگرم"
+            End If
+
+        End If
+        If TBMR2.Text <> "" Then
+            Dim sql_command = String.Format("SELECT wireWeight FROM wireInventory WHERE wireCode = '{0}'", TBMR2.Text)
+            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+            Dim selectedWireWeight As String = dt.Rows(0)(0).ToString
+
+            If IsNumeric(selectedWireWeight) Then
+                Lw2Weight.Text = selectedWireWeight
+                Lw2Unit.Text = "شاخه"
+                TBMRQ2.Text = (Math.Round(Val(TBMRQ2.Text) / Val(selectedWireWeight), 0)).ToString
+            Else
+                Lw2Weight.Text = "-"
+                Lw2Unit.Text = "کیلوگرم"
+            End If
+
+        End If
+        If TBMR3.Text <> "" Then
+            Dim sql_command = String.Format("SELECT wireWeight FROM wireInventory WHERE wireCode = '{0}'", TBMR3.Text)
+            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+            Dim selectedWireWeight As String = dt.Rows(0)(0).ToString
+
+            If IsNumeric(selectedWireWeight) Then
+                Lw3Weight.Text = selectedWireWeight
+                Lw3Unit.Text = "شاخه"
+                TBMRQ3.Text = (Math.Round(Val(TBMRQ3.Text) / Val(selectedWireWeight), 0)).ToString
+            Else
+                Lw3Weight.Text = "-"
+                Lw3Unit.Text = "کیلوگرم"
+            End If
+
+        End If
+        '' ---------------------------------------------------------------------------------------------------------------------------
 
         TabControl1.SelectedTab = TabPage2
 
     End Sub
 
-    Private Sub BTModifyES_Click(sender As Object, e As EventArgs) Handles BTModifyES.Click
-        '    Dim answer As String = MsgBox("در صورت تایید مشخصات این امکان سنجی به صورتی دائمی تغییر خواهد کرد", MsgBoxStyle.OkCancel + MsgBoxStyle.Critical + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.MsgBoxRight, Title:="ویرایش مشخصات امکان سنجی")
-        '    If answer = vbOK Then
-        '        Using cn As New OleDbConnection(connectionString)
-        '            Using cmd As New OleDbCommand With {.Connection = cn}
-        '                cmd.CommandText = "UPDATE emkansanji SET" &
-        '                " productName = '" & TBProductName.Text & "'," &
-        '                 " productID = '" & TBProductID.Text & "'," &
-        '                  " wireDiameter = '" & TBWireDiameter.Text & "'," &
-        '                  " OD = '" & TBOD.Text & "'," &
-        '                  " L0 = '" & TBL0.Text & "'," &
-        '                  " Nt = '" & TBNt.Text & "'," &
-        '                  " Nactive = '" & TBNActive.Text & "'," &
-        '                  " coilingDirection = '" & CBCoilingDirection.Text & "'," &
-        '                  " startCoilType = '" & CBScoilType.Text & "'," &
-        '                  " endCoilType = '" & CBEcoilType.Text & "'," &
-        '                  " mandrelDiameter = '" & TBMandrelDiameter.Text & "'," &
-        '                  " wireLength = '" & TBWireLength.Text & "'," &
-        '                  " springRate = '" & TBSpringRate.Text & "'," &
-        '                  " material = '" & CBMaterial.Text & "'," &
-        '                  " pType = '" & CBspringType.Text & "'," &
-        '                  " dwgNo = '" & TBDwgNo.Text & "'," &
-        '                  " solidStress = '" & TBSolidStress.Text & "'," &
-        '                  " comment = '" & TBComment.Text & "'," &
-        '                 " F1 = '" & TBF1.Text & "'," &
-        '                  " F2 = '" & TBF2.Text & "'," &
-        '                 " F3 = '" & TBF3.Text & "'," &
-        '                 " L1 = '" & TBL1.Text & "'," &
-        '                 " L2 = '" & TBL2.Text & "'," &
-        '                 " L3 = '" & TBL2.Text & "'" &
-        '                 "WHERE ID = " & TBdbID.Text & ";"
-
-        '                'Try
-        '                cn.Open()
-        '                cmd.ExecuteReader()
-        '                cn.Close()
-        '                MsgBox("ویرایش اطلاعات با موفقیت انجام شد", vbInformation, "ویرایش مشخصات محصول")
-
-
-        '            End Using
-        '        End Using
-        '    End If
+    Private Async Sub BTModifyES_Click(sender As Object, e As EventArgs) Handles BTModifyES.Click
+        Dim mandrelState As String
+        If RadioButton5.Checked = True Then
+            mandrelState = "موجود است"
+        Else
+            mandrelState = "ساخته شود"
+        End If
+        Dim r1_q, r2_q, r3_q As String
+        If Lw1Unit.Text = "شاخه" Then
+            r1_q = Math.Round(Val(TBMRQ1.Text) * Val(Lw1Weight.Text), 2).ToString
+        Else
+            r1_q = TBMRQ1.Text
+        End If
+        If Lw2Unit.Text = "شاخه" Then
+            r2_q = Math.Round(Val(TBMRQ2.Text) * Val(Lw2Weight.Text), 2).ToString
+        Else
+            r2_q = TBMRQ2.Text
+        End If
+        If Lw2Unit.Text = "شاخه" Then
+            r3_q = Math.Round(Val(TBMRQ3.Text) * Val(Lw3Weight.Text), 2).ToString
+        Else
+            r3_q = TBMRQ3.Text
+        End If
+        Dim sql_command As String = "UPDATE emkansanji SET" &
+                            " productID = '" & TBProductIDES.Text & "'," &
+                             " customerID = '" & TBCustomerID.Text & "'," &
+                              " customerProductName = '" & TBMCustomerProductName.Text & "'," &
+                              " customerDwgNo = '" & TBMCustomerDwgNo.Text & "'," &
+                              " quantity = '" & TBQuantity.Text & "'," &
+                              " letterNo = '" & TBMLetterNo.Text & "'," &
+                              " letterDate = '" & TBMLetterDate.Text & "'," &
+                              " orderNo = '" & TBMOrderNo.Text & "'," &
+                              " standard = '" & CBStandard.Text & "'," &
+                              " dateOfProccessing = '" & TBMProccessingDate.Text & "'," &
+                              " grade = '" & TBGrade.Text & "'," &
+                              " productCode = '" & TBMCustomerProductCode.Text & "'," &
+                              " comment = '" & TBComment.Text & "'," &
+                              " orderState = '" & CBMOrderState.Text & "'," &
+                              " r1_code = '" & TBMR1.Text & "'," &
+                              " r1_q = '" & r1_q & "'," &
+                              " r2_code = '" & TBMR2.Text & "'," &
+                              " r2_q = '" & r2_q & "'," &
+                              " r3_code = '" & TBMR3.Text & "'," &
+                             " r3_q = '" & r3_q & "'," &
+                              " wireState = '" & LMaftolStatus.Text & "'," &
+                             " verificationNo = '" & TBMVerificationNo.Text & "'," &
+                             " mandrelState = '" & mandrelState & "'," &
+                             " verificationDate = '" & TBMVerificationDate.Text & "'" &
+                             " WHERE ID = " & LemkansanjiID.Text & ";"
+        Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+        MsgBox("done")
+        LoadEmkansanjiTable()
     End Sub
 
     Private Sub RMaftol1_CheckedChanged(sender As Object, e As EventArgs) Handles RMaftol1.CheckedChanged
@@ -296,5 +331,57 @@ Public Class emkanSanjiForm
 
     Private Sub Label24_Click(sender As Object, e As EventArgs) Handles Label24.Click
         ' TODO: Open Customer DataBase
+    End Sub
+    Private Function LoadEmkansanjiTable()
+        Using cn As New OleDbConnection(connectionString)
+            Using cmd As New OleDbCommand With {.Connection = cn}
+
+                Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
+
+                'the paranthesis in the query are mandatory
+                cmd.CommandText = "SELECT " & ESColumnNames & " FROM (emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID" &
+                    " ;"
+
+                Dim dt As New DataTable With {.TableName = "emkansanji"}
+                'Try
+                cn.Open()
+                Dim ds As New DataSet
+                Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
+                ds.Tables.Add(emkansanji)
+                ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
+                DataGridView1.DataSource = ds.Tables("emkansanji")
+                'DataGridView1.Columns(0).Visible = False
+                cn.Close()
+                DataGridView1.Columns(0).Visible = False
+                DataGridView1.Columns(1).Visible = False
+                DataGridView1.Columns(2).Visible = False
+                DataGridView1.Columns(3).Visible = False
+                DataGridView1.Columns(4).Visible = False
+                DataGridView1.Columns(5).Visible = False
+                DataGridView1.Columns(6).Visible = False
+
+            End Using
+        End Using
+    End Function
+
+    Private Sub Lwire1_Click(sender As Object, e As EventArgs) Handles Lwire1.Click
+        Dim wireSelectionForm = New wires()
+        wiresFormState = "selection"
+        wireFormCaller = "wire1"
+        wireSelectionForm.Show()
+    End Sub
+
+    Private Sub Lwire2_Click(sender As Object, e As EventArgs) Handles Lwire2.Click
+        Dim wireSelectionForm = New wires()
+        wiresFormState = "selection"
+        wireFormCaller = "wire2"
+        wireSelectionForm.Show()
+    End Sub
+
+    Private Sub Lwire3_Click(sender As Object, e As EventArgs) Handles Lwire3.Click
+        Dim wireSelectionForm = New wires()
+        wiresFormState = "selection"
+        wireFormCaller = "wire3"
+        wireSelectionForm.Show()
     End Sub
 End Class
