@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class emkanSanjiForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class emkanSanjiForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -28,6 +28,7 @@ Partial Class emkanSanjiForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(emkanSanjiForm))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.BTEmkansanjiSearch = New System.Windows.Forms.Button()
         Me.BTModify = New System.Windows.Forms.Button()
         Me.CBOrderState = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -35,7 +36,6 @@ Partial Class emkanSanjiForm
         Me.TBEmkansanjiID = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TBReservedD = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TBReserved = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
@@ -125,6 +125,12 @@ Partial Class emkanSanjiForm
         Me.RadioButton6 = New System.Windows.Forms.RadioButton()
         Me.RadioButton5 = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Lw3Unit = New System.Windows.Forms.Label()
+        Me.Lw2Unit = New System.Windows.Forms.Label()
+        Me.Lw1Unit = New System.Windows.Forms.Label()
+        Me.Lw3Weight = New System.Windows.Forms.Label()
+        Me.Lw2Weight = New System.Windows.Forms.Label()
+        Me.Lw1Weight = New System.Windows.Forms.Label()
         Me.LProductWeight = New System.Windows.Forms.Label()
         Me.Label45 = New System.Windows.Forms.Label()
         Me.LWireLength = New System.Windows.Forms.Label()
@@ -150,12 +156,6 @@ Partial Class emkanSanjiForm
         Me.TBMR2 = New System.Windows.Forms.TextBox()
         Me.Lwire1 = New System.Windows.Forms.Label()
         Me.TBMR1 = New System.Windows.Forms.TextBox()
-        Me.Lw1Weight = New System.Windows.Forms.Label()
-        Me.Lw2Weight = New System.Windows.Forms.Label()
-        Me.Lw3Weight = New System.Windows.Forms.Label()
-        Me.Lw1Unit = New System.Windows.Forms.Label()
-        Me.Lw2Unit = New System.Windows.Forms.Label()
-        Me.Lw3Unit = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -175,6 +175,7 @@ Partial Class emkanSanjiForm
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -186,6 +187,7 @@ Partial Class emkanSanjiForm
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.Controls.Add(Me.BTEmkansanjiSearch)
         Me.TabPage1.Controls.Add(Me.BTModify)
         Me.TabPage1.Controls.Add(Me.CBOrderState)
         Me.TabPage1.Controls.Add(Me.Label4)
@@ -193,7 +195,6 @@ Partial Class emkanSanjiForm
         Me.TabPage1.Controls.Add(Me.TBEmkansanjiID)
         Me.TabPage1.Controls.Add(Me.Label2)
         Me.TabPage1.Controls.Add(Me.TBReservedD)
-        Me.TabPage1.Controls.Add(Me.Button1)
         Me.TabPage1.Controls.Add(Me.Label1)
         Me.TabPage1.Controls.Add(Me.TBReserved)
         Me.TabPage1.Controls.Add(Me.Label22)
@@ -209,12 +210,24 @@ Partial Class emkanSanjiForm
         Me.TabPage1.Controls.Add(Me.Label7)
         Me.TabPage1.Controls.Add(Me.TBCustomerProductName)
         Me.TabPage1.Controls.Add(Me.DataGridView1)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Font = New System.Drawing.Font("B Traffic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.TabPage1.Location = New System.Drawing.Point(4, 30)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1071, 493)
+        Me.TabPage1.Size = New System.Drawing.Size(1071, 485)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.Text = "لیست امکان سنجی ها"
+        '
+        'BTEmkansanjiSearch
+        '
+        Me.BTEmkansanjiSearch.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTEmkansanjiSearch.Location = New System.Drawing.Point(80, 387)
+        Me.BTEmkansanjiSearch.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTEmkansanjiSearch.Name = "BTEmkansanjiSearch"
+        Me.BTEmkansanjiSearch.Size = New System.Drawing.Size(84, 33)
+        Me.BTEmkansanjiSearch.TabIndex = 70
+        Me.BTEmkansanjiSearch.Text = "جستجو"
+        Me.BTEmkansanjiSearch.UseVisualStyleBackColor = True
         '
         'BTModify
         '
@@ -289,16 +302,6 @@ Partial Class emkanSanjiForm
         Me.TBReservedD.Size = New System.Drawing.Size(234, 29)
         Me.TBReservedD.TabIndex = 10
         Me.TBReservedD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button1.Location = New System.Drawing.Point(80, 405)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(84, 28)
-        Me.Button1.TabIndex = 11
-        Me.Button1.Text = "جستجو"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -454,7 +457,7 @@ Partial Class emkanSanjiForm
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.MenuHighlight
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("B Traffic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -463,7 +466,7 @@ Partial Class emkanSanjiForm
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("B Traffic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -477,7 +480,7 @@ Partial Class emkanSanjiForm
         Me.DataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.MenuHighlight
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("B Traffic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -491,12 +494,13 @@ Partial Class emkanSanjiForm
         '
         Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
         Me.TabPage2.Controls.Add(Me.GroupBox2)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Font = New System.Drawing.Font("B Traffic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.TabPage2.Location = New System.Drawing.Point(4, 30)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1071, 493)
+        Me.TabPage2.Size = New System.Drawing.Size(1071, 485)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.Text = "اطلاعات کلی"
         '
         'GroupBox2
         '
@@ -975,11 +979,12 @@ Partial Class emkanSanjiForm
         Me.TabPage3.Controls.Add(Me.GroupBox5)
         Me.TabPage3.Controls.Add(Me.GroupBox4)
         Me.TabPage3.Controls.Add(Me.GroupBox1)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Font = New System.Drawing.Font("B Traffic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.TabPage3.Location = New System.Drawing.Point(4, 30)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(1071, 493)
+        Me.TabPage3.Size = New System.Drawing.Size(1071, 485)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "TabPage3"
+        Me.TabPage3.Text = "جزئیات تولید"
         '
         'GroupBox7
         '
@@ -1362,6 +1367,72 @@ Partial Class emkanSanjiForm
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = " وضعیت مفتول "
         '
+        'Lw3Unit
+        '
+        Me.Lw3Unit.AutoSize = True
+        Me.Lw3Unit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw3Unit.Location = New System.Drawing.Point(13, 136)
+        Me.Lw3Unit.Name = "Lw3Unit"
+        Me.Lw3Unit.Size = New System.Drawing.Size(19, 26)
+        Me.Lw3Unit.TabIndex = 88
+        Me.Lw3Unit.Text = "-"
+        Me.Lw3Unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw2Unit
+        '
+        Me.Lw2Unit.AutoSize = True
+        Me.Lw2Unit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw2Unit.Location = New System.Drawing.Point(371, 136)
+        Me.Lw2Unit.Name = "Lw2Unit"
+        Me.Lw2Unit.Size = New System.Drawing.Size(19, 26)
+        Me.Lw2Unit.TabIndex = 87
+        Me.Lw2Unit.Text = "-"
+        Me.Lw2Unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw1Unit
+        '
+        Me.Lw1Unit.AutoSize = True
+        Me.Lw1Unit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw1Unit.Location = New System.Drawing.Point(749, 136)
+        Me.Lw1Unit.Name = "Lw1Unit"
+        Me.Lw1Unit.Size = New System.Drawing.Size(19, 26)
+        Me.Lw1Unit.TabIndex = 86
+        Me.Lw1Unit.Text = "-"
+        Me.Lw1Unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw3Weight
+        '
+        Me.Lw3Weight.AutoSize = True
+        Me.Lw3Weight.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw3Weight.Location = New System.Drawing.Point(259, 138)
+        Me.Lw3Weight.Name = "Lw3Weight"
+        Me.Lw3Weight.Size = New System.Drawing.Size(46, 26)
+        Me.Lw3Weight.TabIndex = 85
+        Me.Lw3Weight.Text = "LW3"
+        Me.Lw3Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw2Weight
+        '
+        Me.Lw2Weight.AutoSize = True
+        Me.Lw2Weight.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw2Weight.Location = New System.Drawing.Point(610, 138)
+        Me.Lw2Weight.Name = "Lw2Weight"
+        Me.Lw2Weight.Size = New System.Drawing.Size(46, 26)
+        Me.Lw2Weight.TabIndex = 84
+        Me.Lw2Weight.Text = "LW2"
+        Me.Lw2Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Lw1Weight
+        '
+        Me.Lw1Weight.AutoSize = True
+        Me.Lw1Weight.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Lw1Weight.Location = New System.Drawing.Point(978, 135)
+        Me.Lw1Weight.Name = "Lw1Weight"
+        Me.Lw1Weight.Size = New System.Drawing.Size(46, 26)
+        Me.Lw1Weight.TabIndex = 83
+        Me.Lw1Weight.Text = "LW1"
+        Me.Lw1Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'LProductWeight
         '
         Me.LProductWeight.AutoSize = True
@@ -1633,82 +1704,17 @@ Partial Class emkanSanjiForm
         Me.TBMR1.TabIndex = 63
         Me.TBMR1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Lw1Weight
-        '
-        Me.Lw1Weight.AutoSize = True
-        Me.Lw1Weight.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Lw1Weight.Location = New System.Drawing.Point(978, 135)
-        Me.Lw1Weight.Name = "Lw1Weight"
-        Me.Lw1Weight.Size = New System.Drawing.Size(46, 26)
-        Me.Lw1Weight.TabIndex = 83
-        Me.Lw1Weight.Text = "LW1"
-        Me.Lw1Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Lw2Weight
-        '
-        Me.Lw2Weight.AutoSize = True
-        Me.Lw2Weight.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Lw2Weight.Location = New System.Drawing.Point(610, 138)
-        Me.Lw2Weight.Name = "Lw2Weight"
-        Me.Lw2Weight.Size = New System.Drawing.Size(46, 26)
-        Me.Lw2Weight.TabIndex = 84
-        Me.Lw2Weight.Text = "LW2"
-        Me.Lw2Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Lw3Weight
-        '
-        Me.Lw3Weight.AutoSize = True
-        Me.Lw3Weight.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Lw3Weight.Location = New System.Drawing.Point(259, 138)
-        Me.Lw3Weight.Name = "Lw3Weight"
-        Me.Lw3Weight.Size = New System.Drawing.Size(46, 26)
-        Me.Lw3Weight.TabIndex = 85
-        Me.Lw3Weight.Text = "LW3"
-        Me.Lw3Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Lw1Unit
-        '
-        Me.Lw1Unit.AutoSize = True
-        Me.Lw1Unit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Lw1Unit.Location = New System.Drawing.Point(749, 136)
-        Me.Lw1Unit.Name = "Lw1Unit"
-        Me.Lw1Unit.Size = New System.Drawing.Size(19, 26)
-        Me.Lw1Unit.TabIndex = 86
-        Me.Lw1Unit.Text = "-"
-        Me.Lw1Unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Lw2Unit
-        '
-        Me.Lw2Unit.AutoSize = True
-        Me.Lw2Unit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Lw2Unit.Location = New System.Drawing.Point(371, 136)
-        Me.Lw2Unit.Name = "Lw2Unit"
-        Me.Lw2Unit.Size = New System.Drawing.Size(19, 26)
-        Me.Lw2Unit.TabIndex = 87
-        Me.Lw2Unit.Text = "-"
-        Me.Lw2Unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Lw3Unit
-        '
-        Me.Lw3Unit.AutoSize = True
-        Me.Lw3Unit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Lw3Unit.Location = New System.Drawing.Point(13, 136)
-        Me.Lw3Unit.Name = "Lw3Unit"
-        Me.Lw3Unit.Size = New System.Drawing.Size(19, 26)
-        Me.Lw3Unit.TabIndex = 88
-        Me.Lw3Unit.Text = "-"
-        Me.Lw3Unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'emkanSanjiForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1093, 541)
         Me.Controls.Add(Me.TabControl1)
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(1109, 580)
-        Me.MinimumSize = New System.Drawing.Size(1109, 580)
+        Me.MinimumSize = New System.Drawing.Size(1109, 535)
         Me.Name = "emkanSanjiForm"
         Me.Text = "emkanSanjiForm"
         Me.TabControl1.ResumeLayout(False)
@@ -1753,7 +1759,6 @@ Partial Class emkanSanjiForm
     Friend WithEvents TBCustomerName As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TBCustomerProductName As TextBox
-    Friend WithEvents Button1 As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents TBReservedD As TextBox
     Friend WithEvents CBOrderState As ComboBox
@@ -1865,4 +1870,5 @@ Partial Class emkanSanjiForm
     Friend WithEvents Lw3Weight As Label
     Friend WithEvents Lw2Weight As Label
     Friend WithEvents Lw1Weight As Label
+    Friend WithEvents BTEmkansanjiSearch As Button
 End Class

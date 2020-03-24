@@ -1,9 +1,12 @@
-﻿Imports System.Data.OleDb
+﻿Imports System.ComponentModel
+Imports System.Data.OleDb
 
 
 Imports Excel = Microsoft.Office.Interop.Excel
 Public Class emkanSanjiForm
-
+    'binding source for the data gridview data
+    Public emkansanji_bs As New BindingSource
+    Public thisFormsOwner As String
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message,
                                            ByVal keyData As System.Windows.Forms.Keys) _
                                            As Boolean
@@ -19,55 +22,30 @@ Public Class emkanSanjiForm
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    Private Sub emkanSanjiForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Async Sub emkanSanjiForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ' Hide the tabs which are for editing before user actualy wants to edit somthing
+        TabControl1.TabPages.Remove(TabPage2)
+        TabControl1.TabPages.Remove(TabPage3)
+
         'Loading Springs table into datagridview1
-        LoadEmkansanjiTable()
+        Await LoadEmkansanjiTable()
+        If thisFormsOwner = "wiresForm" Then
+            Me.BTModify.PerformClick()
+            Me.TabControl1.TabPages.Remove(Me.TabPage1)
+        End If
+
     End Sub
 
-    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
 
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Using cn As New OleDbConnection(connectionString)
-            Using cmd As New OleDbCommand With {.Connection = cn}
-
-                Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
-
-                'the paranthesis in the query are mandatory
-                cmd.CommandText = "SELECT " & ESColumnNames & " FROM ((emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
-                    " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
-                 " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
-                 " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
-                 " emkansanji.orderState LIKE '%" & CBOrderState.Text & "%' AND" &
-                 " emkansanji.ID LIKE  '%" & TBEmkansanjiID.Text & "%' AND " &
-                " emkansanji.productCode LIKE '%" & TBCustomerProductCode.Text & "%' AND " &
-                " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
-                " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
-                " ;" 'TODO : Search the database based on Reserved wire and coil 
-                DataGridView1.Columns(0).Visible = False
-                DataGridView1.Columns(1).Visible = False
-                DataGridView1.Columns(2).Visible = False
-                DataGridView1.Columns(3).Visible = False
-                DataGridView1.Columns(4).Visible = False
-                DataGridView1.Columns(5).Visible = False
-                DataGridView1.Columns(6).Visible = False
-
-                Dim dt As New DataTable With {.TableName = "emkansanji"}
-                'Try
-                cn.Open()
-                Dim ds As New DataSet
-                Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
-                ds.Tables.Add(emkansanji)
-                ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
-                DataGridView1.DataSource = ds.Tables("emkansanji")
-                cn.Close()
-
-            End Using
-        End Using
-    End Sub
 
     Private Async Sub BTModify_Click(sender As Object, e As EventArgs) Handles BTModify.Click
+
+        '' Unhide the tabs for editing emkansanji data
+        TabControl1.TabPages.Add(TabPage2)
+        TabControl1.TabPages.Add(TabPage3)
+
+
         'TBCustomerName.Text = DataGridView1.SelectedRows(0).Cells("نام مشتری").Value.ToString
         LemkansanjiID.Text = DataGridView1.SelectedRows(0).Cells("شماره ردیابی سفارش").Value.ToString
         TBMEnergySazProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
@@ -228,8 +206,10 @@ Public Class emkanSanjiForm
                              " verificationDate = '" & TBMVerificationDate.Text & "'" &
                              " WHERE ID = " & LemkansanjiID.Text & ";"
         Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-        MsgBox("done")
-        LoadEmkansanjiTable()
+        Await LoadEmkansanjiTable()
+        Await UpdateReservesTable()
+        MsgBox("ویرایش مشخصات سفارش با موفقیت انجام شد", vbInformation + vbMsgBoxRight + vbMsgBoxRtlReading, "ویرایش امکان سنجی")
+
     End Sub
 
     Private Sub RMaftol1_CheckedChanged(sender As Object, e As EventArgs) Handles RMaftol1.CheckedChanged
@@ -332,36 +312,108 @@ Public Class emkanSanjiForm
     Private Sub Label24_Click(sender As Object, e As EventArgs) Handles Label24.Click
         ' TODO: Open Customer DataBase
     End Sub
-    Private Function LoadEmkansanjiTable()
-        Using cn As New OleDbConnection(connectionString)
-            Using cmd As New OleDbCommand With {.Connection = cn}
+    Private Async Function LoadEmkansanjiTable() As Task
+        'Using cn As New OleDbConnection(connectionString)
+        '    Using cmd As New OleDbCommand With {.Connection = cn}
 
-                Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
+        '        Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
 
-                'the paranthesis in the query are mandatory
-                cmd.CommandText = "SELECT " & ESColumnNames & " FROM (emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID" &
-                    " ;"
+        '        'the paranthesis in the query are mandatory
+        '        cmd.CommandText = "SELECT " & ESColumnNames & " FROM (emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID" &
+        '            " ;"
 
-                Dim dt As New DataTable With {.TableName = "emkansanji"}
-                'Try
-                cn.Open()
-                Dim ds As New DataSet
-                Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
-                ds.Tables.Add(emkansanji)
-                ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
-                DataGridView1.DataSource = ds.Tables("emkansanji")
-                'DataGridView1.Columns(0).Visible = False
-                cn.Close()
-                DataGridView1.Columns(0).Visible = False
-                DataGridView1.Columns(1).Visible = False
-                DataGridView1.Columns(2).Visible = False
-                DataGridView1.Columns(3).Visible = False
-                DataGridView1.Columns(4).Visible = False
-                DataGridView1.Columns(5).Visible = False
-                DataGridView1.Columns(6).Visible = False
+        '        Dim dt As New DataTable With {.TableName = "emkansanji"}
+        '        'Try
+        '        cn.Open()
+        '        Dim ds As New DataSet
+        '        Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
+        '        ds.Tables.Add(emkansanji)
+        '        ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
+        '        DataGridView1.DataSource = ds.Tables("emkansanji")
+        '        'DataGridView1.Columns(0).Visible = False
+        '        cn.Close()
+        '        DataGridView1.Columns(0).Visible = False
+        '        DataGridView1.Columns(1).Visible = False
+        '        DataGridView1.Columns(2).Visible = False
+        '        DataGridView1.Columns(3).Visible = False
+        '        DataGridView1.Columns(4).Visible = False
+        '        DataGridView1.Columns(5).Visible = False
+        '        DataGridView1.Columns(6).Visible = False
 
-            End Using
-        End Using
+        '    End Using
+        'End Using
+
+        'Using cn As New OleDbConnection(connectionString)
+        '    Using cmd As New OleDbCommand With {.Connection = cn}
+
+        '        Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
+
+        '        'the paranthesis in the query are mandatory
+        '        cmd.CommandText = "SELECT " & ESColumnNames & " FROM ((emkansanji LEFT JOIN springDataBase ON emkansanji.productID = springDataBase.ID) LEFT JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
+        '            " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
+        '         " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
+        '         " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
+        '         " emkansanji.orderState LIKE '%" & CBOrderState.Text & "%' AND" &
+        '         " emkansanji.ID LIKE  '%" & TBEmkansanjiID.Text & "' AND " &
+        '        " emkansanji.productCode LIKE '%" & TBCustomerProductCode.Text & "%' AND " &
+        '        " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
+        '        " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
+        '        " ;" 'TODO : Search the database based on Reserved wire and coil 
+
+        '        'cmd.CommandText = "SELECT " & ESColumnNames & " FROM ((emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID) ;"
+        '        Console.WriteLine(cmd.CommandText)
+
+        '        Dim dt As New DataTable With {.TableName = "emkansanji"}
+        '        'Try
+        '        cn.Open()
+        '        Dim ds As New DataSet
+        '        Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
+        '        ds.Tables.Add(emkansanji)
+        '        ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
+        '        '' This enables the use of bs.filter method to filter the database
+        '        'emkansanji_bs.DataSource = ds.Tables("emkansanji")
+        '        emkansanji_bs.DataSource = ds.Tables("emkansanji")
+        '        DataGridView1.DataSource = emkansanji_bs
+
+        '        cn.Close()
+        '        DataGridView1.Columns(0).Visible = False
+        '        DataGridView1.Columns(1).Visible = False
+        '        DataGridView1.Columns(2).Visible = False
+        '        DataGridView1.Columns(3).Visible = False
+        '        DataGridView1.Columns(4).Visible = False
+        '        DataGridView1.Columns(5).Visible = False
+        '        DataGridView1.Columns(6).Visible = False
+
+        '    End Using
+        'End Using
+
+
+        Dim sql_command = "SELECT " & ESColumnNames & " FROM ((emkansanji LEFT JOIN springDataBase ON emkansanji.productID = springDataBase.ID) LEFT JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
+                    " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
+                 " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
+                 " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
+                 " emkansanji.orderState LIKE '%" & CBOrderState.Text & "%' AND" &
+                 " emkansanji.ID LIKE  '%" & TBEmkansanjiID.Text & "%' AND " &
+                " emkansanji.productCode LIKE '%" & TBCustomerProductCode.Text & "%' AND " & 'PROBLEM
+                " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " & 'PROBLEM
+                " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " & ' PROBLEM
+                " ;" 'TODO : Search the database based on Reserved wire and coil 
+
+        Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+        emkansanji_bs.DataSource = dt
+        DataGridView1.DataSource = emkansanji_bs
+        'bs2.Filter = ""
+        ' Hide values which are not for the user to see
+        DataGridView1.Columns(0).Visible = False
+        DataGridView1.Columns(1).Visible = False
+        DataGridView1.Columns(2).Visible = False
+        DataGridView1.Columns(3).Visible = False
+        DataGridView1.Columns(4).Visible = False
+        DataGridView1.Columns(5).Visible = False
+        DataGridView1.Columns(6).Visible = False
+
+
+
     End Function
 
     Private Sub Lwire1_Click(sender As Object, e As EventArgs) Handles Lwire1.Click
@@ -384,4 +436,55 @@ Public Class emkanSanjiForm
         wireFormCaller = "wire3"
         wireSelectionForm.Show()
     End Sub
+
+    Private Sub BTEmkansanjiSearch_Click(sender As Object, e As EventArgs) Handles BTEmkansanjiSearch.Click
+        ''LoadEmkansanjiTable()
+        Using cn As New OleDbConnection(connectionString)
+            Using cmd As New OleDbCommand With {.Connection = cn}
+
+                Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
+
+                'the paranthesis in the query are mandatory
+                cmd.CommandText = "SELECT " & ESColumnNames & " FROM ((emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
+                    " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
+                 " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
+                 " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
+                 " emkansanji.orderState LIKE '%" & CBOrderState.Text & "%' AND" &
+                 " emkansanji.ID LIKE  '%" & TBEmkansanjiID.Text & "%' AND " &
+                " emkansanji.productCode LIKE '%" & TBCustomerProductCode.Text & "%' AND " &
+                " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
+                " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
+                " ;" 'TODO : Search the database based on Reserved wire and coil 
+                DataGridView1.Columns(0).Visible = False
+                DataGridView1.Columns(1).Visible = False
+                DataGridView1.Columns(2).Visible = False
+                DataGridView1.Columns(3).Visible = False
+                DataGridView1.Columns(4).Visible = False
+                DataGridView1.Columns(5).Visible = False
+                DataGridView1.Columns(6).Visible = False
+
+                Dim dt As New DataTable With {.TableName = "emkansanji"}
+                'Try
+                cn.Open()
+                Dim ds As New DataSet
+                Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
+                ds.Tables.Add(emkansanji)
+                ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
+                DataGridView1.DataSource = ds.Tables("emkansanji")
+                cn.Close()
+
+            End Using
+        End Using
+    End Sub
+
+    Private Async Sub emkanSanjiForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        '' If this form is called as a pop-up form from wires form then update wire and order data when closing
+        If thisFormsOwner = "wiresForm" Then
+            Await wires.LoadWiresData()
+            Await wires.LoadOrdersData()
+            Me.Dispose()
+        End If
+    End Sub
+
+
 End Class

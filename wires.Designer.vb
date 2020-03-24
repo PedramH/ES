@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class wires
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,255 +20,83 @@ Partial Class wires
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(wires))
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.BTUpdateInventory = New System.Windows.Forms.Button()
-        Me.BTSelectWire = New System.Windows.Forms.Button()
-        Me.BTModify = New System.Windows.Forms.Button()
-        Me.TBProductID = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TBNt = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.BTSearch = New System.Windows.Forms.Button()
-        Me.TBL0 = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TBOD = New System.Windows.Forms.TextBox()
-        Me.TBWireDiameter = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TBProductName = New System.Windows.Forms.TextBox()
+        Me.TabPage_Wires = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TBWireCode = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TBWireDiameter = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.TBWireLengthMin = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.CBWireType = New System.Windows.Forms.ComboBox()
+        Me.BTUpdateInventory = New System.Windows.Forms.Button()
+        Me.BTCheckOrders = New System.Windows.Forms.Button()
+        Me.BTShowAllWires = New System.Windows.Forms.Button()
+        Me.BTSelectWire = New System.Windows.Forms.Button()
+        Me.TabPage_Orders = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.BTShowAllOrders = New System.Windows.Forms.Button()
+        Me.TBWireCodeOrderSearch = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.BTCheckOrder = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.TabPage_Wires.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.TabPage_Orders.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel4.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TabPage3
+        'TabPage_Wires
         '
-        Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage3.Location = New System.Drawing.Point(4, 30)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(1064, 493)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "لیست سفارشات"
+        Me.TabPage_Wires.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage_Wires.Controls.Add(Me.TableLayoutPanel1)
+        Me.TabPage_Wires.Location = New System.Drawing.Point(4, 30)
+        Me.TabPage_Wires.Name = "TabPage_Wires"
+        Me.TabPage_Wires.Size = New System.Drawing.Size(1065, 507)
+        Me.TabPage_Wires.TabIndex = 2
+        Me.TabPage_Wires.Text = "موجودی مفتول"
         '
-        'TabPage1
+        'TableLayoutPanel1
         '
-        Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage1.Controls.Add(Me.GroupBox1)
-        Me.TabPage1.Controls.Add(Me.DataGridView1)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 30)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1064, 493)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "موجودی مفتول"
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.BTUpdateInventory)
-        Me.GroupBox1.Controls.Add(Me.BTSelectWire)
-        Me.GroupBox1.Controls.Add(Me.BTModify)
-        Me.GroupBox1.Controls.Add(Me.TBProductID)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.TBNt)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.BTSearch)
-        Me.GroupBox1.Controls.Add(Me.TBL0)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.TBOD)
-        Me.GroupBox1.Controls.Add(Me.TBWireDiameter)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.TBProductName)
-        Me.GroupBox1.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 384)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.GroupBox1.Size = New System.Drawing.Size(1045, 106)
-        Me.GroupBox1.TabIndex = 20
-        Me.GroupBox1.TabStop = False
-        '
-        'BTUpdateInventory
-        '
-        Me.BTUpdateInventory.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTUpdateInventory.Location = New System.Drawing.Point(8, 66)
-        Me.BTUpdateInventory.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTUpdateInventory.Name = "BTUpdateInventory"
-        Me.BTUpdateInventory.Size = New System.Drawing.Size(149, 33)
-        Me.BTUpdateInventory.TabIndex = 10
-        Me.BTUpdateInventory.Text = "به‌روزرسانی موجودی"
-        Me.BTUpdateInventory.UseVisualStyleBackColor = True
-        '
-        'BTSelectWire
-        '
-        Me.BTSelectWire.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTSelectWire.Location = New System.Drawing.Point(162, 66)
-        Me.BTSelectWire.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTSelectWire.Name = "BTSelectWire"
-        Me.BTSelectWire.Size = New System.Drawing.Size(105, 33)
-        Me.BTSelectWire.TabIndex = 9
-        Me.BTSelectWire.Text = "انتخاب مفتول"
-        Me.BTSelectWire.UseVisualStyleBackColor = True
-        Me.BTSelectWire.Visible = False
-        '
-        'BTModify
-        '
-        Me.BTModify.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTModify.Location = New System.Drawing.Point(554, 66)
-        Me.BTModify.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTModify.Name = "BTModify"
-        Me.BTModify.Size = New System.Drawing.Size(64, 33)
-        Me.BTModify.TabIndex = 8
-        Me.BTModify.Text = "ویرایش"
-        Me.BTModify.UseVisualStyleBackColor = True
-        '
-        'TBProductID
-        '
-        Me.TBProductID.Location = New System.Drawing.Point(585, 24)
-        Me.TBProductID.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBProductID.Name = "TBProductID"
-        Me.TBProductID.Size = New System.Drawing.Size(98, 29)
-        Me.TBProductID.TabIndex = 2
-        Me.TBProductID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label6.Location = New System.Drawing.Point(681, 25)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(49, 26)
-        Me.Label6.TabIndex = 13
-        Me.Label6.Text = "کد کالا"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TBNt
-        '
-        Me.TBNt.Location = New System.Drawing.Point(8, 24)
-        Me.TBNt.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBNt.Name = "TBNt"
-        Me.TBNt.Size = New System.Drawing.Size(70, 29)
-        Me.TBNt.TabIndex = 6
-        Me.TBNt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label2.Location = New System.Drawing.Point(512, 25)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(74, 26)
-        Me.Label2.TabIndex = 5
-        Me.Label2.Text = "قطر مفتول"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'BTSearch
-        '
-        Me.BTSearch.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTSearch.Location = New System.Drawing.Point(620, 66)
-        Me.BTSearch.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTSearch.Name = "BTSearch"
-        Me.BTSearch.Size = New System.Drawing.Size(63, 33)
-        Me.BTSearch.TabIndex = 7
-        Me.BTSearch.Text = "جستجو"
-        Me.BTSearch.UseVisualStyleBackColor = True
-        '
-        'TBL0
-        '
-        Me.TBL0.Location = New System.Drawing.Point(155, 24)
-        Me.TBL0.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBL0.Name = "TBL0"
-        Me.TBL0.Size = New System.Drawing.Size(70, 29)
-        Me.TBL0.TabIndex = 5
-        Me.TBL0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label1.Location = New System.Drawing.Point(968, 25)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(76, 26)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "نام محصول"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TBOD
-        '
-        Me.TBOD.Location = New System.Drawing.Point(295, 24)
-        Me.TBOD.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBOD.Name = "TBOD"
-        Me.TBOD.Size = New System.Drawing.Size(70, 29)
-        Me.TBOD.TabIndex = 4
-        Me.TBOD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBWireDiameter
-        '
-        Me.TBWireDiameter.Location = New System.Drawing.Point(442, 24)
-        Me.TBWireDiameter.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBWireDiameter.Name = "TBWireDiameter"
-        Me.TBWireDiameter.Size = New System.Drawing.Size(70, 29)
-        Me.TBWireDiameter.TabIndex = 3
-        Me.TBWireDiameter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label5.Location = New System.Drawing.Point(80, 25)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(71, 26)
-        Me.Label5.TabIndex = 8
-        Me.Label5.Text = "تعداد حلقه"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label4.Location = New System.Drawing.Point(224, 25)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(68, 26)
-        Me.Label4.TabIndex = 7
-        Me.Label4.Text = "طول آزاد"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label3.Location = New System.Drawing.Point(363, 25)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(76, 26)
-        Me.Label3.TabIndex = 6
-        Me.Label3.Text = "قطر خارجی"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TBProductName
-        '
-        Me.TBProductName.Location = New System.Drawing.Point(732, 24)
-        Me.TBProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBProductName.Name = "TBProductName"
-        Me.TBProductName.Size = New System.Drawing.Size(236, 29)
-        Me.TBProductName.TabIndex = 1
-        Me.TBProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.DataGridView1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 1)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1065, 507)
+        Me.TableLayoutPanel1.TabIndex = 0
         '
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.MenuHighlight
@@ -288,7 +116,7 @@ Partial Class wires
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView1.GridColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.DataGridView1.Location = New System.Drawing.Point(2, 5)
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 3)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
@@ -302,20 +130,334 @@ Partial Class wires
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(1049, 372)
-        Me.DataGridView1.TabIndex = 19
+        Me.DataGridView1.Size = New System.Drawing.Size(1059, 399)
+        Me.DataGridView1.TabIndex = 20
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 10
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Label1, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.TBWireCode, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label2, 2, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.TBWireDiameter, 3, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label6, 4, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.TBWireLengthMin, 5, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Label3, 6, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.CBWireType, 7, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.BTUpdateInventory, 8, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.BTCheckOrders, 8, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.BTShowAllWires, 1, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.BTSelectWire, 7, 1)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 408)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 2
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1059, 96)
+        Me.TableLayoutPanel2.TabIndex = 21
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label1.Location = New System.Drawing.Point(935, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(121, 48)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "کد کالا"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TBWireCode
+        '
+        Me.TBWireCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TBWireCode.Location = New System.Drawing.Point(830, 9)
+        Me.TBWireCode.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBWireCode.Name = "TBWireCode"
+        Me.TBWireCode.Size = New System.Drawing.Size(99, 29)
+        Me.TBWireCode.TabIndex = 6
+        Me.TBWireCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label2.Location = New System.Drawing.Point(725, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(99, 48)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "قطر مفتول"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TBWireDiameter
+        '
+        Me.TBWireDiameter.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TBWireDiameter.Location = New System.Drawing.Point(620, 9)
+        Me.TBWireDiameter.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBWireDiameter.Name = "TBWireDiameter"
+        Me.TBWireDiameter.Size = New System.Drawing.Size(99, 29)
+        Me.TBWireDiameter.TabIndex = 8
+        Me.TBWireDiameter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label6.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label6.Location = New System.Drawing.Point(483, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(131, 48)
+        Me.Label6.TabIndex = 17
+        Me.Label6.Text = "حداقل طول مفتول"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TBWireLengthMin
+        '
+        Me.TBWireLengthMin.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TBWireLengthMin.Location = New System.Drawing.Point(378, 9)
+        Me.TBWireLengthMin.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBWireLengthMin.Name = "TBWireLengthMin"
+        Me.TBWireLengthMin.Size = New System.Drawing.Size(99, 29)
+        Me.TBWireLengthMin.TabIndex = 18
+        Me.TBWireLengthMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label3.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label3.Location = New System.Drawing.Point(273, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(99, 48)
+        Me.Label3.TabIndex = 19
+        Me.Label3.Text = "نوع مفتول"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'CBWireType
+        '
+        Me.CBWireType.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CBWireType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CBWireType.FormattingEnabled = True
+        Me.CBWireType.Items.AddRange(New Object() {"همه", "مفتول شاخه‌ای", "مفتول کویل"})
+        Me.CBWireType.Location = New System.Drawing.Point(168, 13)
+        Me.CBWireType.Name = "CBWireType"
+        Me.CBWireType.Size = New System.Drawing.Size(99, 29)
+        Me.CBWireType.TabIndex = 20
+        '
+        'BTUpdateInventory
+        '
+        Me.BTUpdateInventory.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TableLayoutPanel2.SetColumnSpan(Me.BTUpdateInventory, 2)
+        Me.BTUpdateInventory.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTUpdateInventory.Location = New System.Drawing.Point(1, 7)
+        Me.BTUpdateInventory.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTUpdateInventory.Name = "BTUpdateInventory"
+        Me.BTUpdateInventory.Size = New System.Drawing.Size(163, 33)
+        Me.BTUpdateInventory.TabIndex = 21
+        Me.BTUpdateInventory.Text = "به‌روزرسانی موجودی"
+        Me.BTUpdateInventory.UseVisualStyleBackColor = True
+        '
+        'BTCheckOrders
+        '
+        Me.BTCheckOrders.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TableLayoutPanel2.SetColumnSpan(Me.BTCheckOrders, 2)
+        Me.BTCheckOrders.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTCheckOrders.Location = New System.Drawing.Point(1, 55)
+        Me.BTCheckOrders.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTCheckOrders.Name = "BTCheckOrders"
+        Me.BTCheckOrders.Size = New System.Drawing.Size(163, 33)
+        Me.BTCheckOrders.TabIndex = 23
+        Me.BTCheckOrders.Text = "جزییات رزرو"
+        Me.BTCheckOrders.UseVisualStyleBackColor = True
+        '
+        'BTShowAllWires
+        '
+        Me.BTShowAllWires.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTShowAllWires.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTShowAllWires.Location = New System.Drawing.Point(828, 55)
+        Me.BTShowAllWires.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTShowAllWires.Name = "BTShowAllWires"
+        Me.BTShowAllWires.Size = New System.Drawing.Size(103, 33)
+        Me.BTShowAllWires.TabIndex = 24
+        Me.BTShowAllWires.Text = "نمایش همه"
+        Me.BTShowAllWires.UseVisualStyleBackColor = True
+        '
+        'BTSelectWire
+        '
+        Me.BTSelectWire.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTSelectWire.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTSelectWire.Location = New System.Drawing.Point(166, 55)
+        Me.BTSelectWire.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTSelectWire.Name = "BTSelectWire"
+        Me.BTSelectWire.Size = New System.Drawing.Size(103, 33)
+        Me.BTSelectWire.TabIndex = 22
+        Me.BTSelectWire.Text = "انتخاب مفتول"
+        Me.BTSelectWire.UseVisualStyleBackColor = True
+        Me.BTSelectWire.Visible = False
+        '
+        'TabPage_Orders
+        '
+        Me.TabPage_Orders.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage_Orders.Controls.Add(Me.TableLayoutPanel3)
+        Me.TabPage_Orders.Location = New System.Drawing.Point(4, 30)
+        Me.TabPage_Orders.Name = "TabPage_Orders"
+        Me.TabPage_Orders.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage_Orders.Size = New System.Drawing.Size(1065, 507)
+        Me.TabPage_Orders.TabIndex = 0
+        Me.TabPage_Orders.Text = "لیست سفارشات"
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 1
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.DataGridView2, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel4, 0, 1)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1059, 501)
+        Me.TableLayoutPanel3.TabIndex = 0
+        '
+        'DataGridView2
+        '
+        Me.DataGridView2.AllowUserToAddRows = False
+        Me.DataGridView2.AllowUserToDeleteRows = False
+        Me.DataGridView2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DataGridView2.BackgroundColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.MenuHighlight
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView2.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DataGridView2.GridColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.DataGridView2.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView2.MultiSelect = False
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.ReadOnly = True
+        Me.DataGridView2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.MenuHighlight
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView2.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridView2.Size = New System.Drawing.Size(1053, 394)
+        Me.DataGridView2.TabIndex = 21
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.ColumnCount = 8
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
+        Me.TableLayoutPanel4.Controls.Add(Me.BTShowAllOrders, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.TBWireCodeOrderSearch, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label4, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.BTCheckOrder, 7, 0)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 403)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 1
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 95.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1053, 95)
+        Me.TableLayoutPanel4.TabIndex = 22
+        '
+        'BTShowAllOrders
+        '
+        Me.BTShowAllOrders.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTShowAllOrders.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTShowAllOrders.Location = New System.Drawing.Point(661, 31)
+        Me.BTShowAllOrders.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTShowAllOrders.Name = "BTShowAllOrders"
+        Me.BTShowAllOrders.Size = New System.Drawing.Size(129, 33)
+        Me.BTShowAllOrders.TabIndex = 23
+        Me.BTShowAllOrders.Text = "نمایش همه"
+        Me.BTShowAllOrders.UseVisualStyleBackColor = True
+        '
+        'TBWireCodeOrderSearch
+        '
+        Me.TBWireCodeOrderSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TBWireCodeOrderSearch.Location = New System.Drawing.Point(794, 33)
+        Me.TBWireCodeOrderSearch.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBWireCodeOrderSearch.Name = "TBWireCodeOrderSearch"
+        Me.TBWireCodeOrderSearch.Size = New System.Drawing.Size(125, 29)
+        Me.TBWireCodeOrderSearch.TabIndex = 7
+        Me.TBWireCodeOrderSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label4.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label4.Location = New System.Drawing.Point(925, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(125, 95)
+        Me.Label4.TabIndex = 6
+        Me.Label4.Text = "کد مفتول رزرو"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'BTCheckOrder
+        '
+        Me.BTCheckOrder.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTCheckOrder.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTCheckOrder.Location = New System.Drawing.Point(1, 31)
+        Me.BTCheckOrder.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTCheckOrder.Name = "BTCheckOrder"
+        Me.BTCheckOrder.Size = New System.Drawing.Size(134, 33)
+        Me.BTCheckOrder.TabIndex = 22
+        Me.BTCheckOrder.Text = "بررسی سفارش"
+        Me.BTCheckOrder.UseVisualStyleBackColor = True
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage_Wires)
+        Me.TabControl1.Controls.Add(Me.TabPage_Orders)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TabControl1.Location = New System.Drawing.Point(0, 2)
+        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.TabControl1.RightToLeftLayout = True
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1072, 527)
+        Me.TabControl1.Size = New System.Drawing.Size(1073, 541)
         Me.TabControl1.TabIndex = 1
         '
         'wires
@@ -328,34 +470,44 @@ Partial Class wires
         Me.Name = "wires"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "مواد اولیه"
-        Me.TabPage1.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.TabPage_Wires.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.TableLayoutPanel2.PerformLayout()
+        Me.TabPage_Orders.ResumeLayout(False)
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel4.ResumeLayout(False)
+        Me.TableLayoutPanel4.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents TabPage_Wires As TabPage
+    Friend WithEvents TabPage_Orders As TabPage
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents Label1 As Label
+    Friend WithEvents TBWireCode As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents TBWireDiameter As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents TBWireLengthMin As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents CBWireType As ComboBox
     Friend WithEvents BTUpdateInventory As Button
     Friend WithEvents BTSelectWire As Button
-    Friend WithEvents BTModify As Button
-    Friend WithEvents TBProductID As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents TBNt As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents BTSearch As Button
-    Friend WithEvents TBL0 As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TBOD As TextBox
-    Friend WithEvents TBWireDiameter As TextBox
-    Friend WithEvents Label5 As Label
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
     Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents TBProductName As TextBox
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TBWireCodeOrderSearch As TextBox
+    Friend WithEvents BTCheckOrder As Button
+    Friend WithEvents BTCheckOrders As Button
+    Friend WithEvents BTShowAllWires As Button
+    Friend WithEvents BTShowAllOrders As Button
 End Class

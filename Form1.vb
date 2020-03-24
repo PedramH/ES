@@ -2,9 +2,9 @@
 Imports System.Configuration
 Imports Excel = Microsoft.Office.Interop.Excel
 
-
+Imports System.Text.RegularExpressions
 Public Class mainForm
-
+    Public spring_bs As New BindingSource
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message,
                                            ByVal keyData As System.Windows.Forms.Keys) _
@@ -36,8 +36,9 @@ Public Class mainForm
                     Dim springDBTable As New DataTable With {.TableName = "springDataBase"}
                     ds.Tables.Add(springDBTable)
                     ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, springDBTable)
+                    spring_bs.DataSource = ds.Tables("springDataBase")
                     DataGridView1.DataSource = ds.Tables("springDataBase")
-                    DataGridView1.Columns(0).Visible = False
+                    'DataGridView1.Columns(0).Visible = False
                 Catch ex As Exception
                     MsgBox("خطا در ارتباط با دیتابیس", vbCritical + vbMsgBoxRight, "خطا")
                     Logger.LogFatal(ex.Message, ex)
@@ -79,10 +80,13 @@ Public Class mainForm
         'This subroutine searches the database based on textbox value
         'Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\ESDB.accdb"
 
+        '' This way it would find [فنر لول داخلی بوژی LSD1] with query [داخلی LSD] its just enogh for the word to be inside the name
+        ''      and what ever it is between them doesn't matter
+        Dim searchTerm = TBProductName.Text.Replace(" ", "%")
         Using cn As New OleDbConnection(connectionString)
             Using cmd As New OleDbCommand With {.Connection = cn}
                 cmd.CommandText = "SELECT " & springDataBaseColumnNames & " FROM springDataBase WHERE " &
-                    "springDataBase.productName LIKE '%" & TBProductName.Text & "%' AND" &
+                    "springDataBase.productName LIKE '%" & searchTerm & "%' AND" & '"springDataBase.productName LIKE '%" & TBProductName.Text & "%' AND" &
                     " springDataBase.wireDiameter LIKE '%" & TBWireDiameter.Text & "%'" &
                     " AND springDataBase.OD LIKE '%" & TBOD.Text & "%'" &
                     " AND springDataBase.L0 LIKE '%" & TBL0.Text & "%'" &
@@ -96,6 +100,7 @@ Public Class mainForm
                     ds.Tables.Add(springDBTable)
                     ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, springDBTable)
                     DataGridView1.DataSource = ds.Tables("springDataBase")
+                    spring_bs.DataSource = ds.Tables("springDataBase")
                     cn.Close()
                 Catch ex As Exception
                     MsgBox("خطا در ارتباط با دیتابیس", vbCritical + vbMsgBoxRight, "خطا")
@@ -351,5 +356,70 @@ Public Class mainForm
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
         wires.Show()
         'Logger.LogInfo("Hello World!")
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        ' KaveNegar
+        'Dim sender_no = "1000596446"
+        'Dim receptor = "09188183115"
+        'Dim Message = "تست سرویس ارسال پیام سلام سلام"
+        'Dim api As New Kavenegar.KavenegarApi("4578412F307931426F456F6D725A544173357933344D7336364C6139386B4838346C657653793872414F343D")
+        'api.Send(sender_no, receptor, Message)
+
+        ''https://developers.ghasedak.io/panel/line
+        Try
+            Dim Message = "سلام احوالت"
+            Dim lineNumber = "10008566"
+            Dim receptor = "09373868293"
+            Dim sms As New Ghasedak.Api("9c00cf12398ffbd28551a8d1645e71d07ed8c7acbb46963a2bb285774eb571c4")
+            Dim result = sms.SendSMS(Message, receptor, lineNumber)
+        Catch ex As Ghasedak.Exceptions.ApiException
+            Console.WriteLine(ex.Message)
+        Catch ex As Ghasedak.Exceptions.ConnectionException
+            Console.WriteLine(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub TBProductName_TextChanged(sender As Object, e As EventArgs) Handles TBProductName.TextChanged
+        Dim searchTerm = ConstructSearchQuery("نام محصول", TBProductName.Text)
+        'Dim filter = String.Format("[نام محصول] LIKE '%{0}%'", searchTerm)
+        Console.WriteLine(searchTerm)
+        spring_bs.Filter = searchTerm
+
+    End Sub
+    Private Function ConstructSearchQuery(columnName As String, input As String) As String
+        '' When the user's search term is [inner LSD1] the program should show a product with name [inner bogie LSD1 Spring]
+        '' Unlike SQL syntax bindingsource's filter property doesn't support wildcard characters in the middle of a string
+        '' so we use this function to construct a query for when the search term has spaces
+        '' so [inner LSD1] -> [columnName] LIKE '%inner%' AND [columnName] LIKE '%LSD1%'
+        '' TODO: think of a faster way to implement this [DONE]
+        input = Regex.Replace(input, "[\\/]", "")
+        input = input.Replace("*", "[*]")
+        input = input.Replace(" ", String.Format("%' AND [{0}] LIKE '%", columnName))
+        Dim searchTerm = String.Format("[{0}] LIKE '%", columnName) + input + String.Format("%'")
+
+        'Dim wordArray = input.Split(" ")
+        'Dim searchTerm = String.Format(" [{0}] LIKE '%{1}%' ", columnName, wordArray(0))
+        'For count = 1 To wordArray.Length - 1
+        '    searchTerm += String.Format(" AND [{0}] LIKE '%{1}%' ", columnName, wordArray(count))
+        'Next
+        Return searchTerm
+    End Function
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
+        '' Send a HTTP POST request to a server including the parametersS
+        Using client As New Net.WebClient
+            Try
+                Dim reqparm As New Specialized.NameValueCollection
+                reqparm.Add("param1", TBWireDiameter.Text) ' -> request.form['param1'] = TBWireDiameter.text
+                reqparm.Add("param2", "othervalue")
+                Dim responsebytes = client.UploadValues("https://pedramh.pythonanywhere.com/", "POST", reqparm)
+                Dim responsebody = (New Text.UTF8Encoding).GetString(responsebytes)
+                MsgBox(responsebody)
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+        End Using
     End Sub
 End Class

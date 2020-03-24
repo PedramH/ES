@@ -18,9 +18,10 @@ Public Module GlobalVariables
     'Public excelTemplateFilePath As String = "D:\ES.xlsx"
     Public excelTemplateFilePath As String = ConfigurationManager.ConnectionStrings("excelPath").ConnectionString
     Public excelFilesBasePath As String = ConfigurationManager.ConnectionStrings("excelBasePath").ConnectionString
-    Public excelInventoryGarmPath As String = "C:\Users\Yousefi\Desktop\springDataBase\garm.xlsx"
-    Public excelInventorySardPath As String = "D:\sard.xlsx"
-    Public excelInventoryPurchasedPath As String = "D:\purchased.xlsx"
+    '' TODO: Make these configurable
+    Public excelInventoryGarmPath As String = "D:\Academic\EnergySaz\Emkansanji\takeHome\موجودي مواد\garm.xlsx"
+    Public excelInventorySardPath As String = "D:\Academic\EnergySaz\Emkansanji\takeHome\موجودي مواد\sard.xlsx"
+    Public excelInventoryPurchasedPath As String = "D:\Academic\EnergySaz\Emkansanji\takeHome\موجودي مواد\purchased.xlsx"
 
 
     '' ----------------------------------------------------------  User Info  --------------------------------------------------------
@@ -51,7 +52,12 @@ Public Module GlobalVariables
 
     Public mandrelsColumnName As String = " ID AS [شماره شناسایی], mandrelCode AS [کد کالا] , mandrelDiameter AS [قطر شفت] "
 
-    Public wiresColumnName As String = ""
+    '' A is wireInventory table as B is wire reserves table
+    Public wiresColumnName As String = " A.wireType, A.wireWeight, A.wireCode AS [کد کالا], A.inventoryName AS [عنوان] , A.wireDiameter AS [قطر مفتول], A.wireLength AS [طول مفتول] ,
+                                        (A.inventory - B.preReserve - B.reserve) AS [مانده موجودی] , IIF(ISNUMERIC (A.wireWeight), INT((A.inventory - B.preReserve - B.reserve) / A.wireWeight) , '-' ) AS [تعداد شاخه] , 
+                                         A.inventory AS [موجودی فیزیکی], IIF( ISNUMERIC(A.wireWeight), INT(A.inventory / A.wireWeight) , '-' ) AS [موجودی فیزیکی (تعداد شاخه)], 
+                                         B.preReserve AS [رزرو امکان سنجی] , IIF( ISNUMERIC(A.wireWeight), INT(B.preReserve / A.wireWeight) , '-' ) AS [امکان سنجی (تعداد شاخه)], 
+                                         B.reserve AS [رزرو تولید] , IIF( ISNUMERIC(A.wireWeight), INT(B.reserve / A.wireWeight) , '-' ) AS [تولید(تعداد شاخه)]   "
 
 
 
@@ -133,7 +139,55 @@ Public Module globalFunctions
                     Return dt
                 End Try
     End Function
+    Public Async Function UpdateReservesTable() As Task
+        '' This function updates the wire reserves table based on emkansanji table
+        Try
+            '' ------------------------------------------------  Generating the reserves table  -----------------------------------------------------------
+            Dim sql_command = "
+                    SELECT wireInventory.wireCode AS [wireCode],
+                    SUM(IIF(emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r1_code,emkansanji.r1_q,0)) + SUM(IIF(emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r2_code,emkansanji.r2_q,0)) + SUM(IIF(emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r3_code,emkansanji.r3_q,0)) AS [رزرو امکان سنجی] ,
+                    SUM(IIF(emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r1_code,emkansanji.r1_q,0)) + SUM(IIF(emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r2_code,emkansanji.r2_q,0))  + SUM(IIF(emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r3_code,emkansanji.r3_q,0)) AS [رزرو تولید]
+                    FROM wireInventory  
+                    LEFT JOIN emkansanji ON (wireInventory.wireCode = emkansanji.r1_code OR wireInventory.wireCode = emkansanji.r2_code OR wireInventory.wireCode = emkansanji.r3_code)
+                    GROUP BY wireInventory.wireCode
+                    ;"
+            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+            '' --------------------------------------  Updating the reserves table in the database with new data  ------------------------------------------
+            Using cn As New OleDbConnection(connectionString)
+                Await cn.OpenAsync()
+                Using tran = cn.BeginTransaction()
+                    Using cmd As New OleDbCommand With {.Connection = cn, .Transaction = tran}
+                        Try
+                            '' Delete everything in wire wire reserve table
+                            cmd.CommandText = "DELETE FROM wireReserve"
+                            Await cmd.ExecuteNonQueryAsync()
 
+                            '' Populate the inventory table with data of reserves query
+                            For Each row As DataRow In dt.Rows
+
+                                cmd.CommandText = String.Format("INSERT INTO wireReserve (wireCode, preReserve, reserve) 
+                                                                VALUES ('{0}', '{1}', '{2}') ; ", row("wireCode").ToString, row("رزرو امکان سنجی").ToString, row("رزرو تولید").ToString)
+
+                                Await cmd.ExecuteNonQueryAsync()
+                            Next row
+                        Catch ex As Exception
+                            MsgBox("بروزرسانی اطلاعات رزرو مواد با خطا مواجه شد", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا")
+                            Logger.LogFatal(ex.Message, ex)
+                            tran.Rollback()
+                            cn.Close()
+                            Exit Function
+                        End Try
+                        tran.Commit()
+                        cn.Close()
+                        MsgBox("بروزرسانی اطلاعات رزرو مواد با موفقیت انجام شد.", MsgBoxStyle.MsgBoxRtlReading + MsgBoxStyle.MsgBoxRight + vbInformation, "بروزرسانی اطلاعات مواد")
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MsgBox("بروزرسانی اطلاعات رزرو مواد با خطا مواجه شد.", MsgBoxStyle.MsgBoxRtlReading + MsgBoxStyle.MsgBoxRight + vbInformation, "بروزرسانی اطلاعات مواد")
+            Logger.LogFatal(ex.Message, ex)
+        End Try
+    End Function
     Public Function CalculateWireWeight(d As Double, L As Double) As Double
         '' Calculates the weight of each wire rod
         Dim rho As Double = 0.00000783
@@ -201,6 +255,13 @@ Public Module globalFunctions
         Return fileName
     End Function
 
+    Public Function NormalizeName(inputStr As String)
+        'This function normalizes the search query and prevent SQL injection
+        inputStr = Regex.Replace(inputStr, "[\\/'"";=]", "")
+        inputStr = Regex.Replace(inputStr, "[ك]", "ک")
+        inputStr = Regex.Replace(inputStr, "[ي]", "ی")
+        Return inputStr
+    End Function
     Public Function NormalizeString(inputStr As String)
         ' This funtion prevent certain characters (* / \ " ' ; = ) from being in the name inputs
         inputStr = Regex.Replace(inputStr, "[*\\/'"";=]", "")
@@ -226,7 +287,7 @@ End Module
 '   TODO: 
 '       [✔] Add IST like calculations to productForm 
 '       [✔] Fix the tab order of form
-'       [  ] Do something for tolid 
+'       [✔] Do something for tolid 
 '       [  ] Deploy using a real database with correct information
 '               [  ] Migrate Tolid's data to the new format
 '       [✔] Add a config file
@@ -245,7 +306,7 @@ End Module
 '               [✔] Main form
 '               [✔] Module1
 '               [  ] emkansanjiForm
-'               [  ] 
+'               [  ] wires
 '       [✔] Add functionality of making emkansanji excel file
 '       [  ] State of wire and mandrel and packaging should be available in the emkansanji database
 '       [  ] Add product reservation 
@@ -264,8 +325,26 @@ End Module
 '       [  ] Make a script to change the reserve for every emkansanji where a future bought wire is used when the wire arrives to the factory
 '       [✔] Generate wire reservation table
 '       [  ] Consider wire state in generation of reservation table
-'       [  ] Use regex to extract wire Length
-'       [  ] 
+'       [✔] Use regex to extract wire Length
+'       [  ] Add print functionality to wires data
+'       [  ] Wires
+'               [✔] Add searching functionality 
+'               [✔] Add list of all orders
+'               [✔] Test the new search system in wires form, if it's good enough maybe change everything else to this method? 
+'               [  ] Add formating based on value to grid views
+'               [  ] Properly Sort and format wires data 
+'       [  ] Make a main form from which every form is accessible
+'       [  ] Update reserves table using the function after each change to the emkansanji table
+'       [  ] Update mandrel data from rahkaran excel file. it shouldn't be hard but it will save some headache in the future
+'       [  ] Measure time difference between local and over the network queries  
+'       [✔] Update data in the wireForm after changing an emkansanji datum originated from that form
+'       [  ] Customer can get all their open orders states from telegram, providing that they know their specific customer ID(long string) 
+'       [  ] Change logging mode from file to db
+'       [  ] Make a copy of rahkaran excel files then read the copy to prevent file open in another computer errors. 
+'       [  ] Add something to compensate wire reservation for orders that only a part of them is produced
+'       [  ] Build purchased file with the data from mojodimaftol.excel
+'       [  ] Use NormalizeName function to prevent sql injection and compensate for difference in farsi and arabic ی  ک characters
+'       [  ]
 '       [  ] 
 '       [  ] 
 '       [  ] 

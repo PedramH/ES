@@ -32,6 +32,7 @@ Partial Class mainForm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.BTClear = New System.Windows.Forms.Button()
         Me.BTNewProduct = New System.Windows.Forms.Button()
         Me.BTModify = New System.Windows.Forms.Button()
@@ -134,6 +135,7 @@ Partial Class mainForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.BTClear)
         Me.GroupBox1.Controls.Add(Me.BTNewProduct)
         Me.GroupBox1.Controls.Add(Me.BTModify)
@@ -157,6 +159,17 @@ Partial Class mainForm
         Me.GroupBox1.Size = New System.Drawing.Size(1045, 106)
         Me.GroupBox1.TabIndex = 20
         Me.GroupBox1.TabStop = False
+        '
+        'Button4
+        '
+        Me.Button4.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Button4.Location = New System.Drawing.Point(90, 66)
+        Me.Button4.Margin = New System.Windows.Forms.Padding(1)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(148, 33)
+        Me.Button4.TabIndex = 14
+        Me.Button4.Text = "تست ارسال پیامک"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'BTClear
         '
@@ -1002,4 +1015,5 @@ Partial Class mainForm
     Friend WithEvents Button3 As Button
     Friend WithEvents LStatus As Label
     Friend WithEvents Button2 As Button
+    Friend WithEvents Button4 As Button
 End Class
