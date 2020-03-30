@@ -17,13 +17,18 @@ Public Class wires
         ''      because of the increased speed.
 
         '' Use FLOOR instead of int in postgreSQL
-        Dim sql_command = "SELECT" + wiresColumnName + "FROM wireInventory A INNER JOIN wireReserve B ON A.wireCode = B.wireCode;"
+        Dim sql_command = "SELECT" + wiresColumnName + "FROM wireInventory A LEFT JOIN wireReserve B ON A.wireCode = B.wireCode;"
         Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
         bs.DataSource = dt
         DataGridView1.DataSource = dt
         '' Hide wireType and wireWeight
         DataGridView1.Columns(0).Visible = False
         DataGridView1.Columns(1).Visible = False
+
+        '' Formating of columns
+        DataGridView1.DefaultCellStyle.Font = New System.Drawing.Font("Arial", 9.85)
+
+        DataGridView1.Columns("عنوان").DefaultCellStyle.Font = New System.Drawing.Font("B Traffic", 9.75)
     End Function
     Private Function SearchWiresData()
         '' This function bs, a global binding source in this form which is the data source for datagridview1
@@ -58,13 +63,21 @@ Public Class wires
         DataGridView2.DataSource = bs2
         'bs2.Filter = ""
         '' Hide values which are not for the user to see
-        DataGridView2.Columns(0).Visible = False
-        DataGridView2.Columns(1).Visible = False
-        DataGridView2.Columns(2).Visible = False
-        DataGridView2.Columns(3).Visible = False
-        DataGridView2.Columns(4).Visible = False
-        DataGridView2.Columns(5).Visible = False
-        DataGridView2.Columns(6).Visible = False
+        DataGridView2.Columns("productID").Visible = False
+        DataGridView2.Columns("customerID").Visible = False
+        DataGridView2.Columns("wireDiameter").Visible = False
+        DataGridView2.Columns("OD").Visible = False
+        DataGridView2.Columns("L0").Visible = False
+        DataGridView2.Columns("wireLength").Visible = False
+        DataGridView2.Columns("mandrelDiameter").Visible = False
+        DataGridView2.Columns("pProcess").Visible = False
+        DataGridView2.Columns("productReserve").Visible = False
+        DataGridView2.Columns("productionProcess").Visible = False
+        DataGridView2.Columns("springInEachPackage").Visible = False
+        DataGridView2.Columns("packagingCost").Visible = False
+        DataGridView2.Columns("doable").Visible = False
+        DataGridView2.Columns("whyNot").Visible = False
+        DataGridView2.Columns("productionReserve").Visible = False
     End Function
     Private Function SearchOrdersData()
         bs2.Filter = String.Format("[کد مفتول رزرو 1] LIKE '%{0}%' OR [کد مفتول رزرو 2] LIKE '%{0}%' OR [کد مفتول رزرو 3] LIKE '%{0}%'", TBWireCodeOrderSearch.Text)
@@ -161,11 +174,18 @@ Public Class wires
                                 '' prevent empty rows in the files to be inserted in the database
                                 Continue For
                             End If
+                            If IsNumeric(row("طول مفتول").ToString()) Then
+                                wireWeight = CalculateWireWeight(Val(row("قطر مفتول").ToString()), Val(row("طول مفتول").ToString())).ToString
+                            Else
+                                wireLength = "-"
+                                wireWeight = "-"
+                            End If
+
 
                             cmd.CommandText = String.Format("INSERT INTO wireInventory 
-                        (wireCode, wireType, wireDiameter, wireLength, wireSpecification, inventory , inventoryName) 
-                        VALUES ( '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}' );", row("کد").ToString(), row("نوع مفتول").ToString(),
-                                       row("قطر مفتول").ToString(), row("طول مفتول").ToString(), row("مشخصه فنی").ToString(), row("موجودی").ToString(), row("عنوان").ToString())
+                        (wireCode, wireType, wireDiameter, wireLength, wireSpecification, inventory , inventoryName,wireWeight) 
+                        VALUES ( '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}','{7}' );", row("کد").ToString(), row("نوع مفتول").ToString(),
+                                       row("قطر مفتول").ToString(), row("طول مفتول").ToString(), row("مشخصه فنی").ToString(), row("موجودی").ToString(), row("عنوان").ToString(), wireWeight)
 
                             'Console.WriteLine(cmd.CommandText)
                             Await cmd.ExecuteNonQueryAsync()
@@ -186,6 +206,7 @@ Public Class wires
             End Using
         End Using
         Await LoadWiresData()
+        Await UpdateReservesTable()
     End Sub
 
 
@@ -197,6 +218,9 @@ Public Class wires
         Dim selectedWire As String = DataGridView1.SelectedRows(0).Cells("کد کالا").Value.ToString  'TODO: fix this -> add column name
         Dim selectedWireWeight As String = DataGridView1.SelectedRows(0).Cells("wireWeight").Value.ToString
         Dim selectedWireUnit As String
+        Dim selectedWireD = DataGridView1.SelectedRows(0).Cells("قطر مفتول").Value.ToString
+        Dim selectedWireL = DataGridView1.SelectedRows(0).Cells("طول مفتول").Value.ToString
+
         If IsNumeric(selectedWireWeight) Then
             selectedWireUnit = "شاخه"
         Else
@@ -208,6 +232,8 @@ Public Class wires
                 emkanSanjiForm.TBMR1.Text = selectedWire
                 emkanSanjiForm.Lw1Weight.Text = selectedWireWeight
                 emkanSanjiForm.Lw1Unit.Text = selectedWireUnit
+                emkanSanjiForm.LSelectedWireD.Text = selectedWireD
+                emkanSanjiForm.LSelectedWireL.Text = selectedWireL
             Case "wire2"
                 emkanSanjiForm.TBMR2.Text = selectedWire
                 emkanSanjiForm.Lw2Weight.Text = selectedWireWeight
@@ -225,6 +251,7 @@ Public Class wires
         ''      but ensuring that data are loaded only the first time the tab is selected. 
         If firstTimeEnteringOrdersTab = True Then
             Await LoadOrdersData()
+            'LoadOrdersData()
             firstTimeEnteringOrdersTab = False
         End If
     End Sub
@@ -281,6 +308,19 @@ Public Class wires
     End Sub
 
     Private Sub TableLayoutPanel2_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel2.Paint
+
+    End Sub
+
+
+    Private Sub DataGridView1_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles DataGridView1.CellPainting
+        If (e.ColumnIndex = 6 Or e.ColumnIndex = 7) And e.RowIndex >= 0 Then
+
+            e.PaintBackground(e.CellBounds, True)
+            TextRenderer.DrawText(e.Graphics, e.FormattedValue.ToString(),
+          e.CellStyle.Font, e.CellBounds, e.CellStyle.ForeColor,
+           TextFormatFlags.HorizontalCenter)
+            e.Handled = True
+        End If
 
     End Sub
 End Class

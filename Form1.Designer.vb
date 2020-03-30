@@ -32,6 +32,7 @@ Partial Class mainForm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.BTClear = New System.Windows.Forms.Button()
         Me.BTNewProduct = New System.Windows.Forms.Button()
@@ -61,16 +62,45 @@ Partial Class mainForm
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.RBMainOrder = New System.Windows.Forms.RadioButton()
+        Me.RBAmendOrder = New System.Windows.Forms.RadioButton()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.TBOtherInspection = New System.Windows.Forms.TextBox()
+        Me.CHCreepTest = New System.Windows.Forms.CheckBox()
+        Me.CHVerifyBeforeShipping = New System.Windows.Forms.CheckBox()
+        Me.CHcustomerTolerance = New System.Windows.Forms.CheckBox()
+        Me.CHAllInspection = New System.Windows.Forms.CheckBox()
+        Me.CHForceTest = New System.Windows.Forms.CheckBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.RBOldProduct = New System.Windows.Forms.RadioButton()
+        Me.RBChangeProduct = New System.Windows.Forms.RadioButton()
+        Me.RBNewProduct = New System.Windows.Forms.RadioButton()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TBEnergySazProductName = New System.Windows.Forms.TextBox()
+        Me.TBCustomerName = New System.Windows.Forms.TextBox()
+        Me.TBProductIDES = New System.Windows.Forms.TextBox()
+        Me.TBCustomerProductName = New System.Windows.Forms.TextBox()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.CHPelak = New System.Windows.Forms.CheckBox()
+        Me.CHRang = New System.Windows.Forms.CheckBox()
+        Me.CHSang = New System.Windows.Forms.CheckBox()
+        Me.CHSet = New System.Windows.Forms.CheckBox()
+        Me.CHTarak = New System.Windows.Forms.CheckBox()
+        Me.CHShot = New System.Windows.Forms.CheckBox()
+        Me.CHTemper = New System.Windows.Forms.CheckBox()
+        Me.CHStress = New System.Windows.Forms.CheckBox()
+        Me.CHGarm = New System.Windows.Forms.CheckBox()
+        Me.CHSard = New System.Windows.Forms.CheckBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.TBSampleQuantity = New System.Windows.Forms.TextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.LStatus = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.TBOrderNo = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.TBProductIDES = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.TBEnergySazProductName = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TBComment = New System.Windows.Forms.TextBox()
         Me.BTSubmit = New System.Windows.Forms.Button()
@@ -86,16 +116,13 @@ Partial Class mainForm
         Me.TBLetterDate = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TBLetterNo = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.TBCustomerID = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TBQuantity = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TBCustomerDwgNo = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TBCustomerName = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TBCustomerProductName = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -105,6 +132,9 @@ Partial Class mainForm
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -135,6 +165,7 @@ Partial Class mainForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button5)
         Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.BTClear)
         Me.GroupBox1.Controls.Add(Me.BTNewProduct)
@@ -159,6 +190,17 @@ Partial Class mainForm
         Me.GroupBox1.Size = New System.Drawing.Size(1045, 106)
         Me.GroupBox1.TabIndex = 20
         Me.GroupBox1.TabStop = False
+        '
+        'Button5
+        '
+        Me.Button5.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Button5.Location = New System.Drawing.Point(847, 66)
+        Me.Button5.Margin = New System.Windows.Forms.Padding(1)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(63, 33)
+        Me.Button5.TabIndex = 15
+        Me.Button5.Text = "جستجو"
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'Button4
         '
@@ -519,16 +561,25 @@ Partial Class mainForm
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.RBMainOrder)
+        Me.GroupBox2.Controls.Add(Me.RBAmendOrder)
+        Me.GroupBox2.Controls.Add(Me.GroupBox4)
+        Me.GroupBox2.Controls.Add(Me.GroupBox5)
+        Me.GroupBox2.Controls.Add(Me.Label11)
+        Me.GroupBox2.Controls.Add(Me.TBEnergySazProductName)
+        Me.GroupBox2.Controls.Add(Me.TBCustomerName)
+        Me.GroupBox2.Controls.Add(Me.TBProductIDES)
+        Me.GroupBox2.Controls.Add(Me.TBCustomerProductName)
+        Me.GroupBox2.Controls.Add(Me.GroupBox10)
+        Me.GroupBox2.Controls.Add(Me.Label23)
+        Me.GroupBox2.Controls.Add(Me.TBSampleQuantity)
         Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.LStatus)
         Me.GroupBox2.Controls.Add(Me.Button3)
         Me.GroupBox2.Controls.Add(Me.Label22)
         Me.GroupBox2.Controls.Add(Me.TBOrderNo)
         Me.GroupBox2.Controls.Add(Me.Button1)
-        Me.GroupBox2.Controls.Add(Me.Label20)
-        Me.GroupBox2.Controls.Add(Me.TBProductIDES)
         Me.GroupBox2.Controls.Add(Me.Label19)
-        Me.GroupBox2.Controls.Add(Me.TBEnergySazProductName)
         Me.GroupBox2.Controls.Add(Me.Label18)
         Me.GroupBox2.Controls.Add(Me.TBComment)
         Me.GroupBox2.Controls.Add(Me.BTSubmit)
@@ -544,28 +595,382 @@ Partial Class mainForm
         Me.GroupBox2.Controls.Add(Me.TBLetterDate)
         Me.GroupBox2.Controls.Add(Me.Label12)
         Me.GroupBox2.Controls.Add(Me.TBLetterNo)
-        Me.GroupBox2.Controls.Add(Me.Label11)
         Me.GroupBox2.Controls.Add(Me.TBCustomerID)
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.TBQuantity)
         Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Controls.Add(Me.TBCustomerDwgNo)
         Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Controls.Add(Me.TBCustomerName)
         Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.TBCustomerProductName)
         Me.GroupBox2.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         Me.GroupBox2.Location = New System.Drawing.Point(4, 1)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.GroupBox2.Size = New System.Drawing.Size(1053, 479)
+        Me.GroupBox2.Size = New System.Drawing.Size(1053, 491)
         Me.GroupBox2.TabIndex = 22
         Me.GroupBox2.TabStop = False
         '
+        'RBMainOrder
+        '
+        Me.RBMainOrder.AutoSize = True
+        Me.RBMainOrder.Checked = True
+        Me.RBMainOrder.Location = New System.Drawing.Point(148, 185)
+        Me.RBMainOrder.Name = "RBMainOrder"
+        Me.RBMainOrder.Size = New System.Drawing.Size(50, 25)
+        Me.RBMainOrder.TabIndex = 90
+        Me.RBMainOrder.TabStop = True
+        Me.RBMainOrder.Text = "اصلی"
+        Me.RBMainOrder.UseVisualStyleBackColor = True
+        '
+        'RBAmendOrder
+        '
+        Me.RBAmendOrder.AutoSize = True
+        Me.RBAmendOrder.Location = New System.Drawing.Point(59, 185)
+        Me.RBAmendOrder.Name = "RBAmendOrder"
+        Me.RBAmendOrder.Size = New System.Drawing.Size(61, 25)
+        Me.RBAmendOrder.TabIndex = 89
+        Me.RBAmendOrder.Text = "اصلاحیه"
+        Me.RBAmendOrder.UseVisualStyleBackColor = True
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.Label24)
+        Me.GroupBox4.Controls.Add(Me.TBOtherInspection)
+        Me.GroupBox4.Controls.Add(Me.CHCreepTest)
+        Me.GroupBox4.Controls.Add(Me.CHVerifyBeforeShipping)
+        Me.GroupBox4.Controls.Add(Me.CHcustomerTolerance)
+        Me.GroupBox4.Controls.Add(Me.CHAllInspection)
+        Me.GroupBox4.Controls.Add(Me.CHForceTest)
+        Me.GroupBox4.Location = New System.Drawing.Point(16, 93)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(1025, 49)
+        Me.GroupBox4.TabIndex = 81
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "فرایند بازرسی"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label24.Location = New System.Drawing.Point(131, 17)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(37, 26)
+        Me.Label24.TabIndex = 77
+        Me.Label24.Text = "سایر"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TBOtherInspection
+        '
+        Me.TBOtherInspection.Location = New System.Drawing.Point(6, 16)
+        Me.TBOtherInspection.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBOtherInspection.Name = "TBOtherInspection"
+        Me.TBOtherInspection.Size = New System.Drawing.Size(116, 29)
+        Me.TBOtherInspection.TabIndex = 76
+        Me.TBOtherInspection.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'CHCreepTest
+        '
+        Me.CHCreepTest.AutoSize = True
+        Me.CHCreepTest.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHCreepTest.Location = New System.Drawing.Point(203, 16)
+        Me.CHCreepTest.Name = "CHCreepTest"
+        Me.CHCreepTest.Size = New System.Drawing.Size(96, 30)
+        Me.CHCreepTest.TabIndex = 75
+        Me.CHCreepTest.Text = "تست خزش"
+        Me.CHCreepTest.UseVisualStyleBackColor = True
+        '
+        'CHVerifyBeforeShipping
+        '
+        Me.CHVerifyBeforeShipping.AutoSize = True
+        Me.CHVerifyBeforeShipping.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHVerifyBeforeShipping.Location = New System.Drawing.Point(334, 16)
+        Me.CHVerifyBeforeShipping.Name = "CHVerifyBeforeShipping"
+        Me.CHVerifyBeforeShipping.Size = New System.Drawing.Size(140, 30)
+        Me.CHVerifyBeforeShipping.TabIndex = 74
+        Me.CHVerifyBeforeShipping.Text = "تاییدیه قبل از ارسال"
+        Me.CHVerifyBeforeShipping.UseVisualStyleBackColor = True
+        '
+        'CHcustomerTolerance
+        '
+        Me.CHcustomerTolerance.AutoSize = True
+        Me.CHcustomerTolerance.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHcustomerTolerance.Location = New System.Drawing.Point(509, 16)
+        Me.CHcustomerTolerance.Name = "CHcustomerTolerance"
+        Me.CHcustomerTolerance.Size = New System.Drawing.Size(182, 30)
+        Me.CHcustomerTolerance.TabIndex = 73
+        Me.CHcustomerTolerance.Text = "تلورانس سختگیرانه مشتری"
+        Me.CHcustomerTolerance.UseVisualStyleBackColor = True
+        '
+        'CHAllInspection
+        '
+        Me.CHAllInspection.AutoSize = True
+        Me.CHAllInspection.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHAllInspection.Location = New System.Drawing.Point(726, 16)
+        Me.CHAllInspection.Name = "CHAllInspection"
+        Me.CHAllInspection.Size = New System.Drawing.Size(107, 30)
+        Me.CHAllInspection.TabIndex = 72
+        Me.CHAllInspection.Text = "بازرسی 100%"
+        Me.CHAllInspection.UseVisualStyleBackColor = True
+        '
+        'CHForceTest
+        '
+        Me.CHForceTest.AutoSize = True
+        Me.CHForceTest.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHForceTest.Location = New System.Drawing.Point(868, 16)
+        Me.CHForceTest.Name = "CHForceTest"
+        Me.CHForceTest.Size = New System.Drawing.Size(144, 30)
+        Me.CHForceTest.TabIndex = 71
+        Me.CHForceTest.Text = "جداسازی 100% نیرو"
+        Me.CHForceTest.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.RBOldProduct)
+        Me.GroupBox5.Controls.Add(Me.RBChangeProduct)
+        Me.GroupBox5.Controls.Add(Me.RBNewProduct)
+        Me.GroupBox5.Location = New System.Drawing.Point(16, 133)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(0)
+        Me.GroupBox5.Size = New System.Drawing.Size(653, 41)
+        Me.GroupBox5.TabIndex = 88
+        Me.GroupBox5.TabStop = False
+        '
+        'RBOldProduct
+        '
+        Me.RBOldProduct.AutoSize = True
+        Me.RBOldProduct.Location = New System.Drawing.Point(18, 13)
+        Me.RBOldProduct.Name = "RBOldProduct"
+        Me.RBOldProduct.Size = New System.Drawing.Size(86, 25)
+        Me.RBOldProduct.TabIndex = 2
+        Me.RBOldProduct.Text = "محصول قبلی"
+        Me.RBOldProduct.UseVisualStyleBackColor = True
+        '
+        'RBChangeProduct
+        '
+        Me.RBChangeProduct.AutoSize = True
+        Me.RBChangeProduct.Location = New System.Drawing.Point(196, 13)
+        Me.RBChangeProduct.Name = "RBChangeProduct"
+        Me.RBChangeProduct.Size = New System.Drawing.Size(181, 25)
+        Me.RBChangeProduct.TabIndex = 1
+        Me.RBChangeProduct.Text = "تغییر در محصول / فرآیند موجود"
+        Me.RBChangeProduct.UseVisualStyleBackColor = True
+        '
+        'RBNewProduct
+        '
+        Me.RBNewProduct.AutoSize = True
+        Me.RBNewProduct.Checked = True
+        Me.RBNewProduct.Location = New System.Drawing.Point(469, 13)
+        Me.RBNewProduct.Name = "RBNewProduct"
+        Me.RBNewProduct.Size = New System.Drawing.Size(158, 25)
+        Me.RBNewProduct.TabIndex = 0
+        Me.RBNewProduct.TabStop = True
+        Me.RBNewProduct.Text = "ایجاد محصول /فرآیند جدید"
+        Me.RBNewProduct.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label11.Location = New System.Drawing.Point(204, 184)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(79, 26)
+        Me.Label11.TabIndex = 87
+        Me.Label11.Text = "نوع سفارش"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TBEnergySazProductName
+        '
+        Me.TBEnergySazProductName.Enabled = False
+        Me.TBEnergySazProductName.Location = New System.Drawing.Point(672, 17)
+        Me.TBEnergySazProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBEnergySazProductName.Name = "TBEnergySazProductName"
+        Me.TBEnergySazProductName.Size = New System.Drawing.Size(234, 29)
+        Me.TBEnergySazProductName.TabIndex = 43
+        Me.TBEnergySazProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBCustomerName
+        '
+        Me.TBCustomerName.Enabled = False
+        Me.TBCustomerName.Location = New System.Drawing.Point(312, 17)
+        Me.TBCustomerName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBCustomerName.Name = "TBCustomerName"
+        Me.TBCustomerName.Size = New System.Drawing.Size(234, 29)
+        Me.TBCustomerName.TabIndex = 20
+        Me.TBCustomerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBProductIDES
+        '
+        Me.TBProductIDES.Enabled = False
+        Me.TBProductIDES.Location = New System.Drawing.Point(919, 338)
+        Me.TBProductIDES.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBProductIDES.Name = "TBProductIDES"
+        Me.TBProductIDES.Size = New System.Drawing.Size(122, 29)
+        Me.TBProductIDES.TabIndex = 45
+        Me.TBProductIDES.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBCustomerProductName
+        '
+        Me.TBCustomerProductName.Location = New System.Drawing.Point(672, 144)
+        Me.TBCustomerProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBCustomerProductName.Name = "TBCustomerProductName"
+        Me.TBCustomerProductName.Size = New System.Drawing.Size(234, 29)
+        Me.TBCustomerProductName.TabIndex = 1
+        Me.TBCustomerProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'GroupBox10
+        '
+        Me.GroupBox10.Controls.Add(Me.CHPelak)
+        Me.GroupBox10.Controls.Add(Me.CHRang)
+        Me.GroupBox10.Controls.Add(Me.CHSang)
+        Me.GroupBox10.Controls.Add(Me.CHSet)
+        Me.GroupBox10.Controls.Add(Me.CHTarak)
+        Me.GroupBox10.Controls.Add(Me.CHShot)
+        Me.GroupBox10.Controls.Add(Me.CHTemper)
+        Me.GroupBox10.Controls.Add(Me.CHStress)
+        Me.GroupBox10.Controls.Add(Me.CHGarm)
+        Me.GroupBox10.Controls.Add(Me.CHSard)
+        Me.GroupBox10.Location = New System.Drawing.Point(16, 44)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(1025, 49)
+        Me.GroupBox10.TabIndex = 72
+        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.Text = " فرایند تولید "
+        '
+        'CHPelak
+        '
+        Me.CHPelak.AutoSize = True
+        Me.CHPelak.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHPelak.Location = New System.Drawing.Point(6, 15)
+        Me.CHPelak.Name = "CHPelak"
+        Me.CHPelak.Size = New System.Drawing.Size(58, 30)
+        Me.CHPelak.TabIndex = 80
+        Me.CHPelak.Text = "پلاک"
+        Me.CHPelak.UseVisualStyleBackColor = True
+        '
+        'CHRang
+        '
+        Me.CHRang.AutoSize = True
+        Me.CHRang.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHRang.Location = New System.Drawing.Point(80, 15)
+        Me.CHRang.Name = "CHRang"
+        Me.CHRang.Size = New System.Drawing.Size(106, 30)
+        Me.CHRang.TabIndex = 79
+        Me.CHRang.Text = "فسفاته و رنگ"
+        Me.CHRang.UseVisualStyleBackColor = True
+        '
+        'CHSang
+        '
+        Me.CHSang.AutoSize = True
+        Me.CHSang.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHSang.Location = New System.Drawing.Point(202, 15)
+        Me.CHSang.Name = "CHSang"
+        Me.CHSang.Size = New System.Drawing.Size(83, 30)
+        Me.CHSang.TabIndex = 78
+        Me.CHSang.Text = "سنگ زنی"
+        Me.CHSang.UseVisualStyleBackColor = True
+        '
+        'CHSet
+        '
+        Me.CHSet.AutoSize = True
+        Me.CHSet.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHSet.Location = New System.Drawing.Point(301, 15)
+        Me.CHSet.Name = "CHSet"
+        Me.CHSet.Size = New System.Drawing.Size(55, 30)
+        Me.CHSet.TabIndex = 77
+        Me.CHSet.Text = "ست"
+        Me.CHSet.UseVisualStyleBackColor = True
+        '
+        'CHTarak
+        '
+        Me.CHTarak.AutoSize = True
+        Me.CHTarak.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHTarak.Location = New System.Drawing.Point(372, 15)
+        Me.CHTarak.Name = "CHTarak"
+        Me.CHTarak.Size = New System.Drawing.Size(83, 30)
+        Me.CHTarak.TabIndex = 76
+        Me.CHTarak.Text = "ترک یابی"
+        Me.CHTarak.UseVisualStyleBackColor = True
+        '
+        'CHShot
+        '
+        Me.CHShot.AutoSize = True
+        Me.CHShot.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHShot.Location = New System.Drawing.Point(471, 15)
+        Me.CHShot.Name = "CHShot"
+        Me.CHShot.Size = New System.Drawing.Size(94, 30)
+        Me.CHShot.TabIndex = 75
+        Me.CHShot.Text = "شات پینینگ"
+        Me.CHShot.UseVisualStyleBackColor = True
+        '
+        'CHTemper
+        '
+        Me.CHTemper.AutoSize = True
+        Me.CHTemper.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHTemper.Location = New System.Drawing.Point(581, 15)
+        Me.CHTemper.Name = "CHTemper"
+        Me.CHTemper.Size = New System.Drawing.Size(76, 30)
+        Me.CHTemper.TabIndex = 74
+        Me.CHTemper.Text = "تمپرینگ"
+        Me.CHTemper.UseVisualStyleBackColor = True
+        '
+        'CHStress
+        '
+        Me.CHStress.AutoSize = True
+        Me.CHStress.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHStress.Location = New System.Drawing.Point(673, 15)
+        Me.CHStress.Name = "CHStress"
+        Me.CHStress.Size = New System.Drawing.Size(90, 30)
+        Me.CHStress.TabIndex = 73
+        Me.CHStress.Text = "تنش گیری"
+        Me.CHStress.UseVisualStyleBackColor = True
+        '
+        'CHGarm
+        '
+        Me.CHGarm.AutoSize = True
+        Me.CHGarm.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHGarm.Location = New System.Drawing.Point(779, 15)
+        Me.CHGarm.Name = "CHGarm"
+        Me.CHGarm.Size = New System.Drawing.Size(108, 30)
+        Me.CHGarm.TabIndex = 72
+        Me.CHGarm.Text = "فنر پیچی گرم"
+        Me.CHGarm.UseVisualStyleBackColor = True
+        '
+        'CHSard
+        '
+        Me.CHSard.AutoSize = True
+        Me.CHSard.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHSard.Location = New System.Drawing.Point(903, 15)
+        Me.CHSard.Name = "CHSard"
+        Me.CHSard.Size = New System.Drawing.Size(111, 30)
+        Me.CHSard.TabIndex = 71
+        Me.CHSard.Text = "فنر پیچی سرد"
+        Me.CHSard.UseVisualStyleBackColor = True
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label23.Location = New System.Drawing.Point(743, 184)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(77, 26)
+        Me.Label23.TabIndex = 53
+        Me.Label23.Text = "تعداد نمونه"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TBSampleQuantity
+        '
+        Me.TBSampleQuantity.Location = New System.Drawing.Point(672, 183)
+        Me.TBSampleQuantity.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBSampleQuantity.Name = "TBSampleQuantity"
+        Me.TBSampleQuantity.Size = New System.Drawing.Size(68, 29)
+        Me.TBSampleQuantity.TabIndex = 52
+        Me.TBSampleQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(117, 123)
+        Me.Button2.Location = New System.Drawing.Point(428, 452)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(81, 29)
         Me.Button2.TabIndex = 51
@@ -576,7 +981,7 @@ Partial Class mainForm
         '
         Me.LStatus.AutoSize = True
         Me.LStatus.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.LStatus.Location = New System.Drawing.Point(2, 434)
+        Me.LStatus.Location = New System.Drawing.Point(2, 459)
         Me.LStatus.Name = "LStatus"
         Me.LStatus.Size = New System.Drawing.Size(287, 26)
         Me.LStatus.TabIndex = 50
@@ -587,7 +992,7 @@ Partial Class mainForm
         'Button3
         '
         Me.Button3.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button3.Location = New System.Drawing.Point(543, 431)
+        Me.Button3.Location = New System.Drawing.Point(543, 456)
         Me.Button3.Margin = New System.Windows.Forms.Padding(1)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(127, 33)
@@ -599,7 +1004,7 @@ Partial Class mainForm
         '
         Me.Label22.AutoSize = True
         Me.Label22.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label22.Location = New System.Drawing.Point(198, 224)
+        Me.Label22.Location = New System.Drawing.Point(555, 184)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(94, 26)
         Me.Label22.TabIndex = 49
@@ -608,17 +1013,17 @@ Partial Class mainForm
         '
         'TBOrderNo
         '
-        Me.TBOrderNo.Location = New System.Drawing.Point(16, 223)
+        Me.TBOrderNo.Location = New System.Drawing.Point(312, 183)
         Me.TBOrderNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBOrderNo.Name = "TBOrderNo"
-        Me.TBOrderNo.Size = New System.Drawing.Size(182, 29)
+        Me.TBOrderNo.Size = New System.Drawing.Size(234, 29)
         Me.TBOrderNo.TabIndex = 10
         Me.TBOrderNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button1.Location = New System.Drawing.Point(672, 431)
+        Me.Button1.Location = New System.Drawing.Point(672, 456)
         Me.Button1.Margin = New System.Windows.Forms.Padding(1)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(116, 33)
@@ -626,53 +1031,22 @@ Partial Class mainForm
         Me.Button1.Text = "پاک‌کردن فرم"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label20.Location = New System.Drawing.Point(147, 25)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(144, 26)
-        Me.Label20.TabIndex = 46
-        Me.Label20.Text = "شماره شناسایی محصول"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TBProductIDES
-        '
-        Me.TBProductIDES.Enabled = False
-        Me.TBProductIDES.Location = New System.Drawing.Point(16, 24)
-        Me.TBProductIDES.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBProductIDES.Name = "TBProductIDES"
-        Me.TBProductIDES.Size = New System.Drawing.Size(122, 29)
-        Me.TBProductIDES.TabIndex = 45
-        Me.TBProductIDES.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label19
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label19.Location = New System.Drawing.Point(915, 25)
+        Me.Label19.Location = New System.Drawing.Point(915, 18)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(133, 26)
         Me.Label19.TabIndex = 44
         Me.Label19.Text = "نام محصول انرژی‌ساز"
         Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TBEnergySazProductName
-        '
-        Me.TBEnergySazProductName.Enabled = False
-        Me.TBEnergySazProductName.Location = New System.Drawing.Point(672, 24)
-        Me.TBEnergySazProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBEnergySazProductName.Name = "TBEnergySazProductName"
-        Me.TBEnergySazProductName.Size = New System.Drawing.Size(234, 29)
-        Me.TBEnergySazProductName.TabIndex = 43
-        Me.TBEnergySazProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label18
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label18.Location = New System.Drawing.Point(977, 275)
+        Me.Label18.Location = New System.Drawing.Point(977, 300)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(69, 26)
         Me.Label18.TabIndex = 42
@@ -681,7 +1055,7 @@ Partial Class mainForm
         '
         'TBComment
         '
-        Me.TBComment.Location = New System.Drawing.Point(16, 275)
+        Me.TBComment.Location = New System.Drawing.Point(16, 300)
         Me.TBComment.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBComment.Multiline = True
         Me.TBComment.Name = "TBComment"
@@ -692,7 +1066,7 @@ Partial Class mainForm
         'BTSubmit
         '
         Me.BTSubmit.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTSubmit.Location = New System.Drawing.Point(790, 431)
+        Me.BTSubmit.Location = New System.Drawing.Point(790, 456)
         Me.BTSubmit.Margin = New System.Windows.Forms.Padding(1)
         Me.BTSubmit.Name = "BTSubmit"
         Me.BTSubmit.Size = New System.Drawing.Size(116, 33)
@@ -704,7 +1078,7 @@ Partial Class mainForm
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label17.Location = New System.Drawing.Point(543, 125)
+        Me.Label17.Location = New System.Drawing.Point(204, 262)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(105, 26)
         Me.Label17.TabIndex = 40
@@ -713,10 +1087,10 @@ Partial Class mainForm
         '
         'TBCustomerProductCode
         '
-        Me.TBCustomerProductCode.Location = New System.Drawing.Point(300, 124)
+        Me.TBCustomerProductCode.Location = New System.Drawing.Point(16, 261)
         Me.TBCustomerProductCode.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerProductCode.Name = "TBCustomerProductCode"
-        Me.TBCustomerProductCode.Size = New System.Drawing.Size(231, 29)
+        Me.TBCustomerProductCode.Size = New System.Drawing.Size(182, 29)
         Me.TBCustomerProductCode.TabIndex = 3
         Me.TBCustomerProductCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -724,7 +1098,7 @@ Partial Class mainForm
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label16.Location = New System.Drawing.Point(587, 225)
+        Me.Label16.Location = New System.Drawing.Point(723, 262)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(40, 26)
         Me.Label16.TabIndex = 38
@@ -733,10 +1107,10 @@ Partial Class mainForm
         '
         'TBGrade
         '
-        Me.TBGrade.Location = New System.Drawing.Point(507, 224)
+        Me.TBGrade.Location = New System.Drawing.Point(672, 261)
         Me.TBGrade.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBGrade.Name = "TBGrade"
-        Me.TBGrade.Size = New System.Drawing.Size(68, 29)
+        Me.TBGrade.Size = New System.Drawing.Size(46, 29)
         Me.TBGrade.TabIndex = 8
         Me.TBGrade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -744,16 +1118,16 @@ Partial Class mainForm
         '
         Me.CBStandard.FormattingEnabled = True
         Me.CBStandard.Items.AddRange(New Object() {"DIN 15800", "DIN 2096-1", "UIC 822", "EN 13298", "EN 1726-1"})
-        Me.CBStandard.Location = New System.Drawing.Point(672, 224)
+        Me.CBStandard.Location = New System.Drawing.Point(769, 261)
         Me.CBStandard.Name = "CBStandard"
-        Me.CBStandard.Size = New System.Drawing.Size(234, 29)
+        Me.CBStandard.Size = New System.Drawing.Size(137, 29)
         Me.CBStandard.TabIndex = 7
         '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label15.Location = New System.Drawing.Point(984, 225)
+        Me.Label15.Location = New System.Drawing.Point(984, 262)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(63, 26)
         Me.Label15.TabIndex = 35
@@ -764,7 +1138,7 @@ Partial Class mainForm
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label14.Location = New System.Drawing.Point(204, 175)
+        Me.Label14.Location = New System.Drawing.Point(204, 223)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(82, 26)
         Me.Label14.TabIndex = 34
@@ -773,7 +1147,7 @@ Partial Class mainForm
         '
         'TBProccessingDate
         '
-        Me.TBProccessingDate.Location = New System.Drawing.Point(16, 174)
+        Me.TBProccessingDate.Location = New System.Drawing.Point(16, 222)
         Me.TBProccessingDate.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBProccessingDate.Name = "TBProccessingDate"
         Me.TBProccessingDate.Size = New System.Drawing.Size(182, 29)
@@ -784,7 +1158,7 @@ Partial Class mainForm
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label13.Location = New System.Drawing.Point(543, 175)
+        Me.Label13.Location = New System.Drawing.Point(555, 223)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(64, 26)
         Me.Label13.TabIndex = 32
@@ -793,7 +1167,7 @@ Partial Class mainForm
         '
         'TBLetterDate
         '
-        Me.TBLetterDate.Location = New System.Drawing.Point(300, 174)
+        Me.TBLetterDate.Location = New System.Drawing.Point(312, 222)
         Me.TBLetterDate.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBLetterDate.Name = "TBLetterDate"
         Me.TBLetterDate.Size = New System.Drawing.Size(234, 29)
@@ -804,7 +1178,7 @@ Partial Class mainForm
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label12.Location = New System.Drawing.Point(974, 175)
+        Me.Label12.Location = New System.Drawing.Point(974, 223)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(72, 26)
         Me.Label12.TabIndex = 30
@@ -813,28 +1187,17 @@ Partial Class mainForm
         '
         'TBLetterNo
         '
-        Me.TBLetterNo.Location = New System.Drawing.Point(672, 174)
+        Me.TBLetterNo.Location = New System.Drawing.Point(672, 222)
         Me.TBLetterNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBLetterNo.Name = "TBLetterNo"
         Me.TBLetterNo.Size = New System.Drawing.Size(234, 29)
         Me.TBLetterNo.TabIndex = 4
         Me.TBLetterNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label11.Location = New System.Drawing.Point(147, 75)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(139, 26)
-        Me.Label11.TabIndex = 28
-        Me.Label11.Text = "شماره شناسایی مشتری"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'TBCustomerID
         '
         Me.TBCustomerID.Enabled = False
-        Me.TBCustomerID.Location = New System.Drawing.Point(16, 74)
+        Me.TBCustomerID.Location = New System.Drawing.Point(919, 380)
         Me.TBCustomerID.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerID.Name = "TBCustomerID"
         Me.TBCustomerID.Size = New System.Drawing.Size(122, 29)
@@ -845,7 +1208,7 @@ Partial Class mainForm
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label10.Location = New System.Drawing.Point(387, 225)
+        Me.Label10.Location = New System.Drawing.Point(957, 184)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(89, 26)
         Me.Label10.TabIndex = 26
@@ -854,10 +1217,10 @@ Partial Class mainForm
         '
         'TBQuantity
         '
-        Me.TBQuantity.Location = New System.Drawing.Point(294, 224)
+        Me.TBQuantity.Location = New System.Drawing.Point(826, 183)
         Me.TBQuantity.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBQuantity.Name = "TBQuantity"
-        Me.TBQuantity.Size = New System.Drawing.Size(84, 29)
+        Me.TBQuantity.Size = New System.Drawing.Size(80, 29)
         Me.TBQuantity.TabIndex = 9
         Me.TBQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -865,7 +1228,7 @@ Partial Class mainForm
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label9.Location = New System.Drawing.Point(968, 125)
+        Me.Label9.Location = New System.Drawing.Point(555, 262)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(78, 26)
         Me.Label9.TabIndex = 24
@@ -874,7 +1237,7 @@ Partial Class mainForm
         '
         'TBCustomerDwgNo
         '
-        Me.TBCustomerDwgNo.Location = New System.Drawing.Point(672, 124)
+        Me.TBCustomerDwgNo.Location = New System.Drawing.Point(312, 261)
         Me.TBCustomerDwgNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerDwgNo.Name = "TBCustomerDwgNo"
         Me.TBCustomerDwgNo.Size = New System.Drawing.Size(234, 29)
@@ -885,42 +1248,23 @@ Partial Class mainForm
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label8.Location = New System.Drawing.Point(975, 75)
+        Me.Label8.Location = New System.Drawing.Point(555, 20)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(71, 26)
         Me.Label8.TabIndex = 21
         Me.Label8.Text = "نام مشتری"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TBCustomerName
-        '
-        Me.TBCustomerName.Enabled = False
-        Me.TBCustomerName.Location = New System.Drawing.Point(672, 74)
-        Me.TBCustomerName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBCustomerName.Name = "TBCustomerName"
-        Me.TBCustomerName.Size = New System.Drawing.Size(234, 29)
-        Me.TBCustomerName.TabIndex = 20
-        Me.TBCustomerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label7.Location = New System.Drawing.Point(543, 25)
+        Me.Label7.Location = New System.Drawing.Point(926, 145)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(120, 26)
         Me.Label7.TabIndex = 19
         Me.Label7.Text = "نام محصول مشتری"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TBCustomerProductName
-        '
-        Me.TBCustomerProductName.Location = New System.Drawing.Point(300, 24)
-        Me.TBCustomerProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBCustomerProductName.Name = "TBCustomerProductName"
-        Me.TBCustomerProductName.Size = New System.Drawing.Size(234, 29)
-        Me.TBCustomerProductName.TabIndex = 1
-        Me.TBCustomerProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'mainForm
         '
@@ -945,6 +1289,12 @@ Partial Class mainForm
         Me.TabPage3.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox10.ResumeLayout(False)
+        Me.GroupBox10.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -995,7 +1345,6 @@ Partial Class mainForm
     Friend WithEvents TBLetterDate As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents TBLetterNo As TextBox
-    Friend WithEvents Label11 As Label
     Friend WithEvents TBCustomerID As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents TBQuantity As TextBox
@@ -1005,7 +1354,6 @@ Partial Class mainForm
     Friend WithEvents TBCustomerName As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TBCustomerProductName As TextBox
-    Friend WithEvents Label20 As Label
     Friend WithEvents TBProductIDES As TextBox
     Friend WithEvents Label19 As Label
     Friend WithEvents TBEnergySazProductName As TextBox
@@ -1016,4 +1364,33 @@ Partial Class mainForm
     Friend WithEvents LStatus As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Button4 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Label23 As Label
+    Friend WithEvents TBSampleQuantity As TextBox
+    Friend WithEvents GroupBox10 As GroupBox
+    Friend WithEvents CHPelak As CheckBox
+    Friend WithEvents CHRang As CheckBox
+    Friend WithEvents CHSang As CheckBox
+    Friend WithEvents CHSet As CheckBox
+    Friend WithEvents CHTarak As CheckBox
+    Friend WithEvents CHShot As CheckBox
+    Friend WithEvents CHTemper As CheckBox
+    Friend WithEvents CHStress As CheckBox
+    Friend WithEvents CHGarm As CheckBox
+    Friend WithEvents CHSard As CheckBox
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents Label24 As Label
+    Friend WithEvents TBOtherInspection As TextBox
+    Friend WithEvents CHCreepTest As CheckBox
+    Friend WithEvents CHVerifyBeforeShipping As CheckBox
+    Friend WithEvents CHcustomerTolerance As CheckBox
+    Friend WithEvents CHAllInspection As CheckBox
+    Friend WithEvents CHForceTest As CheckBox
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents RBOldProduct As RadioButton
+    Friend WithEvents RBChangeProduct As RadioButton
+    Friend WithEvents RBNewProduct As RadioButton
+    Friend WithEvents Label11 As Label
+    Friend WithEvents RBMainOrder As RadioButton
+    Friend WithEvents RBAmendOrder As RadioButton
 End Class

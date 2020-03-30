@@ -6,6 +6,9 @@ Imports System.Text.RegularExpressions
 Public Class mainForm
     Public spring_bs As New BindingSource
 
+    Public CBA As New Collection '' An array of checkBoxes manufacturing process
+    Public CBA_inspection As New Collection '' An array of checkBoxes for inspection
+
     Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message,
                                            ByVal keyData As System.Windows.Forms.Keys) _
                                            As Boolean
@@ -24,11 +27,31 @@ Public Class mainForm
 
 
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '' Add production process checkboxes to a collection for easier handling
+        CBA.Add(CHSard)
+        CBA.Add(CHGarm)
+        CBA.Add(CHStress)
+        CBA.Add(CHTemper)
+        CBA.Add(CHShot)
+        CBA.Add(CHTarak)
+        CBA.Add(CHSet)
+        CBA.Add(CHSang)
+        CBA.Add(CHRang)
+        CBA.Add(CHPelak)
+        '' Add inspection process checkboxes to a collection for easier handling
+        CBA_inspection.Add(CHForceTest)
+        CBA_inspection.Add(CHAllInspection)
+        CBA_inspection.Add(CHcustomerTolerance)
+        CBA_inspection.Add(CHVerifyBeforeShipping)
+        CBA_inspection.Add(CHCreepTest)
+        CBA_inspection.Add(TBOtherInspection)
+
 
         'Loading Springs table into datagridview1
         Using cn As New OleDbConnection(connectionString)
             Using cmd As New OleDbCommand With {.Connection = cn}
                 cmd.CommandText = "SELECT " & springDataBaseColumnNames & " FROM springDataBase;"
+
                 Dim dt As New DataTable With {.TableName = "springDataBase"}
                 Try
                     cn.Open()
@@ -234,6 +257,10 @@ Public Class mainForm
             TBEnergySazProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
             TBCustomerProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
             TBProductIDES.Text = DataGridView1.SelectedRows(0).Cells("شماره شناسایی").Value.ToString
+            '' Parse production process if it exist for the product in the springDataBase
+            If Len(DataGridView1.SelectedRows(0).Cells("productionProcess").Value.ToString) > 0 Then
+                ParseProductionProcess(CBA, DataGridView1.SelectedRows(0).Cells("productionProcess").Value.ToString)
+            End If
             TBCustomerName.Text = DataGridView2.SelectedRows(0).Cells("نام مشتری").Value.ToString
             TBCustomerID.Text = DataGridView2.SelectedRows(0).Cells("شماره شناسایی مشتری").Value.ToString
         End If
@@ -259,16 +286,42 @@ Public Class mainForm
         saveFilePath = preverntOverwriting(saveFilePath, ".xlsx")
 
 
+
+
+        '' generate production process code
+        Dim productionProcess = GenerateProductionProcess(CBA)
+
+        '' gererate inspection process code
+        Dim inspectionProcess = GenerateInspectionProcess(CBA_inspection)
+
+        '' generate order type code   - a two digit number - first digit New product 1 - changing old product 2 - old product 3
+        Dim orderType = ""
+        If RBOldProduct.Checked Then
+            orderType = "3"
+        ElseIf RBChangeProduct.Checked = True Then
+            orderType = "2"
+        Else
+            orderType = "1"
+        End If
+        '' second digit -> main order 1 , order amendment :2 
+        If RBAmendOrder.Checked = True Then
+            orderType = orderType & "2"
+        Else
+            orderType = orderType & "1"
+        End If
+
         Using cn As New OleDbConnection(connectionString)
             Using cmd As New OleDbCommand With {.Connection = cn}
 
-                Dim columnNames As String = " ( productID , customerID , customerProductName , customerDwgNo, quantity, " &
-                     " letterNo , letterDate , orderNo , dateOfProccessing , standard , " &
-                     " grade , productCode , comment , orderState , excelFilePath ) "
 
-                Dim valueString As String = "('" & TBProductIDES.Text & "','" & TBCustomerID.Text & "','" & TBCustomerProductName.Text & "','" & TBCustomerDwgNo.Text & "','" & TBQuantity.Text & "','" &
-                        TBLetterNo.Text & "','" & TBLetterDate.Text & "','" & TBOrderNo.Text & "','" & TBProccessingDate.Text & "','" & CBStandard.Text & "','" &
-                        TBGrade.Text & "','" & TBCustomerProductCode.Text & "','" & TBComment.Text & "', 'امکان سنجی کیفیت' , '" & saveFilePath & "' )"
+                '' generate the query to add value into the table
+                Dim columnNames As String = " ( productID , customerID , customerProductName , customerDwgNo, quantity, sampleQuantity, " &
+                     " letterNo , letterDate , orderNo , orderType ,dateOfProccessing , standard , " &
+                     " grade , productCode , comment ,pProcess ,inspectionProcess , orderState , excelFilePath ) "
+
+                Dim valueString As String = "('" & TBProductIDES.Text & "','" & TBCustomerID.Text & "','" & TBCustomerProductName.Text & "','" & TBCustomerDwgNo.Text & "','" & TBQuantity.Text & "','" & TBSampleQuantity.Text & "','" &
+                        TBLetterNo.Text & "','" & TBLetterDate.Text & "','" & TBOrderNo.Text & "','" & orderType & "','" & TBProccessingDate.Text & "','" & CBStandard.Text & "','" &
+                        TBGrade.Text & "','" & TBCustomerProductCode.Text & "','" & TBComment.Text & "','" & productionProcess & "','" & inspectionProcess & "', 'امکان سنجی اولیه تولید' , '" & saveFilePath & "' )"
 
                 cmd.CommandText = "INSERT INTO emkansanji" & columnNames & " VALUES " & valueString & ";"
                 Try
@@ -281,8 +334,6 @@ Public Class mainForm
                 Finally
                     cn.Close()
                 End Try
-
-
             End Using
         End Using
 
@@ -293,16 +344,58 @@ Public Class mainForm
 
 
         Try
+            If excelTemplateFilePath.Substring(0, 1) = "\" Then
+                '' Acount for when file address is relative
+                excelTemplateFilePath = IO.Directory.GetParent(Application.ExecutablePath).FullName + excelTemplateFilePath
+            End If
+            Console.WriteLine(excelTemplateFilePath)
             Dim excel As Excel.Application = New Excel.Application
             Dim w As Excel.Workbook = excel.Workbooks.Open(excelTemplateFilePath)
-            'TODO: Complete this list
+
+            '' ----------------------------- Populate fields in the emkansanji excel Template -------------------------------
+            excel.Range("customerName").Value = NormalizeString(DataGridView2.SelectedRows(0).Cells("نام مشتری").Value.ToString)
+            excel.Range("letterNo").Value = NormalizeString(TBLetterNo.Text)
+            excel.Range("pName").Value = NormalizeString(TBCustomerProductName.Text)
+            excel.Range("letterDate").Value = NormalizeString(TBLetterDate.Text)
+            excel.Range("dwgNo").Value = NormalizeString(TBCustomerDwgNo.Text)
+            excel.Range("quantity").Value = NormalizeString(TBQuantity.Text)
+            excel.Range("sampleQuantity").Value = NormalizeString(TBSampleQuantity.Text)
+            excel.Range("pDate").Value = NormalizeString(TBProccessingDate.Text)
+            excel.Range("standard").Value = NormalizeString(CBStandard.Text)
+            excel.Range("grade").Value = NormalizeString(TBGrade.Text)
+            excel.Range("customerProductCode").Value = NormalizeString(TBCustomerProductCode.Text)
+            excel.Range("comment").Value = NormalizeString(TBComment.Text)
+
+            '' -------------------------------------------------------------------------------------------------------------
+            excel.Range("ESpName").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString)
+            excel.Range("ESProductCode").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("کد کالا").Value.ToString)
+            '' -------------------------------------------------------------------------------------------------------------
+            excel.Range("springType").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("نوع فنر").Value.ToString)
+            excel.Range("material").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("جنس مواد").Value.ToString)
             excel.Range("wireD").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("قطر مفتول").Value.ToString)
             excel.Range("OD").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("قطر خارجی").Value.ToString)
-            excel.Range("ESpName").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString)
-            excel.Range("pName").Value = NormalizeString(TBCustomerProductName.Text)
+            excel.Range("mandrel").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("قطر شفت").Value.ToString)
             excel.Range("Nt").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("حلقه کل").Value.ToString)
+            excel.Range("Na").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("حلقه فعال").Value.ToString)
             excel.Range("L0").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("طول آزاد").Value.ToString)
+            excel.Range("coilingDirection").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("جهت پیچش").Value.ToString)
+            excel.Range("springRate").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("ریت فنر").Value.ToString)
+            excel.Range("firstCoil").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("شکل حلقه ابتدا").Value.ToString)
+            excel.Range("lastCoil").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("شکل حلقه انتها").Value.ToString)
+            excel.Range("Force1").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("F1").Value.ToString)
+            excel.Range("Length1").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("L1").Value.ToString)
+            excel.Range("Force2").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("F2").Value.ToString)
+            excel.Range("Length2").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("L2").Value.ToString)
+            excel.Range("Force3").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("F3").Value.ToString)
+            excel.Range("Length3").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("L3").Value.ToString)
+            excel.Range("forceUnit").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("واحد نیرو").Value.ToString)
+            '' -----------------------------------------------------------------------------------------------------------
+            excel.Range("wireLength").Value = NormalizeString(DataGridView1.SelectedRows(0).Cells("طول مفتول").Value.ToString)
 
+            '' ------------------------------------------------------------------------------------------------------------
+            excel.Range("productionProcess").Value = productionProcess
+            excel.Range("inspectionProcess").Value = inspectionProcess
+            excel.Range("orderTypeCode").Value = orderType
 
             'Check if there is an address provided for the second excel file, if not it uses working directory
             Dim saveDuplicatePath As String
@@ -369,13 +462,19 @@ Public Class mainForm
         ''https://developers.ghasedak.io/panel/line
         Try
             Dim Message = "سلام احوالت"
-            Dim lineNumber = "10008566"
-            Dim receptor = "09373868293"
+            Dim lineNumber = "50001212124042"
+            Dim receptor() As String = {"09188183115"}
             Dim sms As New Ghasedak.Api("9c00cf12398ffbd28551a8d1645e71d07ed8c7acbb46963a2bb285774eb571c4")
-            Dim result = sms.SendSMS(Message, receptor, lineNumber)
+            'Dim result = sms.SendSMS(Message, receptor, lineNumber)
+            Dim result = sms.Verify(1, "order",
+                                      receptor,
+                                      "25").Result
+            MsgBox(result)
         Catch ex As Ghasedak.Exceptions.ApiException
             Console.WriteLine(ex.Message)
         Catch ex As Ghasedak.Exceptions.ConnectionException
+            Console.WriteLine(ex.Message)
+        Catch ex As Exception
             Console.WriteLine(ex.Message)
         End Try
     End Sub
@@ -422,4 +521,20 @@ Public Class mainForm
 
         End Using
     End Sub
+
+    Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
+        'Dim sql = "UPDATE springDataBase SET productionProcess = '1010111110' WHERE productionMethod = 'سرد پیچ' "
+        'Dim sql = "SELECT * FROM springDataBase WHERE productionMethod = 'سرد پیچ' "
+        Dim ColumnName = " emkansanji.ID, emkansanji.pProcess , springDataBase.productionProcess, springDataBase.productionMethod "
+        Dim sql_command = "SELECT " & ColumnName & " FROM ((emkansanji LEFT JOIN springDataBase ON emkansanji.productID = springDataBase.ID) LEFT JOIN customers ON emkansanji.customerID = customers.ID) "
+        Dim sql = "UPDATE emkansanji SET pProcess = '0101111110' WHERE productID <> 553 "
+
+        DataGridView1.DataSource = LoadDataTable(sql_command)
+    End Sub
+        Private Sub Label24_Click(sender As Object, e As EventArgs) Handles Label24.Click
+        Dim code = InputBox("hey")
+        ParseInspectionProcess(CBA_inspection, code)
+    End Sub
+
+
 End Class
