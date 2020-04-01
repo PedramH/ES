@@ -1,6 +1,6 @@
-﻿Imports System.Data.OleDb
+﻿
 Imports System.Text.RegularExpressions
-Imports System.Threading
+
 Public Class wires
     Dim firstTimeEnteringOrdersTab = True
 
@@ -15,20 +15,21 @@ Public Class wires
         ''      This way there wont be a call to data base for each search. we just call the database once then use the 
         ''      binding source for filtering -> less data transfer, probably faster and we can do it on textbox.changed
         ''      because of the increased speed.
-
-        '' Use FLOOR instead of int in postgreSQL
         Dim sql_command = "SELECT" + wiresColumnName + "FROM wireInventory A LEFT JOIN wireReserve B ON A.wireCode = B.wireCode;"
-        Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-        bs.DataSource = dt
-        DataGridView1.DataSource = dt
-        '' Hide wireType and wireWeight
-        DataGridView1.Columns(0).Visible = False
-        DataGridView1.Columns(1).Visible = False
-
-        '' Formating of columns
-        DataGridView1.DefaultCellStyle.Font = New System.Drawing.Font("Arial", 9.85)
-
-        DataGridView1.Columns("عنوان").DefaultCellStyle.Font = New System.Drawing.Font("B Traffic", 9.75)
+        Try
+            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+            bs.DataSource = dt
+            DataGridView1.DataSource = bs.DataSource
+            '' Hide wireType and wireWeight
+            DataGridView1.Columns(0).Visible = False
+            DataGridView1.Columns(1).Visible = False
+            '' Formating of columns
+            DataGridView1.DefaultCellStyle.Font = New System.Drawing.Font("Arial", 9.85)
+            DataGridView1.Columns("عنوان").DefaultCellStyle.Font = New System.Drawing.Font("B Traffic", 9.75)
+        Catch ex As Exception
+            MsgBox("خطا در ارتباط با دیتابیس", vbCritical + MsgBoxStyle.MsgBoxRight, RightToLeft)
+            Logger.LogFatal(sql_command, ex)
+        End Try
     End Function
     Private Function SearchWiresData()
         '' This function bs, a global binding source in this form which is the data source for datagridview1
@@ -57,31 +58,37 @@ Public Class wires
         Dim sql_command = "SELECT " & ESColumnNames & " FROM ((emkansanji LEFT JOIN springDataBase ON emkansanji.productID = springDataBase.ID)
                             LEFT JOIN customers ON emkansanji.customerID = customers.ID) WHERE
                             emkansanji.orderState LIKE '%امکان سنجی%' OR emkansanji.orderState LIKE '%تایید%'  ;"
+        Try
+            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+            bs2.DataSource = dt
+            DataGridView2.DataSource = bs2
+            'bs2.Filter = ""
+            '' Hide values which are not for the user to see
+            DataGridView2.Columns("productID").Visible = False
+            DataGridView2.Columns("customerID").Visible = False
+            DataGridView2.Columns("wireDiameter").Visible = False
+            DataGridView2.Columns("OD").Visible = False
+            DataGridView2.Columns("L0").Visible = False
+            DataGridView2.Columns("wireLength").Visible = False
+            DataGridView2.Columns("mandrelDiameter").Visible = False
+            DataGridView2.Columns("pProcess").Visible = False
+            DataGridView2.Columns("productReserve").Visible = False
+            DataGridView2.Columns("productionProcess").Visible = False
+            DataGridView2.Columns("springInEachPackage").Visible = False
+            DataGridView2.Columns("packagingCost").Visible = False
+            DataGridView2.Columns("doable").Visible = False
+            DataGridView2.Columns("whyNot").Visible = False
+            DataGridView2.Columns("productionReserve").Visible = False
+        Catch ex As Exception
+            MsgBox("خطا در ارتباط با دیتابیس", vbCritical + MsgBoxStyle.MsgBoxRight, RightToLeft)
+            Logger.LogFatal(sql_command, ex)
+        End Try
 
-        Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-        bs2.DataSource = dt
-        DataGridView2.DataSource = bs2
-        'bs2.Filter = ""
-        '' Hide values which are not for the user to see
-        DataGridView2.Columns("productID").Visible = False
-        DataGridView2.Columns("customerID").Visible = False
-        DataGridView2.Columns("wireDiameter").Visible = False
-        DataGridView2.Columns("OD").Visible = False
-        DataGridView2.Columns("L0").Visible = False
-        DataGridView2.Columns("wireLength").Visible = False
-        DataGridView2.Columns("mandrelDiameter").Visible = False
-        DataGridView2.Columns("pProcess").Visible = False
-        DataGridView2.Columns("productReserve").Visible = False
-        DataGridView2.Columns("productionProcess").Visible = False
-        DataGridView2.Columns("springInEachPackage").Visible = False
-        DataGridView2.Columns("packagingCost").Visible = False
-        DataGridView2.Columns("doable").Visible = False
-        DataGridView2.Columns("whyNot").Visible = False
-        DataGridView2.Columns("productionReserve").Visible = False
     End Function
-    Private Function SearchOrdersData()
+    Private Sub SearchOrdersData()
+        On Error Resume Next
         bs2.Filter = String.Format("[کد مفتول رزرو 1] LIKE '%{0}%' OR [کد مفتول رزرو 2] LIKE '%{0}%' OR [کد مفتول رزرو 3] LIKE '%{0}%'", TBWireCodeOrderSearch.Text)
-    End Function
+    End Sub
 
     Private Async Sub wires_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -101,33 +108,127 @@ Public Class wires
 
         '' This subroutine will generate the inventory Database from excel files provided by rahkaran
         '' Requires ImportExceltoDatatable function
-
-        '' import garm inventory data to a data table
-        Dim garmDataTable = Await Task(Of DataTable).Run(Function() ImportExceltoDatatable(excelInventoryGarmPath, "موجودی مواد خط گرم"))
-        '' import sard inventory data to a data table
-        Dim sardDataTable = Await Task(Of DataTable).Run(Function() ImportExceltoDatatable(excelInventorySardPath, "موجودی مواد خط سرد"))
-        '' import purchased inventory data to a data table
-        Dim purchasedDataTable = Await Task(Of DataTable).Run(Function() ImportExceltoDatatable(excelInventoryPurchasedPath, "موجودی مواد خریداری شده قطعی"))
-
+        Dim garmDataTable, sardDataTable, purchasedDataTable As DataTable
+        Try
+            '' import garm inventory data to a data table
+            garmDataTable = Await Task(Of DataTable).Run(Function() ImportExceltoDatatable(excelInventoryGarmPath, "موجودی مواد خط گرم"))
+            '' import sard inventory data to a data table
+            sardDataTable = Await Task(Of DataTable).Run(Function() ImportExceltoDatatable(excelInventorySardPath, "موجودی مواد خط سرد"))
+            '' import purchased inventory data to a data table
+             purchasedDataTable = Await Task(Of DataTable).Run(Function() ImportExceltoDatatable(excelInventoryPurchasedPath, "موجودی مواد خریداری شده قطعی"))
+        Catch ex As Exception
+            MsgBox("خطا در خواندن اطلاعات موجودی مفتول از فایل اکسل", vbCritical + MsgBoxStyle.MsgBoxRight, RightToLeft)
+            Logger.LogFatal("خطا در خواندن اطلاعات موجودی مفتول از فایل اکسل", ex)
+            Exit Sub
+        End Try
 
         Dim wireDiameter As String
         Dim wireLength As String
         Dim wireWeight As String
 
-        Using cn As New OleDbConnection(connectionString)
+        'Using cn As New OleDbConnection(connectionString)
+        '    Await cn.OpenAsync()
+        '    Using tran = cn.BeginTransaction()
+        '        Using cmd As New OleDbCommand With {.Connection = cn, .Transaction = tran}
+
+        '            Try
+        '                '' Delete everything in wire inventory
+        '                cmd.CommandText = "DELETE FROM wireInventory"
+        '                Await cmd.ExecuteNonQueryAsync()
+
+        '                '' Populate the inventory table with data of garm file
+        '                For Each row As DataRow In garmDataTable.Rows
+        '                    wireDiameter = (Val(row("کد").ToString().Substring(2, 4)) / 100).ToString
+
+
+        '                    '' Extract wire length from specification column of rahkaran usind regular expressions 
+        '                    Dim RegexObj As New Regex("[L|l]\s*[:|;]?\s*(\d{4})", RegexOptions.IgnoreCase)
+        '                    Dim specification = row("مشخصه فنی").ToString()
+        '                    wireLength = RegexObj.Match(specification).Groups(1).Value
+
+        '                    '' Check to see if wire is black steel if it is add black to its name
+        '                    Dim inventoryName = row("عنوان").ToString()
+        '                    Dim RegexBbj2 As New Regex(".*(black).*", RegexOptions.IgnoreCase)
+        '                    If RegexBbj2.Match(specification).Groups(1).Value.ToLower = "black" Then
+        '                        inventoryName += " - (Black)"
+        '                    End If
+
+        '                    If IsNumeric(wireLength) Then
+        '                        wireWeight = CalculateWireWeight(Val(wireDiameter), Val(wireLength)).ToString
+        '                    Else
+        '                        wireLength = "-"
+        '                        wireWeight = "-"
+        '                    End If
+        '                    cmd.CommandText = String.Format("INSERT INTO wireInventory 
+        '                (wireCode, wireType, wireDiameter, wireLength, wireSpecification, inventory , inventoryName, wireWeight) 
+        '                VALUES ( '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}' );", row("کد").ToString(), "مفتول شاخه‌ای",
+        '                               wireDiameter, wireLength, row("مشخصه فنی").ToString(), row("مانده (اصلی)").ToString(), inventoryName, wireWeight)
+        '                    Await cmd.ExecuteNonQueryAsync()
+        '                Next row
+
+
+        '                '' Populate the inventory table with data of sard file
+        '                For Each row As DataRow In sardDataTable.Rows
+        '                    wireDiameter = (Val(row("کد").ToString().Substring(2, 4)) / 100).ToString
+        '                    cmd.CommandText = String.Format("INSERT INTO wireInventory 
+        '                (wireCode, wireType, wireDiameter, wireLength, wireSpecification, inventory , inventoryName, wireWeight) 
+        '                VALUES ( '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}' );", row("کد").ToString(), "مفتول کویل",
+        '                               wireDiameter, "-", row("مشخصه فنی").ToString(), row("مانده (اصلی)").ToString(), row("عنوان").ToString(), "-")
+        '                    Await cmd.ExecuteNonQueryAsync()
+        '                Next row
+
+
+        '                '' Populate the inventory table with data of purchased wires file
+        '                '' TODO: Add wire weight 
+        '                For Each row As DataRow In purchasedDataTable.Rows
+
+        '                    If row("کد").ToString() = "" Then
+        '                        '' prevent empty rows in the files to be inserted in the database
+        '                        Continue For
+        '                    End If
+        '                    If IsNumeric(row("طول مفتول").ToString()) Then
+        '                        wireWeight = CalculateWireWeight(Val(row("قطر مفتول").ToString()), Val(row("طول مفتول").ToString())).ToString
+        '                    Else
+        '                        wireLength = "-"
+        '                        wireWeight = "-"
+        '                    End If
+
+
+        '                    cmd.CommandText = String.Format("INSERT INTO wireInventory 
+        '                (wireCode, wireType, wireDiameter, wireLength, wireSpecification, inventory , inventoryName,wireWeight) 
+        '                VALUES ( '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}','{7}' );", row("کد").ToString(), row("نوع مفتول").ToString(),
+        '                               row("قطر مفتول").ToString(), row("طول مفتول").ToString(), row("مشخصه فنی").ToString(), row("موجودی").ToString(), row("عنوان").ToString(), wireWeight)
+
+        '                    'Console.WriteLine(cmd.CommandText)
+        '                    Await cmd.ExecuteNonQueryAsync()
+        '                Next row
+
+        '            Catch ex As Exception
+        '                MsgBox("انتقال اطلاعات موجودی مواد با خطا مواجه شد", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا")
+        '                Logger.LogFatal(ex.Message, ex)
+        '                tran.Rollback()
+        '                cn.Close()
+        '                Exit Sub
+        '            End Try
+
+        '            tran.Commit()
+        '            cn.Close()
+        '            MsgBox("بروزرسانی اطلاعات موجودی مواد با موفقیت انجام شد.", MsgBoxStyle.MsgBoxRtlReading + MsgBoxStyle.MsgBoxRight + vbInformation, "بروزرسانی اطلاعات مواد")
+        '        End Using
+        '    End Using
+        'End Using
+        Using cn = GetDatabaseCon()
             Await cn.OpenAsync()
             Using tran = cn.BeginTransaction()
-                Using cmd As New OleDbCommand With {.Connection = cn, .Transaction = tran}
-
+                Using cmd = cn.CreateCommand
+                    cmd.Transaction = tran
                     Try
                         '' Delete everything in wire inventory
                         cmd.CommandText = "DELETE FROM wireInventory"
                         Await cmd.ExecuteNonQueryAsync()
-
                         '' Populate the inventory table with data of garm file
                         For Each row As DataRow In garmDataTable.Rows
                             wireDiameter = (Val(row("کد").ToString().Substring(2, 4)) / 100).ToString
-
 
                             '' Extract wire length from specification column of rahkaran usind regular expressions 
                             Dim RegexObj As New Regex("[L|l]\s*[:|;]?\s*(\d{4})", RegexOptions.IgnoreCase)
@@ -192,19 +293,19 @@ Public Class wires
                         Next row
 
                     Catch ex As Exception
-                        MsgBox("انتقال اطلاعات موجودی مواد با خطا مواجه شد", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا")
+                        MsgBox("انتقال اطلاعات موجودی مواد با خطا مواجه شد" + ex.Message, vbCritical + MsgBoxStyle.MsgBoxRight, "خطا")
                         Logger.LogFatal(ex.Message, ex)
                         tran.Rollback()
                         cn.Close()
                         Exit Sub
                     End Try
-
                     tran.Commit()
                     cn.Close()
                     MsgBox("بروزرسانی اطلاعات موجودی مواد با موفقیت انجام شد.", MsgBoxStyle.MsgBoxRtlReading + MsgBoxStyle.MsgBoxRight + vbInformation, "بروزرسانی اطلاعات مواد")
                 End Using
             End Using
         End Using
+
         Await LoadWiresData()
         Await UpdateReservesTable()
     End Sub

@@ -1,7 +1,8 @@
 ﻿Imports System.Threading
 Imports System.Text.RegularExpressions
 Imports System.Data.OleDb
-
+Imports Npgsql
+Imports System.Security.Cryptography
 
 Public Module globalFunctions
 
@@ -12,14 +13,29 @@ Public Module globalFunctions
         Dim dt = New DataTable
         Using dbcon As New OleDbConnection(connectionString)
             Using cmd As New OleDbCommand(sql, dbcon)
-                dbcon.Open()
-                dt.Load(cmd.ExecuteReader())
-                dbcon.Close()
+                Try
+                    dbcon.Open()
+                    dt.Load(cmd.ExecuteReader())
+                    dbcon.Close()
+                Catch ex As Exception
+                    MsgBox("error")
+                    Console.WriteLine(sql)
+                    Console.WriteLine(ex.Message)
+                End Try
             End Using
         End Using
         Return dt
     End Function
 
+    Public Function GetDatabaseCon() As OleDbConnection
+        Dim con As New OleDbConnection(connectionString)
+        Return con
+    End Function
+    Public Function GetPostgresCon() As NpgsqlConnection
+        Dim con As New NpgsqlConnection(postgresConString)
+
+        Return con
+    End Function
 
 
     Public Function NormalizeName(inputStr As String)
@@ -287,6 +303,33 @@ Public Module globalFunctions
         c(c.Count()).text = other
     End Function
 
+    '' ----------------------------------------- cryptography----------------------------------------
+    Public Function GetSaltedHash(pw As String, salt As String) As String
+        Dim tmp As String = pw & salt
+
+        ' or SHA512Managed
+        Using hash As HashAlgorithm = New SHA256Managed()
+            ' convert pw+salt to bytes:
+            Dim saltyPW = System.Text.Encoding.UTF8.GetBytes(tmp)
+            ' hash the pw+salt bytes:
+            Dim hBytes = hash.ComputeHash(saltyPW)
+            ' return a B64 string so it can be saved as text 
+            Return Convert.ToBase64String(hBytes)
+        End Using
+
+    End Function
+    Public Function CreateNewSalt(size As Integer) As String
+        ' use the crypto random number generator to create
+        ' a new random salt 
+        Using rng As New RNGCryptoServiceProvider
+            ' dont allow very small salt
+            Dim data(If(size < 7, 7, size)) As Byte
+            ' fill the array
+            rng.GetBytes(data)
+            ' convert to B64 for saving as text
+            Return Convert.ToBase64String(data)
+        End Using
+    End Function
 
 
 
@@ -333,7 +376,14 @@ End Module
 '       [✔] Password Protect The DataBase
 '       [✔] Try a better database server (Preferably PostgreSQL) -> it works fine with minimal change
 '       [  ] Migrate to postgreSQL
-'       [  ] Make all calls to database async
+'       [✔] Make all calls to database async
+'               [✔] new emkansanji (form1)
+'               [✔] emkansanji
+'               [✔] wires
+'               [✔] new product
+'               [✔] new customer
+'               [✔] login
+'               [✔] change password
 '       [  ] Make a script to change the reserve for every emkansanji where a future bought wire is used when the wire arrives to the factory
 '       [✔] Generate wire reservation table
 '       [  ] Consider wire state in generation of reservation table
@@ -365,6 +415,16 @@ End Module
 '       [  ] in modify emkansanji there are 3 seperate calls to database to get wire weight
 '       [  ] Compare calculation of rate and other thing with excel and this program for outer LSD1 
 '       [  ] Show the data for the required wire in the wires form when its opened from emkansanji
+'       [  ] When migrating to postgres the two functions that populate new_customer and new_product might be a problem(they user actual table column name)
+'       [  ]
+'       [  ] 
+'       [  ] 
+'       [  ] 
+'       [  ] 
+'       [  ] 
+'       [  ] 
+'       [  ] 
+'       [  ] 
 '
 '
 '

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class mainForm
+Partial Class FrmNewEmkansanji
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -28,10 +28,12 @@ Partial Class mainForm
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmNewEmkansanji))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.BTClear = New System.Windows.Forms.Button()
@@ -123,6 +125,7 @@ Partial Class mainForm
         Me.TBCustomerDwgNo = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -165,6 +168,8 @@ Partial Class mainForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button7)
+        Me.GroupBox1.Controls.Add(Me.Button6)
         Me.GroupBox1.Controls.Add(Me.Button5)
         Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.BTClear)
@@ -191,6 +196,28 @@ Partial Class mainForm
         Me.GroupBox1.TabIndex = 20
         Me.GroupBox1.TabStop = False
         '
+        'Button7
+        '
+        Me.Button7.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Button7.Location = New System.Drawing.Point(732, 66)
+        Me.Button7.Margin = New System.Windows.Forms.Padding(1)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(63, 33)
+        Me.Button7.TabIndex = 17
+        Me.Button7.Text = "فرم اصلی"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Button6.Location = New System.Drawing.Point(936, 66)
+        Me.Button6.Margin = New System.Windows.Forms.Padding(1)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(63, 33)
+        Me.Button6.TabIndex = 16
+        Me.Button6.Text = "تست"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
         'Button5
         '
         Me.Button5.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
@@ -216,12 +243,12 @@ Partial Class mainForm
         'BTClear
         '
         Me.BTClear.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTClear.Location = New System.Drawing.Point(370, 66)
+        Me.BTClear.Location = New System.Drawing.Point(356, 66)
         Me.BTClear.Margin = New System.Windows.Forms.Padding(1)
         Me.BTClear.Name = "BTClear"
-        Me.BTClear.Size = New System.Drawing.Size(75, 33)
+        Me.BTClear.Size = New System.Drawing.Size(89, 33)
         Me.BTClear.TabIndex = 10
-        Me.BTClear.Text = "پاک‌کردن"
+        Me.BTClear.Text = "نمایش همه"
         Me.BTClear.UseVisualStyleBackColor = True
         '
         'BTNewProduct
@@ -448,12 +475,12 @@ Partial Class mainForm
         'BTClearCustomer
         '
         Me.BTClearCustomer.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTClearCustomer.Location = New System.Drawing.Point(13, 22)
+        Me.BTClearCustomer.Location = New System.Drawing.Point(4, 22)
         Me.BTClearCustomer.Margin = New System.Windows.Forms.Padding(1)
         Me.BTClearCustomer.Name = "BTClearCustomer"
-        Me.BTClearCustomer.Size = New System.Drawing.Size(75, 33)
+        Me.BTClearCustomer.Size = New System.Drawing.Size(84, 33)
         Me.BTClearCustomer.TabIndex = 17
-        Me.BTClearCustomer.Text = "پاک‌کردن"
+        Me.BTClearCustomer.Text = "نمایش همه"
         Me.BTClearCustomer.UseVisualStyleBackColor = True
         '
         'BTNewCustomer
@@ -561,6 +588,7 @@ Partial Class mainForm
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Button8)
         Me.GroupBox2.Controls.Add(Me.RBMainOrder)
         Me.GroupBox2.Controls.Add(Me.RBAmendOrder)
         Me.GroupBox2.Controls.Add(Me.GroupBox4)
@@ -1266,7 +1294,16 @@ Partial Class mainForm
         Me.Label7.Text = "نام محصول مشتری"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'mainForm
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(317, 452)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(81, 29)
+        Me.Button8.TabIndex = 91
+        Me.Button8.Text = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'FrmNewEmkansanji
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1275,7 +1312,7 @@ Partial Class mainForm
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "mainForm"
+        Me.Name = "FrmNewEmkansanji"
         Me.Text = "EmkanSanji - EnergySaz"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
@@ -1393,4 +1430,7 @@ Partial Class mainForm
     Friend WithEvents Label11 As Label
     Friend WithEvents RBMainOrder As RadioButton
     Friend WithEvents RBAmendOrder As RadioButton
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button8 As Button
 End Class

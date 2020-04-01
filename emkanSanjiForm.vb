@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Data.OleDb
 Imports System.Configuration
 
 Imports Excel = Microsoft.Office.Interop.Excel
@@ -64,228 +63,232 @@ Public Class emkanSanjiForm
 
 
     Private Async Sub BTModify_Click(sender As Object, e As EventArgs) Handles BTModify.Click
-
-        If tabsHidden = True Then
-            '' Unhide the tabs for editing emkansanji data
-            TabControl1.TabPages.Add(TabPage2)
-            TabControl1.TabPages.Add(TabPage3)
-            TabControl1.TabPages.Add(TabPage4)
-            tabsHidden = False
-        End If
-
-        'TBCustomerName.Text = DataGridView1.SelectedRows(0).Cells("نام مشتری").Value.ToString
-        LemkansanjiID.Text = DataGridView1.SelectedRows(0).Cells("شماره ردیابی سفارش").Value.ToString
-        TBMEnergySazProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
-        TBMCustomerProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول مشتری").Value.ToString
-        TBProductIDES.Text = DataGridView1.SelectedRows(0).Cells(0).Value.ToString
-        TBCustomerID.Text = DataGridView1.SelectedRows(0).Cells(1).Value.ToString
-        TBMCustomerName.Text = DataGridView1.SelectedRows(0).Cells("نام مشتری").Value.ToString
-        TBMCustomerDwgNo.Text = DataGridView1.SelectedRows(0).Cells("شماره نقشه").Value.ToString
-        TBMCustomerProductCode.Text = DataGridView1.SelectedRows(0).Cells("کد قطعه مشتری").Value.ToString
-        TBMLetterNo.Text = DataGridView1.SelectedRows(0).Cells("شماره نامه").Value.ToString
-        TBMLetterDate.Text = DataGridView1.SelectedRows(0).Cells("تاریخ نامه").Value.ToString
-        TBMProccessingDate.Text = DataGridView1.SelectedRows(0).Cells("تاریخ بررسی").Value.ToString
-        CBStandard.Text = DataGridView1.SelectedRows(0).Cells("استاندارد").Value.ToString
-
-        TBGrade.Text = DataGridView1.SelectedRows(0).Cells("گرید").Value.ToString
-        TBQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString
-        TBSampleQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد نمونه").Value.ToString
-        TBMOrderNo.Text = DataGridView1.SelectedRows(0).Cells("شماره سفارش").Value.ToString
-        TBComment.Text = DataGridView1.SelectedRows(0).Cells("توضیحات").Value.ToString
-
-
-        TBMR1.Text = DataGridView1.SelectedRows(0).Cells("کد مفتول رزرو 1").Value.ToString
-        TBMR2.Text = DataGridView1.SelectedRows(0).Cells("کد مفتول رزرو 2").Value.ToString
-        TBMR3.Text = DataGridView1.SelectedRows(0).Cells("کد مفتول رزرو 3").Value.ToString
-
-        TBMRQ1.Text = DataGridView1.SelectedRows(0).Cells("مقدار1").Value.ToString
-        TBMRQ2.Text = DataGridView1.SelectedRows(0).Cells("مقدار 2").Value.ToString
-        TBMRQ3.Text = DataGridView1.SelectedRows(0).Cells("مقدار 3").Value.ToString
-
-        TBMVerificationDate.Text = DataGridView1.SelectedRows(0).Cells("تاریخ تاییدیه").Value.ToString
-        TBMVerificationNo.Text = DataGridView1.SelectedRows(0).Cells("شماره تاییدیه").Value.ToString
-        CBMOrderState.Text = DataGridView1.SelectedRows(0).Cells("وضعیت سفارش").Value.ToString
-
-        LOrderQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString
-        LWireOrderQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString
-        LQuantityDetail.Text = String.Format("{1} عدد نمونه و {0} عدد انبوه", DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString, DataGridView1.SelectedRows(0).Cells("تعداد نمونه").Value.ToString)
-
-        LOutsideDiameter.Text = DataGridView1.SelectedRows(0).Cells("OD").Value.ToString
-        LFreeLength.Text = DataGridView1.SelectedRows(0).Cells("L0").Value.ToString
-        LWireDiameter.Text = DataGridView1.SelectedRows(0).Cells("wireDiameter").Value.ToString
-        LWireLength.Text = DataGridView1.SelectedRows(0).Cells("wireLength").Value.ToString
-        LMandrelDiameter.Text = DataGridView1.SelectedRows(0).Cells("mandrelDiameter").Value.ToString
-
-        Dim wireState As String = DataGridView1.SelectedRows(0).Cells("وضعیت موجودی مفتول").Value.ToString
-        TBProductReserve.Text = DataGridView1.SelectedRows(0).Cells("productReserve").Value.ToString
-
-        '' product Weight 
-        LProductWeight.Text = CalculateWireWeight(Val(LWireDiameter.Text), Val(LWireLength.Text))
-
-        '' packaging
-        TBPackageCount.Text = DataGridView1.SelectedRows(0).Cells("springInEachPackage").Value.ToString
-        TBPCostForEach.Text = DataGridView1.SelectedRows(0).Cells("packagingCost").Value.ToString
-        Dim packageType = DataGridView1.SelectedRows(0).Cells("packageType").Value.ToString
-        If packageType = "پالت" Then
-            Rpack1.Checked = True
-        ElseIf packageType = "کارتن" Then
-            Rpack2.Checked = True
-        Else
-            Rpack1.Checked = False
-            Rpack2.Checked = False
-        End If
-
-
-        '' Populate the production process check boxes
-        Dim processCode = ""
-        If Len(DataGridView1.SelectedRows(0).Cells("pProcess").Value.ToString) > 1 Then
-            processCode = DataGridView1.SelectedRows(0).Cells("pProcess").Value.ToString 'from emkansanji
-        Else
-            processCode = DataGridView1.SelectedRows(0).Cells("productionProcess").Value.ToString ' from springDataBase
-        End If
-        ParseProductionProcess(CBA, processCode)
-
-        '' Populate the inspectionProcess check boxes
-        ParseInspectionProcess(CBA_inspection, DataGridView1.SelectedRows(0).Cells("inspectionProcess").Value.ToString)
-
-        '' Populate orderData 
-        Dim orderType = DataGridView1.SelectedRows(0).Cells("orderType").Value.ToString
-        If Len(orderType) = 2 Then
-            If orderType(0) = "1" Then
-                RBNewProduct.Checked = True
-            ElseIf orderType(0) = "2" Then
-                RBChangeProduct.Checked = True
-            Else
-                RBOldProduct.Checked = True
+        Try
+            If tabsHidden = True Then
+                '' Unhide the tabs for editing emkansanji data
+                TabControl1.TabPages.Add(TabPage2)
+                TabControl1.TabPages.Add(TabPage3)
+                TabControl1.TabPages.Add(TabPage4)
+                tabsHidden = False
             End If
 
-            If orderType(1) = "1" Then
-                RBMainOrder.Checked = True
+            'TBCustomerName.Text = DataGridView1.SelectedRows(0).Cells("نام مشتری").Value.ToString
+            LemkansanjiID.Text = DataGridView1.SelectedRows(0).Cells("شماره ردیابی سفارش").Value.ToString
+            TBMEnergySazProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
+            TBMCustomerProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول مشتری").Value.ToString
+            TBProductIDES.Text = DataGridView1.SelectedRows(0).Cells(0).Value.ToString
+            TBCustomerID.Text = DataGridView1.SelectedRows(0).Cells(1).Value.ToString
+            TBMCustomerName.Text = DataGridView1.SelectedRows(0).Cells("نام مشتری").Value.ToString
+            TBMCustomerDwgNo.Text = DataGridView1.SelectedRows(0).Cells("شماره نقشه").Value.ToString
+            TBMCustomerProductCode.Text = DataGridView1.SelectedRows(0).Cells("کد قطعه مشتری").Value.ToString
+            TBMLetterNo.Text = DataGridView1.SelectedRows(0).Cells("شماره نامه").Value.ToString
+            TBMLetterDate.Text = DataGridView1.SelectedRows(0).Cells("تاریخ نامه").Value.ToString
+            TBMProccessingDate.Text = DataGridView1.SelectedRows(0).Cells("تاریخ بررسی").Value.ToString
+            CBStandard.Text = DataGridView1.SelectedRows(0).Cells("استاندارد").Value.ToString
+
+            TBGrade.Text = DataGridView1.SelectedRows(0).Cells("گرید").Value.ToString
+            TBQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString
+            TBSampleQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد نمونه").Value.ToString
+            TBMOrderNo.Text = DataGridView1.SelectedRows(0).Cells("شماره سفارش").Value.ToString
+            TBComment.Text = DataGridView1.SelectedRows(0).Cells("توضیحات").Value.ToString
+
+
+            TBMR1.Text = DataGridView1.SelectedRows(0).Cells("کد مفتول رزرو 1").Value.ToString
+            TBMR2.Text = DataGridView1.SelectedRows(0).Cells("کد مفتول رزرو 2").Value.ToString
+            TBMR3.Text = DataGridView1.SelectedRows(0).Cells("کد مفتول رزرو 3").Value.ToString
+
+            TBMRQ1.Text = DataGridView1.SelectedRows(0).Cells("مقدار1").Value.ToString
+            TBMRQ2.Text = DataGridView1.SelectedRows(0).Cells("مقدار 2").Value.ToString
+            TBMRQ3.Text = DataGridView1.SelectedRows(0).Cells("مقدار 3").Value.ToString
+
+            TBMVerificationDate.Text = DataGridView1.SelectedRows(0).Cells("تاریخ تاییدیه").Value.ToString
+            TBMVerificationNo.Text = DataGridView1.SelectedRows(0).Cells("شماره تاییدیه").Value.ToString
+            CBMOrderState.Text = DataGridView1.SelectedRows(0).Cells("وضعیت سفارش").Value.ToString
+
+            LOrderQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString
+            LWireOrderQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString
+            LQuantityDetail.Text = String.Format("{1} عدد نمونه و {0} عدد انبوه", DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString, DataGridView1.SelectedRows(0).Cells("تعداد نمونه").Value.ToString)
+
+            LOutsideDiameter.Text = DataGridView1.SelectedRows(0).Cells("OD").Value.ToString
+            LFreeLength.Text = DataGridView1.SelectedRows(0).Cells("L0").Value.ToString
+            LWireDiameter.Text = DataGridView1.SelectedRows(0).Cells("wireDiameter").Value.ToString
+            LWireLength.Text = DataGridView1.SelectedRows(0).Cells("wireLength").Value.ToString
+            LMandrelDiameter.Text = DataGridView1.SelectedRows(0).Cells("mandrelDiameter").Value.ToString
+
+            Dim wireState As String = DataGridView1.SelectedRows(0).Cells("وضعیت موجودی مفتول").Value.ToString
+            TBProductReserve.Text = DataGridView1.SelectedRows(0).Cells("productReserve").Value.ToString
+
+            '' product Weight 
+            LProductWeight.Text = CalculateWireWeight(Val(LWireDiameter.Text), Val(LWireLength.Text))
+
+            '' packaging
+            TBPackageCount.Text = DataGridView1.SelectedRows(0).Cells("springInEachPackage").Value.ToString
+            TBPCostForEach.Text = DataGridView1.SelectedRows(0).Cells("packagingCost").Value.ToString
+            Dim packageType = DataGridView1.SelectedRows(0).Cells("packageType").Value.ToString
+            If packageType = "پالت" Then
+                Rpack1.Checked = True
+            ElseIf packageType = "کارتن" Then
+                Rpack2.Checked = True
             Else
-                RBAmendOrder.Checked = True
-            End If
-        End If
-
-        '' Buy Wire 
-        Dim buyWireStr As String = DataGridView1.SelectedRows(0).Cells("buyWire").Value.ToString
-        If Len(buyWireStr) > 0 Then
-            Dim buyWireArray As String() = buyWireStr.Split(New Char() {"-"c})
-            TBBuyWireD.Text = buyWireArray(0)
-            TBBuyWireLength.Text = buyWireArray(1)
-            TBPillCost.Text = buyWireArray(2)
-        End If
-
-        '' Buy Mandrel 
-        Dim buyMandrelStr As String = DataGridView1.SelectedRows(0).Cells("buyMandrel").Value.ToString
-        ' Console.WriteLine(buyMandrelStr)
-        If Len(buyMandrelStr) > 0 Then
-            Dim buyMandrelArray As String() = buyMandrelStr.Split(New Char() {"-"c})
-            TBBuyMandrelD.Text = buyMandrelArray(0)
-            TBBuyMandrelL.Text = buyMandrelArray(1)
-            TBBuyMandrelPrice.Text = buyMandrelArray(2)
-            TBBuyMandrelCost.Text = buyMandrelArray(3)
-        End If
-
-        '' Zarfiat Sanji
-        '' tedadZayeat - zaman Tahvil ghete - zarfiat khali - zarfiat mojod - mahsol rang shode - mahsol nimsakht
-        '' 1-2-3-4-5-6
-        Dim zarfiatStr As String = DataGridView1.SelectedRows(0).Cells("zarfiatSanji").Value.ToString
-        'Console.WriteLine(zarfiatStr)
-        If Len(zarfiatStr) > 0 Then
-            Dim zarfiatStrArray As String() = zarfiatStr.Split(New Char() {"-"c})
-            TBProductionLoss.Text = zarfiatStrArray(0)
-            TBDue.Text = zarfiatStrArray(1)
-            TBEmpty.Text = zarfiatStrArray(2)
-            TBAvailable.Text = zarfiatStrArray(3)
-            TBPRang.Text = zarfiatStrArray(4)
-            TBPNimsakht.Text = zarfiatStrArray(5)
-        End If
-
-        '' able to produce 
-        Dim doable = DataGridView1.SelectedRows(0).Cells("doable").Value.ToString
-        If doable = "yes" Then
-            RBProducable.Checked = True
-        ElseIf doable = "no" Then
-            RBNotProducable.Checked = True
-            TBReasonOfNotProducing.Text = DataGridView1.SelectedRows(0).Cells("whyNot").Value.ToString
-        Else
-            RBProducable.Checked = False
-            RBNotProducable.Checked = False
-        End If
-
-
-        '' ---------------------------------------------------------------------------------------------------------------------------
-
-        If wireState = "موجود است" Then
-            RMaftol1.Checked = True
-        ElseIf wireState = "پیل و پولیش شود" Then
-            RMaftol2.Checked = True
-        ElseIf wireState = "درخواست خرید" Then
-            RMaftol3.Checked = True
-        ElseIf wireState = "ارسال شده به پیل و پولیش" Then
-            RMaftol4.Checked = True
-        End If
-        '' ---------------------------------------------------------------------------------------------------------------------------
-        Dim mandrelState As String = DataGridView1.SelectedRows(0).Cells("موجودی مندرل").Value.ToString
-        If mandrelState = "موجود است" Then
-            RadioButton5.Checked = True
-        Else
-            RadioButton6.Checked = True
-        End If
-        '' ---------------------------------------------------------------------------------------------------------------------------
-        '' TODO: This is 3 seprate calls to the database fix this
-        If TBMR1.Text <> "" Then
-            Dim sql_command = String.Format("SELECT wireWeight, wireDiameter, wireLength FROM wireInventory WHERE wireCode = '{0}'", TBMR1.Text)
-            Console.WriteLine(sql_command)
-            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-            Dim selectedWireWeight As String = dt.Rows(0)(0).ToString
-            LSelectedWireD.Text = dt.Rows(0)(1).ToString
-            LSelectedWireL.Text = dt.Rows(0)(2).ToString
-
-            If IsNumeric(selectedWireWeight) Then
-                Lw1Weight.Text = selectedWireWeight
-                Lw1Unit.Text = "شاخه"
-                TBMRQ1.Text = (Math.Round(Val(TBMRQ1.Text) / Val(selectedWireWeight), 0)).ToString
-            Else
-                Lw1Weight.Text = "-"
-                Lw1Unit.Text = "کیلوگرم"
+                Rpack1.Checked = False
+                Rpack2.Checked = False
             End If
 
-        End If
-        If TBMR2.Text <> "" Then
-            Dim sql_command = String.Format("SELECT wireWeight FROM wireInventory WHERE wireCode = '{0}'", TBMR2.Text)
-            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-            Dim selectedWireWeight As String = dt.Rows(0)(0).ToString
 
-            If IsNumeric(selectedWireWeight) Then
-                Lw2Weight.Text = selectedWireWeight
-                Lw2Unit.Text = "شاخه"
-                TBMRQ2.Text = (Math.Round(Val(TBMRQ2.Text) / Val(selectedWireWeight), 0)).ToString
+            '' Populate the production process check boxes
+            Dim processCode = ""
+            If Len(DataGridView1.SelectedRows(0).Cells("pProcess").Value.ToString) > 1 Then
+                processCode = DataGridView1.SelectedRows(0).Cells("pProcess").Value.ToString 'from emkansanji
             Else
-                Lw2Weight.Text = "-"
-                Lw2Unit.Text = "کیلوگرم"
+                processCode = DataGridView1.SelectedRows(0).Cells("productionProcess").Value.ToString ' from springDataBase
+            End If
+            ParseProductionProcess(CBA, processCode)
+
+            '' Populate the inspectionProcess check boxes
+            ParseInspectionProcess(CBA_inspection, DataGridView1.SelectedRows(0).Cells("inspectionProcess").Value.ToString)
+
+            '' Populate orderData 
+            Dim orderType = DataGridView1.SelectedRows(0).Cells("orderType").Value.ToString
+            If Len(orderType) = 2 Then
+                If orderType(0) = "1" Then
+                    RBNewProduct.Checked = True
+                ElseIf orderType(0) = "2" Then
+                    RBChangeProduct.Checked = True
+                Else
+                    RBOldProduct.Checked = True
+                End If
+
+                If orderType(1) = "1" Then
+                    RBMainOrder.Checked = True
+                Else
+                    RBAmendOrder.Checked = True
+                End If
             End If
 
-        End If
-        If TBMR3.Text <> "" Then
-            Dim sql_command = String.Format("SELECT wireWeight FROM wireInventory WHERE wireCode = '{0}'", TBMR3.Text)
-            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-            Dim selectedWireWeight As String = dt.Rows(0)(0).ToString
-            If IsNumeric(selectedWireWeight) Then
-                Lw3Weight.Text = selectedWireWeight
-                Lw3Unit.Text = "شاخه"
-                TBMRQ3.Text = (Math.Round(Val(TBMRQ3.Text) / Val(selectedWireWeight), 0)).ToString
-            Else
-                Lw3Weight.Text = "-"
-                Lw3Unit.Text = "کیلوگرم"
+            '' Buy Wire 
+            Dim buyWireStr As String = DataGridView1.SelectedRows(0).Cells("buyWire").Value.ToString
+            If Len(buyWireStr) > 0 Then
+                Dim buyWireArray As String() = buyWireStr.Split(New Char() {"-"c})
+                TBBuyWireD.Text = buyWireArray(0)
+                TBBuyWireLength.Text = buyWireArray(1)
+                TBPillCost.Text = buyWireArray(2)
             End If
-        End If
-        '' ---------------------------------------------------------------------------------------------------------------------------
+
+            '' Buy Mandrel 
+            Dim buyMandrelStr As String = DataGridView1.SelectedRows(0).Cells("buyMandrel").Value.ToString
+            ' Console.WriteLine(buyMandrelStr)
+            If Len(buyMandrelStr) > 0 Then
+                Dim buyMandrelArray As String() = buyMandrelStr.Split(New Char() {"-"c})
+                TBBuyMandrelD.Text = buyMandrelArray(0)
+                TBBuyMandrelL.Text = buyMandrelArray(1)
+                TBBuyMandrelPrice.Text = buyMandrelArray(2)
+                TBBuyMandrelCost.Text = buyMandrelArray(3)
+            End If
+
+            '' Zarfiat Sanji
+            '' tedadZayeat - zaman Tahvil ghete - zarfiat khali - zarfiat mojod - mahsol rang shode - mahsol nimsakht
+            '' 1-2-3-4-5-6
+            Dim zarfiatStr As String = DataGridView1.SelectedRows(0).Cells("zarfiatSanji").Value.ToString
+            'Console.WriteLine(zarfiatStr)
+            If Len(zarfiatStr) > 0 Then
+                Dim zarfiatStrArray As String() = zarfiatStr.Split(New Char() {"-"c})
+                TBProductionLoss.Text = zarfiatStrArray(0)
+                TBDue.Text = zarfiatStrArray(1)
+                TBEmpty.Text = zarfiatStrArray(2)
+                TBAvailable.Text = zarfiatStrArray(3)
+                TBPRang.Text = zarfiatStrArray(4)
+                TBPNimsakht.Text = zarfiatStrArray(5)
+            End If
+
+            '' able to produce 
+            Dim doable = DataGridView1.SelectedRows(0).Cells("doable").Value.ToString
+            If doable = "yes" Then
+                RBProducable.Checked = True
+            ElseIf doable = "no" Then
+                RBNotProducable.Checked = True
+                TBReasonOfNotProducing.Text = DataGridView1.SelectedRows(0).Cells("whyNot").Value.ToString
+            Else
+                RBProducable.Checked = False
+                RBNotProducable.Checked = False
+            End If
+
+
+            '' ---------------------------------------------------------------------------------------------------------------------------
+
+            If wireState = "موجود است" Then
+                RMaftol1.Checked = True
+            ElseIf wireState = "پیل و پولیش شود" Then
+                RMaftol2.Checked = True
+            ElseIf wireState = "درخواست خرید" Then
+                RMaftol3.Checked = True
+            ElseIf wireState = "ارسال شده به پیل و پولیش" Then
+                RMaftol4.Checked = True
+            End If
+            '' ---------------------------------------------------------------------------------------------------------------------------
+            Dim mandrelState As String = DataGridView1.SelectedRows(0).Cells("موجودی مندرل").Value.ToString
+            If mandrelState = "موجود است" Then
+                RadioButton5.Checked = True
+            Else
+                RadioButton6.Checked = True
+            End If
+            '' ---------------------------------------------------------------------------------------------------------------------------
+            '' TODO: This is 3 seprate calls to the database fix this
+            If TBMR1.Text <> "" Then
+                Dim sql_command = String.Format("SELECT wireWeight, wireDiameter, wireLength FROM wireInventory WHERE wireCode = '{0}'", TBMR1.Text)
+                Console.WriteLine(sql_command)
+                Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+                Dim selectedWireWeight As String = dt.Rows(0)(0).ToString
+                LSelectedWireD.Text = dt.Rows(0)(1).ToString
+                LSelectedWireL.Text = dt.Rows(0)(2).ToString
+
+                If IsNumeric(selectedWireWeight) Then
+                    Lw1Weight.Text = selectedWireWeight
+                    Lw1Unit.Text = "شاخه"
+                    TBMRQ1.Text = (Math.Round(Val(TBMRQ1.Text) / Val(selectedWireWeight), 0)).ToString
+                Else
+                    Lw1Weight.Text = "-"
+                    Lw1Unit.Text = "کیلوگرم"
+                End If
+
+            End If
+            If TBMR2.Text <> "" Then
+                Dim sql_command = String.Format("SELECT wireWeight FROM wireInventory WHERE wireCode = '{0}'", TBMR2.Text)
+                Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+                Dim selectedWireWeight As String = dt.Rows(0)(0).ToString
+
+                If IsNumeric(selectedWireWeight) Then
+                    Lw2Weight.Text = selectedWireWeight
+                    Lw2Unit.Text = "شاخه"
+                    TBMRQ2.Text = (Math.Round(Val(TBMRQ2.Text) / Val(selectedWireWeight), 0)).ToString
+                Else
+                    Lw2Weight.Text = "-"
+                    Lw2Unit.Text = "کیلوگرم"
+                End If
+
+            End If
+            If TBMR3.Text <> "" Then
+                Dim sql_command = String.Format("SELECT wireWeight FROM wireInventory WHERE wireCode = '{0}'", TBMR3.Text)
+                Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+                Dim selectedWireWeight As String = dt.Rows(0)(0).ToString
+                If IsNumeric(selectedWireWeight) Then
+                    Lw3Weight.Text = selectedWireWeight
+                    Lw3Unit.Text = "شاخه"
+                    TBMRQ3.Text = (Math.Round(Val(TBMRQ3.Text) / Val(selectedWireWeight), 0)).ToString
+                Else
+                    Lw3Weight.Text = "-"
+                    Lw3Unit.Text = "کیلوگرم"
+                End If
+            End If
+            '' ---------------------------------------------------------------------------------------------------------------------------
 
 
 
 
-        TabControl1.SelectedTab = TabPage2
+            TabControl1.SelectedTab = TabPage2
+        Catch ex As Exception
+            MsgBox(ex.Message, vbCritical, "خطا")
+            Logger.LogFatal("خطا در انتخاب امکان سنجی برای ویراش", ex)
+        End Try
 
     End Sub
 
@@ -331,15 +334,35 @@ Public Class emkanSanjiForm
         HandleWireStateChange()
     End Sub
 
-    Private Sub LMandrelInventory_Click(sender As Object, e As EventArgs) Handles LMandrelInventory.Click
+    Private Async Sub LMandrelInventory_Click(sender As Object, e As EventArgs) Handles LMandrelInventory.Click
         'TODO: Check to see if mandrel is in the inventory
         ' Dim mandrelState As Boolean
         If IsNumeric(LMandrelDiameter.Text) Then
-            Using cn As New OleDbConnection(connectionString)
-                Using cmd As New OleDbCommand With {.Connection = cn}
+            'Using cn As New OleDbConnection(connectionString)
+            '    Using cmd As New OleDbCommand With {.Connection = cn}
+            '        cmd.CommandText = "SELECT COUNT(*) FROM mandrels WHERE mandrelDiameter = '" + LMandrelDiameter.Text + "' ;"
+            '        Try
+            '            cn.Open()
+            '            If cmd.ExecuteScalar() > 0 Then
+            '                'Mandrel is in the inventory
+            '                RadioButton5.Checked = True
+            '            Else
+            '                'Mandrel is not Present
+            '                RadioButton6.Checked = True
+            '            End If
+            '        Catch ex As Exception
+            '            MsgBox("خطا در ارتباط با دیتابیس", vbCritical + vbMsgBoxRight, "خطا")
+            '            Logger.LogFatal(ex.Message, ex)
+            '        Finally
+            '            cn.Close()
+            '        End Try
+            '    End Using
+            'End Using
+            Using cn = GetDatabaseCon()
+                Using cmd = cn.CreateCommand()
                     cmd.CommandText = "SELECT COUNT(*) FROM mandrels WHERE mandrelDiameter = '" + LMandrelDiameter.Text + "' ;"
                     Try
-                        cn.Open()
+                        Await cn.OpenAsync()
                         If cmd.ExecuteScalar() > 0 Then
                             'Mandrel is in the inventory
                             RadioButton5.Checked = True
@@ -469,27 +492,32 @@ Public Class emkanSanjiForm
                                  " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
                                  " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
                                  " ORDER BY emkansanji.ID ;" 'TODO : Search the database based on Reserved wire and coil 
+        Try
+            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+            emkansanji_bs.DataSource = dt
+            DataGridView1.DataSource = emkansanji_bs
+            'bs2.Filter = ""
+            ' Hide values which are not for the user to see
+            DataGridView1.Columns("productID").Visible = False
+            DataGridView1.Columns("customerID").Visible = False
+            DataGridView1.Columns("wireDiameter").Visible = False
+            DataGridView1.Columns("OD").Visible = False
+            DataGridView1.Columns("L0").Visible = False
+            DataGridView1.Columns("wireLength").Visible = False
+            DataGridView1.Columns("mandrelDiameter").Visible = False
+            DataGridView1.Columns("pProcess").Visible = False
+            DataGridView1.Columns("productReserve").Visible = False
+            DataGridView1.Columns("productionProcess").Visible = False
+            DataGridView1.Columns("springInEachPackage").Visible = False
+            DataGridView1.Columns("packagingCost").Visible = False
+            DataGridView1.Columns("doable").Visible = False
+            DataGridView1.Columns("whyNot").Visible = False
+            DataGridView1.Columns("productionReserve").Visible = False
+        Catch ex As Exception
+            MsgBox("خطا در برقرای ارتباط با دیتابیس", vbCritical + RightToLeft + vbMsgBoxRight, "خطا")
+            Logger.LogFatal(sql_command, ex)
+        End Try
 
-        Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-        emkansanji_bs.DataSource = dt
-        DataGridView1.DataSource = emkansanji_bs
-        'bs2.Filter = ""
-        ' Hide values which are not for the user to see
-        DataGridView1.Columns("productID").Visible = False
-        DataGridView1.Columns("customerID").Visible = False
-        DataGridView1.Columns("wireDiameter").Visible = False
-        DataGridView1.Columns("OD").Visible = False
-        DataGridView1.Columns("L0").Visible = False
-        DataGridView1.Columns("wireLength").Visible = False
-        DataGridView1.Columns("mandrelDiameter").Visible = False
-        DataGridView1.Columns("pProcess").Visible = False
-        DataGridView1.Columns("productReserve").Visible = False
-        DataGridView1.Columns("productionProcess").Visible = False
-        DataGridView1.Columns("springInEachPackage").Visible = False
-        DataGridView1.Columns("packagingCost").Visible = False
-        DataGridView1.Columns("doable").Visible = False
-        DataGridView1.Columns("whyNot").Visible = False
-        DataGridView1.Columns("productionReserve").Visible = False
 
 
 
@@ -516,15 +544,49 @@ Public Class emkanSanjiForm
         wireSelectionForm.Show()
     End Sub
 
-    Private Sub BTEmkansanjiSearch_Click(sender As Object, e As EventArgs) Handles BTEmkansanjiSearch.Click
+    Private Async Sub BTEmkansanjiSearch_Click(sender As Object, e As EventArgs) Handles BTEmkansanjiSearch.Click
         ''LoadEmkansanjiTable()
-        Using cn As New OleDbConnection(connectionString)
-            Using cmd As New OleDbCommand With {.Connection = cn}
+        'Using cn As New OleDbConnection(connectionString)
+        '    Using cmd As New OleDbCommand With {.Connection = cn}
 
-                Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
+        '        Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
 
-                'the paranthesis in the query are mandatory
-                cmd.CommandText = "SELECT " & ESColumnNames & " FROM ((emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
+        '        'the paranthesis in the query are mandatory
+        '        cmd.CommandText = "SELECT " & ESColumnNames & " FROM ((emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
+        '            " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
+        '         " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
+        '         " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
+        '         " emkansanji.orderState LIKE '%" & CBOrderState.Text & "%' AND" &
+        '         " emkansanji.ID LIKE  '%" & TBEmkansanjiID.Text & "%' AND " &
+        '        " emkansanji.productCode LIKE '%" & TBCustomerProductCode.Text & "%' AND " &
+        '        " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
+        '        " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
+        '        " ;" 'TODO : Search the database based on Reserved wire and coil 
+        '        DataGridView1.Columns(0).Visible = False
+        '        DataGridView1.Columns(1).Visible = False
+        '        DataGridView1.Columns(2).Visible = False
+        '        DataGridView1.Columns(3).Visible = False
+        '        DataGridView1.Columns(4).Visible = False
+        '        DataGridView1.Columns(5).Visible = False
+        '        DataGridView1.Columns(6).Visible = False
+
+        '        Dim dt As New DataTable With {.TableName = "emkansanji"}
+        '        'Try
+        '        cn.Open()
+        '        Dim ds As New DataSet
+        '        Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
+        '        ds.Tables.Add(emkansanji)
+        '        ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
+        '        DataGridView1.DataSource = ds.Tables("emkansanji")
+        '        cn.Close()
+
+        '    End Using
+        'End Using
+
+
+
+        'the paranthesis in the query are mandatory
+        Dim sql_command = "SELECT " & ESColumnNames & " FROM ((emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
                     " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
                  " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
                  " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
@@ -534,26 +596,31 @@ Public Class emkanSanjiForm
                 " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
                 " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
                 " ;" 'TODO : Search the database based on Reserved wire and coil 
-                DataGridView1.Columns(0).Visible = False
-                DataGridView1.Columns(1).Visible = False
-                DataGridView1.Columns(2).Visible = False
-                DataGridView1.Columns(3).Visible = False
-                DataGridView1.Columns(4).Visible = False
-                DataGridView1.Columns(5).Visible = False
-                DataGridView1.Columns(6).Visible = False
+        Try
+            DataGridView1.Columns("productID").Visible = False
+            DataGridView1.Columns("customerID").Visible = False
+            DataGridView1.Columns("wireDiameter").Visible = False
+            DataGridView1.Columns("OD").Visible = False
+            DataGridView1.Columns("L0").Visible = False
+            DataGridView1.Columns("wireLength").Visible = False
+            DataGridView1.Columns("mandrelDiameter").Visible = False
+            DataGridView1.Columns("pProcess").Visible = False
+            DataGridView1.Columns("productReserve").Visible = False
+            DataGridView1.Columns("productionProcess").Visible = False
+            DataGridView1.Columns("springInEachPackage").Visible = False
+            DataGridView1.Columns("packagingCost").Visible = False
+            DataGridView1.Columns("doable").Visible = False
+            DataGridView1.Columns("whyNot").Visible = False
+            DataGridView1.Columns("productionReserve").Visible = False
+            'Try
+            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+            emkansanji_bs.DataSource = dt
+            DataGridView1.DataSource = emkansanji_bs.DataSource
+        Catch ex As Exception
+            MsgBox("خطا در برقرای ارتباط با دیتابیس", vbCritical + RightToLeft + vbMsgBoxRight, "خطا")
+            Logger.LogFatal(sql_command, ex)
+        End Try
 
-                Dim dt As New DataTable With {.TableName = "emkansanji"}
-                'Try
-                cn.Open()
-                Dim ds As New DataSet
-                Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
-                ds.Tables.Add(emkansanji)
-                ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
-                DataGridView1.DataSource = ds.Tables("emkansanji")
-                cn.Close()
-
-            End Using
-        End Using
     End Sub
 
     Private Async Sub emkanSanjiForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -763,6 +830,7 @@ Public Class emkanSanjiForm
             End If
 
 
+
             '' Mandrel State: 
             If RadioButton6.Checked Then '' Mandrel is not in the inventory
                 excel.Range("buyMandrel").Value = "TRUE"
@@ -932,8 +1000,8 @@ Public Class emkanSanjiForm
                              " verificationNo = '" & TBMVerificationNo.Text & "'," &
                              " mandrelState = '" & mandrelState & "'," &
                              " buyMandrel = '" & buyMandrelData & "'," &
-                             " springInEachPackage = " & TBPackageCount.Text & "," & 'database type is number not string
-                             " packagingCost = " & TBPCostForEach.Text & "," & 'database type is number not string
+                             " springInEachPackage = '" & TBPackageCount.Text & "'," &
+                             " packagingCost = '" & TBPCostForEach.Text & "'," &
                              " packageType = '" & packageType & "'," &
                              " doable = '" & producable & "'," &
                               " whyNot = '" & whyNotProducable & "'," &

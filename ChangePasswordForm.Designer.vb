@@ -29,6 +29,7 @@ Partial Class ChangePasswordForm
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TBpass2 = New System.Windows.Forms.TextBox()
         Me.TBpass = New System.Windows.Forms.TextBox()
+        Me.BTPasswordReset = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -90,14 +91,27 @@ Partial Class ChangePasswordForm
         Me.TBpass.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         Me.TBpass.Location = New System.Drawing.Point(7, 116)
         Me.TBpass.Name = "TBpass"
+        Me.TBpass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TBpass.Size = New System.Drawing.Size(282, 26)
         Me.TBpass.TabIndex = 7
+        '
+        'BTPasswordReset
+        '
+        Me.BTPasswordReset.Font = New System.Drawing.Font("B Traffic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTPasswordReset.Location = New System.Drawing.Point(7, 180)
+        Me.BTPasswordReset.Name = "BTPasswordReset"
+        Me.BTPasswordReset.Size = New System.Drawing.Size(82, 27)
+        Me.BTPasswordReset.TabIndex = 13
+        Me.BTPasswordReset.Text = "ریست پسورد"
+        Me.BTPasswordReset.UseVisualStyleBackColor = True
+        Me.BTPasswordReset.Visible = False
         '
         'ChangePasswordForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(395, 211)
+        Me.Controls.Add(Me.BTPasswordReset)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -119,4 +133,5 @@ Partial Class ChangePasswordForm
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents TBpass2 As TextBox
     Friend WithEvents TBpass As TextBox
+    Friend WithEvents BTPasswordReset As Button
 End Class

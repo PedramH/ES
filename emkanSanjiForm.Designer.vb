@@ -54,6 +54,9 @@ Partial Class emkanSanjiForm
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.RBMainOrder = New System.Windows.Forms.RadioButton()
+        Me.RBAmendOrder = New System.Windows.Forms.RadioButton()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
         Me.Label68 = New System.Windows.Forms.Label()
         Me.TBOtherInspection = New System.Windows.Forms.TextBox()
@@ -62,6 +65,10 @@ Partial Class emkanSanjiForm
         Me.CHcustomerTolerance = New System.Windows.Forms.CheckBox()
         Me.CHAllInspection = New System.Windows.Forms.CheckBox()
         Me.CHForceTest = New System.Windows.Forms.CheckBox()
+        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.RBOldProduct = New System.Windows.Forms.RadioButton()
+        Me.RBChangeProduct = New System.Windows.Forms.RadioButton()
+        Me.RBNewProduct = New System.Windows.Forms.RadioButton()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.TBSampleQuantity = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -179,12 +186,15 @@ Partial Class emkanSanjiForm
         Me.Label42 = New System.Windows.Forms.Label()
         Me.Label41 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.LSelectedWireL = New System.Windows.Forms.Label()
+        Me.LSelectedWireD = New System.Windows.Forms.Label()
         Me.LMaftolStatus = New System.Windows.Forms.Label()
         Me.RMaftol4 = New System.Windows.Forms.RadioButton()
         Me.RMaftol3 = New System.Windows.Forms.RadioButton()
         Me.RMaftol2 = New System.Windows.Forms.RadioButton()
         Me.RMaftol1 = New System.Windows.Forms.RadioButton()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.LStatus = New System.Windows.Forms.Label()
         Me.CheckChangeExcel = New System.Windows.Forms.CheckBox()
         Me.BTModifyES = New System.Windows.Forms.Button()
         Me.BTDeleteES = New System.Windows.Forms.Button()
@@ -236,22 +246,13 @@ Partial Class emkanSanjiForm
         Me.Label37 = New System.Windows.Forms.Label()
         Me.LOutsideDiameter = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
-        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
-        Me.RBOldProduct = New System.Windows.Forms.RadioButton()
-        Me.RBChangeProduct = New System.Windows.Forms.RadioButton()
-        Me.RBNewProduct = New System.Windows.Forms.RadioButton()
-        Me.RBMainOrder = New System.Windows.Forms.RadioButton()
-        Me.RBAmendOrder = New System.Windows.Forms.RadioButton()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.LStatus = New System.Windows.Forms.Label()
-        Me.LSelectedWireD = New System.Windows.Forms.Label()
-        Me.LSelectedWireL = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
+        Me.GroupBox12.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -267,7 +268,6 @@ Partial Class emkanSanjiForm
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
-        Me.GroupBox12.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -323,7 +323,7 @@ Partial Class emkanSanjiForm
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button1.Location = New System.Drawing.Point(89, 433)
+        Me.Button1.Location = New System.Drawing.Point(80, 433)
         Me.Button1.Margin = New System.Windows.Forms.Padding(1)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(84, 33)
@@ -579,7 +579,7 @@ Partial Class emkanSanjiForm
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("B Traffic", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -673,6 +673,39 @@ Partial Class emkanSanjiForm
         Me.GroupBox2.TabIndex = 23
         Me.GroupBox2.TabStop = False
         '
+        'RBMainOrder
+        '
+        Me.RBMainOrder.AutoSize = True
+        Me.RBMainOrder.Checked = True
+        Me.RBMainOrder.Location = New System.Drawing.Point(148, 187)
+        Me.RBMainOrder.Name = "RBMainOrder"
+        Me.RBMainOrder.Size = New System.Drawing.Size(50, 25)
+        Me.RBMainOrder.TabIndex = 98
+        Me.RBMainOrder.TabStop = True
+        Me.RBMainOrder.Text = "اصلی"
+        Me.RBMainOrder.UseVisualStyleBackColor = True
+        '
+        'RBAmendOrder
+        '
+        Me.RBAmendOrder.AutoSize = True
+        Me.RBAmendOrder.Location = New System.Drawing.Point(59, 187)
+        Me.RBAmendOrder.Name = "RBAmendOrder"
+        Me.RBAmendOrder.Size = New System.Drawing.Size(61, 25)
+        Me.RBAmendOrder.TabIndex = 97
+        Me.RBAmendOrder.Text = "اصلاحیه"
+        Me.RBAmendOrder.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label11.Location = New System.Drawing.Point(204, 186)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(79, 26)
+        Me.Label11.TabIndex = 96
+        Me.Label11.Text = "نوع سفارش"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'GroupBox11
         '
         Me.GroupBox11.Controls.Add(Me.Label68)
@@ -763,6 +796,51 @@ Partial Class emkanSanjiForm
         Me.CHForceTest.TabIndex = 71
         Me.CHForceTest.Text = "جداسازی 100% نیرو"
         Me.CHForceTest.UseVisualStyleBackColor = True
+        '
+        'GroupBox12
+        '
+        Me.GroupBox12.Controls.Add(Me.RBOldProduct)
+        Me.GroupBox12.Controls.Add(Me.RBChangeProduct)
+        Me.GroupBox12.Controls.Add(Me.RBNewProduct)
+        Me.GroupBox12.Location = New System.Drawing.Point(16, 141)
+        Me.GroupBox12.Margin = New System.Windows.Forms.Padding(0)
+        Me.GroupBox12.Name = "GroupBox12"
+        Me.GroupBox12.Padding = New System.Windows.Forms.Padding(0)
+        Me.GroupBox12.Size = New System.Drawing.Size(653, 41)
+        Me.GroupBox12.TabIndex = 95
+        Me.GroupBox12.TabStop = False
+        '
+        'RBOldProduct
+        '
+        Me.RBOldProduct.AutoSize = True
+        Me.RBOldProduct.Location = New System.Drawing.Point(18, 13)
+        Me.RBOldProduct.Name = "RBOldProduct"
+        Me.RBOldProduct.Size = New System.Drawing.Size(86, 25)
+        Me.RBOldProduct.TabIndex = 2
+        Me.RBOldProduct.Text = "محصول قبلی"
+        Me.RBOldProduct.UseVisualStyleBackColor = True
+        '
+        'RBChangeProduct
+        '
+        Me.RBChangeProduct.AutoSize = True
+        Me.RBChangeProduct.Location = New System.Drawing.Point(196, 13)
+        Me.RBChangeProduct.Name = "RBChangeProduct"
+        Me.RBChangeProduct.Size = New System.Drawing.Size(181, 25)
+        Me.RBChangeProduct.TabIndex = 1
+        Me.RBChangeProduct.Text = "تغییر در محصول / فرآیند موجود"
+        Me.RBChangeProduct.UseVisualStyleBackColor = True
+        '
+        'RBNewProduct
+        '
+        Me.RBNewProduct.AutoSize = True
+        Me.RBNewProduct.Checked = True
+        Me.RBNewProduct.Location = New System.Drawing.Point(469, 13)
+        Me.RBNewProduct.Name = "RBNewProduct"
+        Me.RBNewProduct.Size = New System.Drawing.Size(158, 25)
+        Me.RBNewProduct.TabIndex = 0
+        Me.RBNewProduct.TabStop = True
+        Me.RBNewProduct.Text = "ایجاد محصول /فرآیند جدید"
+        Me.RBNewProduct.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -2066,6 +2144,28 @@ Partial Class emkanSanjiForm
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "وضعیت موجودی مفتول"
         '
+        'LSelectedWireL
+        '
+        Me.LSelectedWireL.AutoSize = True
+        Me.LSelectedWireL.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.LSelectedWireL.Location = New System.Drawing.Point(517, 21)
+        Me.LSelectedWireL.Name = "LSelectedWireL"
+        Me.LSelectedWireL.Size = New System.Drawing.Size(46, 26)
+        Me.LSelectedWireL.TabIndex = 103
+        Me.LSelectedWireL.Text = "LW1"
+        Me.LSelectedWireL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LSelectedWireD
+        '
+        Me.LSelectedWireD.AutoSize = True
+        Me.LSelectedWireD.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.LSelectedWireD.Location = New System.Drawing.Point(465, 21)
+        Me.LSelectedWireD.Name = "LSelectedWireD"
+        Me.LSelectedWireD.Size = New System.Drawing.Size(46, 26)
+        Me.LSelectedWireD.TabIndex = 102
+        Me.LSelectedWireD.Text = "LW1"
+        Me.LSelectedWireD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'LMaftolStatus
         '
         Me.LMaftolStatus.AutoSize = True
@@ -2139,6 +2239,18 @@ Partial Class emkanSanjiForm
         Me.TabPage4.Size = New System.Drawing.Size(1071, 485)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "سایر مشخصات"
+        '
+        'LStatus
+        '
+        Me.LStatus.AutoSize = True
+        Me.LStatus.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.LStatus.Location = New System.Drawing.Point(210, 439)
+        Me.LStatus.Name = "LStatus"
+        Me.LStatus.Size = New System.Drawing.Size(96, 26)
+        Me.LStatus.TabIndex = 97
+        Me.LStatus.Text = "------------"
+        Me.LStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LStatus.Visible = False
         '
         'CheckChangeExcel
         '
@@ -2733,118 +2845,6 @@ Partial Class emkanSanjiForm
         Me.Label39.Text = "قطر خارجی فنر : "
         Me.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'GroupBox12
-        '
-        Me.GroupBox12.Controls.Add(Me.RBOldProduct)
-        Me.GroupBox12.Controls.Add(Me.RBChangeProduct)
-        Me.GroupBox12.Controls.Add(Me.RBNewProduct)
-        Me.GroupBox12.Location = New System.Drawing.Point(16, 141)
-        Me.GroupBox12.Margin = New System.Windows.Forms.Padding(0)
-        Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Padding = New System.Windows.Forms.Padding(0)
-        Me.GroupBox12.Size = New System.Drawing.Size(653, 41)
-        Me.GroupBox12.TabIndex = 95
-        Me.GroupBox12.TabStop = False
-        '
-        'RBOldProduct
-        '
-        Me.RBOldProduct.AutoSize = True
-        Me.RBOldProduct.Location = New System.Drawing.Point(18, 13)
-        Me.RBOldProduct.Name = "RBOldProduct"
-        Me.RBOldProduct.Size = New System.Drawing.Size(86, 25)
-        Me.RBOldProduct.TabIndex = 2
-        Me.RBOldProduct.Text = "محصول قبلی"
-        Me.RBOldProduct.UseVisualStyleBackColor = True
-        '
-        'RBChangeProduct
-        '
-        Me.RBChangeProduct.AutoSize = True
-        Me.RBChangeProduct.Location = New System.Drawing.Point(196, 13)
-        Me.RBChangeProduct.Name = "RBChangeProduct"
-        Me.RBChangeProduct.Size = New System.Drawing.Size(181, 25)
-        Me.RBChangeProduct.TabIndex = 1
-        Me.RBChangeProduct.Text = "تغییر در محصول / فرآیند موجود"
-        Me.RBChangeProduct.UseVisualStyleBackColor = True
-        '
-        'RBNewProduct
-        '
-        Me.RBNewProduct.AutoSize = True
-        Me.RBNewProduct.Checked = True
-        Me.RBNewProduct.Location = New System.Drawing.Point(469, 13)
-        Me.RBNewProduct.Name = "RBNewProduct"
-        Me.RBNewProduct.Size = New System.Drawing.Size(158, 25)
-        Me.RBNewProduct.TabIndex = 0
-        Me.RBNewProduct.TabStop = True
-        Me.RBNewProduct.Text = "ایجاد محصول /فرآیند جدید"
-        Me.RBNewProduct.UseVisualStyleBackColor = True
-        '
-        'RBMainOrder
-        '
-        Me.RBMainOrder.AutoSize = True
-        Me.RBMainOrder.Checked = True
-        Me.RBMainOrder.Location = New System.Drawing.Point(148, 187)
-        Me.RBMainOrder.Name = "RBMainOrder"
-        Me.RBMainOrder.Size = New System.Drawing.Size(50, 25)
-        Me.RBMainOrder.TabIndex = 98
-        Me.RBMainOrder.TabStop = True
-        Me.RBMainOrder.Text = "اصلی"
-        Me.RBMainOrder.UseVisualStyleBackColor = True
-        '
-        'RBAmendOrder
-        '
-        Me.RBAmendOrder.AutoSize = True
-        Me.RBAmendOrder.Location = New System.Drawing.Point(59, 187)
-        Me.RBAmendOrder.Name = "RBAmendOrder"
-        Me.RBAmendOrder.Size = New System.Drawing.Size(61, 25)
-        Me.RBAmendOrder.TabIndex = 97
-        Me.RBAmendOrder.Text = "اصلاحیه"
-        Me.RBAmendOrder.UseVisualStyleBackColor = True
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label11.Location = New System.Drawing.Point(204, 186)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(79, 26)
-        Me.Label11.TabIndex = 96
-        Me.Label11.Text = "نوع سفارش"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LStatus
-        '
-        Me.LStatus.AutoSize = True
-        Me.LStatus.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.LStatus.Location = New System.Drawing.Point(210, 439)
-        Me.LStatus.Name = "LStatus"
-        Me.LStatus.Size = New System.Drawing.Size(96, 26)
-        Me.LStatus.TabIndex = 97
-        Me.LStatus.Text = "------------"
-        Me.LStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.LStatus.Visible = False
-        '
-        'LSelectedWireD
-        '
-        Me.LSelectedWireD.AutoSize = True
-        Me.LSelectedWireD.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.LSelectedWireD.Location = New System.Drawing.Point(465, 21)
-        Me.LSelectedWireD.Name = "LSelectedWireD"
-        Me.LSelectedWireD.Size = New System.Drawing.Size(46, 26)
-        Me.LSelectedWireD.TabIndex = 102
-        Me.LSelectedWireD.Text = "LW1"
-        Me.LSelectedWireD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LSelectedWireL
-        '
-        Me.LSelectedWireL.AutoSize = True
-        Me.LSelectedWireL.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.LSelectedWireL.Location = New System.Drawing.Point(517, 21)
-        Me.LSelectedWireL.Name = "LSelectedWireL"
-        Me.LSelectedWireL.Size = New System.Drawing.Size(46, 26)
-        Me.LSelectedWireL.TabIndex = 103
-        Me.LSelectedWireL.Text = "LW1"
-        Me.LSelectedWireL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'emkanSanjiForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2867,6 +2867,8 @@ Partial Class emkanSanjiForm
         Me.GroupBox2.PerformLayout()
         Me.GroupBox11.ResumeLayout(False)
         Me.GroupBox11.PerformLayout()
+        Me.GroupBox12.ResumeLayout(False)
+        Me.GroupBox12.PerformLayout()
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox10.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
@@ -2896,8 +2898,6 @@ Partial Class emkanSanjiForm
         Me.GroupBox5.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
-        Me.GroupBox12.ResumeLayout(False)
-        Me.GroupBox12.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

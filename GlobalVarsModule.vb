@@ -3,13 +3,13 @@
 Module GlobalVarsModule
 
     '' ------------------------------------------ Debug Mode: circumvents the login system ------------------------------------------
-    Public debugMode As Boolean = True
+    Public debugMode As Boolean = False
 
     '' -------------------------------------------------------  Configurations  -----------------------------------------------------
 
 
     Public connectionString As String = ConfigurationManager.ConnectionStrings("ConString").ConnectionString & "Jet OLEDB:Database Password=esdbpassword;"
-
+    Public postgresConString As String = "Host=198.143.181.131;Port=5432;Username=postgres;Password=picher;Database=mydb"
 
     Public excelTemplateFilePath As String = ConfigurationManager.ConnectionStrings("excelPath").ConnectionString
     Public excelFilesBasePath As String = ConfigurationManager.ConnectionStrings("excelBasePath").ConnectionString
@@ -22,9 +22,9 @@ Module GlobalVarsModule
 
     '' ----------------------------------------------------------  User Info  --------------------------------------------------------
 
-    Public loggedInUser As String = "Pedram"
-    Public loggedInUserName As String = "پدرام یوسفی"
-    Public loggedInUserGroup As String = "Admin"
+    Public loggedInUser As String = ""
+    Public loggedInUserName As String = ""
+    Public loggedInUserGroup As String = ""
 
     '' -------------------------------------------------------  Query Column Names  --------------------------------------------------
 
