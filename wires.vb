@@ -16,6 +16,13 @@ Public Class wires
         ''      binding source for filtering -> less data transfer, probably faster and we can do it on textbox.changed
         ''      because of the increased speed.
         Dim sql_command = "SELECT" + wiresColumnName + "FROM wireInventory A LEFT JOIN wireReserve B ON A.wireCode = B.wireCode;"
+        If db = "postgres" Then
+            sql_command = "SELECT A.wireType, A.wireWeight, A.wireCode AS ""کد کالا"", A.inventoryName AS ""عنوان"" , A.wireDiameter AS ""قطر مفتول"", A.wireLength AS ""طول مفتول"" ,
+                                        FLOOR((CAST(A.inventory As real) - CAST(B.preReserve As real) - CAST(B.reserve As real))) As ""مانده موجودي (کيلوگرم)"" , (Case When (A.wireWeight ~ '^\d+(\.\d+)?$') THEN CAST(FLOOR((CAST(A.inventory AS real) - CAST (B.preReserve AS real) - CAST(B.reserve AS real)) / CAST(A.wireWeight AS real)) AS varchar) ELSE '-' END ) AS ""تعداد شاخه"" , 
+                                         A.inventory AS ""موجودي فيزيکي(کيلوگرم)"", ( CASE WHEN A.wireWeight ~ '^\d+(\.\d+)?$' THEN CAST(FLOOR( CAST (A.inventory AS real) / CAST(A.wireWeight AS real) ) as varchar) ELSE '-' END) AS ""موجودي فيزيکي (تعداد شاخه)"", 
+                                         B.preReserve AS ""رزرو امکان سنجي (کيلوگرم)"" , (CASE WHEN A.wireWeight ~ '^\d+(\.\d+)?$' THEN CAST(FLOOR( CAST(B.preReserve AS real) / CAST (A.wireWeight AS real)) AS varchar) ELSE '-' END) AS ""امکان سنجي (تعداد شاخه)"", 
+                                         B.reserve AS ""رزرو توليد (کيلوگرم)"" , (CASE WHEN A.wireWeight ~ '^\d+(\.\d+)?$' THEN CAST (FLOOR( CAST(B.reserve AS real) / CAST(A.wireWeight AS real)) AS varchar) ELSE '-' END) AS ""توليد(تعداد شاخه)""   FROM wireInventory A LEFT JOIN wireReserve B ON A.wireCode = B.wireCode;"
+        End If
         Try
             Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
             bs.DataSource = dt

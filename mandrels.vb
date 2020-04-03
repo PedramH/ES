@@ -1,4 +1,4 @@
-﻿Imports System.Data.OleDb
+﻿
 Public Class mandrels
     Private Sub mandrels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ''Loading Mandrels table into datagridview
@@ -11,8 +11,8 @@ Public Class mandrels
 
     Function SearchMandrelDataBase(query As String)
         '' Gets a query value and search the mandrel database by that value
-        Using cn As New OleDbConnection(connectionString)
-            Using cmd As New OleDbCommand With {.Connection = cn}
+        Using cn = GetDatabaseCon()
+            Using cmd = cn.CreateCommand()
                 cmd.CommandText = "SELECT " & mandrelsColumnName & " FROM mandrels WHERE mandrelDiameter LIKE '%" + query + "%' ;"
                 Using dt As New DataTable With {.TableName = "mandrels"}
                     Try

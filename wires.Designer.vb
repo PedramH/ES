@@ -33,6 +33,7 @@ Partial Class wires
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LProductData = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TBWireCode = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -43,8 +44,8 @@ Partial Class wires
         Me.CBWireType = New System.Windows.Forms.ComboBox()
         Me.BTUpdateInventory = New System.Windows.Forms.Button()
         Me.BTCheckOrders = New System.Windows.Forms.Button()
-        Me.BTShowAllWires = New System.Windows.Forms.Button()
         Me.BTSelectWire = New System.Windows.Forms.Button()
+        Me.BTShowAllWires = New System.Windows.Forms.Button()
         Me.TabPage_Orders = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
@@ -147,6 +148,7 @@ Partial Class wires
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.LProductData, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Label1, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.TBWireCode, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Label2, 2, 0)
@@ -157,8 +159,8 @@ Partial Class wires
         Me.TableLayoutPanel2.Controls.Add(Me.CBWireType, 7, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.BTUpdateInventory, 8, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.BTCheckOrders, 8, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.BTShowAllWires, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.BTSelectWire, 7, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.BTShowAllWires, 0, 1)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 408)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
@@ -167,6 +169,20 @@ Partial Class wires
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(1059, 96)
         Me.TableLayoutPanel2.TabIndex = 21
+        '
+        'LProductData
+        '
+        Me.LProductData.AutoSize = True
+        Me.TableLayoutPanel2.SetColumnSpan(Me.LProductData, 4)
+        Me.LProductData.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LProductData.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.LProductData.Location = New System.Drawing.Point(483, 48)
+        Me.LProductData.Name = "LProductData"
+        Me.LProductData.Size = New System.Drawing.Size(446, 48)
+        Me.LProductData.TabIndex = 25
+        Me.LProductData.Text = "قطر مفتول"
+        Me.LProductData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LProductData.Visible = False
         '
         'Label1
         '
@@ -283,18 +299,6 @@ Partial Class wires
         Me.BTCheckOrders.Text = "جزییات رزرو"
         Me.BTCheckOrders.UseVisualStyleBackColor = True
         '
-        'BTShowAllWires
-        '
-        Me.BTShowAllWires.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BTShowAllWires.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTShowAllWires.Location = New System.Drawing.Point(828, 55)
-        Me.BTShowAllWires.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTShowAllWires.Name = "BTShowAllWires"
-        Me.BTShowAllWires.Size = New System.Drawing.Size(103, 33)
-        Me.BTShowAllWires.TabIndex = 24
-        Me.BTShowAllWires.Text = "نمایش همه"
-        Me.BTShowAllWires.UseVisualStyleBackColor = True
-        '
         'BTSelectWire
         '
         Me.BTSelectWire.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -307,6 +311,18 @@ Partial Class wires
         Me.BTSelectWire.Text = "انتخاب مفتول"
         Me.BTSelectWire.UseVisualStyleBackColor = True
         Me.BTSelectWire.Visible = False
+        '
+        'BTShowAllWires
+        '
+        Me.BTShowAllWires.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTShowAllWires.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTShowAllWires.Location = New System.Drawing.Point(933, 55)
+        Me.BTShowAllWires.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTShowAllWires.Name = "BTShowAllWires"
+        Me.BTShowAllWires.Size = New System.Drawing.Size(125, 33)
+        Me.BTShowAllWires.TabIndex = 24
+        Me.BTShowAllWires.Text = "نمایش همه"
+        Me.BTShowAllWires.UseVisualStyleBackColor = True
         '
         'TabPage_Orders
         '
@@ -511,4 +527,5 @@ Partial Class wires
     Friend WithEvents BTCheckOrders As Button
     Friend WithEvents BTShowAllWires As Button
     Friend WithEvents BTShowAllOrders As Button
+    Friend WithEvents LProductData As Label
 End Class

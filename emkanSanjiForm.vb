@@ -58,6 +58,8 @@ Public Class emkanSanjiForm
             Me.TabControl1.TabPages.Remove(Me.TabPage1)
         End If
 
+        HandleUserPermissions()
+
     End Sub
 
 
@@ -107,7 +109,7 @@ Public Class emkanSanjiForm
 
             LOrderQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString
             LWireOrderQuantity.Text = DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString
-            LQuantityDetail.Text = String.Format("{1} عدد نمونه و {0} عدد انبوه", DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString, DataGridView1.SelectedRows(0).Cells("تعداد نمونه").Value.ToString)
+            LQuantityDetail.Text = String.Format("{1} عدد نمونه و {0} عدد انبوه", Val(DataGridView1.SelectedRows(0).Cells("تعداد سفارش").Value.ToString) - Val(DataGridView1.SelectedRows(0).Cells("تعداد نمونه").Value.ToString), DataGridView1.SelectedRows(0).Cells("تعداد نمونه").Value.ToString)
 
             LOutsideDiameter.Text = DataGridView1.SelectedRows(0).Cells("OD").Value.ToString
             LFreeLength.Text = DataGridView1.SelectedRows(0).Cells("L0").Value.ToString
@@ -290,9 +292,8 @@ Public Class emkanSanjiForm
             Logger.LogFatal("خطا در انتخاب امکان سنجی برای ویراش", ex)
         End Try
 
+        HandleUserPermissions()
     End Sub
-
-
 
 
     Private Sub HandleWireStateChange()
@@ -481,17 +482,31 @@ Public Class emkanSanjiForm
         '    End Using
         'End Using
 
-
+        '' ------------------------------------------------------- 
+        'Dim sql_command = "SELECT " & ESColumnNames & " FROM ((emkansanji LEFT JOIN springDataBase ON emkansanji.productID = springDataBase.ID) LEFT JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
+        '                         " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
+        '                         " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
+        '                         " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
+        '                         " emkansanji.orderState LIKE '%" & CBOrderState.Text & "%' AND" &
+        '                         " emkansanji.ID LIKE  '%" & TBEmkansanjiID.Text & "%' AND " &
+        '                         " emkansanji.productCode LIKE '%" & TBCustomerProductCode.Text & "%' AND " &
+        '                         " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
+        '                         " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
+        '                         " ORDER BY emkansanji.ID ;" 'TODO : Search the database based on Reserved wire and coil
+        ' changed for postgres
         Dim sql_command = "SELECT " & ESColumnNames & " FROM ((emkansanji LEFT JOIN springDataBase ON emkansanji.productID = springDataBase.ID) LEFT JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
                                  " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
                                  " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
                                  " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
-                                 " emkansanji.orderState LIKE '%" & CBOrderState.Text & "%' AND" &
-                                 " emkansanji.ID LIKE  '%" & TBEmkansanjiID.Text & "%' AND " &
+                                 " emkansanji.orderState LIKE '%" & CBOrderState.Text & "%' AND" & '" emkansanji.ID LIKE  '%" & TBEmkansanjiID.Text & "%' AND " &
                                  " emkansanji.productCode LIKE '%" & TBCustomerProductCode.Text & "%' AND " &
                                  " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
                                  " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
                                  " ORDER BY emkansanji.ID ;" 'TODO : Search the database based on Reserved wire and coil 
+
+
+
+
         Try
             Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
             emkansanji_bs.DataSource = dt
@@ -527,6 +542,8 @@ Public Class emkanSanjiForm
         Dim wireSelectionForm = New wires()
         wiresFormState = "selection"
         wireFormCaller = "wire1"
+        wireSelectionForm.LProductData.Visible = True
+        wireSelectionForm.Text = String.Format("قطر مفتول: {0} - طول مفتول: {1} - تعداد سفارش: {2}", LWireDiameter.Text, LWireLength.Text, LWireOrderQuantity.Text)
         wireSelectionForm.Show()
     End Sub
 
@@ -534,6 +551,8 @@ Public Class emkanSanjiForm
         Dim wireSelectionForm = New wires()
         wiresFormState = "selection"
         wireFormCaller = "wire2"
+        wireSelectionForm.LProductData.Visible = True
+        wireSelectionForm.LProductData.Text = String.Format("قطر مفتول: {0} - طول مفتول: {1} - تعداد سفارش: {2}", LWireDiameter.Text, LWireLength.Text, LWireOrderQuantity.Text)
         wireSelectionForm.Show()
     End Sub
 
@@ -541,18 +560,15 @@ Public Class emkanSanjiForm
         Dim wireSelectionForm = New wires()
         wiresFormState = "selection"
         wireFormCaller = "wire3"
+        wireSelectionForm.LProductData.Visible = True
+        wireSelectionForm.LProductData.Text = String.Format("قطر مفتول: {0} - طول مفتول: {1} - تعداد سفارش: {2}", LWireDiameter.Text, LWireLength.Text, LWireOrderQuantity.Text)
         wireSelectionForm.Show()
     End Sub
 
     Private Async Sub BTEmkansanjiSearch_Click(sender As Object, e As EventArgs) Handles BTEmkansanjiSearch.Click
-        ''LoadEmkansanjiTable()
-        'Using cn As New OleDbConnection(connectionString)
-        '    Using cmd As New OleDbCommand With {.Connection = cn}
 
-        '        Dim emkanSanjiColumnNames As String = " springDataBase.productName, emkansanji.quantity, emkansanji.letterNo, customers.customerName "
-
-        '        'the paranthesis in the query are mandatory
-        '        cmd.CommandText = "SELECT " & ESColumnNames & " FROM ((emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
+        ''the paranthesis in the query are mandatory
+        'Dim sql_command = "SELECT " & ESColumnNames & " FROM ((emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
         '            " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
         '         " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
         '         " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
@@ -562,68 +578,34 @@ Public Class emkanSanjiForm
         '        " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
         '        " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
         '        " ;" 'TODO : Search the database based on Reserved wire and coil 
-        '        DataGridView1.Columns(0).Visible = False
-        '        DataGridView1.Columns(1).Visible = False
-        '        DataGridView1.Columns(2).Visible = False
-        '        DataGridView1.Columns(3).Visible = False
-        '        DataGridView1.Columns(4).Visible = False
-        '        DataGridView1.Columns(5).Visible = False
-        '        DataGridView1.Columns(6).Visible = False
-
-        '        Dim dt As New DataTable With {.TableName = "emkansanji"}
-        '        'Try
-        '        cn.Open()
-        '        Dim ds As New DataSet
-        '        Dim emkansanji As New DataTable With {.TableName = "emkansanji"}
-        '        ds.Tables.Add(emkansanji)
-        '        ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, emkansanji)
-        '        DataGridView1.DataSource = ds.Tables("emkansanji")
-        '        cn.Close()
-
-        '    End Using
-        'End Using
-
-
-
-        'the paranthesis in the query are mandatory
-        Dim sql_command = "SELECT " & ESColumnNames & " FROM ((emkansanji INNER JOIN springDataBase ON emkansanji.productID = springDataBase.ID) INNER JOIN customers ON emkansanji.customerID = customers.ID) WHERE " &
-                    " springDataBase.productName LIKE '%" & TBEnergySazProductName.Text & "%' AND" &
-                 " customers.customerName LIKE '%" & TBCustomerName.Text & "%' AND" &
-                 " emkansanji.customerProductName LIKE '%" & TBCustomerProductName.Text & "%' AND" &
-                 " emkansanji.orderState LIKE '%" & CBOrderState.Text & "%' AND" &
-                 " emkansanji.ID LIKE  '%" & TBEmkansanjiID.Text & "%' AND " &
-                " emkansanji.productCode LIKE '%" & TBCustomerProductCode.Text & "%' AND " &
-                " emkansanji.orderNo LIKE '%" & TBOrderNo.Text & "%' AND " &
-                " emkansanji.letterNo LIKE '%" & TBLetterNo.Text & "%' " &
-                " ;" 'TODO : Search the database based on Reserved wire and coil 
-        Try
-            DataGridView1.Columns("productID").Visible = False
-            DataGridView1.Columns("customerID").Visible = False
-            DataGridView1.Columns("wireDiameter").Visible = False
-            DataGridView1.Columns("OD").Visible = False
-            DataGridView1.Columns("L0").Visible = False
-            DataGridView1.Columns("wireLength").Visible = False
-            DataGridView1.Columns("mandrelDiameter").Visible = False
-            DataGridView1.Columns("pProcess").Visible = False
-            DataGridView1.Columns("productReserve").Visible = False
-            DataGridView1.Columns("productionProcess").Visible = False
-            DataGridView1.Columns("springInEachPackage").Visible = False
-            DataGridView1.Columns("packagingCost").Visible = False
-            DataGridView1.Columns("doable").Visible = False
-            DataGridView1.Columns("whyNot").Visible = False
-            DataGridView1.Columns("productionReserve").Visible = False
-            'Try
-            Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-            emkansanji_bs.DataSource = dt
-            DataGridView1.DataSource = emkansanji_bs.DataSource
-        Catch ex As Exception
-            MsgBox("خطا در برقرای ارتباط با دیتابیس", vbCritical + RightToLeft + vbMsgBoxRight, "خطا")
-            Logger.LogFatal(sql_command, ex)
-        End Try
-
+        'Try
+        '    DataGridView1.Columns("productID").Visible = False
+        '    DataGridView1.Columns("customerID").Visible = False
+        '    DataGridView1.Columns("wireDiameter").Visible = False
+        '    DataGridView1.Columns("OD").Visible = False
+        '    DataGridView1.Columns("L0").Visible = False
+        '    DataGridView1.Columns("wireLength").Visible = False
+        '    DataGridView1.Columns("mandrelDiameter").Visible = False
+        '    DataGridView1.Columns("pProcess").Visible = False
+        '    DataGridView1.Columns("productReserve").Visible = False
+        '    DataGridView1.Columns("productionProcess").Visible = False
+        '    DataGridView1.Columns("springInEachPackage").Visible = False
+        '    DataGridView1.Columns("packagingCost").Visible = False
+        '    DataGridView1.Columns("doable").Visible = False
+        '    DataGridView1.Columns("whyNot").Visible = False
+        '    DataGridView1.Columns("productionReserve").Visible = False
+        '    'Try
+        '    Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+        '    emkansanji_bs.DataSource = dt
+        '    DataGridView1.DataSource = emkansanji_bs.DataSource
+        'Catch ex As Exception
+        '    MsgBox("خطا در برقرای ارتباط با دیتابیس", vbCritical + RightToLeft + vbMsgBoxRight, "خطا")
+        '    Logger.LogFatal(sql_command, ex)
+        'End Try
+        Await LoadEmkansanjiTable()
     End Sub
 
-    Private Async Sub emkanSanjiForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Async Sub emkanSanjiForm_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         '' If this form is called as a pop-up form from wires form then update wire and order data when closing
         If thisFormsOwner = "wiresForm" Then
             Await wires.LoadWiresData()
@@ -666,7 +648,8 @@ Public Class emkanSanjiForm
             Dim NoOfRows = Int(TBPackageH.Text / LFreeLength.Text)
 
             TBPackageCount.Text = maxInLength * maxInWidth * NoOfRows
-            TBPCostForEach.Text = Math.Round((Val(TBPCost.Text) / (Int(LOrderQuantity.Text / TBPackageCount.Text) + 1)) / 10000, 0) * 10000
+            Dim NoOfPackages = Int((LOrderQuantity.Text / TBPackageCount.Text) + 1)
+            TBPCostForEach.Text = Math.Round(((Val(TBPCost.Text) * NoOfPackages) / Val(LOrderQuantity.Text)) / 10000, 0) * 10000
         Catch ex As Exception
             MsgBox(" پارامتر هار ورودی را کنترل کنید" + ex.Message, vbCritical + vbMsgBoxRight + RightToLeft, "خطا")
         End Try
@@ -685,26 +668,6 @@ Public Class emkanSanjiForm
     Private Sub BTModifyES2_Click(sender As Object, e As EventArgs) Handles BTModifyES2.Click
         BTModifyES.PerformClick()
     End Sub
-
-    Private Sub CheckBox5_CheckedChanged(sender As Object, e As EventArgs) Handles CHShot.CheckedChanged
-
-    End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        '' Add checkboxes to collection (array)
-
-        'MsgBox(CBA.Count.ToString)
-        'Dim processCode = GenerateProductionProcess(CBA)
-        'MsgBox(processCode)
-        Dim code = InputBox("EnterSomething", "title", "1111111111")
-        ParseProductionProcess(CBA, code)
-
-    End Sub
-
-    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
-
-    End Sub
-
 
     '' ----------------------------------------------------------------------------------------------------------------------
     '' ----------------------------------------------------------------------------------------------------------------------
@@ -894,6 +857,31 @@ Public Class emkanSanjiForm
         LStatus.Visible = False
         'Me.Cursor = Cursors.Default
     End Sub
+
+    Private Sub CHChangedExcel2_CheckedChanged(sender As Object, e As EventArgs) Handles CHChangedExcel2.CheckedChanged
+        '' couple the check boxes 
+        CheckChangeExcel.Checked = CHChangedExcel2.Checked
+    End Sub
+
+    Private Sub CheckChangeExcel_CheckedChanged(sender As Object, e As EventArgs) Handles CheckChangeExcel.CheckedChanged
+        '' couple the check boxes
+        CHChangedExcel2.Checked = CheckChangeExcel.Checked
+    End Sub
+
+    Private Sub Label51_Click(sender As Object, e As EventArgs) Handles Label51.Click
+
+    End Sub
+
+    Private Async Sub BTShowAll_Click(sender As Object, e As EventArgs) Handles BTShowAll.Click
+        For Each tb As TextBox In TabPage1.Controls.OfType(Of TextBox)()
+            tb.Text = ""
+        Next
+        CBOrderState.Text = ""
+        Await LoadEmkansanjiTable()
+    End Sub
+
+
+
     Private Async Sub BTModifyES_Click(sender As Object, e As EventArgs) Handles BTModifyES.Click
         '' Establish mandrel state
         If RadioButton5.Checked = True Then
@@ -972,7 +960,7 @@ Public Class emkanSanjiForm
             packageType = "پالت"
         End If
 
-        '' Construct the sql command to update the emkansanji table with new data
+        ' Construct the sql command to update the emkansanji table with new data
         Dim sql_command As String = "UPDATE emkansanji SET" &
                             " productID = '" & TBProductIDES.Text & "'," &
                             " pProcess = '" & productionProcess & "'," &
@@ -1014,6 +1002,7 @@ Public Class emkanSanjiForm
                              " WHERE ID = " & LemkansanjiID.Text & ";"
 
 
+
         Try
             If CheckChangeExcel.Checked Then
                 ModifyEmkansanjiExcelFile()
@@ -1032,5 +1021,45 @@ Public Class emkanSanjiForm
         'MsgBox("ویرایش مشخصات سفارش با موفقیت انجام شد", vbInformation + vbMsgBoxRight + vbMsgBoxRtlReading, "ویرایش امکان سنجی")
     End Sub
 
+
+    '' ---------------------------------------------------------------------------------------------------------------------
+    Private Sub HandleUserPermissions()
+        If loggedInUserGroup <> "Admin" Then
+            BTDeleteES.Enabled = False
+        End If
+        If loggedInUserGroup <> "Admin" And loggedInUserGroup <> "QC" Then
+            GroupBox10.Enabled = False '' Production process can't change buy other than QC
+            GroupBox11.Enabled = False '' inspection process
+            GroupBox12.Enabled = False '' type of order 
+            RBMainOrder.Enabled = False
+            RBAmendOrder.Enabled = False
+            ' TBMCustomerProductName.Enabled = False
+            TBMCustomerProductName.ReadOnly = True
+            TBQuantity.ReadOnly = True
+            TBSampleQuantity.ReadOnly = True
+            TBMOrderNo.ReadOnly = True
+            TBMLetterNo.ReadOnly = True
+            TBMProccessingDate.ReadOnly = True
+            TBMLetterDate.ReadOnly = True
+            CBStandard.Enabled = False
+            TBGrade.ReadOnly = True
+            TBMCustomerDwgNo.ReadOnly = True
+            TBMCustomerProductCode.ReadOnly = True
+            TBMCustomerDwgNo.ReadOnly = True
+
+        End If
+        If loggedInUserGroup <> "Admin" And loggedInUserGroup <> "Tolid1" And loggedInUserGroup <> "Tolid2" Then
+            GroupBox3.Enabled = False '' Wire State
+            GroupBoxReserve.Enabled = False '' reserve
+            GroupBoxBuy.Enabled = False
+            GroupBoxPill.Enabled = False
+            GroupBox7.Enabled = False '' product reserve
+            GroupBox4.Enabled = False '' mandrel
+            GroupBox6.Enabled = False '' packaging
+            GroupBox8.Enabled = False ''zarfiatsanji
+        End If
+
+
+    End Sub
 
 End Class

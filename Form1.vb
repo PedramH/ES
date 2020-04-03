@@ -9,6 +9,8 @@ Public Class FrmNewEmkansanji
     Public spring_bs As New BindingSource
     Public customer_bs As New BindingSource
 
+    Public formState As String = "" 'Form state can be : normal(or empty) , productSearch, customerSearch
+
     Public CBA As New Collection '' An array of checkBoxes manufacturing process
     Public CBA_inspection As New Collection '' An array of checkBoxes for inspection
 
@@ -30,6 +32,21 @@ Public Class FrmNewEmkansanji
 
 
     Private Async Sub mainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If formState = "productSearch" Then
+            '' Remove customer tab and new emkansanji tab
+            TabControl1.TabPages.Remove(TabPage2)
+            TabControl1.TabPages.Remove(TabPage3)
+        ElseIf formState = "customerSearch" Then
+            TabControl1.TabPages.Remove(TabPage1)
+            TabControl1.TabPages.Remove(TabPage3)
+        ElseIf formState = "newProductCode" Then
+            '' This is for when user wants to 
+            '' Remove customer tab and new emkansanji tab
+            TabControl1.TabPages.Remove(TabPage2)
+            TabControl1.TabPages.Remove(TabPage3)
+        End If
+
         '' Add production process checkboxes to a collection for easier handling
         CBA.Add(CHSard)
         CBA.Add(CHGarm)
@@ -74,20 +91,38 @@ Public Class FrmNewEmkansanji
 
         '    End Using
         'End Using
+        If formState <> "customerSearch" Then '' This loads the spring database
+            'Loading Springs table into datagridview1
+            Dim sql_command = "SELECT " & springDataBaseColumnNames & " FROM springDataBase;"
+            If formState = "newProductCode" Then
+                '' if user wants to add product code for new products just show them the products that don't have one
+                Dim clNames = " springDataBase.ID AS [ID] , springDataBase.productName AS [نام محصول] , springDataBase.productID AS [کد کالا],  springDataBase.wireDiameter AS [قطر مفتول], springDataBase.OD AS [قطر خارجی] , springDataBase.L0 AS [طول آزاد] , springDataBase.Nt AS [تعداد حلقه], springDataBase.productionMethod AS [روش تولید], emkansanji.ID AS [orderID]"
+                sql_command = "SELECT " & clNames & " FROM (emkansanji LEFT JOIN springDataBase ON emkansanji.productID = springDataBase.ID) WHERE " &
+                                 " (springDataBase.productID = '' OR ISNULL(springDataBase.productID) ) AND" &
+                                 " emkansanji.orderState LIKE '%تایید%'" &
+                                 " ORDER BY emkansanji.ID ;" 'TODO : Search the database based on Reserved wire and coil 
+                If db = "postgres" Then
+                    sql_command = MigrateAccessToPostgres(sql_command)
+                End If
+                'sql_command = "SELECT " & springDataBaseColumnNames & " FROM springDataBase WHERE ( productID = '' OR ISNULL(productID) AND orderState LIKE '%تایید%') ;"
+            End If
+            Dim springdt As New DataTable
+            Try
+                springdt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+                spring_bs.DataSource = springdt
+                DataGridView1.DataSource = spring_bs
+                If formState = "newProductCode" Then
+                    DataGridView1.Columns("ID").Visible = False
+                    DataGridView1.Columns("orderID").Visible = False
+                Else
+                    DataGridView1.Columns("productionProcess").Visible = False
+                End If
 
-        'Loading Springs table into datagridview1
-        Dim sql_command = "SELECT " & springDataBaseColumnNames & " FROM springDataBase;"
-        Dim springdt As New DataTable
-        Try
-            springdt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-            spring_bs.DataSource = springdt
-            DataGridView1.DataSource = spring_bs
-            'DataGridView1.Columns(0).Visible = False
-        Catch ex As Exception
-            MsgBox("خطا در ارتباط با دیتابیس" + Environment.NewLine + ex.Message, vbCritical + vbMsgBoxRight, "خطا")
-            Logger.LogFatal("spring data base couldn't be loaded.", ex)
-        End Try
-
+            Catch ex As Exception
+                MsgBox("خطا در ارتباط با دیتابیس" + Environment.NewLine + ex.Message, vbCritical + vbMsgBoxRight, "خطا")
+                Logger.LogFatal("spring data base couldn't be loaded.", ex)
+            End Try
+        End If
 
         '' ------------------------------------------------------------------------------------------------------------------
         '' ------------------------------------------------------------------------------------------------------------------
@@ -118,17 +153,21 @@ Public Class FrmNewEmkansanji
         'End Using
 
         '' Loading Customers info into datagridView2
-        sql_command = "SELECT " & customerDataBaseColumnNames & " FROM customers;"
-        Dim customerdt As New DataTable
-        Try
-            customerdt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
-            customer_bs.DataSource = customerdt
-            DataGridView2.DataSource = customer_bs
-            DataGridView2.Columns(0).Visible = False
-        Catch ex As Exception
-            MsgBox("خطا در ارتباط با دیتابیس" + Environment.NewLine + ex.Message, vbCritical + vbMsgBoxRight, "خطا")
-            Logger.LogFatal(ex.Message, ex)
-        End Try
+        If formState <> "productSearch" And formState <> "newProductCode" Then
+            Dim sql_command = "SELECT " & customerDataBaseColumnNames & " FROM customers;"
+            Dim customerdt As New DataTable
+            Try
+                customerdt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
+                customer_bs.DataSource = customerdt
+                DataGridView2.DataSource = customer_bs
+                DataGridView2.Columns(0).Visible = False
+            Catch ex As Exception
+                MsgBox("خطا در ارتباط با دیتابیس" + Environment.NewLine + ex.Message, vbCritical + vbMsgBoxRight, "خطا")
+                Logger.LogFatal(ex.Message, ex)
+            End Try
+        End If
+
+        HandleUserPermissions()
 
     End Sub
 
@@ -168,7 +207,7 @@ Public Class FrmNewEmkansanji
         '        End Try
         '    End Using
         'End Using
-
+        'MsgBox("im here")
         Dim searchTerm = TBProductName.Text.Replace(" ", "%")
         Dim sql_command = "SELECT " & springDataBaseColumnNames & " FROM springDataBase WHERE " &
                     "springDataBase.productName LIKE '%" & searchTerm & "%' AND" & '"springDataBase.productName LIKE '%" & TBProductName.Text & "%' AND" &
@@ -176,7 +215,6 @@ Public Class FrmNewEmkansanji
                     " AND springDataBase.OD LIKE '%" & TBOD.Text & "%'" &
                     " AND springDataBase.L0 LIKE '%" & TBL0.Text & "%'" &
                     " AND springDataBase.Nt LIKE '%" & TBNt.Text & "%'" & " AND springDataBase.productID LIKE '%" & TBProductID.Text & "%'" & " ;"
-
         Try
             Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
             spring_bs.DataSource = dt
@@ -470,43 +508,34 @@ Public Class FrmNewEmkansanji
         DataGridView1.DataSource = LoadDataTable(sql_command)
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        '' PostgreSQL migration
-        Dim dt = New DataTable
-        Using con = GetPostgresCon()
-            Dim cmd = con.CreateCommand()
-            Dim query As String = "SELECT * FROM cities;"
-            con.Open()
-            cmd.CommandText = query
-            'cmd.ExecuteNonQuery()
-            dt.Load(cmd.ExecuteReader())
-            con.Close()
-        End Using
+    Private Async Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim sql_command = "
+                    SELECT wireInventory.wireCode AS [wireCode],
+                    SUM(IIF(emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r1_code,emkansanji.r1_q,0)) + SUM(IIF(emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r2_code,emkansanji.r2_q,0)) + SUM(IIF(emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r3_code,emkansanji.r3_q,0)) AS [رزرو امکان سنجی] ,
+                    SUM(IIF(emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r1_code,emkansanji.r1_q,0)) + SUM(IIF(emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r2_code,emkansanji.r2_q,0))  + SUM(IIF(emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r3_code,emkansanji.r3_q,0)) AS [رزرو تولید]
+                    FROM wireInventory  
+                    LEFT JOIN emkansanji ON (wireInventory.wireCode = emkansanji.r1_code OR wireInventory.wireCode = emkansanji.r2_code OR wireInventory.wireCode = emkansanji.r3_code)
+                    GROUP BY wireInventory.wireCode 
+                    ;"
+
+        If db = "postgres" Then
+
+            sql_command = "
+                    SELECT wireInventory.wireCode AS ""wireCode"",
+                    SUM(CASE WHEN (emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r1_code) THEN CAST(emkansanji.r1_q AS real) ELSE 0 END) + SUM(CASE WHEN (emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r2_code) THEN CAST (emkansanji.r2_q AS real) ELSE 0 END) + SUM(CASE WHEN (emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r3_code) THEN CAST (emkansanji.r3_q AS real) ELSE 0 END) AS ""رزرو امکان سنجی"" ,
+                    SUM(CASE WHEN (emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r1_code) THEN CAST(emkansanji.r1_q AS real) ELSE 0 END) + SUM(CASE WHEN (emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r2_code) THEN CAST(emkansanji.r2_q AS real) ELSE 0 END) + SUM(CASE WHEN (emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r3_code) THEN CAST (emkansanji.r3_q AS real) ELSE 0 END) AS ""رزرو تولید""
+                    FROM wireInventory  
+                    LEFT JOIN emkansanji ON (wireInventory.wireCode = emkansanji.r1_code OR wireInventory.wireCode = emkansanji.r2_code OR wireInventory.wireCode = emkansanji.r3_code)
+                    GROUP BY wireInventory.wireCode ORDER BY wireInventory.wirecode
+                    ;"
+            '' change [] to "" 
+            'sql_command = MigrateAccessToPostgres(sql_command)
+        End If
+
+        Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
         DataGridView1.DataSource = dt
 
-
-        'Using cn As New NpgsqlConnection(postgresConString)
-        '    Using cmd As New NpgsqlCommand With {.Connection = cn}
-        '        cmd.CommandText = "SELECT * FROM cities;" ''Because of the case sensitivity thing the database name should be in double qoutes
-        '        Dim dt As New DataTable With {.TableName = "springDataBase"}
-        '        'Try
-        '        cn.Close()
-        '        cn.Close()
-
-        '        cn.Open()
-        '        Dim ds As New DataSet
-        '        Dim springDBTable As New DataTable With {.TableName = "springDataBase"}
-        '        ds.Tables.Add(springDBTable)
-        '        ds.Load(cmd.ExecuteReader(), LoadOption.OverwriteChanges, springDBTable)
-        '        DataGridView1.DataSource = ds.Tables("springDataBase")
-        '        'DataGridView1.Columns("EmployeeID").Visible = False
-        '        'Catch ex As Exception
-        '        ' very common for a developer to simply ignore errors, unwise.
-        '        ' MsgBox("error")
-        '        ' End Try
-        '        cn.Close()
-        '    End Using
-        'End Using
+        Await UpdateReservesTable()
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
@@ -776,5 +805,42 @@ Public Class FrmNewEmkansanji
         Console.WriteLine(DaysSinceLastLogin)
 
     End Sub
+
+    Private Sub HandleUserPermissions()
+        If loggedInUserGroup <> "Admin" Then
+            Button4.Visible = False 'SEND SMS 
+        End If
+        If loggedInUserGroup <> "Admin" And loggedInUserGroup <> "QC" Then
+            BTNewProduct.Enabled = False
+            BTSubmit.Enabled = False
+            BTModify.Text = "مشاهده جزئیات"
+        End If
+        If loggedInUserGroup = "Anbar" Then
+            TBProductName.Enabled = False
+            TBProductID.Enabled = False
+            TBWireDiameter.Enabled = False
+            TBOD.Enabled = False
+            TBL0.Enabled = False
+            TBNt.Enabled = False
+            BTClear.Enabled = False
+            BTNewProduct.Enabled = False
+            BTSearch.Enabled = False
+            BTModify.Enabled = True '' We need him to be able to modify
+            BTModify.Text = "ویرایش کد"
+            'For Each cl As DataGridViewColumn In DataGridView1.Columns()
+            '    cl.Visible = False
+            'Next
+            'DataGridView1.Columns("نام محصول").Visible = True
+            'DataGridView1.Columns("کد کالا").Visible = True
+            'DataGridView1.Columns("نوع فنر").Visible = True
+            'DataGridView1.Columns("روش تولید").Visible = True
+            'DataGridView1.Columns("قطر مفتول").Visible = True
+            'DataGridView1.Columns("قطر خارجی").Visible = True
+            'DataGridView1.Columns("طول آزاد").Visible = True
+            'DataGridView1.Columns("حلقه کل").Visible = True
+            'DataGridView1.Columns("جهت پیچش").Visible = True
+        End If
+    End Sub
+
 
 End Class

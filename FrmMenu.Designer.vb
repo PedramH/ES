@@ -25,24 +25,28 @@ Partial Class FrmMenu
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMenu))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.Menu_userProfile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.M_user_info = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_user_setting = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_user_logout = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_emkansanji = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_emkansanji_orders = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_emkansanji_new = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_production = New System.Windows.Forms.ToolStripMenuItem()
-        Me.M_production_plan = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_production_orders = New System.Windows.Forms.ToolStripMenuItem()
-        Me.M_production_data = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_prodcution_wireInventory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.M_production_data = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_production_shippment = New System.Windows.Forms.ToolStripMenuItem()
+        Me.M_production_plan = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_customers = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_customers_list = New System.Windows.Forms.ToolStripMenuItem()
+        Me.M_customer_new = New System.Windows.Forms.ToolStripMenuItem()
         Me.Menu_products = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_products_list = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_products_new = New System.Windows.Forms.ToolStripMenuItem()
-        Me.M_customer_new = New System.Windows.Forms.ToolStripMenuItem()
-        Me.M_user_info = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Menu_warehouse = New System.Windows.Forms.ToolStripMenuItem()
+        Me.M_warehouse_mandrels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.M_warehouse_wires = New System.Windows.Forms.ToolStripMenuItem()
+        Me.M_warehouse_productCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -51,7 +55,7 @@ Partial Class FrmMenu
         '
         Me.MenuStrip1.BackColor = System.Drawing.SystemColors.Control
         Me.MenuStrip1.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Menu_userProfile, Me.Menu_emkansanji, Me.Menu_production, Me.Menu_customers, Me.Menu_products})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Menu_userProfile, Me.Menu_emkansanji, Me.Menu_production, Me.Menu_customers, Me.Menu_products, Me.Menu_warehouse})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(8, 3, 0, 3)
@@ -68,16 +72,23 @@ Partial Class FrmMenu
         Me.Menu_userProfile.Size = New System.Drawing.Size(95, 25)
         Me.Menu_userProfile.Text = "اطلاعات کاربری"
         '
+        'M_user_info
+        '
+        Me.M_user_info.Enabled = False
+        Me.M_user_info.Name = "M_user_info"
+        Me.M_user_info.Size = New System.Drawing.Size(144, 26)
+        Me.M_user_info.Text = "اطلاعات کاربر"
+        '
         'M_user_setting
         '
         Me.M_user_setting.Name = "M_user_setting"
-        Me.M_user_setting.Size = New System.Drawing.Size(180, 26)
+        Me.M_user_setting.Size = New System.Drawing.Size(144, 26)
         Me.M_user_setting.Text = "تنظیمات"
         '
         'M_user_logout
         '
         Me.M_user_logout.Name = "M_user_logout"
-        Me.M_user_logout.Size = New System.Drawing.Size(180, 26)
+        Me.M_user_logout.Size = New System.Drawing.Size(144, 26)
         Me.M_user_logout.Text = "خروج"
         '
         'Menu_emkansanji
@@ -101,16 +112,10 @@ Partial Class FrmMenu
         '
         'Menu_production
         '
-        Me.Menu_production.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.M_production_plan, Me.M_production_orders, Me.M_production_data, Me.M_prodcution_wireInventory, Me.M_production_shippment})
+        Me.Menu_production.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.M_production_orders, Me.M_prodcution_wireInventory, Me.M_production_data, Me.M_production_shippment, Me.M_production_plan})
         Me.Menu_production.Name = "Menu_production"
         Me.Menu_production.Size = New System.Drawing.Size(45, 25)
         Me.Menu_production.Text = "تولید"
-        '
-        'M_production_plan
-        '
-        Me.M_production_plan.Name = "M_production_plan"
-        Me.M_production_plan.Size = New System.Drawing.Size(180, 26)
-        Me.M_production_plan.Text = "برنامه تولید"
         '
         'M_production_orders
         '
@@ -118,23 +123,29 @@ Partial Class FrmMenu
         Me.M_production_orders.Size = New System.Drawing.Size(180, 26)
         Me.M_production_orders.Text = "لیست سفارشات"
         '
-        'M_production_data
-        '
-        Me.M_production_data.Name = "M_production_data"
-        Me.M_production_data.Size = New System.Drawing.Size(180, 26)
-        Me.M_production_data.Text = "آمار و موجودی تولید"
-        '
         'M_prodcution_wireInventory
         '
         Me.M_prodcution_wireInventory.Name = "M_prodcution_wireInventory"
         Me.M_prodcution_wireInventory.Size = New System.Drawing.Size(180, 26)
         Me.M_prodcution_wireInventory.Text = "موجودی مواد اولیه"
         '
+        'M_production_data
+        '
+        Me.M_production_data.Name = "M_production_data"
+        Me.M_production_data.Size = New System.Drawing.Size(180, 26)
+        Me.M_production_data.Text = "آمار و موجودی تولید"
+        '
         'M_production_shippment
         '
         Me.M_production_shippment.Name = "M_production_shippment"
         Me.M_production_shippment.Size = New System.Drawing.Size(180, 26)
         Me.M_production_shippment.Text = "ارسال محصول"
+        '
+        'M_production_plan
+        '
+        Me.M_production_plan.Name = "M_production_plan"
+        Me.M_production_plan.Size = New System.Drawing.Size(180, 26)
+        Me.M_production_plan.Text = "برنامه تولید"
         '
         'Menu_customers
         '
@@ -149,37 +160,55 @@ Partial Class FrmMenu
         Me.M_customers_list.Size = New System.Drawing.Size(180, 26)
         Me.M_customers_list.Text = "اطلاعت مشتریان"
         '
+        'M_customer_new
+        '
+        Me.M_customer_new.Name = "M_customer_new"
+        Me.M_customer_new.Size = New System.Drawing.Size(180, 26)
+        Me.M_customer_new.Text = "ثبت مشتری جدید"
+        '
         'Menu_products
         '
         Me.Menu_products.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.M_products_list, Me.M_products_new})
         Me.Menu_products.Name = "Menu_products"
-        Me.Menu_products.Size = New System.Drawing.Size(67, 25)
-        Me.Menu_products.Text = "محصولات"
+        Me.Menu_products.Size = New System.Drawing.Size(109, 25)
+        Me.Menu_products.Text = "مدیریت محصولات"
         '
         'M_products_list
         '
         Me.M_products_list.Name = "M_products_list"
         Me.M_products_list.Size = New System.Drawing.Size(180, 26)
-        Me.M_products_list.Text = "مدیریت محصولات"
+        Me.M_products_list.Text = "اطلاعات محصولات"
         '
         'M_products_new
         '
         Me.M_products_new.Name = "M_products_new"
         Me.M_products_new.Size = New System.Drawing.Size(180, 26)
-        Me.M_products_new.Text = "محصول جدید"
+        Me.M_products_new.Text = "ثبت محصول جدید"
         '
-        'M_customer_new
+        'Menu_warehouse
         '
-        Me.M_customer_new.Name = "M_customer_new"
-        Me.M_customer_new.Size = New System.Drawing.Size(180, 26)
-        Me.M_customer_new.Text = "مشتری جدید"
+        Me.Menu_warehouse.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.M_warehouse_mandrels, Me.M_warehouse_wires, Me.M_warehouse_productCode})
+        Me.Menu_warehouse.Name = "Menu_warehouse"
+        Me.Menu_warehouse.Size = New System.Drawing.Size(40, 25)
+        Me.Menu_warehouse.Text = "انبار"
         '
-        'M_user_info
+        'M_warehouse_mandrels
         '
-        Me.M_user_info.Enabled = False
-        Me.M_user_info.Name = "M_user_info"
-        Me.M_user_info.Size = New System.Drawing.Size(180, 26)
-        Me.M_user_info.Text = "اطلاعات کاربر"
+        Me.M_warehouse_mandrels.Name = "M_warehouse_mandrels"
+        Me.M_warehouse_mandrels.Size = New System.Drawing.Size(234, 26)
+        Me.M_warehouse_mandrels.Text = "لیست مندرل ها"
+        '
+        'M_warehouse_wires
+        '
+        Me.M_warehouse_wires.Name = "M_warehouse_wires"
+        Me.M_warehouse_wires.Size = New System.Drawing.Size(234, 26)
+        Me.M_warehouse_wires.Text = "موجودی مواد اولیه"
+        '
+        'M_warehouse_productCode
+        '
+        Me.M_warehouse_productCode.Name = "M_warehouse_productCode"
+        Me.M_warehouse_productCode.Size = New System.Drawing.Size(234, 26)
+        Me.M_warehouse_productCode.Text = "صدور کد کالا برای محصول جدید"
         '
         'Panel1
         '
@@ -232,4 +261,8 @@ Partial Class FrmMenu
     Friend WithEvents M_products_new As ToolStripMenuItem
     Friend WithEvents M_user_info As ToolStripMenuItem
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents Menu_warehouse As ToolStripMenuItem
+    Friend WithEvents M_warehouse_wires As ToolStripMenuItem
+    Friend WithEvents M_warehouse_productCode As ToolStripMenuItem
+    Friend WithEvents M_warehouse_mandrels As ToolStripMenuItem
 End Class

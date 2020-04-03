@@ -64,6 +64,7 @@ Partial Class FrmNewEmkansanji
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.RBMainOrder = New System.Windows.Forms.RadioButton()
         Me.RBAmendOrder = New System.Windows.Forms.RadioButton()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -125,7 +126,6 @@ Partial Class FrmNewEmkansanji
         Me.TBCustomerDwgNo = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Button8 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -206,6 +206,7 @@ Partial Class FrmNewEmkansanji
         Me.Button7.TabIndex = 17
         Me.Button7.Text = "فرم اصلی"
         Me.Button7.UseVisualStyleBackColor = True
+        Me.Button7.Visible = False
         '
         'Button6
         '
@@ -228,6 +229,7 @@ Partial Class FrmNewEmkansanji
         Me.Button5.TabIndex = 15
         Me.Button5.Text = "جستجو"
         Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.Visible = False
         '
         'Button4
         '
@@ -243,7 +245,7 @@ Partial Class FrmNewEmkansanji
         'BTClear
         '
         Me.BTClear.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTClear.Location = New System.Drawing.Point(356, 66)
+        Me.BTClear.Location = New System.Drawing.Point(325, 66)
         Me.BTClear.Margin = New System.Windows.Forms.Padding(1)
         Me.BTClear.Name = "BTClear"
         Me.BTClear.Size = New System.Drawing.Size(89, 33)
@@ -254,7 +256,7 @@ Partial Class FrmNewEmkansanji
         'BTNewProduct
         '
         Me.BTNewProduct.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTNewProduct.Location = New System.Drawing.Point(447, 66)
+        Me.BTNewProduct.Location = New System.Drawing.Point(416, 66)
         Me.BTNewProduct.Margin = New System.Windows.Forms.Padding(1)
         Me.BTNewProduct.Name = "BTNewProduct"
         Me.BTNewProduct.Size = New System.Drawing.Size(105, 33)
@@ -265,10 +267,10 @@ Partial Class FrmNewEmkansanji
         'BTModify
         '
         Me.BTModify.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTModify.Location = New System.Drawing.Point(554, 66)
+        Me.BTModify.Location = New System.Drawing.Point(523, 66)
         Me.BTModify.Margin = New System.Windows.Forms.Padding(1)
         Me.BTModify.Name = "BTModify"
-        Me.BTModify.Size = New System.Drawing.Size(64, 33)
+        Me.BTModify.Size = New System.Drawing.Size(95, 33)
         Me.BTModify.TabIndex = 8
         Me.BTModify.Text = "ویرایش"
         Me.BTModify.UseVisualStyleBackColor = True
@@ -638,6 +640,15 @@ Partial Class FrmNewEmkansanji
         Me.GroupBox2.Size = New System.Drawing.Size(1053, 491)
         Me.GroupBox2.TabIndex = 22
         Me.GroupBox2.TabStop = False
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(317, 452)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(81, 29)
+        Me.Button8.TabIndex = 91
+        Me.Button8.Text = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
         '
         'RBMainOrder
         '
@@ -1293,15 +1304,6 @@ Partial Class FrmNewEmkansanji
         Me.Label7.TabIndex = 19
         Me.Label7.Text = "نام محصول مشتری"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Button8
-        '
-        Me.Button8.Location = New System.Drawing.Point(317, 452)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(81, 29)
-        Me.Button8.TabIndex = 91
-        Me.Button8.Text = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
         '
         'FrmNewEmkansanji
         '

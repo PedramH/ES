@@ -352,4 +352,10 @@ Public Class customerForm
         On Error Resume Next
         FrmNewEmkansanji.BTCustomerSearch.PerformClick()
     End Sub
+
+    Private Sub HandleUserPermissions()
+        If loggedInUserGroup <> "Admin" Then
+            BTDeleteCustomer.Enabled = False
+        End If
+    End Sub
 End Class

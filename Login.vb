@@ -154,6 +154,18 @@ Public Class LoginForm
     End Sub
 
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        '' PostgreSQL uses " for alias but access use [] so we change it here
+        If db = "postgres" Then
+            springDataBaseColumnNames = MigrateAccessToPostgres(springDataBaseColumnNames)
+            customerDataBaseColumnNames = MigrateAccessToPostgres(customerDataBaseColumnNames)
+            ESColumnNames = MigrateAccessToPostgres(ESColumnNames)
+            mandrelsColumnName = MigrateAccessToPostgres(mandrelsColumnName)
+            wiresColumnName = MigrateAccessToPostgres(wiresColumnName)
+        End If
+
+
+
         If debugMode = True Then
             loggedInUser = "Pedram"
             loggedInUserName = "پدرام یوسفی"
@@ -173,9 +185,7 @@ Public Class LoginForm
         End If
     End Sub
 
-    Private Sub TBuserName_TextChanged(sender As Object, e As EventArgs) Handles TBuserName.TextChanged
 
-    End Sub
 
 
 End Class

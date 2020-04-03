@@ -54,6 +54,8 @@ Partial Class emkanSanjiForm
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.CHChangedExcel2 = New System.Windows.Forms.CheckBox()
+        Me.BTModifyES2 = New System.Windows.Forms.Button()
         Me.RBMainOrder = New System.Windows.Forms.RadioButton()
         Me.RBAmendOrder = New System.Windows.Forms.RadioButton()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -69,7 +71,6 @@ Partial Class emkanSanjiForm
         Me.RBOldProduct = New System.Windows.Forms.RadioButton()
         Me.RBChangeProduct = New System.Windows.Forms.RadioButton()
         Me.RBNewProduct = New System.Windows.Forms.RadioButton()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.TBSampleQuantity = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.TBProductIDES = New System.Windows.Forms.TextBox()
@@ -93,12 +94,10 @@ Partial Class emkanSanjiForm
         Me.TBMVerificationNo = New System.Windows.Forms.TextBox()
         Me.Label32 = New System.Windows.Forms.Label()
         Me.TBMVerificationDate = New System.Windows.Forms.TextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TBMOrderNo = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.createFile = New System.Windows.Forms.Button()
         Me.TBComment = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TBMCustomerProductCode = New System.Windows.Forms.TextBox()
@@ -198,7 +197,6 @@ Partial Class emkanSanjiForm
         Me.CheckChangeExcel = New System.Windows.Forms.CheckBox()
         Me.BTModifyES = New System.Windows.Forms.Button()
         Me.BTDeleteES = New System.Windows.Forms.Button()
-        Me.BTModifyES2 = New System.Windows.Forms.Button()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
         Me.TBReasonOfNotProducing = New System.Windows.Forms.TextBox()
         Me.LReasonOfNotProducing = New System.Windows.Forms.Label()
@@ -246,6 +244,7 @@ Partial Class emkanSanjiForm
         Me.Label37 = New System.Windows.Forms.Label()
         Me.LOutsideDiameter = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
+        Me.BTShowAll = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -288,6 +287,7 @@ Partial Class emkanSanjiForm
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.Controls.Add(Me.BTShowAll)
         Me.TabPage1.Controls.Add(Me.Button1)
         Me.TabPage1.Controls.Add(Me.BTEmkansanjiSearch)
         Me.TabPage1.Controls.Add(Me.BTModify)
@@ -330,11 +330,12 @@ Partial Class emkanSanjiForm
         Me.Button1.TabIndex = 71
         Me.Button1.Text = "تست"
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'BTEmkansanjiSearch
         '
         Me.BTEmkansanjiSearch.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTEmkansanjiSearch.Location = New System.Drawing.Point(80, 387)
+        Me.BTEmkansanjiSearch.Location = New System.Drawing.Point(80, 321)
         Me.BTEmkansanjiSearch.Margin = New System.Windows.Forms.Padding(1)
         Me.BTEmkansanjiSearch.Name = "BTEmkansanjiSearch"
         Me.BTEmkansanjiSearch.Size = New System.Drawing.Size(84, 33)
@@ -345,7 +346,7 @@ Partial Class emkanSanjiForm
         'BTModify
         '
         Me.BTModify.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTModify.Location = New System.Drawing.Point(80, 346)
+        Me.BTModify.Location = New System.Drawing.Point(80, 356)
         Me.BTModify.Margin = New System.Windows.Forms.Padding(1)
         Me.BTModify.Name = "BTModify"
         Me.BTModify.Size = New System.Drawing.Size(84, 33)
@@ -617,12 +618,13 @@ Partial Class emkanSanjiForm
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.CHChangedExcel2)
+        Me.GroupBox2.Controls.Add(Me.BTModifyES2)
         Me.GroupBox2.Controls.Add(Me.RBMainOrder)
         Me.GroupBox2.Controls.Add(Me.RBAmendOrder)
         Me.GroupBox2.Controls.Add(Me.Label11)
         Me.GroupBox2.Controls.Add(Me.GroupBox11)
         Me.GroupBox2.Controls.Add(Me.GroupBox12)
-        Me.GroupBox2.Controls.Add(Me.Button3)
         Me.GroupBox2.Controls.Add(Me.TBSampleQuantity)
         Me.GroupBox2.Controls.Add(Me.Label26)
         Me.GroupBox2.Controls.Add(Me.TBProductIDES)
@@ -636,12 +638,10 @@ Partial Class emkanSanjiForm
         Me.GroupBox2.Controls.Add(Me.TBMVerificationNo)
         Me.GroupBox2.Controls.Add(Me.Label32)
         Me.GroupBox2.Controls.Add(Me.TBMVerificationDate)
-        Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.TBMOrderNo)
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.Label18)
-        Me.GroupBox2.Controls.Add(Me.createFile)
         Me.GroupBox2.Controls.Add(Me.TBComment)
         Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Controls.Add(Me.TBMCustomerProductCode)
@@ -672,6 +672,30 @@ Partial Class emkanSanjiForm
         Me.GroupBox2.Size = New System.Drawing.Size(1063, 480)
         Me.GroupBox2.TabIndex = 23
         Me.GroupBox2.TabStop = False
+        '
+        'CHChangedExcel2
+        '
+        Me.CHChangedExcel2.AutoSize = True
+        Me.CHChangedExcel2.Checked = True
+        Me.CHChangedExcel2.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CHChangedExcel2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.CHChangedExcel2.Location = New System.Drawing.Point(542, 445)
+        Me.CHChangedExcel2.Name = "CHChangedExcel2"
+        Me.CHChangedExcel2.Size = New System.Drawing.Size(237, 30)
+        Me.CHChangedExcel2.TabIndex = 100
+        Me.CHChangedExcel2.Text = "تغییرات در فایل اکسل نیز اعمال شود"
+        Me.CHChangedExcel2.UseVisualStyleBackColor = True
+        '
+        'BTModifyES2
+        '
+        Me.BTModifyES2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTModifyES2.Location = New System.Drawing.Point(790, 442)
+        Me.BTModifyES2.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTModifyES2.Name = "BTModifyES2"
+        Me.BTModifyES2.Size = New System.Drawing.Size(116, 33)
+        Me.BTModifyES2.TabIndex = 16
+        Me.BTModifyES2.Text = "ذخیره تغییرات"
+        Me.BTModifyES2.UseVisualStyleBackColor = True
         '
         'RBMainOrder
         '
@@ -842,24 +866,13 @@ Partial Class emkanSanjiForm
         Me.RBNewProduct.Text = "ایجاد محصول /فرآیند جدید"
         Me.RBNewProduct.UseVisualStyleBackColor = True
         '
-        'Button3
-        '
-        Me.Button3.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button3.Location = New System.Drawing.Point(412, 443)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(1)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(116, 33)
-        Me.Button3.TabIndex = 93
-        Me.Button3.Text = "حذف"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'TBSampleQuantity
         '
         Me.TBSampleQuantity.Location = New System.Drawing.Point(672, 185)
         Me.TBSampleQuantity.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBSampleQuantity.Name = "TBSampleQuantity"
         Me.TBSampleQuantity.Size = New System.Drawing.Size(63, 29)
-        Me.TBSampleQuantity.TabIndex = 73
+        Me.TBSampleQuantity.TabIndex = 3
         Me.TBSampleQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label26
@@ -882,6 +895,7 @@ Partial Class emkanSanjiForm
         Me.TBProductIDES.Size = New System.Drawing.Size(50, 29)
         Me.TBProductIDES.TabIndex = 45
         Me.TBProductIDES.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBProductIDES.Visible = False
         '
         'TBMEnergySazProductName
         '
@@ -1050,7 +1064,7 @@ Partial Class emkanSanjiForm
         Me.CBMOrderState.Location = New System.Drawing.Point(16, 411)
         Me.CBMOrderState.Name = "CBMOrderState"
         Me.CBMOrderState.Size = New System.Drawing.Size(154, 29)
-        Me.CBMOrderState.TabIndex = 20
+        Me.CBMOrderState.TabIndex = 15
         '
         'Label34
         '
@@ -1080,7 +1094,7 @@ Partial Class emkanSanjiForm
         Me.TBMVerificationNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMVerificationNo.Name = "TBMVerificationNo"
         Me.TBMVerificationNo.Size = New System.Drawing.Size(154, 29)
-        Me.TBMVerificationNo.TabIndex = 19
+        Me.TBMVerificationNo.TabIndex = 14
         Me.TBMVerificationNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label32
@@ -1100,17 +1114,8 @@ Partial Class emkanSanjiForm
         Me.TBMVerificationDate.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMVerificationDate.Name = "TBMVerificationDate"
         Me.TBMVerificationDate.Size = New System.Drawing.Size(154, 29)
-        Me.TBMVerificationDate.TabIndex = 18
+        Me.TBMVerificationDate.TabIndex = 13
         Me.TBMVerificationDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(195, 447)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(109, 25)
-        Me.Button2.TabIndex = 50
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'Label5
         '
@@ -1129,7 +1134,7 @@ Partial Class emkanSanjiForm
         Me.TBMOrderNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMOrderNo.Name = "TBMOrderNo"
         Me.TBMOrderNo.Size = New System.Drawing.Size(231, 29)
-        Me.TBMOrderNo.TabIndex = 10
+        Me.TBMOrderNo.TabIndex = 4
         Me.TBMOrderNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label6
@@ -1154,16 +1159,6 @@ Partial Class emkanSanjiForm
         Me.Label18.Text = "توضیحات "
         Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'createFile
-        '
-        Me.createFile.Location = New System.Drawing.Point(319, 443)
-        Me.createFile.Name = "createFile"
-        Me.createFile.Size = New System.Drawing.Size(89, 26)
-        Me.createFile.TabIndex = 3
-        Me.createFile.Text = "ساخت فایل"
-        Me.createFile.UseVisualStyleBackColor = True
-        Me.createFile.Visible = False
-        '
         'TBComment
         '
         Me.TBComment.Location = New System.Drawing.Point(16, 292)
@@ -1171,7 +1166,7 @@ Partial Class emkanSanjiForm
         Me.TBComment.Multiline = True
         Me.TBComment.Name = "TBComment"
         Me.TBComment.Size = New System.Drawing.Size(890, 115)
-        Me.TBComment.TabIndex = 11
+        Me.TBComment.TabIndex = 12
         Me.TBComment.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label9
@@ -1191,7 +1186,7 @@ Partial Class emkanSanjiForm
         Me.TBMCustomerProductCode.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMCustomerProductCode.Name = "TBMCustomerProductCode"
         Me.TBMCustomerProductCode.Size = New System.Drawing.Size(182, 29)
-        Me.TBMCustomerProductCode.TabIndex = 3
+        Me.TBMCustomerProductCode.TabIndex = 11
         Me.TBMCustomerProductCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label16
@@ -1211,7 +1206,7 @@ Partial Class emkanSanjiForm
         Me.TBGrade.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBGrade.Name = "TBGrade"
         Me.TBGrade.Size = New System.Drawing.Size(60, 29)
-        Me.TBGrade.TabIndex = 8
+        Me.TBGrade.TabIndex = 9
         Me.TBGrade.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'CBStandard
@@ -1221,7 +1216,7 @@ Partial Class emkanSanjiForm
         Me.CBStandard.Location = New System.Drawing.Point(777, 256)
         Me.CBStandard.Name = "CBStandard"
         Me.CBStandard.Size = New System.Drawing.Size(129, 29)
-        Me.CBStandard.TabIndex = 7
+        Me.CBStandard.TabIndex = 8
         '
         'Label15
         '
@@ -1251,7 +1246,7 @@ Partial Class emkanSanjiForm
         Me.TBMProccessingDate.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMProccessingDate.Name = "TBMProccessingDate"
         Me.TBMProccessingDate.Size = New System.Drawing.Size(182, 29)
-        Me.TBMProccessingDate.TabIndex = 6
+        Me.TBMProccessingDate.TabIndex = 7
         Me.TBMProccessingDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label13
@@ -1271,7 +1266,7 @@ Partial Class emkanSanjiForm
         Me.TBMLetterDate.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMLetterDate.Name = "TBMLetterDate"
         Me.TBMLetterDate.Size = New System.Drawing.Size(231, 29)
-        Me.TBMLetterDate.TabIndex = 5
+        Me.TBMLetterDate.TabIndex = 6
         Me.TBMLetterDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label10
@@ -1291,7 +1286,7 @@ Partial Class emkanSanjiForm
         Me.TBMLetterNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMLetterNo.Name = "TBMLetterNo"
         Me.TBMLetterNo.Size = New System.Drawing.Size(234, 29)
-        Me.TBMLetterNo.TabIndex = 4
+        Me.TBMLetterNo.TabIndex = 5
         Me.TBMLetterNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TBCustomerID
@@ -1303,6 +1298,7 @@ Partial Class emkanSanjiForm
         Me.TBCustomerID.Size = New System.Drawing.Size(50, 29)
         Me.TBCustomerID.TabIndex = 27
         Me.TBCustomerID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBCustomerID.Visible = False
         '
         'Label21
         '
@@ -1321,7 +1317,7 @@ Partial Class emkanSanjiForm
         Me.TBQuantity.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBQuantity.Name = "TBQuantity"
         Me.TBQuantity.Size = New System.Drawing.Size(84, 29)
-        Me.TBQuantity.TabIndex = 9
+        Me.TBQuantity.TabIndex = 2
         Me.TBQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label23
@@ -1341,7 +1337,7 @@ Partial Class emkanSanjiForm
         Me.TBMCustomerDwgNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMCustomerDwgNo.Name = "TBMCustomerDwgNo"
         Me.TBMCustomerDwgNo.Size = New System.Drawing.Size(231, 29)
-        Me.TBMCustomerDwgNo.TabIndex = 2
+        Me.TBMCustomerDwgNo.TabIndex = 10
         Me.TBMCustomerDwgNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label24
@@ -1425,7 +1421,7 @@ Partial Class emkanSanjiForm
         Me.TBProductionLoss.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBProductionLoss.Name = "TBProductionLoss"
         Me.TBProductionLoss.Size = New System.Drawing.Size(60, 29)
-        Me.TBProductionLoss.TabIndex = 100
+        Me.TBProductionLoss.TabIndex = 27
         Me.TBProductionLoss.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label38
@@ -1445,7 +1441,7 @@ Partial Class emkanSanjiForm
         Me.TBProductReserve.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBProductReserve.Name = "TBProductReserve"
         Me.TBProductReserve.Size = New System.Drawing.Size(60, 29)
-        Me.TBProductReserve.TabIndex = 87
+        Me.TBProductReserve.TabIndex = 26
         Me.TBProductReserve.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label47
@@ -1547,7 +1543,7 @@ Partial Class emkanSanjiForm
         Me.TBBuyMandrelCost.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBBuyMandrelCost.Name = "TBBuyMandrelCost"
         Me.TBBuyMandrelCost.Size = New System.Drawing.Size(74, 29)
-        Me.TBBuyMandrelCost.TabIndex = 107
+        Me.TBBuyMandrelCost.TabIndex = 31
         Me.TBBuyMandrelCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label46
@@ -1567,7 +1563,7 @@ Partial Class emkanSanjiForm
         Me.TBBuyMandrelPrice.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBBuyMandrelPrice.Name = "TBBuyMandrelPrice"
         Me.TBBuyMandrelPrice.Size = New System.Drawing.Size(74, 29)
-        Me.TBBuyMandrelPrice.TabIndex = 105
+        Me.TBBuyMandrelPrice.TabIndex = 30
         Me.TBBuyMandrelPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label53
@@ -1587,7 +1583,7 @@ Partial Class emkanSanjiForm
         Me.TBBuyMandrelL.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBBuyMandrelL.Name = "TBBuyMandrelL"
         Me.TBBuyMandrelL.Size = New System.Drawing.Size(74, 29)
-        Me.TBBuyMandrelL.TabIndex = 102
+        Me.TBBuyMandrelL.TabIndex = 29
         Me.TBBuyMandrelL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label36
@@ -1607,7 +1603,7 @@ Partial Class emkanSanjiForm
         Me.TBBuyMandrelD.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBBuyMandrelD.Name = "TBBuyMandrelD"
         Me.TBBuyMandrelD.Size = New System.Drawing.Size(74, 29)
-        Me.TBBuyMandrelD.TabIndex = 100
+        Me.TBBuyMandrelD.TabIndex = 28
         Me.TBBuyMandrelD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label44
@@ -1775,6 +1771,7 @@ Partial Class emkanSanjiForm
         Me.Lw3Weight.TabIndex = 103
         Me.Lw3Weight.Text = "LW3"
         Me.Lw3Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Lw3Weight.Visible = False
         '
         'Lw2Weight
         '
@@ -1786,6 +1783,7 @@ Partial Class emkanSanjiForm
         Me.Lw2Weight.TabIndex = 102
         Me.Lw2Weight.Text = "LW2"
         Me.Lw2Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Lw2Weight.Visible = False
         '
         'Lw1Weight
         '
@@ -1797,6 +1795,7 @@ Partial Class emkanSanjiForm
         Me.Lw1Weight.TabIndex = 101
         Me.Lw1Weight.Text = "LW1"
         Me.Lw1Weight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Lw1Weight.Visible = False
         '
         'Label29
         '
@@ -1815,7 +1814,7 @@ Partial Class emkanSanjiForm
         Me.TBMRQ3.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMRQ3.Name = "TBMRQ3"
         Me.TBMRQ3.Size = New System.Drawing.Size(74, 29)
-        Me.TBMRQ3.TabIndex = 94
+        Me.TBMRQ3.TabIndex = 22
         Me.TBMRQ3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label30
@@ -1835,7 +1834,7 @@ Partial Class emkanSanjiForm
         Me.TBMRQ2.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMRQ2.Name = "TBMRQ2"
         Me.TBMRQ2.Size = New System.Drawing.Size(74, 29)
-        Me.TBMRQ2.TabIndex = 92
+        Me.TBMRQ2.TabIndex = 20
         Me.TBMRQ2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label31
@@ -1855,7 +1854,7 @@ Partial Class emkanSanjiForm
         Me.TBMRQ1.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMRQ1.Name = "TBMRQ1"
         Me.TBMRQ1.Size = New System.Drawing.Size(74, 29)
-        Me.TBMRQ1.TabIndex = 90
+        Me.TBMRQ1.TabIndex = 18
         Me.TBMRQ1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Lwire3
@@ -1876,7 +1875,7 @@ Partial Class emkanSanjiForm
         Me.TBMR3.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMR3.Name = "TBMR3"
         Me.TBMR3.Size = New System.Drawing.Size(154, 29)
-        Me.TBMR3.TabIndex = 93
+        Me.TBMR3.TabIndex = 21
         Me.TBMR3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Lwire2
@@ -1897,7 +1896,7 @@ Partial Class emkanSanjiForm
         Me.TBMR2.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMR2.Name = "TBMR2"
         Me.TBMR2.Size = New System.Drawing.Size(154, 29)
-        Me.TBMR2.TabIndex = 91
+        Me.TBMR2.TabIndex = 19
         Me.TBMR2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Lwire1
@@ -1918,7 +1917,7 @@ Partial Class emkanSanjiForm
         Me.TBMR1.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMR1.Name = "TBMR1"
         Me.TBMR1.Size = New System.Drawing.Size(154, 29)
-        Me.TBMR1.TabIndex = 89
+        Me.TBMR1.TabIndex = 17
         Me.TBMR1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'GroupBoxPill
@@ -1950,7 +1949,7 @@ Partial Class emkanSanjiForm
         Me.TBPillCost.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBPillCost.Name = "TBPillCost"
         Me.TBPillCost.Size = New System.Drawing.Size(74, 29)
-        Me.TBPillCost.TabIndex = 111
+        Me.TBPillCost.TabIndex = 25
         Me.TBPillCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'LPill1
@@ -1995,7 +1994,7 @@ Partial Class emkanSanjiForm
         Me.TBBuyWireLength.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBBuyWireLength.Name = "TBBuyWireLength"
         Me.TBBuyWireLength.Size = New System.Drawing.Size(74, 29)
-        Me.TBBuyWireLength.TabIndex = 102
+        Me.TBBuyWireLength.TabIndex = 24
         Me.TBBuyWireLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'LBuy2
@@ -2015,7 +2014,7 @@ Partial Class emkanSanjiForm
         Me.TBBuyWireD.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBBuyWireD.Name = "TBBuyWireD"
         Me.TBBuyWireD.Size = New System.Drawing.Size(74, 29)
-        Me.TBBuyWireD.TabIndex = 100
+        Me.TBBuyWireD.TabIndex = 23
         Me.TBBuyWireD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'LBuy1
@@ -2154,6 +2153,7 @@ Partial Class emkanSanjiForm
         Me.LSelectedWireL.TabIndex = 103
         Me.LSelectedWireL.Text = "LW1"
         Me.LSelectedWireL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LSelectedWireL.Visible = False
         '
         'LSelectedWireD
         '
@@ -2165,6 +2165,7 @@ Partial Class emkanSanjiForm
         Me.LSelectedWireD.TabIndex = 102
         Me.LSelectedWireD.Text = "LW1"
         Me.LSelectedWireD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LSelectedWireD.Visible = False
         '
         'LMaftolStatus
         '
@@ -2174,6 +2175,7 @@ Partial Class emkanSanjiForm
         Me.LMaftolStatus.Size = New System.Drawing.Size(17, 21)
         Me.LMaftolStatus.TabIndex = 4
         Me.LMaftolStatus.Text = "0"
+        Me.LMaftolStatus.Visible = False
         '
         'RMaftol4
         '
@@ -2229,7 +2231,6 @@ Partial Class emkanSanjiForm
         Me.TabPage4.Controls.Add(Me.CheckChangeExcel)
         Me.TabPage4.Controls.Add(Me.BTModifyES)
         Me.TabPage4.Controls.Add(Me.BTDeleteES)
-        Me.TabPage4.Controls.Add(Me.BTModifyES2)
         Me.TabPage4.Controls.Add(Me.GroupBox9)
         Me.TabPage4.Controls.Add(Me.GroupBox8)
         Me.TabPage4.Controls.Add(Me.GroupBox5)
@@ -2272,7 +2273,7 @@ Partial Class emkanSanjiForm
         Me.BTModifyES.Margin = New System.Windows.Forms.Padding(1)
         Me.BTModifyES.Name = "BTModifyES"
         Me.BTModifyES.Size = New System.Drawing.Size(116, 33)
-        Me.BTModifyES.TabIndex = 91
+        Me.BTModifyES.TabIndex = 40
         Me.BTModifyES.Text = "ذخیره تغییرات"
         Me.BTModifyES.UseVisualStyleBackColor = True
         '
@@ -2286,17 +2287,6 @@ Partial Class emkanSanjiForm
         Me.BTDeleteES.TabIndex = 92
         Me.BTDeleteES.Text = "حذف"
         Me.BTDeleteES.UseVisualStyleBackColor = True
-        '
-        'BTModifyES2
-        '
-        Me.BTModifyES2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTModifyES2.Location = New System.Drawing.Point(930, 436)
-        Me.BTModifyES2.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTModifyES2.Name = "BTModifyES2"
-        Me.BTModifyES2.Size = New System.Drawing.Size(116, 33)
-        Me.BTModifyES2.TabIndex = 90
-        Me.BTModifyES2.Text = "ذخیره تغییرات"
-        Me.BTModifyES2.UseVisualStyleBackColor = True
         '
         'GroupBox9
         '
@@ -2321,7 +2311,7 @@ Partial Class emkanSanjiForm
         Me.TBReasonOfNotProducing.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBReasonOfNotProducing.Name = "TBReasonOfNotProducing"
         Me.TBReasonOfNotProducing.Size = New System.Drawing.Size(877, 29)
-        Me.TBReasonOfNotProducing.TabIndex = 97
+        Me.TBReasonOfNotProducing.TabIndex = 39
         Me.TBReasonOfNotProducing.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'LReasonOfNotProducing
@@ -2413,7 +2403,7 @@ Partial Class emkanSanjiForm
         Me.TBPNimsakht.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBPNimsakht.Name = "TBPNimsakht"
         Me.TBPNimsakht.Size = New System.Drawing.Size(52, 29)
-        Me.TBPNimsakht.TabIndex = 95
+        Me.TBPNimsakht.TabIndex = 38
         Me.TBPNimsakht.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label63
@@ -2433,7 +2423,7 @@ Partial Class emkanSanjiForm
         Me.TBPRang.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBPRang.Name = "TBPRang"
         Me.TBPRang.Size = New System.Drawing.Size(52, 29)
-        Me.TBPRang.TabIndex = 93
+        Me.TBPRang.TabIndex = 37
         Me.TBPRang.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label64
@@ -2453,7 +2443,7 @@ Partial Class emkanSanjiForm
         Me.TBAvailable.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBAvailable.Name = "TBAvailable"
         Me.TBAvailable.Size = New System.Drawing.Size(52, 29)
-        Me.TBAvailable.TabIndex = 91
+        Me.TBAvailable.TabIndex = 36
         Me.TBAvailable.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label62
@@ -2473,7 +2463,7 @@ Partial Class emkanSanjiForm
         Me.TBEmpty.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBEmpty.Name = "TBEmpty"
         Me.TBEmpty.Size = New System.Drawing.Size(52, 29)
-        Me.TBEmpty.TabIndex = 89
+        Me.TBEmpty.TabIndex = 35
         Me.TBEmpty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label61
@@ -2493,7 +2483,7 @@ Partial Class emkanSanjiForm
         Me.TBDue.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBDue.Name = "TBDue"
         Me.TBDue.Size = New System.Drawing.Size(52, 29)
-        Me.TBDue.TabIndex = 87
+        Me.TBDue.TabIndex = 34
         Me.TBDue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label72
@@ -2603,7 +2593,7 @@ Partial Class emkanSanjiForm
         Me.TBPCost.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBPCost.Name = "TBPCost"
         Me.TBPCost.Size = New System.Drawing.Size(151, 29)
-        Me.TBPCost.TabIndex = 99
+        Me.TBPCost.TabIndex = 95
         Me.TBPCost.Text = "4000000"
         Me.TBPCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -2635,7 +2625,7 @@ Partial Class emkanSanjiForm
         Me.TBPackageW.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBPackageW.Name = "TBPackageW"
         Me.TBPackageW.Size = New System.Drawing.Size(52, 29)
-        Me.TBPackageW.TabIndex = 96
+        Me.TBPackageW.TabIndex = 93
         Me.TBPackageW.Text = "1000"
         Me.TBPackageW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -2709,7 +2699,7 @@ Partial Class emkanSanjiForm
         Me.TBPCostForEach.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBPCostForEach.Name = "TBPCostForEach"
         Me.TBPCostForEach.Size = New System.Drawing.Size(151, 29)
-        Me.TBPCostForEach.TabIndex = 89
+        Me.TBPCostForEach.TabIndex = 33
         Me.TBPCostForEach.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label51
@@ -2740,7 +2730,7 @@ Partial Class emkanSanjiForm
         Me.TBPackageCount.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBPackageCount.Name = "TBPackageCount"
         Me.TBPackageCount.Size = New System.Drawing.Size(52, 29)
-        Me.TBPackageCount.TabIndex = 86
+        Me.TBPackageCount.TabIndex = 32
         Me.TBPackageCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'LPack
@@ -2845,6 +2835,17 @@ Partial Class emkanSanjiForm
         Me.Label39.Text = "قطر خارجی فنر : "
         Me.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'BTShowAll
+        '
+        Me.BTShowAll.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTShowAll.Location = New System.Drawing.Point(80, 391)
+        Me.BTShowAll.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTShowAll.Name = "BTShowAll"
+        Me.BTShowAll.Size = New System.Drawing.Size(84, 33)
+        Me.BTShowAll.TabIndex = 72
+        Me.BTShowAll.Text = "نمایش همه"
+        Me.BTShowAll.UseVisualStyleBackColor = True
+        '
         'emkanSanjiForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2927,14 +2928,12 @@ Partial Class emkanSanjiForm
     Friend WithEvents Label3 As Label
     Friend WithEvents TBEmkansanjiID As TextBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Button2 As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents TBMOrderNo As TextBox
     Friend WithEvents TBProductIDES As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents TBMEnergySazProductName As TextBox
     Friend WithEvents Label18 As Label
-    Friend WithEvents createFile As Button
     Friend WithEvents TBComment As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents TBMCustomerProductCode As TextBox
@@ -3086,7 +3085,6 @@ Partial Class emkanSanjiForm
     Friend WithEvents LQuantityDetail As Label
     Friend WithEvents Label75 As Label
     Friend WithEvents Label76 As Label
-    Friend WithEvents BTModifyES2 As Button
     Friend WithEvents GroupBox10 As GroupBox
     Friend WithEvents CHSard As CheckBox
     Friend WithEvents CheckChangeExcel As CheckBox
@@ -3103,7 +3101,6 @@ Partial Class emkanSanjiForm
     Friend WithEvents CHGarm As CheckBox
     Friend WithEvents TBSampleQuantity As TextBox
     Friend WithEvents Label26 As Label
-    Friend WithEvents Button3 As Button
     Friend WithEvents GroupBox11 As GroupBox
     Friend WithEvents Label68 As Label
     Friend WithEvents TBOtherInspection As TextBox
@@ -3122,4 +3119,7 @@ Partial Class emkanSanjiForm
     Friend WithEvents LStatus As Label
     Friend WithEvents LSelectedWireL As Label
     Friend WithEvents LSelectedWireD As Label
+    Friend WithEvents CHChangedExcel2 As CheckBox
+    Friend WithEvents BTModifyES2 As Button
+    Friend WithEvents BTShowAll As Button
 End Class

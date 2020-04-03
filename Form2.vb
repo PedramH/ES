@@ -402,6 +402,7 @@ Public Class productForm
                 BTDelete.Enabled = False
                 PopulateForm()
         End Select
+        HandleUserPermissions()
     End Sub
     Private Sub productForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         On Error Resume Next
@@ -596,5 +597,27 @@ Public Class productForm
     Private Sub BTCheckMandrelInventory_Click(sender As Object, e As EventArgs) Handles BTCheckMandrelInventory.Click
         mandrels.Show()
         mandrels.SearchMandrelDataBase(TBMandrelDiameter.Text)
+    End Sub
+    Private Sub HandleUserPermissions()
+        If loggedInUserGroup <> "Admin" And loggedInUserGroup <> "QC" Then
+            BTModify.Enabled = False
+            BTNew.Enabled = False
+            BTDelete.Enabled = False
+        End If
+        If loggedInUserGroup = "Anbar" Then
+            '' disable all textboxes
+            For Each tb As TextBox In GroupBox1.Controls.OfType(Of TextBox)()
+                tb.ReadOnly = True
+            Next
+            For Each cb As ComboBox In GroupBox1.Controls.OfType(Of ComboBox)()
+                cb.Enabled = False
+            Next
+            BTDelete.Enabled = False
+            BTNew.Enabled = False
+            BTCheckMandrelInventory.Enabled = False
+            BTWireInventory.Enabled = False
+            TBProductID.ReadOnly = False '' need to be able to modify product ID 
+            BTModify.Enabled = True
+        End If
     End Sub
 End Class

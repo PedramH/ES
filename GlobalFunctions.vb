@@ -11,31 +11,61 @@ Public Module globalFunctions
     Public Function LoadDataTable(sql As String) As DataTable
         '' This function gets an SQL Query then returns data in a datatable Search Results asynchronously
         Dim dt = New DataTable
-        Using dbcon As New OleDbConnection(connectionString)
-            Using cmd As New OleDbCommand(sql, dbcon)
-                Try
-                    dbcon.Open()
-                    dt.Load(cmd.ExecuteReader())
-                    dbcon.Close()
-                Catch ex As Exception
-                    MsgBox("error")
-                    Console.WriteLine(sql)
-                    Console.WriteLine(ex.Message)
-                End Try
+        If db = "access" Then
+            Using dbcon As New OleDbConnection(connectionString)
+                Using cmd As New OleDbCommand(sql, dbcon)
+                    Try
+                        dbcon.Open()
+                        dt.Load(cmd.ExecuteReader())
+                        dbcon.Close()
+                    Catch ex As Exception
+                        MsgBox(ex.Message, vbCritical, "خطا در ارتباط با دیتابیس")
+                        Console.WriteLine(sql)
+                        Console.WriteLine(ex.Message)
+                    End Try
+                End Using
             End Using
-        End Using
+        ElseIf db = "postgres" Then
+            Using dbcon As New NpgsqlConnection(postgresConString)
+                Using cmd As New NpgsqlCommand(sql, dbcon)
+                    Try
+                        dbcon.Open()
+                        dt.Load(cmd.ExecuteReader())
+                        dbcon.Close()
+                    Catch ex As Exception
+                        MsgBox(ex.Message, vbCritical, "خطا در ارتباط با دیتابیس")
+                        Console.WriteLine(sql)
+                        Console.WriteLine(ex.Message)
+                    End Try
+                End Using
+            End Using
+        End If
+
         Return dt
     End Function
 
-    Public Function GetDatabaseCon() As OleDbConnection
-        Dim con As New OleDbConnection(connectionString)
-        Return con
+    Public Function GetDatabaseCon()
+        If db = "access" Then
+            Dim con As New OleDbConnection(connectionString)
+            Return con
+
+        ElseIf db = "postgres" Then
+            Dim con As New NpgsqlConnection(postgresConString)
+            Return con
+        End If
+        Return vbNull
     End Function
     Public Function GetPostgresCon() As NpgsqlConnection
         Dim con As New NpgsqlConnection(postgresConString)
 
         Return con
     End Function
+
+    Public Function MigrateAccessToPostgres(query As String)
+        query = Regex.Replace(query, "[\[\]]", """")
+        Return query
+    End Function
+
 
 
     Public Function NormalizeName(inputStr As String)
@@ -60,12 +90,28 @@ Public Module globalFunctions
                     LEFT JOIN emkansanji ON (wireInventory.wireCode = emkansanji.r1_code OR wireInventory.wireCode = emkansanji.r2_code OR wireInventory.wireCode = emkansanji.r3_code)
                     GROUP BY wireInventory.wireCode
                     ;"
+
+            If db = "postgres" Then
+
+                sql_command = "
+                    SELECT wireInventory.wireCode AS ""wireCode"",
+                    SUM(CASE WHEN (emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r1_code) THEN CAST(emkansanji.r1_q AS real) ELSE 0 END) + SUM(CASE WHEN (emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r2_code) THEN CAST (emkansanji.r2_q AS real) ELSE 0 END) + SUM(CASE WHEN (emkansanji.orderState LIKE '%امکان سنجی%' AND wireInventory.wireCode = emkansanji.r3_code) THEN CAST (emkansanji.r3_q AS real) ELSE 0 END) AS ""رزرو امکان سنجی"" ,
+                    SUM(CASE WHEN (emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r1_code) THEN CAST(emkansanji.r1_q AS real) ELSE 0 END) + SUM(CASE WHEN (emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r2_code) THEN CAST(emkansanji.r2_q AS real) ELSE 0 END) + SUM(CASE WHEN (emkansanji.orderState LIKE '%تایید%' AND wireInventory.wireCode = emkansanji.r3_code) THEN CAST (emkansanji.r3_q AS real) ELSE 0 END) AS ""رزرو تولید""
+                    FROM wireInventory  
+                    LEFT JOIN emkansanji ON (wireInventory.wireCode = emkansanji.r1_code OR wireInventory.wireCode = emkansanji.r2_code OR wireInventory.wireCode = emkansanji.r3_code)
+                    GROUP BY wireInventory.wireCode ORDER BY wireInventory.wirecode
+                    ;"
+                '' change [] to "" 
+                'sql_command = MigrateAccessToPostgres(sql_command)
+            End If
+
             Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
             '' --------------------------------------  Updating the reserves table in the database with new data  ------------------------------------------
-            Using cn As New OleDbConnection(connectionString)
+            Using cn = GetDatabaseCon()
                 Await cn.OpenAsync()
                 Using tran = cn.BeginTransaction()
-                    Using cmd As New OleDbCommand With {.Connection = cn, .Transaction = tran}
+                    Using cmd = cn.CreateCommand
+                        cmd.Transaction = tran
                         Try
                             '' Delete everything in wire wire reserve table
                             cmd.CommandText = "DELETE FROM wireReserve"
@@ -78,6 +124,8 @@ Public Module globalFunctions
                                                                 VALUES ('{0}', '{1}', '{2}') ; ", row("wireCode").ToString, row("رزرو امکان سنجی").ToString, row("رزرو تولید").ToString)
 
                                 Await cmd.ExecuteNonQueryAsync()
+                                Console.WriteLine(cmd.CommandText)
+                                'Logger.LogInfo(cmd.CommandText)
                             Next row
                         Catch ex As Exception
                             MsgBox("بروزرسانی اطلاعات رزرو مواد با خطا مواجه شد", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا")
@@ -303,6 +351,7 @@ Public Module globalFunctions
         c(c.Count()).text = other
     End Function
 
+
     '' ----------------------------------------- cryptography----------------------------------------
     Public Function GetSaltedHash(pw As String, salt As String) As String
         Dim tmp As String = pw & salt
@@ -350,8 +399,14 @@ End Module
 '       [  ] Create a product and customer search form 
 '       [  ] Add usergroup and different user permissions
 '               [✔] Implement a login system
-'                       [  ] Implement a hashing system to store passwords - Just for the fun of it :) 
+'                       [✔] Implement a hashing system to store passwords - Just for the fun of it :) 
 '               [  ] Enable/Disable Form controls based on usergroup
+'                       [✔] Menu
+'                       [✔] NewEmkanSanji  
+'                       [✔] Emkansanji
+'                       [✔] Wires
+'                       [✔] newProduct
+'                       [✔] newCustomer
 '               [  ] Restrict user's permission to modify different parts of the database 
 '       [✔] Add a logging system
 '       [  ] Error Handling and Logging
@@ -395,7 +450,7 @@ End Module
 '               [✔] Test the new search system in wires form, if it's good enough maybe change everything else to this method? 
 '               [  ] Add formating based on value to grid views
 '               [  ] Properly Sort and format wires data 
-'       [  ] Make a main form from which every form is accessible
+'       [✔] Make a main form from which every form is accessible
 '       [✔] Update reserves table using the function after each change to the emkansanji table
 '       [  ] Update mandrel data from rahkaran excel file. it shouldn't be hard but it will save some headache in the future
 '       [  ] Measure time difference between local and over the network queries  
@@ -406,16 +461,16 @@ End Module
 '       [  ] Add something to compensate wire reservation for orders that only a part of them is produced
 '       [✔] Build purchased file with the data from mojodimaftol.excel
 '       [  ] Use NormalizeName function to prevent sql injection and compensate for difference in farsi and arabic ی  ک characters
-'       [  ] Refactor the code. 
+'       [✔] Refactor the code. 
 '       [  ] Add a timer to see how long actual wire inventory is not updated
 '       [  ] Add a button to automaticaly change the state to send to next person
 '       [✔] Emkansanji form has a bug when it keeps adding the tabs everytime you click modify 
 '       [  ] Setup a way for drawings and other files to circulate with the emkansanji
-'       [  ] Make adding to database and excel file atomic
+'       [✔] Make adding to database and excel file atomic
 '       [  ] in modify emkansanji there are 3 seperate calls to database to get wire weight
 '       [  ] Compare calculation of rate and other thing with excel and this program for outer LSD1 
 '       [  ] Show the data for the required wire in the wires form when its opened from emkansanji
-'       [  ] When migrating to postgres the two functions that populate new_customer and new_product might be a problem(they user actual table column name)
+'       [  ] When migrating to postgres the two functions that populate new_customer and new_product might be a problem(they use actual table column name)
 '       [  ]
 '       [  ] 
 '       [  ] 

@@ -4,12 +4,15 @@ Module GlobalVarsModule
 
     '' ------------------------------------------ Debug Mode: circumvents the login system ------------------------------------------
     Public debugMode As Boolean = False
+    Public db As String = "postgres" 'access or postgres
 
     '' -------------------------------------------------------  Configurations  -----------------------------------------------------
 
 
     Public connectionString As String = ConfigurationManager.ConnectionStrings("ConString").ConnectionString & "Jet OLEDB:Database Password=esdbpassword;"
-    Public postgresConString As String = "Host=198.143.181.131;Port=5432;Username=postgres;Password=picher;Database=mydb"
+    'Public postgresConString As String = "Host=198.143.181.131;Port=5432;Username=postgres;Password=picher;Database=mydb"
+    Public postgresConString As String = "Host=185.97.117.81;Port=5432;Username=postgres;Password=esdbpassword;Database=esdb" 'arvan-cloud
+
 
     Public excelTemplateFilePath As String = ConfigurationManager.ConnectionStrings("excelPath").ConnectionString
     Public excelFilesBasePath As String = ConfigurationManager.ConnectionStrings("excelBasePath").ConnectionString
@@ -73,6 +76,6 @@ Module GlobalVarsModule
     Public wiresFormState As String = "normal"  ' normal - selection 
     '' wireFormCaller is used to determine which of the wire reservastion spots called the wire form. 
     Public wireFormCaller As String = ""
-
-
+    '' ----------------------------------------------------  Order state numbering system  ----------------------------------------------------
+    Public userGroupOrder As New Dictionary(Of String, String)
 End Module
