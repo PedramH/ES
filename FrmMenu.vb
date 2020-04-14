@@ -26,16 +26,16 @@
     End Sub
 
     Private Sub M_emkansanji_orders_Click(sender As Object, e As EventArgs) Handles M_emkansanji_orders.Click
-        Dim f As New emkanSanjiForm
+        'Dim f As New emkanSanjiForm
         Select Case loggedInUserGroup
             Case "Tolid1"
-                f.CBOrderState.Text = "امکان سنجی اولیه تولید"
+                emkanSanjiForm.CBOrderState.Text = "امکان سنجی اولیه تولید"
             Case "Tolid2"
-                f.CBOrderState.Text = "امکان سنجی نهایی تولید"
+                emkanSanjiForm.CBOrderState.Text = "امکان سنجی نهایی تولید"
             Case "QA"
-                f.CBOrderState.Text = "امکان سنجی نهایی کیفی"
+                emkanSanjiForm.CBOrderState.Text = "امکان سنجی نهایی کیفی"
         End Select
-        f.Show()
+        emkanSanjiForm.Show()
     End Sub
 
     Private Sub M_emkansanji_new_Click(sender As Object, e As EventArgs) Handles M_emkansanji_new.Click
@@ -44,9 +44,9 @@
 
     Private Sub M_production_orders_Click(sender As Object, e As EventArgs) Handles M_production_orders.Click
         '' This shows only the orders that are validated to produce
-        Dim f As New emkanSanjiForm
-        f.CBOrderState.Text = "تایید شده"
-        f.Show()
+        ' Dim f As New emkanSanjiForm
+        emkanSanjiForm.CBOrderState.Text = "تایید شده"
+        emkanSanjiForm.Show()
         '' TODO
     End Sub
 
@@ -97,6 +97,9 @@
             Menu_products.Visible = False
 
         End If
+        If loggedInUserGroup = "Admin" Then
+            BTTest.Visible = True
+        End If
 
     End Sub
 
@@ -120,5 +123,29 @@
         Dim f As New FrmNewEmkansanji
         f.formState = "newProductCode"
         f.Show()
+    End Sub
+
+    Private Sub M_user_setting_Click(sender As Object, e As EventArgs) Handles M_user_setting.Click
+        'Dim i As Integer = 0
+        'Dim rndstring = ""
+        'For i = 11 To 55
+        '    Using con = GetDatabaseCon()
+        '        Dim cmd = con.CreateCommand()
+        '        con.open()
+        '        Console.WriteLine(i)
+        '        System.Threading.Thread.Sleep(500)
+        '        rndstring = GenerateRandomString(15)
+        '        cmd.CommandText = String.Format("UPDATE customers SET validationstring = '{0}' WHERE id = {1};", rndstring, i)
+        '        cmd.executenonquery()
+        '        con.close()
+        '    End Using
+        'Next
+        'MsgBox("done")
+        'ProductionStats.Show()
+        UserSettingForm.Show()
+    End Sub
+
+    Private Sub BTTest_Click(sender As Object, e As EventArgs) Handles BTTest.Click
+        ProductionStats.Show()
     End Sub
 End Class

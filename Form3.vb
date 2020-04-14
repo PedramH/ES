@@ -61,6 +61,8 @@ Public Class customerForm
 
             '    End Using
             'End Using
+            Me.Cursor = Cursors.WaitCursor
+
             Using cn = GetDatabaseCon()
                 Using cmd = cn.CreateCommand()
                     cmd.CommandText = "UPDATE customers SET" &
@@ -94,9 +96,13 @@ Public Class customerForm
                         Await cn.OpenAsync()
                         Await cmd.ExecuteNonQueryAsync()
                         cn.Close()
+                        Me.Cursor = Cursors.Default
+
                         MsgBox("ویرایش اطلاعات با موفقیت انجام شد", vbInformation, "ویرایش مشخصات مشتری")
                         Logger.LogInfo("Modified information of Customer Name : " + TBCustomerName.Text + " - Customer ID: " + TBdbID.Text)
                     Catch ex As Exception
+                        Me.Cursor = Cursors.Default
+
                         MsgBox("خطا در ثبت اطلاعات مشتری. پارامتر های ورودی را کنترل کرده و مجددا سعی کنید", vbCritical + vbMsgBoxRight, "خطا در ثبت اطلاعات مشتری")
                         Logger.LogFatal(cmd.CommandText, ex)
                     End Try
@@ -107,6 +113,7 @@ Public Class customerForm
 
 
         End If
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Async Sub BTDeleteCustomer_Click(sender As Object, e As EventArgs) Handles BTDeleteCustomer.Click
@@ -149,6 +156,7 @@ Public Class customerForm
             Dim i As String ' Number of emkansanji with this customer
             'Check to see if an emkansanji with this customer is present
             Try
+                Me.Cursor = Cursors.WaitCursor
                 Using cn = GetDatabaseCon()
                     Using cmd = cn.CreateCommand
                         cmd.CommandText = "SELECT COUNT(*) FROM emkansanji Where customerID = " & TBdbID.Text & " ;"
@@ -167,20 +175,27 @@ Public Class customerForm
                             Await cn.OpenAsync()
                             Await cmd.ExecuteNonQueryAsync()
                             cn.Close()
+                            Me.Cursor = Cursors.Default
                             MsgBox("مشتری از دیتابیس حذف شد", vbInformation, "حذف مشتری")
                             Logger.LogInfo("Deleting customer  Name: " + TBCustomerName.Text + " - ID: " + TBdbID.Text)
                         End Using
                     End Using
                 Else
+                    Me.Cursor = Cursors.Default
+
                     MsgBox("امکان سنجی این مشتری در دیتابیس ثبت شده است، بنابراین امکان حذف آن وجود ندارد", vbCritical + MsgBoxStyle.MsgBoxRight, "حذف مشتری")
                 End If
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
+
                 MsgBox("خطا در حذف اطلاعات مشتری. پارامتر های ورودی را کنترل کرده و مجددا سعی کنید", vbCritical + vbMsgBoxRight, "خطا در حذف اطلاعات مشتری")
                 Logger.LogFatal(ex.Message, ex)
             End Try
 
 
         End If
+        Me.Cursor = Cursors.Default
+
     End Sub
 
     Private Async Sub BTNewCustomer_Click(sender As Object, e As EventArgs) Handles BTNewCustomer.Click
@@ -212,36 +227,45 @@ Public Class customerForm
             '        End Try
             '    End Using
             'End Using
+            Me.Cursor = Cursors.WaitCursor
 
             Using cn = GetDatabaseCon()
                 Using cmd = cn.CreateCommand()
                     Dim columnNames As String = " ( customerName , fieldOfWork , shenaseMelli , codeEghtesadi, postCode, " &
                      " ads1 , ads2 , p1, p1_job , p1_phone , " &
                      " p1_mobile , p1_email , p2 , p2_job , p2_phone , " &
-                    " p2_mobile, p2_email ,p3,p3_job,p3_phone,p3_mobile,p3_email,requirements,  comment ) "
-
+                    " p2_mobile, p2_email ,p3,p3_job,p3_phone,p3_mobile,p3_email,requirements, validationstring ,comment ) "
+                    Dim validationstring = GenerateRandomString(15)
                     Dim valueString As String = "('" & TBCustomerName.Text & "','" & TBFieldOfWork.Text & "','" & TBShenaseMelli.Text & "','" & TBCodeEghtesadi.Text & "','" & TBPostCode.Text & "','" &
                         TBAds1.Text & "','" & TBAds2.Text & "','" & TBP_1_Name.Text & "','" & TBP_1_job.Text & "','" & TBP_1_phone.Text & "','" &
                         TBP_1_mobile.Text & "','" & TBP_1_email.Text & "','" & TBP_2_Name.Text & "','" & TBP_2_job.Text & "','" & TBP_2_phone.Text & "','" &
-                        TBP_2_mobile.Text & "','" & TBP_2_email.Text & "','" & TBP_3_Name.Text & "','" & TBP_3_job.Text & "','" & TBP_3_phone.Text & "','" & TBP_3_mobile.Text & "','" & TBP_3_email.Text & "','" & TBRequierments.Text & "','" & TBComment.Text & "' )"
+                        TBP_2_mobile.Text & "','" & TBP_2_email.Text & "','" & TBP_3_Name.Text & "','" & TBP_3_job.Text & "','" & TBP_3_phone.Text & "','" & TBP_3_mobile.Text & "','" & TBP_3_email.Text & "','" & TBRequierments.Text & "','" & validationstring & "','" & TBComment.Text & "' )"
 
                     cmd.CommandText = "INSERT INTO customers" & columnNames & " VALUES " & valueString & ";"
                     Try
                         Await cn.OpenAsync()
                         Await cmd.ExecuteNonQueryAsync()
+                        Me.Cursor = Cursors.Default
+
                         MsgBox("ثبت اطلاعات مشتری با موفقیت انجام شد", vbInformation, "مشخصات مشتری")
                         cn.Close()
                         Logger.LogInfo("New Customer Added With Name = " + TBCustomerName.Text)
                     Catch ex As Exception
+                        Me.Cursor = Cursors.Default
+
                         MsgBox("خطا در ثبت اطلاعات مشتری. پارامتر های ورودی را کنترل کرده و مجددا سعی کنید", vbCritical + vbMsgBoxRight, "خطا در ثبت اطلاعات مشتری")
                         Logger.LogFatal(cmd.CommandText, ex)
                     End Try
                 End Using
             End Using
         End If
+        Me.Cursor = Cursors.Default
+
     End Sub
 
     Private Sub customerForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Cursor = Cursors.WaitCursor
+
         Select Case customerFormState
             Case "modify"
                 Me.BTNewCustomer.Enabled = False
@@ -258,6 +282,8 @@ Public Class customerForm
                 Me.BTDeleteCustomer.Enabled = False
                 LoadCustomerInfo()
         End Select
+        Me.Cursor = Cursors.Default
+
     End Sub
 
     Private Async Sub LoadCustomerInfo()

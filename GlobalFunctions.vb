@@ -10,6 +10,7 @@ Public Module globalFunctions
 
     Public Function LoadDataTable(sql As String) As DataTable
         '' This function gets an SQL Query then returns data in a datatable Search Results asynchronously
+
         Dim dt = New DataTable
         If db = "access" Then
             Using dbcon As New OleDbConnection(connectionString)
@@ -101,8 +102,6 @@ Public Module globalFunctions
                     LEFT JOIN emkansanji ON (wireInventory.wireCode = emkansanji.r1_code OR wireInventory.wireCode = emkansanji.r2_code OR wireInventory.wireCode = emkansanji.r3_code)
                     GROUP BY wireInventory.wireCode ORDER BY wireInventory.wirecode
                     ;"
-                '' change [] to "" 
-                'sql_command = MigrateAccessToPostgres(sql_command)
             End If
 
             Dim dt = Await Task(Of DataTable).Run(Function() LoadDataTable(sql_command))
@@ -124,7 +123,7 @@ Public Module globalFunctions
                                                                 VALUES ('{0}', '{1}', '{2}') ; ", row("wireCode").ToString, row("رزرو امکان سنجی").ToString, row("رزرو تولید").ToString)
 
                                 Await cmd.ExecuteNonQueryAsync()
-                                Console.WriteLine(cmd.CommandText)
+                                'Console.WriteLine(cmd.CommandText)
                                 'Logger.LogInfo(cmd.CommandText)
                             Next row
                         Catch ex As Exception
@@ -160,6 +159,7 @@ Public Module globalFunctions
         Dim t As New Thread(
             Sub()
                 While (System.IO.File.Exists(filePath) = False)
+                    Console.WriteLine(filePath)
                     MsgBox(String.Format("فایل {0} یافت نشد. لطفا این فایل را انتخاب کنید.", fileDesc), MsgBoxStyle.Critical + MsgBoxStyle.MsgBoxRtlReading + vbMsgBoxRight, "خطا")
                     Dim fd As OpenFileDialog = New OpenFileDialog()
                     fd.Title = "Open File Dialog"
@@ -242,7 +242,7 @@ Public Module globalFunctions
     Public Function CalculateWireWeight(d As Double, L As Double) As Double
         '' Calculates the weight of each wire rod
         Dim rho As Double = 0.00000783
-        Return Math.Round(((d * d * Math.PI) / 4) * L * rho, 2)
+        Return ((d * d * Math.PI) / 4) * L * rho
     End Function
 
 
@@ -380,6 +380,19 @@ Public Module globalFunctions
         End Using
     End Function
 
+    Public Function GenerateRandomString(ByRef iLength As Integer) As String
+        Dim rdm As New Random()
+        Dim allowChrs() As Char = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ0123456789".ToCharArray()
+        Dim sResult As String = ""
+
+        For i As Integer = 0 To iLength - 1
+            sResult += allowChrs(rdm.Next(0, allowChrs.Length))
+        Next
+
+        Return sResult
+    End Function
+
+
 
 
 
@@ -396,11 +409,11 @@ End Module
 '       [✔] Add sard Orders
 '       [✔] Add a config file
 '       [✔] Fix the Functionality of Modify Emkansanji Form 
-'       [  ] Create a product and customer search form 
-'       [  ] Add usergroup and different user permissions
+'       [✔] Create a product and customer search form 
+'       [✔] Add usergroup and different user permissions
 '               [✔] Implement a login system
 '                       [✔] Implement a hashing system to store passwords - Just for the fun of it :) 
-'               [  ] Enable/Disable Form controls based on usergroup
+'               [✔] Enable/Disable Form controls based on usergroup
 '                       [✔] Menu
 '                       [✔] NewEmkanSanji  
 '                       [✔] Emkansanji
@@ -409,18 +422,20 @@ End Module
 '                       [✔] newCustomer
 '               [  ] Restrict user's permission to modify different parts of the database 
 '       [✔] Add a logging system
-'       [  ] Error Handling and Logging
+'       [✔] Error Handling and Logging
 '               [✔] ProductForm
 '               [✔] CustomerForm
 '               [✔] Login and Change password Form
 '               [✔] Main form
 '               [✔] Module1
-'               [  ] emkansanjiForm
-'               [  ] wires
+'               [✔] emkansanjiForm
+'               [✔] wires
+'               [  ] Log unhandled exceptions
+'               [  ] handle different exceptions of data base
 '       [✔] Add functionality of making emkansanji excel file
 '       [✔] State of wire and mandrel should be available in the emkansanji database
 '       [  ] Add product reservation 
-'       [  ] The Excel file should be opened from inside the program
+'       [✔] The Excel file should be opened from inside the program
 '       [✔] Add Production Method to springDataBase
 '       [✔] Mandrel DataBase
 '               [✔] Check if mandrel is present by clicking on a button
@@ -430,7 +445,7 @@ End Module
 '       [✔] Prevent overwriting previous excel files with the same name
 '       [✔] Password Protect The DataBase
 '       [✔] Try a better database server (Preferably PostgreSQL) -> it works fine with minimal change
-'       [  ] Migrate to postgreSQL
+'       [✔] Migrate to postgreSQL
 '       [✔] Make all calls to database async
 '               [✔] new emkansanji (form1)
 '               [✔] emkansanji
@@ -453,7 +468,7 @@ End Module
 '       [✔] Make a main form from which every form is accessible
 '       [✔] Update reserves table using the function after each change to the emkansanji table
 '       [  ] Update mandrel data from rahkaran excel file. it shouldn't be hard but it will save some headache in the future
-'       [  ] Measure time difference between local and over the network queries  
+'       [✔] Measure time difference between local and over the network queries  
 '       [✔] Update data in the wireForm after changing an emkansanji datum originated from that form
 '       [  ] Customer can get all their open orders states from telegram, providing that they know their specific customer ID(long string) 
 '       [  ] Change logging mode from file to db
@@ -468,9 +483,9 @@ End Module
 '       [  ] Setup a way for drawings and other files to circulate with the emkansanji
 '       [✔] Make adding to database and excel file atomic
 '       [  ] in modify emkansanji there are 3 seperate calls to database to get wire weight
-'       [  ] Compare calculation of rate and other thing with excel and this program for outer LSD1 
-'       [  ] Show the data for the required wire in the wires form when its opened from emkansanji
-'       [  ] When migrating to postgres the two functions that populate new_customer and new_product might be a problem(they use actual table column name)
+'       [✔] Compare calculation of rate and other things with excel and this program for outer LSD1 
+'       [✔] Show the data for the required wire in the wires form when its opened from emkansanji
+'       [✔] When migrating to postgres the two functions that populate new_customer and new_product might be a problem(they use actual table column name)
 '       [  ]
 '       [  ] 
 '       [  ] 

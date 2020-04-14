@@ -19,6 +19,7 @@ Public Class productForm
 
         Dim answer As String = MsgBox("در صورت تایید مشخصات محصول به صورتی دائمی تغییر خواهد کرد", MsgBoxStyle.OkCancel + MsgBoxStyle.Critical + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.MsgBoxRight, Title:="ویرایش مشخصات محصول")
         If answer = vbOK Then
+
             'Using cn As New OleDbConnection(connectionString)
             '    Using cmd As New OleDbCommand With {.Connection = cn}
             '        cmd.CommandText = "UPDATE springDataBase SET" &
@@ -66,7 +67,7 @@ Public Class productForm
 
             '    End Using
             'End Using
-
+            Me.Cursor = Cursors.WaitCursor
             Using cn = GetDatabaseCon()
                 Dim cmd = cn.CreateCommand()
                 cmd.CommandText = "UPDATE springDataBase SET" &
@@ -90,6 +91,7 @@ Public Class productForm
                       " solidStress = '" & TBSolidStress.Text & "'," &
                       " solidLoad = '" & TBMaxLoad.Text & "'," &
                       " comment = '" & TBComment.Text & "'," &
+                      " forceUnit = '" & CBForceUnit.Text & "'," &
                      " F1 = '" & TBF1.Text & "'," &
                       " F2 = '" & TBF2.Text & "'," &
                      " F3 = '" & TBF3.Text & "'," &
@@ -102,9 +104,11 @@ Public Class productForm
                     Await cn.OpenAsync()
                     Await cmd.ExecuteNonQueryAsync()
                     cn.Close()
+                    Me.Cursor = Cursors.Default
                     Logger.LogInfo("Modified Product with ID = " + TBdbID.Text)
                     MsgBox("ویرایش اطلاعات با موفقیت انجام شد", vbInformation, "ویرایش مشخصات محصول")
                 Catch ex As Exception
+                    Me.Cursor = Cursors.Default
                     MsgBox("پارامتر های وارد شده را بررسی کنید و در صورت تکرار اطلاع دهید", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا در ویرایش اطلاعات")
                     Logger.LogFatal("Modifying Product Data Base", ex)
                 End Try
@@ -158,14 +162,19 @@ Public Class productForm
             'End If
 
             'Check to see if an emkansanji with this product is present
+            Me.Cursor = Cursors.Default
             Using cn = GetDatabaseCon()
+
                 Using cmd = cn.CreateCommand()
                     cmd.CommandText = "SELECT COUNT(*) FROM emkansanji Where productID = " & TBdbID.Text & " ;"
                     Try
                         Await cn.OpenAsync()
                         i = cmd.ExecuteScalar()
                         cn.Close()
+                        Me.Cursor = Cursors.Default
                     Catch ex As Exception
+                        Me.Cursor = Cursors.Default
+
                         MsgBox("پارامتر های وارد شده را بررسی کنید و در صورت تکرار اطلاع دهید", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا در حذف اطلاعات")
                         Logger.LogFatal(ex.Message, ex)
                     End Try
@@ -173,6 +182,8 @@ Public Class productForm
                 End Using
             End Using
             If i = 0 Then
+                Me.Cursor = Cursors.WaitCursor
+
                 Using cn = GetDatabaseCon()
                     Using cmd = cn.CreateCommand()
                         cmd.CommandText = "DELETE FROM springDataBase Where ID = " & TBdbID.Text & " ;"
@@ -180,13 +191,14 @@ Public Class productForm
                             Await cn.OpenAsync
                             Await cmd.ExecuteNonQueryAsync()
                             cn.Close()
+                            Me.Cursor = Cursors.Default
                             MsgBox("محصول از دیتابیس حذف شد", vbInformation, "حذف محصول")
                             Logger.LogInfo("Deleted Product Name = " + TBProductName.Text)
                         Catch ex As Exception
+                            Me.Cursor = Cursors.Default
                             MsgBox("پارامتر های وارد شده را بررسی کنید و در صورت تکرار اطلاع دهید", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا در حذف اطلاعات")
                             Logger.LogFatal(ex.Message, ex)
                         End Try
-
                     End Using
                 End Using
             Else
@@ -257,18 +269,20 @@ Public Class productForm
             '        End Try
             '    End Using
             'End Using
+            Me.Cursor = Cursors.WaitCursor
+
             Using cn = GetDatabaseCon()
                 Using cmd = cn.CreateCommand()
 
                     Dim columnNames As String = " ( productName , productID , wireDiameter , pType, productionMethod, productionProcess ,dwgNo, " &
                      " OD , L0 , Nt, Nactive , coilingDirection , " &
                      " mandrelDiameter , wireLength , startCoilType , endCoilType , tipThickness , material , " &
-                    " solidStress, solidLoad , springRate ,F1,L1,F2,L2,F3,L3,  comment ) "
+                    " solidStress, solidLoad , springRate, forceUnit ,F1,L1,F2,L2,F3,L3,  comment ) "
 
                     Dim valueString As String = "('" & TBProductName.Text & "','" & TBProductID.Text & "','" & TBWireDiameter.Text & "','" & CBspringType.Text & "','" & CBProductionMethod.Text & "','" & productionProcess & "','" & TBDwgNo.Text & "','" &
                         TBOD.Text & "','" & TBL0.Text & "','" & TBNt.Text & "','" & TBNActive.Text & "','" & CBCoilingDirection.Text & "','" &
                         TBMandrelDiameter.Text & "','" & TBWireLength.Text & "','" & CBScoilType.Text & "','" & CBEcoilType.Text & "','" & TBtipThickness.Text & "','" & CBMaterial.Text & "','" &
-                        TBSolidStress.Text & "','" & TBMaxLoad.Text & "','" & TBSpringRate.Text & "','" & TBF1.Text & "','" & TBL1.Text & "','" & TBF2.Text & "','" & TBL2.Text & "','" & TBF3.Text & "','" & TBL3.Text & "','" & TBComment.Text & "' )"
+                        TBSolidStress.Text & "','" & TBMaxLoad.Text & "','" & TBSpringRate.Text & "','" & CBForceUnit.Text & "','" & TBF1.Text & "','" & TBL1.Text & "','" & TBF2.Text & "','" & TBL2.Text & "','" & TBF3.Text & "','" & TBL3.Text & "','" & TBComment.Text & "' )"
 
                     cmd.CommandText = "SELECT * FROM springDataBase WHERE productID = '" & TBProductID.Text & "';"
 
@@ -276,6 +290,7 @@ Public Class productForm
                     Try
                         Await cn.OpenAsync()
                         If cmd.ExecuteReader().HasRows() And TBProductID.Text <> "" Then
+                            Me.Cursor = Cursors.Default
                             MsgBox("کد کالای وارد شده تکرای است", MsgBoxStyle.Critical, "ثبت محصول جدید")
                             cn.Close()
                         Else
@@ -284,19 +299,22 @@ Public Class productForm
                             Await cn.OpenAsync()
                             Await cmd.ExecuteNonQueryAsync()
                             cn.Close()
+                            Me.Cursor = Cursors.Default
                             MsgBox("ثبت محصول با موفقیت انجام شد", vbInformation, "ویرایش مشخصات محصول")
                             Logger.LogInfo("New product added to the database with Name = " + TBProductName.Text)
                         End If
                         'cn.Close()
                     Catch ex As Exception
+                        Me.Cursor = Cursors.Default
+
                         MsgBox("پارامتر های وارد شده را بررسی کنید ", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا در ثبت اطلاعات")
                         Logger.LogFatal(ex.Message, ex)
                     End Try
                 End Using
             End Using
-
-
         End If
+        Me.Cursor = Cursors.Default
+
     End Sub
 
     Private Sub Label24_Click(sender As Object, e As EventArgs) Handles Label24.Click
@@ -310,12 +328,10 @@ Public Class productForm
             Else
                 G = 79299.5
             End If
-
             springRate = (G * TBWireDiameter.Text ^ 4) / (8 * activeCoil * meanD ^ 3)
             Dim groundThickness As Double = (1 - TBtipThickness.Text / 100) * 2
             solidLength = (TBNt.Text + 1 - groundThickness) * TBWireDiameter.Text   'TODO: Compensate for spring end types
             solidLoad = (TBL0.Text - solidLength) * springRate
-
             TBSolidStress.Text = Math.Round((8 * solidLoad * meanD) / (Math.PI * TBWireDiameter.Text ^ 3), 2)
         Catch ex As Exception
             MsgBox("پارامتر های فنی محصول به درستی وارد نشده است", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا در انجام محاسبه")
@@ -376,7 +392,7 @@ Public Class productForm
 
             closedCoilLength = ((Math.PI * meanD * ((TBNt.Text - TBNActive.Text) / 2)) ^ 2 + (((TBNt.Text - TBNActive.Text) / 2) * TBWireDiameter.Text) ^ 2) ^ 0.5
             openCoilLength = ((TBL0.Text + ((groundThickness - (TBNt.Text - TBNActive.Text) - 1)) * TBWireDiameter.Text) ^ 2 + (Math.PI * meanD * (TBNActive.Text)) ^ 2) ^ 0.5
-            TBWireLength.Text = Math.Round(noOfClosedEnds * closedCoilLength + openCoilLength, 2)
+            TBWireLength.Text = Math.Round(noOfClosedEnds * closedCoilLength + openCoilLength, 0)
         Catch ex As Exception
             MsgBox("پارامتر های فنی محصول به درستی وارد نشده است", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا در انجام محاسبه")
             Logger.LogFatal("Error Calculating wire Length", ex)
@@ -386,6 +402,7 @@ Public Class productForm
     End Sub
 
     Private Sub productForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Cursor = Cursors.WaitCursor
         Select Case productFormState
             Case "modify"
                 BTNew.Enabled = False
@@ -403,6 +420,7 @@ Public Class productForm
                 PopulateForm()
         End Select
         HandleUserPermissions()
+        Me.Cursor = Cursors.Default
     End Sub
     Private Sub productForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         On Error Resume Next
@@ -521,6 +539,7 @@ Public Class productForm
             Me.TBL2.Text = dt.Rows(0)("L2").ToString()
             Me.TBL3.Text = dt.Rows(0)("L3").ToString()
 
+            Me.CBForceUnit.Text = dt.Rows(0)("forceUnit").ToString()
             Me.TBSolidStress.Text = dt.Rows(0)("solidStress").ToString()
             Me.TBMaxLoad.Text = dt.Rows(0)("solidLoad").ToString()
             Me.TBDwgNo.Text = dt.Rows(0)("dwgNo").ToString()
@@ -536,10 +555,10 @@ Public Class productForm
     End Sub
 
     Function CalculateLength(springRate As Double, L0 As Double, load As Double)
-        Return L0 - (load / springRate)
+        Return Math.Round(L0 - (load / springRate), 2)
     End Function
     Function CalculateLoad(springRate As Double, L0 As Double, length As Double)
-        Return (L0 - length) * springRate
+        Return Math.Round((L0 - length) * springRate, 2)
     End Function
 
     Private Sub Label18_Click(sender As Object, e As EventArgs) Handles Label18.Click
@@ -618,6 +637,46 @@ Public Class productForm
             BTWireInventory.Enabled = False
             TBProductID.ReadOnly = False '' need to be able to modify product ID 
             BTModify.Enabled = True
+        End If
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+        Try
+            TBNActive.Text = Val(TBNt.Text) - 1.5
+        Catch ex As Exception
+            MsgBox("پارامتر های فنی محصول به درستی وارد نشده است", vbCritical + MsgBoxStyle.MsgBoxRight, "خطا در انجام محاسبه")
+            Logger.LogFatal("Error Calculating Active Coil", ex)
+        End Try
+    End Sub
+
+    Private Sub TBWireLength_TextChanged(sender As Object, e As EventArgs) Handles TBWireLength.TextChanged
+        If IsNumeric(TBWireLength.Text) And CBProductionMethod.Text <> "سرد پیچ" Then
+            If Val(TBWireLength.Text) > My.Settings.wireLengthThreshold Then
+                TBWireLength.BackColor = Color.Red
+                TBWireLength.ForeColor = SystemColors.Window
+            Else
+                TBWireLength.BackColor = SystemColors.Window
+                TBWireLength.ForeColor = SystemColors.WindowText
+            End If
+        Else
+            TBWireLength.BackColor = SystemColors.Window
+            TBWireLength.ForeColor = SystemColors.WindowText
+        End If
+
+    End Sub
+
+    Private Sub TBSolidStress_TextChanged(sender As Object, e As EventArgs) Handles TBSolidStress.TextChanged
+        If IsNumeric(TBSolidStress.Text) Then
+            If Val(TBSolidStress.Text) > My.Settings.stressThreashold Then
+                TBSolidStress.BackColor = Color.Red
+                TBSolidStress.ForeColor = SystemColors.Window
+            Else
+                TBSolidStress.BackColor = SystemColors.Window
+                TBSolidStress.ForeColor = SystemColors.WindowText
+            End If
+        Else
+            TBSolidStress.BackColor = SystemColors.Window
+            TBSolidStress.ForeColor = SystemColors.WindowText
         End If
     End Sub
 End Class

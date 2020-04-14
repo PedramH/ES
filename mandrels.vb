@@ -1,8 +1,10 @@
 ﻿
 Public Class mandrels
     Private Sub mandrels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Cursor = Cursors.WaitCursor
         ''Loading Mandrels table into datagridview
         SearchMandrelDataBase("")
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub BTCustomerSearch_Click(sender As Object, e As EventArgs) Handles BTCustomerSearch.Click

@@ -52,6 +52,7 @@ Public Class LoginForm
         'End Using
 
         Dim i As String = 0
+        Me.Cursor = Cursors.WaitCursor
         Using cn = GetDatabaseCon()
             Using cmd = cn.CreateCommand()
                 cmd.CommandText = "SELECT COUNT(*) FROM users WHERE userID = '" + TBuserName.Text + "';"
@@ -91,7 +92,9 @@ Public Class LoginForm
             Else
                 MsgBox("نام کاربری وارد شده اشتباه است", vbCritical, "ورود ناموفق")
             End If
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             MsgBox("خطا در اتصال به دیتابیس. پارامتر های ورودی را چک کرده و مجددا سعی کنید", vbCritical + vbMsgBoxRight, "خطا در اتصال")
             Logger.LogFatal(ex.Message, ex)
         End Try
@@ -105,6 +108,7 @@ Public Class LoginForm
 
     Private Async Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         '' change password form
+        Me.Cursor = Cursors.WaitCursor
         Dim i As String = 0
         Using cn = GetDatabaseCon()
             Using cmd = cn.CreateCommand()
@@ -147,7 +151,9 @@ Public Class LoginForm
             Else
                 MsgBox("نام کاربری وارد شده اشتباه است", vbCritical, "ورود ناموفق")
             End If
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             MsgBox("خطا در اتصال به دیتابیس. پارامتر های ورودی را چک کرده و مجددا سعی کنید", vbCritical + vbMsgBoxRight, "خطا در اتصال")
             Logger.LogFatal(ex.Message, ex)
         End Try

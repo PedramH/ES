@@ -10,7 +10,7 @@ Public Class FrmNewEmkansanji
     Public customer_bs As New BindingSource
 
     Public formState As String = "" 'Form state can be : normal(or empty) , productSearch, customerSearch
-
+    Public form_caller As emkanSanjiForm
     Public CBA As New Collection '' An array of checkBoxes manufacturing process
     Public CBA_inspection As New Collection '' An array of checkBoxes for inspection
 
@@ -66,7 +66,7 @@ Public Class FrmNewEmkansanji
         CBA_inspection.Add(CHCreepTest)
         CBA_inspection.Add(TBOtherInspection)
 
-
+        Me.Cursor = Cursors.WaitCursor
         'Loading Springs table into datagridview1 ----- this is the old version
         'Using cn As New OleDbConnection(connectionString)
         '    Using cmd As New OleDbCommand With {.Connection = cn}
@@ -96,7 +96,7 @@ Public Class FrmNewEmkansanji
             Dim sql_command = "SELECT " & springDataBaseColumnNames & " FROM springDataBase;"
             If formState = "newProductCode" Then
                 '' if user wants to add product code for new products just show them the products that don't have one
-                Dim clNames = " springDataBase.ID AS [ID] , springDataBase.productName AS [نام محصول] , springDataBase.productID AS [کد کالا],  springDataBase.wireDiameter AS [قطر مفتول], springDataBase.OD AS [قطر خارجی] , springDataBase.L0 AS [طول آزاد] , springDataBase.Nt AS [تعداد حلقه], springDataBase.productionMethod AS [روش تولید], emkansanji.ID AS [orderID]"
+                Dim clNames = " springDataBase.ID AS [شماره شناسایی] , springDataBase.productName AS [نام محصول] , springDataBase.productID AS [کد کالا],  springDataBase.wireDiameter AS [قطر مفتول], springDataBase.OD AS [قطر خارجی] , springDataBase.L0 AS [طول آزاد] , springDataBase.Nt AS [تعداد حلقه], springDataBase.productionMethod AS [روش تولید], emkansanji.ID AS [orderID]"
                 sql_command = "SELECT " & clNames & " FROM (emkansanji LEFT JOIN springDataBase ON emkansanji.productID = springDataBase.ID) WHERE " &
                                  " (springDataBase.productID = '' OR ISNULL(springDataBase.productID) ) AND" &
                                  " emkansanji.orderState LIKE '%تایید%'" &
@@ -112,7 +112,7 @@ Public Class FrmNewEmkansanji
                 spring_bs.DataSource = springdt
                 DataGridView1.DataSource = spring_bs
                 If formState = "newProductCode" Then
-                    DataGridView1.Columns("ID").Visible = False
+                    ' DataGridView1.Columns("ID").Visible = False
                     DataGridView1.Columns("orderID").Visible = False
                 Else
                     DataGridView1.Columns("productionProcess").Visible = False
@@ -168,7 +168,7 @@ Public Class FrmNewEmkansanji
         End If
 
         HandleUserPermissions()
-
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Async Sub BTSearch_Click(sender As Object, e As EventArgs) Handles BTSearch.Click
@@ -402,14 +402,18 @@ Public Class FrmNewEmkansanji
         TBCustomerName.Text = ""
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        emkanSanjiForm.Show()
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles BTOpenExcel.Click
+        Me.Cursor = Cursors.WaitCursor
+        If System.IO.File.Exists(TBExcelFilePath.Text) Then
+            Dim path = """" & TBExcelFilePath.Text & """"
+            Process.Start("EXCEL.EXE", path)
+        Else
+            MsgBox("فایل اکسل در محل مورد نظر وجود ندارد", vbCritical, "خطا")
+        End If
+        Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
-        wires.Show()
-        'Logger.LogInfo("Hello World!")
-    End Sub
+
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         ' KaveNegar
@@ -422,8 +426,8 @@ Public Class FrmNewEmkansanji
         ''https://developers.ghasedak.io/panel/line
         Try
             Dim Message = "سلام احوالت"
-            Dim lineNumber = "50001212124042"
-            Dim receptor() As String = {"09188183115"}
+            Dim lineNumber = "300002525"
+            Dim receptor() As String = {"09373868293"}
             Dim sms As New Ghasedak.Api("9c00cf12398ffbd28551a8d1645e71d07ed8c7acbb46963a2bb285774eb571c4")
             'Dim result = sms.SendSMS(Message, receptor, lineNumber)
             Dim result = sms.Verify(1, "order",
@@ -538,9 +542,7 @@ Public Class FrmNewEmkansanji
         Await UpdateReservesTable()
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        FrmMenu.Show()
-    End Sub
+
 
     Private Sub TBCustomerNameSearch_TextChanged(sender As Object, e As EventArgs) Handles TBCustomerNameSearch.TextChanged
         '' filters the data in customer data (datagridview2) in realtime based on the text in search textbox
@@ -591,7 +593,8 @@ Public Class FrmNewEmkansanji
         '' Generate the file path for creating the excel file
         '' path would be : base\year\month\customername\productname.xlsx
         Dim pc As New Globalization.PersianCalendar
-        Dim excelFiledir As String = pc.GetYear(Now).ToString & "\" & getMonthName(pc.GetMonth(Now)) & "\" & DataGridView2.SelectedRows(0).Cells("نام مشتری").Value.ToString & "\"
+        'Dim excelFiledir As String = pc.GetYear(Now).ToString & "\" & getMonthName(pc.GetMonth(Now)) & "\" & DataGridView2.SelectedRows(0).Cells("نام مشتری").Value.ToString & "\"
+        Dim excelFiledir As String = DataGridView2.SelectedRows(0).Cells("نام مشتری").Value.ToString & "\" & pc.GetYear(Now).ToString & "\" & getMonthName(pc.GetMonth(Now)) & "\" & stripFileName(DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString) & "\"
         Dim excelFileName As String = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
 
 
@@ -603,6 +606,26 @@ Public Class FrmNewEmkansanji
         'Check to see if file with this name exist to rename it to prevent overwriting
         saveFilePath = preverntOverwriting(saveFilePath, ".xlsx")
 
+
+        'Check if there is an address provided for the second excel file, if not it uses working directory
+        Dim saveDuplicateBasePath As String
+        If My.Settings.duplicateESExcel = "" Then
+            saveDuplicateBasePath = My.Application.Info.DirectoryPath
+        Else
+            saveDuplicateBasePath = My.Settings.duplicateESExcel
+        End If
+        If saveDuplicateBasePath(Len(saveDuplicateBasePath) - 1) <> "\" Then saveDuplicateBasePath += "\"
+        Dim saveDuplicatePath = saveDuplicateBasePath & excelFiledir
+        Console.WriteLine(saveDuplicatePath)
+        MkDir(path)  'Make the directory if it doesn't exist
+        MkDir(saveDuplicatePath)
+
+
+
+
+
+        Dim w As Excel.Workbook
+
         Try
 
             '' Open Emkansanji Excel template file to fill in the data
@@ -612,7 +635,12 @@ Public Class FrmNewEmkansanji
             End If
             Console.WriteLine(excelTemplateFilePath)
             Dim excel As Excel.Application = New Excel.Application
-            Dim w As Excel.Workbook = excel.Workbooks.Open(excelTemplateFilePath)
+            w = excel.Workbooks.Open(excelTemplateFilePath)
+            Dim s1 As Excel.Worksheet = w.Sheets("ورود اطلاعات")
+            Dim s2 As Excel.Worksheet = w.Sheets("امکانسنجی  ")
+            s1.Unprotect(excelSheetPassword)
+            s2.Unprotect(excelSheetPassword)
+
 
             '' ----------------------------- Populate fields in the emkansanji excel Template -------------------------------
             excel.Range("customerName").Value = NormalizeString(DataGridView2.SelectedRows(0).Cells("نام مشتری").Value.ToString)
@@ -658,24 +686,45 @@ Public Class FrmNewEmkansanji
             excel.Range("productionProcess").Value = productionProcess
             excel.Range("inspectionProcess").Value = inspectionProcess
             excel.Range("orderTypeCode").Value = orderType
-
-            'Check if there is an address provided for the second excel file, if not it uses working directory
-            Dim saveDuplicatePath As String
-            If ConfigurationManager.ConnectionStrings("saveAsFilePath").ConnectionString = "" Then
-                saveDuplicatePath = My.Application.Info.DirectoryPath
-            Else
-                saveDuplicatePath = ConfigurationManager.ConnectionStrings("saveAsFilePath").ConnectionString
+            '' ------------------------------------------------------------------------------------------------------------
+            '' --------------------------------- Customer Product Specification -------------------------------------------
+            '' ------------------------------------------------------------------------------------------------------------
+            If TBCustomerProductSpec.Text <> "" Then
+                Dim productSpecArray As String() = TBCustomerProductSpec.Text.Split(New Char() {"|"c}) 'Customer production spec seperator changed to | 
+                Dim excelRangeArray As String() = {"cMaterial", "cWired", "cWiredTol", "cOD", "cODTol", "cDi", "cDiTol", "cNt", "cNtTol", "cNa", "cL0", "cL0Tol", "cCD",
+                "cRate", "cRateTol", "cEbteda", "cEnteha", "cF_1", "cL_1", "cF1_Tol", "cF_2", "cL_2", "cF2_Tol", "cF_3", "cL_3", "cF3_Tol", "cFUnit", "cTooli", "cGhotri", "cHardness"}
+                Dim i As Integer
+                For i = 0 To excelRangeArray.Count - 2
+                    If productSpecArray(i) <> "" Then
+                        excel.Range(excelRangeArray(i)).Value = NormalizeString(productSpecArray(i))
+                    End If
+                Next
+                '' Now for Hardness
+                i = excelRangeArray.Count - 1 ' The last item
+                excel.Range(excelRangeArray(i)).Value = NormalizeString(productSpecArray(i)) & "-" & NormalizeString(productSpecArray(i + 1)) & " " & NormalizeString(productSpecArray(i + 2))
+                'excel.Range("cMaterial").Value = NormalizeString()
             End If
-            MkDir(path)  'Make the directory if it doesn't exist
+
+
+
+
+
+
+
+            s1.Protect(excelSheetPassword, True)
+            s2.Protect(excelSheetPassword, True)
+
             w.SaveAs(saveFilePath)
-            w.SaveAs(saveDuplicatePath & "\" & excelFileName) 'Save another file in the application directory
-            w.Close()
+            w.SaveAs(saveDuplicatePath & excelFileName) 'Save another file in the application directory
+
             Logger.LogInfo("Excel File Created with path (" + saveFilePath + ")")
             Return saveFilePath
         Catch ex As Exception
             MsgBox("خطا در تکمیل قالب اکسل امکان سنجی. فایل اکسل را چک کرده و مجددا امتحان کنید", vbCritical + vbMsgBoxRight, "خطا")
             Logger.LogFatal(ex.Message, ex)
             Return "abort"
+        Finally
+            w.Close()
         End Try
 
     End Function
@@ -754,11 +803,11 @@ Public Class FrmNewEmkansanji
             Exit Sub
         End If
 
-        Dim columnNames As String = " ( productID , customerID , customerProductName , customerDwgNo, quantity, sampleQuantity, " &
+        Dim columnNames As String = " ( productID , customerID , customerProductName ,customerProductSpecification ,customerDwgNo, quantity, sampleQuantity, " &
                      " letterNo , letterDate , orderNo , orderType ,dateOfProccessing , standard , " &
                      " grade , productCode , comment ,pProcess ,inspectionProcess , orderState , excelFilePath ) "
 
-        Dim valueString As String = "('" & TBProductIDES.Text & "','" & TBCustomerID.Text & "','" & TBCustomerProductName.Text & "','" & TBCustomerDwgNo.Text & "','" & TBQuantity.Text & "','" & TBSampleQuantity.Text & "','" &
+        Dim valueString As String = "('" & TBProductIDES.Text & "','" & TBCustomerID.Text & "','" & TBCustomerProductName.Text & "','" & TBCustomerProductSpec.Text & "','" & TBCustomerDwgNo.Text & "','" & TBQuantity.Text & "','" & TBSampleQuantity.Text & "','" &
                         TBLetterNo.Text & "','" & TBLetterDate.Text & "','" & TBOrderNo.Text & "','" & orderType & "','" & TBProccessingDate.Text & "','" & CBStandard.Text & "','" &
                         TBGrade.Text & "','" & TBCustomerProductCode.Text & "','" & TBComment.Text & "','" & productionProcess & "','" & inspectionProcess & "', 'امکان سنجی اولیه تولید' , '" & saveFilePath & "' )"
 
@@ -768,6 +817,7 @@ Public Class FrmNewEmkansanji
             Try
                 Await con.OpenAsync()
                 Await cmd.ExecuteNonQueryAsync()
+                TBExcelFilePath.Text = saveFilePath
                 Logger.LogInfo("New EmkanSanji with Product ID = " + TBProductIDES.Text + " And Customer ID = " + TBCustomerID.Text)
                 MsgBox("ثبت امکان سنجی با موفقیت انجام شد", vbInformation + vbMsgBoxRight + RightToLeft, "امکان سنجی")
             Catch ex As Exception
@@ -790,7 +840,7 @@ Public Class FrmNewEmkansanji
 
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+    Private Sub Button8_Click(sender As Object, e As EventArgs)
         'Dim s1 = GetSaltedHash(TBCustomerProductName.Text, "salt")
         'Dim s2 = GetSaltedHash(TBOrderNo.Text, "salt")
         'If StrComp(s1, s2, False) = 0 Then
@@ -842,5 +892,33 @@ Public Class FrmNewEmkansanji
         End If
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim f As New customerProductSpecification
+        f.TBCustomerProductSpec.Text = TBCustomerProductSpec.Text
+        f.thisFormsCaller = Me
+        f.Show()
+    End Sub
 
+    Private Sub BTSelectProduct_Click(sender As Object, e As EventArgs) Handles BTSelectProduct.Click
+        form_caller.TBMEnergySazProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
+        form_caller.TBMCustomerProductName.Text = DataGridView1.SelectedRows(0).Cells("نام محصول").Value.ToString
+        form_caller.TBProductIDES.Text = DataGridView1.SelectedRows(0).Cells("شماره شناسایی").Value.ToString
+        Me.Close()
+
+    End Sub
+
+    Private Sub BTSelectCustomer_Click(sender As Object, e As EventArgs) Handles BTSelectCustomer.Click
+
+        form_caller.TBMCustomerName.Text = DataGridView2.SelectedRows(0).Cells("نام مشتری").Value.ToString
+        form_caller.TBCustomerID.Text = DataGridView2.SelectedRows(0).Cells("شماره شناسایی مشتری").Value.ToString
+        Me.Close()
+    End Sub
+
+    Private Sub TBExcelFilePath_TextChanged(sender As Object, e As EventArgs) Handles TBExcelFilePath.TextChanged
+        If TBExcelFilePath.Text <> "" Then
+            BTOpenExcel.Enabled = True
+        Else
+            BTOpenExcel.Enabled = False
+        End If
+    End Sub
 End Class

@@ -17,5 +17,23 @@
     <Setting Name="userGroup" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="stressThreashold" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">760</Value>
+    </Setting>
+    <Setting Name="wireLengthThreshold" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">6200</Value>
+    </Setting>
+    <Setting Name="inventoryGarm" Type="System.String" Scope="User">
+      <Value Profile="(Default)">"Z:\ES-ERP\mavad\garm.xlsx"</Value>
+    </Setting>
+    <Setting Name="inventorySard" Type="System.String" Scope="User">
+      <Value Profile="(Default)">"Z:\ES-ERP\mavad\sard.xlsx"</Value>
+    </Setting>
+    <Setting Name="inventoryPurchase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">"Z:\ES-ERP\mavad\purchased.xlsx"</Value>
+    </Setting>
+    <Setting Name="duplicateESExcel" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

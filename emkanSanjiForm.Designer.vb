@@ -28,6 +28,7 @@ Partial Class emkanSanjiForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(emkanSanjiForm))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.BTShowAll = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.BTEmkansanjiSearch = New System.Windows.Forms.Button()
         Me.BTModify = New System.Windows.Forms.Button()
@@ -35,10 +36,6 @@ Partial Class emkanSanjiForm
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TBEmkansanjiID = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.TBReservedD = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TBReserved = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.TBOrderNo = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -54,8 +51,10 @@ Partial Class emkanSanjiForm
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.CHChangedExcel2 = New System.Windows.Forms.CheckBox()
-        Me.BTModifyES2 = New System.Windows.Forms.Button()
+        Me.BTOpenExcel = New System.Windows.Forms.Button()
+        Me.BTShowProduct = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.TBCustomerProductSpec = New System.Windows.Forms.TextBox()
         Me.RBMainOrder = New System.Windows.Forms.RadioButton()
         Me.RBAmendOrder = New System.Windows.Forms.RadioButton()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -244,7 +243,7 @@ Partial Class emkanSanjiForm
         Me.Label37 = New System.Windows.Forms.Label()
         Me.LOutsideDiameter = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
-        Me.BTShowAll = New System.Windows.Forms.Button()
+        Me.BTOpenExcel2 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -295,10 +294,6 @@ Partial Class emkanSanjiForm
         Me.TabPage1.Controls.Add(Me.Label4)
         Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Controls.Add(Me.TBEmkansanjiID)
-        Me.TabPage1.Controls.Add(Me.Label2)
-        Me.TabPage1.Controls.Add(Me.TBReservedD)
-        Me.TabPage1.Controls.Add(Me.Label1)
-        Me.TabPage1.Controls.Add(Me.TBReserved)
         Me.TabPage1.Controls.Add(Me.Label22)
         Me.TabPage1.Controls.Add(Me.TBOrderNo)
         Me.TabPage1.Controls.Add(Me.Label19)
@@ -320,25 +315,35 @@ Partial Class emkanSanjiForm
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "لیست امکان سنجی ها"
         '
+        'BTShowAll
+        '
+        Me.BTShowAll.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTShowAll.Location = New System.Drawing.Point(6, 449)
+        Me.BTShowAll.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTShowAll.Name = "BTShowAll"
+        Me.BTShowAll.Size = New System.Drawing.Size(84, 33)
+        Me.BTShowAll.TabIndex = 72
+        Me.BTShowAll.Text = "نمایش همه"
+        Me.BTShowAll.UseVisualStyleBackColor = True
+        '
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button1.Location = New System.Drawing.Point(80, 433)
+        Me.Button1.Location = New System.Drawing.Point(107, 448)
         Me.Button1.Margin = New System.Windows.Forms.Padding(1)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(84, 33)
         Me.Button1.TabIndex = 71
         Me.Button1.Text = "تست"
         Me.Button1.UseVisualStyleBackColor = True
-        Me.Button1.Visible = False
         '
         'BTEmkansanjiSearch
         '
         Me.BTEmkansanjiSearch.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTEmkansanjiSearch.Location = New System.Drawing.Point(80, 321)
-        Me.BTEmkansanjiSearch.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTEmkansanjiSearch.Location = New System.Drawing.Point(6, 379)
+        Me.BTEmkansanjiSearch.Margin = New System.Windows.Forms.Padding(0)
         Me.BTEmkansanjiSearch.Name = "BTEmkansanjiSearch"
-        Me.BTEmkansanjiSearch.Size = New System.Drawing.Size(84, 33)
+        Me.BTEmkansanjiSearch.Size = New System.Drawing.Size(84, 34)
         Me.BTEmkansanjiSearch.TabIndex = 70
         Me.BTEmkansanjiSearch.Text = "جستجو"
         Me.BTEmkansanjiSearch.UseVisualStyleBackColor = True
@@ -346,7 +351,7 @@ Partial Class emkanSanjiForm
         'BTModify
         '
         Me.BTModify.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTModify.Location = New System.Drawing.Point(80, 356)
+        Me.BTModify.Location = New System.Drawing.Point(6, 414)
         Me.BTModify.Margin = New System.Windows.Forms.Padding(1)
         Me.BTModify.Name = "BTModify"
         Me.BTModify.Size = New System.Drawing.Size(84, 33)
@@ -359,16 +364,16 @@ Partial Class emkanSanjiForm
         Me.CBOrderState.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         Me.CBOrderState.FormattingEnabled = True
         Me.CBOrderState.Items.AddRange(New Object() {"امکان سنجی اولیه کیفیت", "امکان سنجی اولیه تولید", "امکان سنجی نهایی تولید", "امکان سنجی نهایی کیفی", "امکان سنجی تکمیل شده", "تایید شده", "تولید شده", "منقضی شده"})
-        Me.CBOrderState.Location = New System.Drawing.Point(253, 320)
+        Me.CBOrderState.Location = New System.Drawing.Point(380, 382)
         Me.CBOrderState.Name = "CBOrderState"
-        Me.CBOrderState.Size = New System.Drawing.Size(233, 29)
+        Me.CBOrderState.Size = New System.Drawing.Size(200, 29)
         Me.CBOrderState.TabIndex = 2
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label4.Location = New System.Drawing.Point(496, 321)
+        Me.Label4.Location = New System.Drawing.Point(588, 383)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(125, 26)
         Me.Label4.TabIndex = 69
@@ -379,7 +384,7 @@ Partial Class emkanSanjiForm
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label3.Location = New System.Drawing.Point(883, 321)
+        Me.Label3.Location = New System.Drawing.Point(930, 383)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(134, 26)
         Me.Label3.TabIndex = 68
@@ -389,60 +394,18 @@ Partial Class emkanSanjiForm
         'TBEmkansanjiID
         '
         Me.TBEmkansanjiID.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TBEmkansanjiID.Location = New System.Drawing.Point(640, 320)
+        Me.TBEmkansanjiID.Location = New System.Drawing.Point(722, 382)
         Me.TBEmkansanjiID.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBEmkansanjiID.Name = "TBEmkansanjiID"
-        Me.TBEmkansanjiID.Size = New System.Drawing.Size(234, 29)
+        Me.TBEmkansanjiID.Size = New System.Drawing.Size(200, 29)
         Me.TBEmkansanjiID.TabIndex = 1
         Me.TBEmkansanjiID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label2.Location = New System.Drawing.Point(496, 453)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(106, 26)
-        Me.Label2.TabIndex = 66
-        Me.Label2.Text = "قطر مفتول رزرو"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TBReservedD
-        '
-        Me.TBReservedD.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TBReservedD.Location = New System.Drawing.Point(253, 452)
-        Me.TBReservedD.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBReservedD.Name = "TBReservedD"
-        Me.TBReservedD.Size = New System.Drawing.Size(234, 29)
-        Me.TBReservedD.TabIndex = 10
-        Me.TBReservedD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label1.Location = New System.Drawing.Point(883, 453)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(90, 26)
-        Me.Label1.TabIndex = 63
-        Me.Label1.Text = "کد رزرو شده"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TBReserved
-        '
-        Me.TBReserved.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TBReserved.Location = New System.Drawing.Point(640, 452)
-        Me.TBReserved.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBReserved.Name = "TBReserved"
-        Me.TBReserved.Size = New System.Drawing.Size(234, 29)
-        Me.TBReserved.TabIndex = 9
-        Me.TBReserved.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label22
         '
         Me.Label22.AutoSize = True
         Me.Label22.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label22.Location = New System.Drawing.Point(883, 420)
+        Me.Label22.Location = New System.Drawing.Point(930, 452)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(94, 26)
         Me.Label22.TabIndex = 61
@@ -452,10 +415,10 @@ Partial Class emkanSanjiForm
         'TBOrderNo
         '
         Me.TBOrderNo.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TBOrderNo.Location = New System.Drawing.Point(640, 419)
+        Me.TBOrderNo.Location = New System.Drawing.Point(722, 451)
         Me.TBOrderNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBOrderNo.Name = "TBOrderNo"
-        Me.TBOrderNo.Size = New System.Drawing.Size(234, 29)
+        Me.TBOrderNo.Size = New System.Drawing.Size(200, 29)
         Me.TBOrderNo.TabIndex = 7
         Me.TBOrderNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -463,7 +426,7 @@ Partial Class emkanSanjiForm
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label19.Location = New System.Drawing.Point(883, 354)
+        Me.Label19.Location = New System.Drawing.Point(930, 417)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(133, 26)
         Me.Label19.TabIndex = 59
@@ -473,18 +436,18 @@ Partial Class emkanSanjiForm
         'TBEnergySazProductName
         '
         Me.TBEnergySazProductName.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TBEnergySazProductName.Location = New System.Drawing.Point(640, 353)
+        Me.TBEnergySazProductName.Location = New System.Drawing.Point(722, 416)
         Me.TBEnergySazProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBEnergySazProductName.Name = "TBEnergySazProductName"
-        Me.TBEnergySazProductName.Size = New System.Drawing.Size(234, 29)
-        Me.TBEnergySazProductName.TabIndex = 3
+        Me.TBEnergySazProductName.Size = New System.Drawing.Size(200, 29)
+        Me.TBEnergySazProductName.TabIndex = 4
         Me.TBEnergySazProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label17
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label17.Location = New System.Drawing.Point(496, 387)
+        Me.Label17.Location = New System.Drawing.Point(588, 452)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(105, 26)
         Me.Label17.TabIndex = 57
@@ -494,18 +457,18 @@ Partial Class emkanSanjiForm
         'TBCustomerProductCode
         '
         Me.TBCustomerProductCode.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TBCustomerProductCode.Location = New System.Drawing.Point(253, 386)
+        Me.TBCustomerProductCode.Location = New System.Drawing.Point(380, 451)
         Me.TBCustomerProductCode.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerProductCode.Name = "TBCustomerProductCode"
-        Me.TBCustomerProductCode.Size = New System.Drawing.Size(234, 29)
-        Me.TBCustomerProductCode.TabIndex = 6
+        Me.TBCustomerProductCode.Size = New System.Drawing.Size(200, 29)
+        Me.TBCustomerProductCode.TabIndex = 8
         Me.TBCustomerProductCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label12
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label12.Location = New System.Drawing.Point(496, 420)
+        Me.Label12.Location = New System.Drawing.Point(303, 417)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(72, 26)
         Me.Label12.TabIndex = 55
@@ -515,18 +478,18 @@ Partial Class emkanSanjiForm
         'TBLetterNo
         '
         Me.TBLetterNo.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TBLetterNo.Location = New System.Drawing.Point(253, 419)
+        Me.TBLetterNo.Location = New System.Drawing.Point(95, 416)
         Me.TBLetterNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBLetterNo.Name = "TBLetterNo"
-        Me.TBLetterNo.Size = New System.Drawing.Size(234, 29)
-        Me.TBLetterNo.TabIndex = 8
+        Me.TBLetterNo.Size = New System.Drawing.Size(200, 29)
+        Me.TBLetterNo.TabIndex = 6
         Me.TBLetterNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label8.Location = New System.Drawing.Point(883, 387)
+        Me.Label8.Location = New System.Drawing.Point(303, 383)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(71, 26)
         Me.Label8.TabIndex = 53
@@ -536,18 +499,18 @@ Partial Class emkanSanjiForm
         'TBCustomerName
         '
         Me.TBCustomerName.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TBCustomerName.Location = New System.Drawing.Point(640, 386)
+        Me.TBCustomerName.Location = New System.Drawing.Point(95, 382)
         Me.TBCustomerName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerName.Name = "TBCustomerName"
-        Me.TBCustomerName.Size = New System.Drawing.Size(234, 29)
-        Me.TBCustomerName.TabIndex = 5
+        Me.TBCustomerName.Size = New System.Drawing.Size(200, 29)
+        Me.TBCustomerName.TabIndex = 3
         Me.TBCustomerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label7.Location = New System.Drawing.Point(496, 354)
+        Me.Label7.Location = New System.Drawing.Point(588, 417)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(120, 26)
         Me.Label7.TabIndex = 51
@@ -557,11 +520,11 @@ Partial Class emkanSanjiForm
         'TBCustomerProductName
         '
         Me.TBCustomerProductName.Font = New System.Drawing.Font("B Traffic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.TBCustomerProductName.Location = New System.Drawing.Point(253, 353)
+        Me.TBCustomerProductName.Location = New System.Drawing.Point(380, 416)
         Me.TBCustomerProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerProductName.Name = "TBCustomerProductName"
-        Me.TBCustomerProductName.Size = New System.Drawing.Size(234, 29)
-        Me.TBCustomerProductName.TabIndex = 4
+        Me.TBCustomerProductName.Size = New System.Drawing.Size(200, 29)
+        Me.TBCustomerProductName.TabIndex = 5
         Me.TBCustomerProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'DataGridView1
@@ -601,7 +564,7 @@ Partial Class emkanSanjiForm
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(1059, 308)
+        Me.DataGridView1.Size = New System.Drawing.Size(1059, 370)
         Me.DataGridView1.TabIndex = 20
         '
         'TabPage2
@@ -618,8 +581,10 @@ Partial Class emkanSanjiForm
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.CHChangedExcel2)
-        Me.GroupBox2.Controls.Add(Me.BTModifyES2)
+        Me.GroupBox2.Controls.Add(Me.BTOpenExcel)
+        Me.GroupBox2.Controls.Add(Me.BTShowProduct)
+        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Controls.Add(Me.TBCustomerProductSpec)
         Me.GroupBox2.Controls.Add(Me.RBMainOrder)
         Me.GroupBox2.Controls.Add(Me.RBAmendOrder)
         Me.GroupBox2.Controls.Add(Me.Label11)
@@ -673,29 +638,49 @@ Partial Class emkanSanjiForm
         Me.GroupBox2.TabIndex = 23
         Me.GroupBox2.TabStop = False
         '
-        'CHChangedExcel2
+        'BTOpenExcel
         '
-        Me.CHChangedExcel2.AutoSize = True
-        Me.CHChangedExcel2.Checked = True
-        Me.CHChangedExcel2.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CHChangedExcel2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.CHChangedExcel2.Location = New System.Drawing.Point(542, 445)
-        Me.CHChangedExcel2.Name = "CHChangedExcel2"
-        Me.CHChangedExcel2.Size = New System.Drawing.Size(237, 30)
-        Me.CHChangedExcel2.TabIndex = 100
-        Me.CHChangedExcel2.Text = "تغییرات در فایل اکسل نیز اعمال شود"
-        Me.CHChangedExcel2.UseVisualStyleBackColor = True
+        Me.BTOpenExcel.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTOpenExcel.Location = New System.Drawing.Point(752, 445)
+        Me.BTOpenExcel.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTOpenExcel.Name = "BTOpenExcel"
+        Me.BTOpenExcel.Size = New System.Drawing.Size(154, 33)
+        Me.BTOpenExcel.TabIndex = 102
+        Me.BTOpenExcel.Text = "مشاهده فایل اکسل"
+        Me.BTOpenExcel.UseVisualStyleBackColor = True
         '
-        'BTModifyES2
+        'BTShowProduct
         '
-        Me.BTModifyES2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTModifyES2.Location = New System.Drawing.Point(790, 442)
-        Me.BTModifyES2.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTModifyES2.Name = "BTModifyES2"
-        Me.BTModifyES2.Size = New System.Drawing.Size(116, 33)
-        Me.BTModifyES2.TabIndex = 16
-        Me.BTModifyES2.Text = "ذخیره تغییرات"
-        Me.BTModifyES2.UseVisualStyleBackColor = True
+        Me.BTShowProduct.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTShowProduct.Location = New System.Drawing.Point(552, 14)
+        Me.BTShowProduct.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTShowProduct.Name = "BTShowProduct"
+        Me.BTShowProduct.Size = New System.Drawing.Size(117, 33)
+        Me.BTShowProduct.TabIndex = 101
+        Me.BTShowProduct.Text = "مشاهده محصول"
+        Me.BTShowProduct.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Button2.Location = New System.Drawing.Point(16, 14)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(1)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(168, 33)
+        Me.Button2.TabIndex = 100
+        Me.Button2.Text = "مشخصه های خاص مشتری"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'TBCustomerProductSpec
+        '
+        Me.TBCustomerProductSpec.Enabled = False
+        Me.TBCustomerProductSpec.Location = New System.Drawing.Point(954, 383)
+        Me.TBCustomerProductSpec.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBCustomerProductSpec.Name = "TBCustomerProductSpec"
+        Me.TBCustomerProductSpec.Size = New System.Drawing.Size(50, 29)
+        Me.TBCustomerProductSpec.TabIndex = 99
+        Me.TBCustomerProductSpec.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBCustomerProductSpec.Visible = False
         '
         'RBMainOrder
         '
@@ -900,7 +885,7 @@ Partial Class emkanSanjiForm
         'TBMEnergySazProductName
         '
         Me.TBMEnergySazProductName.Enabled = False
-        Me.TBMEnergySazProductName.Location = New System.Drawing.Point(672, 15)
+        Me.TBMEnergySazProductName.Location = New System.Drawing.Point(672, 16)
         Me.TBMEnergySazProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMEnergySazProductName.Name = "TBMEnergySazProductName"
         Me.TBMEnergySazProductName.Size = New System.Drawing.Size(234, 29)
@@ -909,10 +894,10 @@ Partial Class emkanSanjiForm
         '
         'TBMCustomerProductName
         '
-        Me.TBMCustomerProductName.Location = New System.Drawing.Point(672, 151)
+        Me.TBMCustomerProductName.Location = New System.Drawing.Point(188, 15)
         Me.TBMCustomerProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMCustomerProductName.Name = "TBMCustomerProductName"
-        Me.TBMCustomerProductName.Size = New System.Drawing.Size(234, 29)
+        Me.TBMCustomerProductName.Size = New System.Drawing.Size(224, 29)
         Me.TBMCustomerProductName.TabIndex = 1
         Me.TBMCustomerProductName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1140,8 +1125,9 @@ Partial Class emkanSanjiForm
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label6.Location = New System.Drawing.Point(912, 16)
+        Me.Label6.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Label6.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label6.Location = New System.Drawing.Point(912, 17)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(133, 26)
         Me.Label6.TabIndex = 44
@@ -1343,8 +1329,9 @@ Partial Class emkanSanjiForm
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label24.Location = New System.Drawing.Point(540, 16)
+        Me.Label24.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Label24.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label24.Location = New System.Drawing.Point(972, 153)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(71, 26)
         Me.Label24.TabIndex = 21
@@ -1354,7 +1341,7 @@ Partial Class emkanSanjiForm
         'TBMCustomerName
         '
         Me.TBMCustomerName.Enabled = False
-        Me.TBMCustomerName.Location = New System.Drawing.Point(297, 15)
+        Me.TBMCustomerName.Location = New System.Drawing.Point(672, 152)
         Me.TBMCustomerName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMCustomerName.Name = "TBMCustomerName"
         Me.TBMCustomerName.Size = New System.Drawing.Size(234, 29)
@@ -1365,7 +1352,7 @@ Partial Class emkanSanjiForm
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label25.Location = New System.Drawing.Point(923, 152)
+        Me.Label25.Location = New System.Drawing.Point(422, 16)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(120, 26)
         Me.Label25.TabIndex = 19
@@ -2227,6 +2214,7 @@ Partial Class emkanSanjiForm
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.BTOpenExcel2)
         Me.TabPage4.Controls.Add(Me.LStatus)
         Me.TabPage4.Controls.Add(Me.CheckChangeExcel)
         Me.TabPage4.Controls.Add(Me.BTModifyES)
@@ -2256,8 +2244,6 @@ Partial Class emkanSanjiForm
         'CheckChangeExcel
         '
         Me.CheckChangeExcel.AutoSize = True
-        Me.CheckChangeExcel.Checked = True
-        Me.CheckChangeExcel.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckChangeExcel.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         Me.CheckChangeExcel.Location = New System.Drawing.Point(554, 438)
         Me.CheckChangeExcel.Name = "CheckChangeExcel"
@@ -2835,16 +2821,16 @@ Partial Class emkanSanjiForm
         Me.Label39.Text = "قطر خارجی فنر : "
         Me.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'BTShowAll
+        'BTOpenExcel2
         '
-        Me.BTShowAll.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTShowAll.Location = New System.Drawing.Point(80, 391)
-        Me.BTShowAll.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTShowAll.Name = "BTShowAll"
-        Me.BTShowAll.Size = New System.Drawing.Size(84, 33)
-        Me.BTShowAll.TabIndex = 72
-        Me.BTShowAll.Text = "نمایش همه"
-        Me.BTShowAll.UseVisualStyleBackColor = True
+        Me.BTOpenExcel2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTOpenExcel2.Location = New System.Drawing.Point(919, 436)
+        Me.BTOpenExcel2.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTOpenExcel2.Name = "BTOpenExcel2"
+        Me.BTOpenExcel2.Size = New System.Drawing.Size(127, 33)
+        Me.BTOpenExcel2.TabIndex = 103
+        Me.BTOpenExcel2.Text = "مشاهده فایل اکسل"
+        Me.BTOpenExcel2.UseVisualStyleBackColor = True
         '
         'emkanSanjiForm
         '
@@ -2907,8 +2893,6 @@ Partial Class emkanSanjiForm
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TBReserved As TextBox
     Friend WithEvents Label22 As Label
     Friend WithEvents TBOrderNo As TextBox
     Friend WithEvents Label19 As Label
@@ -2921,8 +2905,6 @@ Partial Class emkanSanjiForm
     Friend WithEvents TBCustomerName As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents TBCustomerProductName As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents TBReservedD As TextBox
     Friend WithEvents CBOrderState As ComboBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
@@ -3119,7 +3101,10 @@ Partial Class emkanSanjiForm
     Friend WithEvents LStatus As Label
     Friend WithEvents LSelectedWireL As Label
     Friend WithEvents LSelectedWireD As Label
-    Friend WithEvents CHChangedExcel2 As CheckBox
-    Friend WithEvents BTModifyES2 As Button
     Friend WithEvents BTShowAll As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents TBCustomerProductSpec As TextBox
+    Friend WithEvents BTShowProduct As Button
+    Friend WithEvents BTOpenExcel As Button
+    Friend WithEvents BTOpenExcel2 As Button
 End Class

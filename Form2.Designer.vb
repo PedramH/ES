@@ -36,6 +36,8 @@ Partial Class productForm
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TBProductID = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BTWireInventory = New System.Windows.Forms.Button()
+        Me.BTCheckMandrelInventory = New System.Windows.Forms.Button()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.TBMaxLoad = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -82,8 +84,8 @@ Partial Class productForm
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.BTCheckMandrelInventory = New System.Windows.Forms.Button()
-        Me.BTWireInventory = New System.Windows.Forms.Button()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.CBForceUnit = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -209,6 +211,8 @@ Partial Class productForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.CBForceUnit)
+        Me.GroupBox1.Controls.Add(Me.Label28)
         Me.GroupBox1.Controls.Add(Me.BTWireInventory)
         Me.GroupBox1.Controls.Add(Me.BTCheckMandrelInventory)
         Me.GroupBox1.Controls.Add(Me.Label27)
@@ -277,6 +281,25 @@ Partial Class productForm
         Me.GroupBox1.TabIndex = 14
         Me.GroupBox1.TabStop = False
         '
+        'BTWireInventory
+        '
+        Me.BTWireInventory.Enabled = False
+        Me.BTWireInventory.Location = New System.Drawing.Point(72, 222)
+        Me.BTWireInventory.Name = "BTWireInventory"
+        Me.BTWireInventory.Size = New System.Drawing.Size(131, 28)
+        Me.BTWireInventory.TabIndex = 61
+        Me.BTWireInventory.Text = "بررسی موجودی مفتول"
+        Me.BTWireInventory.UseVisualStyleBackColor = True
+        '
+        'BTCheckMandrelInventory
+        '
+        Me.BTCheckMandrelInventory.Location = New System.Drawing.Point(438, 222)
+        Me.BTCheckMandrelInventory.Name = "BTCheckMandrelInventory"
+        Me.BTCheckMandrelInventory.Size = New System.Drawing.Size(131, 28)
+        Me.BTCheckMandrelInventory.TabIndex = 60
+        Me.BTCheckMandrelInventory.Text = "بررسی موجودی شفت"
+        Me.BTCheckMandrelInventory.UseVisualStyleBackColor = True
+        '
         'Label27
         '
         Me.Label27.AutoSize = True
@@ -291,7 +314,7 @@ Partial Class productForm
         '
         'TBMaxLoad
         '
-        Me.TBMaxLoad.Location = New System.Drawing.Point(224, 267)
+        Me.TBMaxLoad.Location = New System.Drawing.Point(224, 266)
         Me.TBMaxLoad.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBMaxLoad.Name = "TBMaxLoad"
         Me.TBMaxLoad.Size = New System.Drawing.Size(79, 29)
@@ -316,6 +339,7 @@ Partial Class productForm
         Me.TBtipThickness.Name = "TBtipThickness"
         Me.TBtipThickness.Size = New System.Drawing.Size(60, 29)
         Me.TBtipThickness.TabIndex = 56
+        Me.TBtipThickness.Text = "25"
         Me.TBtipThickness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'CBProductionMethod
@@ -439,7 +463,6 @@ Partial Class productForm
         Me.TBComment.Name = "TBComment"
         Me.TBComment.Size = New System.Drawing.Size(392, 125)
         Me.TBComment.TabIndex = 25
-        Me.TBComment.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'CBMaterial
         '
@@ -622,6 +645,7 @@ Partial Class productForm
         '
         'TBWireLength
         '
+        Me.TBWireLength.ForeColor = System.Drawing.SystemColors.WindowText
         Me.TBWireLength.Location = New System.Drawing.Point(224, 222)
         Me.TBWireLength.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBWireLength.Name = "TBWireLength"
@@ -632,7 +656,7 @@ Partial Class productForm
         'TBdbID
         '
         Me.TBdbID.Enabled = False
-        Me.TBdbID.Location = New System.Drawing.Point(6, 447)
+        Me.TBdbID.Location = New System.Drawing.Point(11, 447)
         Me.TBdbID.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBdbID.Name = "TBdbID"
         Me.TBdbID.Size = New System.Drawing.Size(92, 29)
@@ -643,7 +667,8 @@ Partial Class productForm
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label8.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Label8.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
         Me.Label8.Location = New System.Drawing.Point(77, 115)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(69, 26)
@@ -685,7 +710,7 @@ Partial Class productForm
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label12.Location = New System.Drawing.Point(104, 450)
+        Me.Label12.Location = New System.Drawing.Point(109, 450)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(76, 26)
         Me.Label12.TabIndex = 25
@@ -710,6 +735,7 @@ Partial Class productForm
         Me.CBEcoilType.Name = "CBEcoilType"
         Me.CBEcoilType.Size = New System.Drawing.Size(122, 29)
         Me.CBEcoilType.TabIndex = 14
+        Me.CBEcoilType.Text = "بسته و سنگ خورده"
         '
         'CBScoilType
         '
@@ -719,6 +745,7 @@ Partial Class productForm
         Me.CBScoilType.Name = "CBScoilType"
         Me.CBScoilType.Size = New System.Drawing.Size(115, 29)
         Me.CBScoilType.TabIndex = 13
+        Me.CBScoilType.Text = "بسته و سنگ خورده"
         '
         'Label11
         '
@@ -753,24 +780,25 @@ Partial Class productForm
         Me.Label9.Text = "جهت پیچش"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'BTCheckMandrelInventory
+        'Label28
         '
-        Me.BTCheckMandrelInventory.Location = New System.Drawing.Point(438, 222)
-        Me.BTCheckMandrelInventory.Name = "BTCheckMandrelInventory"
-        Me.BTCheckMandrelInventory.Size = New System.Drawing.Size(131, 28)
-        Me.BTCheckMandrelInventory.TabIndex = 60
-        Me.BTCheckMandrelInventory.Text = "بررسی موجودی شفت"
-        Me.BTCheckMandrelInventory.UseVisualStyleBackColor = True
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label28.Location = New System.Drawing.Point(140, 267)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(66, 26)
+        Me.Label28.TabIndex = 62
+        Me.Label28.Text = "واحد نیرو"
+        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'BTWireInventory
+        'CBForceUnit
         '
-        Me.BTWireInventory.Enabled = False
-        Me.BTWireInventory.Location = New System.Drawing.Point(72, 222)
-        Me.BTWireInventory.Name = "BTWireInventory"
-        Me.BTWireInventory.Size = New System.Drawing.Size(131, 28)
-        Me.BTWireInventory.TabIndex = 61
-        Me.BTWireInventory.Text = "بررسی موجودی مفتول"
-        Me.BTWireInventory.UseVisualStyleBackColor = True
+        Me.CBForceUnit.FormattingEnabled = True
+        Me.CBForceUnit.Items.AddRange(New Object() {"N", "Kgf"})
+        Me.CBForceUnit.Location = New System.Drawing.Point(55, 266)
+        Me.CBForceUnit.Name = "CBForceUnit"
+        Me.CBForceUnit.Size = New System.Drawing.Size(79, 29)
+        Me.CBForceUnit.TabIndex = 63
         '
         'productForm
         '
@@ -851,4 +879,6 @@ Partial Class productForm
     Friend WithEvents TBMaxLoad As TextBox
     Friend WithEvents BTWireInventory As Button
     Friend WithEvents BTCheckMandrelInventory As Button
+    Friend WithEvents CBForceUnit As ComboBox
+    Friend WithEvents Label28 As Label
 End Class

@@ -55,9 +55,9 @@ Partial Class LoginForm
         '
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Default
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(71, 2)
+        Me.PictureBox1.Location = New System.Drawing.Point(49, 2)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(248, 70)
+        Me.PictureBox1.Size = New System.Drawing.Size(284, 104)
         Me.PictureBox1.TabIndex = 2
         Me.PictureBox1.TabStop = False
         '

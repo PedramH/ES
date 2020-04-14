@@ -33,7 +33,6 @@ Partial Class wires
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.LProductData = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TBWireCode = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -41,19 +40,23 @@ Partial Class wires
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TBWireLengthMin = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.CBWireType = New System.Windows.Forms.ComboBox()
         Me.BTUpdateInventory = New System.Windows.Forms.Button()
         Me.BTCheckOrders = New System.Windows.Forms.Button()
         Me.BTSelectWire = New System.Windows.Forms.Button()
         Me.BTShowAllWires = New System.Windows.Forms.Button()
+        Me.CBWireType = New System.Windows.Forms.ComboBox()
         Me.TabPage_Orders = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.BTShowAllOrders = New System.Windows.Forms.Button()
         Me.TBWireCodeOrderSearch = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.BTCheckOrder = New System.Windows.Forms.Button()
+        Me.BTShowAllOrders = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TBCustomerNameOrderSearch = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.TBProductNameOrderSearch = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage_Wires.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -148,7 +151,6 @@ Partial Class wires
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.LProductData, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Label1, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.TBWireCode, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Label2, 2, 0)
@@ -156,11 +158,11 @@ Partial Class wires
         Me.TableLayoutPanel2.Controls.Add(Me.Label6, 4, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.TBWireLengthMin, 5, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Label3, 6, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.CBWireType, 7, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.BTUpdateInventory, 8, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.BTCheckOrders, 8, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.BTSelectWire, 7, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.BTShowAllWires, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.CBWireType, 7, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 408)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
@@ -169,20 +171,6 @@ Partial Class wires
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(1059, 96)
         Me.TableLayoutPanel2.TabIndex = 21
-        '
-        'LProductData
-        '
-        Me.LProductData.AutoSize = True
-        Me.TableLayoutPanel2.SetColumnSpan(Me.LProductData, 4)
-        Me.LProductData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LProductData.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.LProductData.Location = New System.Drawing.Point(483, 48)
-        Me.LProductData.Name = "LProductData"
-        Me.LProductData.Size = New System.Drawing.Size(446, 48)
-        Me.LProductData.TabIndex = 25
-        Me.LProductData.Text = "قطر مفتول"
-        Me.LProductData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.LProductData.Visible = False
         '
         'Label1
         '
@@ -262,17 +250,6 @@ Partial Class wires
         Me.Label3.Text = "نوع مفتول"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'CBWireType
-        '
-        Me.CBWireType.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CBWireType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CBWireType.FormattingEnabled = True
-        Me.CBWireType.Items.AddRange(New Object() {"همه", "مفتول شاخه‌ای", "مفتول کویل"})
-        Me.CBWireType.Location = New System.Drawing.Point(168, 13)
-        Me.CBWireType.Name = "CBWireType"
-        Me.CBWireType.Size = New System.Drawing.Size(99, 29)
-        Me.CBWireType.TabIndex = 20
-        '
         'BTUpdateInventory
         '
         Me.BTUpdateInventory.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -323,6 +300,17 @@ Partial Class wires
         Me.BTShowAllWires.TabIndex = 24
         Me.BTShowAllWires.Text = "نمایش همه"
         Me.BTShowAllWires.UseVisualStyleBackColor = True
+        '
+        'CBWireType
+        '
+        Me.CBWireType.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.CBWireType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CBWireType.FormattingEnabled = True
+        Me.CBWireType.Items.AddRange(New Object() {"همه", "مفتول شاخه‌ای", "مفتول کویل"})
+        Me.CBWireType.Location = New System.Drawing.Point(168, 13)
+        Me.CBWireType.Name = "CBWireType"
+        Me.CBWireType.Size = New System.Drawing.Size(99, 29)
+        Me.CBWireType.TabIndex = 20
         '
         'TabPage_Orders
         '
@@ -404,10 +392,14 @@ Partial Class wires
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5!))
-        Me.TableLayoutPanel4.Controls.Add(Me.BTShowAllOrders, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.TBWireCodeOrderSearch, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.Label4, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.BTCheckOrder, 7, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.BTShowAllOrders, 6, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label5, 4, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.TBCustomerNameOrderSearch, 5, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Label7, 2, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.TBProductNameOrderSearch, 3, 0)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 403)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
@@ -416,18 +408,6 @@ Partial Class wires
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 95.0!))
         Me.TableLayoutPanel4.Size = New System.Drawing.Size(1053, 95)
         Me.TableLayoutPanel4.TabIndex = 22
-        '
-        'BTShowAllOrders
-        '
-        Me.BTShowAllOrders.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BTShowAllOrders.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTShowAllOrders.Location = New System.Drawing.Point(661, 31)
-        Me.BTShowAllOrders.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTShowAllOrders.Name = "BTShowAllOrders"
-        Me.BTShowAllOrders.Size = New System.Drawing.Size(129, 33)
-        Me.BTShowAllOrders.TabIndex = 23
-        Me.BTShowAllOrders.Text = "نمایش همه"
-        Me.BTShowAllOrders.UseVisualStyleBackColor = True
         '
         'TBWireCodeOrderSearch
         '
@@ -462,6 +442,62 @@ Partial Class wires
         Me.BTCheckOrder.TabIndex = 22
         Me.BTCheckOrder.Text = "بررسی سفارش"
         Me.BTCheckOrder.UseVisualStyleBackColor = True
+        '
+        'BTShowAllOrders
+        '
+        Me.BTShowAllOrders.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BTShowAllOrders.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTShowAllOrders.Location = New System.Drawing.Point(137, 31)
+        Me.BTShowAllOrders.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTShowAllOrders.Name = "BTShowAllOrders"
+        Me.BTShowAllOrders.Size = New System.Drawing.Size(129, 33)
+        Me.BTShowAllOrders.TabIndex = 23
+        Me.BTShowAllOrders.Text = "نمایش همه"
+        Me.BTShowAllOrders.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label5.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label5.Location = New System.Drawing.Point(401, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(125, 95)
+        Me.Label5.TabIndex = 24
+        Me.Label5.Text = "نام مشتری"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TBCustomerNameOrderSearch
+        '
+        Me.TBCustomerNameOrderSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TBCustomerNameOrderSearch.Location = New System.Drawing.Point(270, 33)
+        Me.TBCustomerNameOrderSearch.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBCustomerNameOrderSearch.Name = "TBCustomerNameOrderSearch"
+        Me.TBCustomerNameOrderSearch.Size = New System.Drawing.Size(125, 29)
+        Me.TBCustomerNameOrderSearch.TabIndex = 27
+        Me.TBCustomerNameOrderSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label7.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Label7.Location = New System.Drawing.Point(663, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(125, 95)
+        Me.Label7.TabIndex = 26
+        Me.Label7.Text = "نام محصول"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TBProductNameOrderSearch
+        '
+        Me.TBProductNameOrderSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TBProductNameOrderSearch.Location = New System.Drawing.Point(532, 33)
+        Me.TBProductNameOrderSearch.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBProductNameOrderSearch.Name = "TBProductNameOrderSearch"
+        Me.TBProductNameOrderSearch.Size = New System.Drawing.Size(125, 29)
+        Me.TBProductNameOrderSearch.TabIndex = 25
+        Me.TBProductNameOrderSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TabControl1
         '
@@ -527,5 +563,8 @@ Partial Class wires
     Friend WithEvents BTCheckOrders As Button
     Friend WithEvents BTShowAllWires As Button
     Friend WithEvents BTShowAllOrders As Button
-    Friend WithEvents LProductData As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents TBCustomerNameOrderSearch As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents TBProductNameOrderSearch As TextBox
 End Class

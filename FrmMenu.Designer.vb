@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmMenu
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmMenu
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMenu))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
@@ -48,7 +48,9 @@ Partial Class FrmMenu
         Me.M_warehouse_wires = New System.Windows.Forms.ToolStripMenuItem()
         Me.M_warehouse_productCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BTTest = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -101,13 +103,13 @@ Partial Class FrmMenu
         'M_emkansanji_orders
         '
         Me.M_emkansanji_orders.Name = "M_emkansanji_orders"
-        Me.M_emkansanji_orders.Size = New System.Drawing.Size(180, 26)
+        Me.M_emkansanji_orders.Size = New System.Drawing.Size(162, 26)
         Me.M_emkansanji_orders.Text = "لیست سفارشات"
         '
         'M_emkansanji_new
         '
         Me.M_emkansanji_new.Name = "M_emkansanji_new"
-        Me.M_emkansanji_new.Size = New System.Drawing.Size(180, 26)
+        Me.M_emkansanji_new.Size = New System.Drawing.Size(162, 26)
         Me.M_emkansanji_new.Text = "امکان سنجی جدید"
         '
         'Menu_production
@@ -120,31 +122,31 @@ Partial Class FrmMenu
         'M_production_orders
         '
         Me.M_production_orders.Name = "M_production_orders"
-        Me.M_production_orders.Size = New System.Drawing.Size(180, 26)
+        Me.M_production_orders.Size = New System.Drawing.Size(179, 26)
         Me.M_production_orders.Text = "لیست سفارشات"
         '
         'M_prodcution_wireInventory
         '
         Me.M_prodcution_wireInventory.Name = "M_prodcution_wireInventory"
-        Me.M_prodcution_wireInventory.Size = New System.Drawing.Size(180, 26)
+        Me.M_prodcution_wireInventory.Size = New System.Drawing.Size(179, 26)
         Me.M_prodcution_wireInventory.Text = "موجودی مواد اولیه"
         '
         'M_production_data
         '
         Me.M_production_data.Name = "M_production_data"
-        Me.M_production_data.Size = New System.Drawing.Size(180, 26)
+        Me.M_production_data.Size = New System.Drawing.Size(179, 26)
         Me.M_production_data.Text = "آمار و موجودی تولید"
         '
         'M_production_shippment
         '
         Me.M_production_shippment.Name = "M_production_shippment"
-        Me.M_production_shippment.Size = New System.Drawing.Size(180, 26)
+        Me.M_production_shippment.Size = New System.Drawing.Size(179, 26)
         Me.M_production_shippment.Text = "ارسال محصول"
         '
         'M_production_plan
         '
         Me.M_production_plan.Name = "M_production_plan"
-        Me.M_production_plan.Size = New System.Drawing.Size(180, 26)
+        Me.M_production_plan.Size = New System.Drawing.Size(179, 26)
         Me.M_production_plan.Text = "برنامه تولید"
         '
         'Menu_customers
@@ -157,13 +159,13 @@ Partial Class FrmMenu
         'M_customers_list
         '
         Me.M_customers_list.Name = "M_customers_list"
-        Me.M_customers_list.Size = New System.Drawing.Size(180, 26)
+        Me.M_customers_list.Size = New System.Drawing.Size(162, 26)
         Me.M_customers_list.Text = "اطلاعت مشتریان"
         '
         'M_customer_new
         '
         Me.M_customer_new.Name = "M_customer_new"
-        Me.M_customer_new.Size = New System.Drawing.Size(180, 26)
+        Me.M_customer_new.Size = New System.Drawing.Size(162, 26)
         Me.M_customer_new.Text = "ثبت مشتری جدید"
         '
         'Menu_products
@@ -176,13 +178,13 @@ Partial Class FrmMenu
         'M_products_list
         '
         Me.M_products_list.Name = "M_products_list"
-        Me.M_products_list.Size = New System.Drawing.Size(180, 26)
+        Me.M_products_list.Size = New System.Drawing.Size(165, 26)
         Me.M_products_list.Text = "اطلاعات محصولات"
         '
         'M_products_new
         '
         Me.M_products_new.Name = "M_products_new"
-        Me.M_products_new.Size = New System.Drawing.Size(180, 26)
+        Me.M_products_new.Size = New System.Drawing.Size(165, 26)
         Me.M_products_new.Text = "ثبت محصول جدید"
         '
         'Menu_warehouse
@@ -212,11 +214,22 @@ Partial Class FrmMenu
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.BTTest)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 31)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(784, 530)
         Me.Panel1.TabIndex = 1
+        '
+        'BTTest
+        '
+        Me.BTTest.Location = New System.Drawing.Point(33, 64)
+        Me.BTTest.Name = "BTTest"
+        Me.BTTest.Size = New System.Drawing.Size(82, 50)
+        Me.BTTest.TabIndex = 0
+        Me.BTTest.Text = "test"
+        Me.BTTest.UseVisualStyleBackColor = True
+        Me.BTTest.Visible = False
         '
         'FrmMenu
         '
@@ -235,6 +248,7 @@ Partial Class FrmMenu
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -265,4 +279,5 @@ Partial Class FrmMenu
     Friend WithEvents M_warehouse_wires As ToolStripMenuItem
     Friend WithEvents M_warehouse_productCode As ToolStripMenuItem
     Friend WithEvents M_warehouse_mandrels As ToolStripMenuItem
+    Friend WithEvents BTTest As Button
 End Class

@@ -32,7 +32,7 @@ Partial Class FrmNewEmkansanji
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button7 = New System.Windows.Forms.Button()
+        Me.BTSelectProduct = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -55,6 +55,7 @@ Partial Class FrmNewEmkansanji
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.BTSelectCustomer = New System.Windows.Forms.Button()
         Me.BTClearCustomer = New System.Windows.Forms.Button()
         Me.BTNewCustomer = New System.Windows.Forms.Button()
         Me.BTModifyCustomer = New System.Windows.Forms.Button()
@@ -64,7 +65,8 @@ Partial Class FrmNewEmkansanji
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.TBCustomerProductSpec = New System.Windows.Forms.TextBox()
         Me.RBMainOrder = New System.Windows.Forms.RadioButton()
         Me.RBAmendOrder = New System.Windows.Forms.RadioButton()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -97,9 +99,8 @@ Partial Class FrmNewEmkansanji
         Me.CHSard = New System.Windows.Forms.CheckBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.TBSampleQuantity = New System.Windows.Forms.TextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.LStatus = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.BTOpenExcel = New System.Windows.Forms.Button()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.TBOrderNo = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -126,6 +127,7 @@ Partial Class FrmNewEmkansanji
         Me.TBCustomerDwgNo = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.TBExcelFilePath = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -168,7 +170,7 @@ Partial Class FrmNewEmkansanji
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button7)
+        Me.GroupBox1.Controls.Add(Me.BTSelectProduct)
         Me.GroupBox1.Controls.Add(Me.Button6)
         Me.GroupBox1.Controls.Add(Me.Button5)
         Me.GroupBox1.Controls.Add(Me.Button4)
@@ -196,33 +198,34 @@ Partial Class FrmNewEmkansanji
         Me.GroupBox1.TabIndex = 20
         Me.GroupBox1.TabStop = False
         '
-        'Button7
+        'BTSelectProduct
         '
-        Me.Button7.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button7.Location = New System.Drawing.Point(732, 66)
-        Me.Button7.Margin = New System.Windows.Forms.Padding(1)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(63, 33)
-        Me.Button7.TabIndex = 17
-        Me.Button7.Text = "فرم اصلی"
-        Me.Button7.UseVisualStyleBackColor = True
-        Me.Button7.Visible = False
+        Me.BTSelectProduct.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTSelectProduct.Location = New System.Drawing.Point(8, 66)
+        Me.BTSelectProduct.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTSelectProduct.Name = "BTSelectProduct"
+        Me.BTSelectProduct.Size = New System.Drawing.Size(138, 33)
+        Me.BTSelectProduct.TabIndex = 17
+        Me.BTSelectProduct.Text = "تعویض محصول"
+        Me.BTSelectProduct.UseVisualStyleBackColor = True
+        Me.BTSelectProduct.Visible = False
         '
         'Button6
         '
         Me.Button6.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button6.Location = New System.Drawing.Point(936, 66)
+        Me.Button6.Location = New System.Drawing.Point(968, 66)
         Me.Button6.Margin = New System.Windows.Forms.Padding(1)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(63, 33)
         Me.Button6.TabIndex = 16
         Me.Button6.Text = "تست"
         Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.Visible = False
         '
         'Button5
         '
         Me.Button5.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button5.Location = New System.Drawing.Point(847, 66)
+        Me.Button5.Location = New System.Drawing.Point(903, 66)
         Me.Button5.Margin = New System.Windows.Forms.Padding(1)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(63, 33)
@@ -234,7 +237,7 @@ Partial Class FrmNewEmkansanji
         'Button4
         '
         Me.Button4.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button4.Location = New System.Drawing.Point(90, 66)
+        Me.Button4.Location = New System.Drawing.Point(175, 66)
         Me.Button4.Margin = New System.Windows.Forms.Padding(1)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(148, 33)
@@ -460,6 +463,7 @@ Partial Class FrmNewEmkansanji
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.BTSelectCustomer)
         Me.GroupBox3.Controls.Add(Me.BTClearCustomer)
         Me.GroupBox3.Controls.Add(Me.BTNewCustomer)
         Me.GroupBox3.Controls.Add(Me.BTModifyCustomer)
@@ -473,6 +477,18 @@ Partial Class FrmNewEmkansanji
         Me.GroupBox3.Size = New System.Drawing.Size(1049, 71)
         Me.GroupBox3.TabIndex = 21
         Me.GroupBox3.TabStop = False
+        '
+        'BTSelectCustomer
+        '
+        Me.BTSelectCustomer.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTSelectCustomer.Location = New System.Drawing.Point(328, 22)
+        Me.BTSelectCustomer.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTSelectCustomer.Name = "BTSelectCustomer"
+        Me.BTSelectCustomer.Size = New System.Drawing.Size(109, 33)
+        Me.BTSelectCustomer.TabIndex = 18
+        Me.BTSelectCustomer.Text = "تعویض مشتری"
+        Me.BTSelectCustomer.UseVisualStyleBackColor = True
+        Me.BTSelectCustomer.Visible = False
         '
         'BTClearCustomer
         '
@@ -531,10 +547,10 @@ Partial Class FrmNewEmkansanji
         '
         'TBCustomerNameSearch
         '
-        Me.TBCustomerNameSearch.Location = New System.Drawing.Point(330, 24)
+        Me.TBCustomerNameSearch.Location = New System.Drawing.Point(735, 24)
         Me.TBCustomerNameSearch.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerNameSearch.Name = "TBCustomerNameSearch"
-        Me.TBCustomerNameSearch.Size = New System.Drawing.Size(631, 29)
+        Me.TBCustomerNameSearch.Size = New System.Drawing.Size(226, 29)
         Me.TBCustomerNameSearch.TabIndex = 1
         Me.TBCustomerNameSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -590,7 +606,9 @@ Partial Class FrmNewEmkansanji
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Button8)
+        Me.GroupBox2.Controls.Add(Me.TBExcelFilePath)
+        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Controls.Add(Me.TBCustomerProductSpec)
         Me.GroupBox2.Controls.Add(Me.RBMainOrder)
         Me.GroupBox2.Controls.Add(Me.RBAmendOrder)
         Me.GroupBox2.Controls.Add(Me.GroupBox4)
@@ -603,9 +621,8 @@ Partial Class FrmNewEmkansanji
         Me.GroupBox2.Controls.Add(Me.GroupBox10)
         Me.GroupBox2.Controls.Add(Me.Label23)
         Me.GroupBox2.Controls.Add(Me.TBSampleQuantity)
-        Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.LStatus)
-        Me.GroupBox2.Controls.Add(Me.Button3)
+        Me.GroupBox2.Controls.Add(Me.BTOpenExcel)
         Me.GroupBox2.Controls.Add(Me.Label22)
         Me.GroupBox2.Controls.Add(Me.TBOrderNo)
         Me.GroupBox2.Controls.Add(Me.Button1)
@@ -641,14 +658,27 @@ Partial Class FrmNewEmkansanji
         Me.GroupBox2.TabIndex = 22
         Me.GroupBox2.TabStop = False
         '
-        'Button8
+        'Button2
         '
-        Me.Button8.Location = New System.Drawing.Point(317, 452)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(81, 29)
-        Me.Button8.TabIndex = 91
-        Me.Button8.Text = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.Button2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.Button2.Location = New System.Drawing.Point(59, 15)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(1)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(171, 33)
+        Me.Button2.TabIndex = 92
+        Me.Button2.Text = "مشخصات محصول مشتری"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'TBCustomerProductSpec
+        '
+        Me.TBCustomerProductSpec.Enabled = False
+        Me.TBCustomerProductSpec.Location = New System.Drawing.Point(919, 419)
+        Me.TBCustomerProductSpec.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBCustomerProductSpec.Name = "TBCustomerProductSpec"
+        Me.TBCustomerProductSpec.Size = New System.Drawing.Size(122, 29)
+        Me.TBCustomerProductSpec.TabIndex = 91
+        Me.TBCustomerProductSpec.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBCustomerProductSpec.Visible = False
         '
         'RBMainOrder
         '
@@ -779,10 +809,12 @@ Partial Class FrmNewEmkansanji
         'RBOldProduct
         '
         Me.RBOldProduct.AutoSize = True
+        Me.RBOldProduct.Checked = True
         Me.RBOldProduct.Location = New System.Drawing.Point(18, 13)
         Me.RBOldProduct.Name = "RBOldProduct"
         Me.RBOldProduct.Size = New System.Drawing.Size(86, 25)
         Me.RBOldProduct.TabIndex = 2
+        Me.RBOldProduct.TabStop = True
         Me.RBOldProduct.Text = "محصول قبلی"
         Me.RBOldProduct.UseVisualStyleBackColor = True
         '
@@ -799,12 +831,10 @@ Partial Class FrmNewEmkansanji
         'RBNewProduct
         '
         Me.RBNewProduct.AutoSize = True
-        Me.RBNewProduct.Checked = True
         Me.RBNewProduct.Location = New System.Drawing.Point(469, 13)
         Me.RBNewProduct.Name = "RBNewProduct"
         Me.RBNewProduct.Size = New System.Drawing.Size(158, 25)
         Me.RBNewProduct.TabIndex = 0
-        Me.RBNewProduct.TabStop = True
         Me.RBNewProduct.Text = "ایجاد محصول /فرآیند جدید"
         Me.RBNewProduct.UseVisualStyleBackColor = True
         '
@@ -832,7 +862,7 @@ Partial Class FrmNewEmkansanji
         'TBCustomerName
         '
         Me.TBCustomerName.Enabled = False
-        Me.TBCustomerName.Location = New System.Drawing.Point(312, 17)
+        Me.TBCustomerName.Location = New System.Drawing.Point(672, 145)
         Me.TBCustomerName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerName.Name = "TBCustomerName"
         Me.TBCustomerName.Size = New System.Drawing.Size(234, 29)
@@ -848,10 +878,11 @@ Partial Class FrmNewEmkansanji
         Me.TBProductIDES.Size = New System.Drawing.Size(122, 29)
         Me.TBProductIDES.TabIndex = 45
         Me.TBProductIDES.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBProductIDES.Visible = False
         '
         'TBCustomerProductName
         '
-        Me.TBCustomerProductName.Location = New System.Drawing.Point(672, 144)
+        Me.TBCustomerProductName.Location = New System.Drawing.Point(289, 17)
         Me.TBCustomerProductName.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerProductName.Name = "TBCustomerProductName"
         Me.TBCustomerProductName.Size = New System.Drawing.Size(234, 29)
@@ -1004,17 +1035,8 @@ Partial Class FrmNewEmkansanji
         Me.TBSampleQuantity.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBSampleQuantity.Name = "TBSampleQuantity"
         Me.TBSampleQuantity.Size = New System.Drawing.Size(68, 29)
-        Me.TBSampleQuantity.TabIndex = 52
+        Me.TBSampleQuantity.TabIndex = 2
         Me.TBSampleQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(428, 452)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(81, 29)
-        Me.Button2.TabIndex = 51
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'LStatus
         '
@@ -1028,16 +1050,17 @@ Partial Class FrmNewEmkansanji
         Me.LStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.LStatus.Visible = False
         '
-        'Button3
+        'BTOpenExcel
         '
-        Me.Button3.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Button3.Location = New System.Drawing.Point(543, 456)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(1)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(127, 33)
-        Me.Button3.TabIndex = 14
-        Me.Button3.Text = "لیست امکان سنجی"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.BTOpenExcel.Enabled = False
+        Me.BTOpenExcel.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTOpenExcel.Location = New System.Drawing.Point(543, 456)
+        Me.BTOpenExcel.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTOpenExcel.Name = "BTOpenExcel"
+        Me.BTOpenExcel.Size = New System.Drawing.Size(127, 33)
+        Me.BTOpenExcel.TabIndex = 14
+        Me.BTOpenExcel.Text = "مشاهده فایل"
+        Me.BTOpenExcel.UseVisualStyleBackColor = True
         '
         'Label22
         '
@@ -1056,7 +1079,7 @@ Partial Class FrmNewEmkansanji
         Me.TBOrderNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBOrderNo.Name = "TBOrderNo"
         Me.TBOrderNo.Size = New System.Drawing.Size(234, 29)
-        Me.TBOrderNo.TabIndex = 10
+        Me.TBOrderNo.TabIndex = 3
         Me.TBOrderNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button1
@@ -1130,7 +1153,7 @@ Partial Class FrmNewEmkansanji
         Me.TBCustomerProductCode.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerProductCode.Name = "TBCustomerProductCode"
         Me.TBCustomerProductCode.Size = New System.Drawing.Size(182, 29)
-        Me.TBCustomerProductCode.TabIndex = 3
+        Me.TBCustomerProductCode.TabIndex = 10
         Me.TBCustomerProductCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label16
@@ -1242,6 +1265,7 @@ Partial Class FrmNewEmkansanji
         Me.TBCustomerID.Size = New System.Drawing.Size(122, 29)
         Me.TBCustomerID.TabIndex = 27
         Me.TBCustomerID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBCustomerID.Visible = False
         '
         'Label10
         '
@@ -1260,7 +1284,7 @@ Partial Class FrmNewEmkansanji
         Me.TBQuantity.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBQuantity.Name = "TBQuantity"
         Me.TBQuantity.Size = New System.Drawing.Size(80, 29)
-        Me.TBQuantity.TabIndex = 9
+        Me.TBQuantity.TabIndex = 1
         Me.TBQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label9
@@ -1280,14 +1304,14 @@ Partial Class FrmNewEmkansanji
         Me.TBCustomerDwgNo.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerDwgNo.Name = "TBCustomerDwgNo"
         Me.TBCustomerDwgNo.Size = New System.Drawing.Size(234, 29)
-        Me.TBCustomerDwgNo.TabIndex = 2
+        Me.TBCustomerDwgNo.TabIndex = 9
         Me.TBCustomerDwgNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label8.Location = New System.Drawing.Point(555, 20)
+        Me.Label8.Location = New System.Drawing.Point(975, 148)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(71, 26)
         Me.Label8.TabIndex = 21
@@ -1298,12 +1322,23 @@ Partial Class FrmNewEmkansanji
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.Label7.Location = New System.Drawing.Point(926, 145)
+        Me.Label7.Location = New System.Drawing.Point(543, 18)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(120, 26)
         Me.Label7.TabIndex = 19
         Me.Label7.Text = "نام محصول مشتری"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TBExcelFilePath
+        '
+        Me.TBExcelFilePath.Enabled = False
+        Me.TBExcelFilePath.Location = New System.Drawing.Point(919, 456)
+        Me.TBExcelFilePath.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBExcelFilePath.Name = "TBExcelFilePath"
+        Me.TBExcelFilePath.Size = New System.Drawing.Size(122, 29)
+        Me.TBExcelFilePath.TabIndex = 93
+        Me.TBExcelFilePath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBExcelFilePath.Visible = False
         '
         'FrmNewEmkansanji
         '
@@ -1399,9 +1434,8 @@ Partial Class FrmNewEmkansanji
     Friend WithEvents Button1 As Button
     Friend WithEvents Label22 As Label
     Friend WithEvents TBOrderNo As TextBox
-    Friend WithEvents Button3 As Button
+    Friend WithEvents BTOpenExcel As Button
     Friend WithEvents LStatus As Label
-    Friend WithEvents Button2 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Label23 As Label
@@ -1433,6 +1467,9 @@ Partial Class FrmNewEmkansanji
     Friend WithEvents RBMainOrder As RadioButton
     Friend WithEvents RBAmendOrder As RadioButton
     Friend WithEvents Button6 As Button
-    Friend WithEvents Button7 As Button
-    Friend WithEvents Button8 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents TBCustomerProductSpec As TextBox
+    Friend WithEvents BTSelectProduct As Button
+    Friend WithEvents BTSelectCustomer As Button
+    Friend WithEvents TBExcelFilePath As TextBox
 End Class

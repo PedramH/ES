@@ -8,26 +8,28 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>emkansanjiV1.My.MyApplication</StartupObject>
     <RootNamespace>emkansanjiV1</RootNamespace>
-    <AssemblyName>emkansanjiV1</AssemblyName>
+    <AssemblyName>ES-ERP</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>Z:\ES-ERP\package\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UpdateUrl>\\192.168.1.10\netdrive\ES-ERP\package\</UpdateUrl>
+    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationVersion>0.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -37,7 +39,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>emkansanjiV1.xml</DocumentationFile>
+    <DocumentationFile>ES-ERP.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -48,7 +50,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>emkansanjiV1.xml</DocumentationFile>
+    <DocumentationFile>ES-ERP.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -65,6 +67,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>logo_xgy_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>F1BCC15E9AABB95AB86F933ACE0BAB51CA8D6278</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>emkansanjiV1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ghasedak, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -134,6 +148,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="customerProductSpecification.Designer.vb">
+      <DependentUpon>customerProductSpecification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="customerProductSpecification.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="emkanSanjiForm.Designer.vb">
       <DependentUpon>emkanSanjiForm.vb</DependentUpon>
     </Compile>
@@ -201,7 +221,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ProductionStats.Designer.vb">
+      <DependentUpon>ProductionStats.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ProductionStats.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="readonlyclass.vb" />
+    <Compile Include="UserSettingForm.Designer.vb">
+      <DependentUpon>UserSettingForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserSettingForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="wires.Designer.vb">
       <DependentUpon>wires.vb</DependentUpon>
     </Compile>
@@ -210,6 +242,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="customerProductSpecification.resx">
+      <DependentUpon>customerProductSpecification.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="emkanSanjiForm.resx">
       <DependentUpon>emkanSanjiForm.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -244,11 +279,18 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductionStats.resx">
+      <DependentUpon>ProductionStats.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserSettingForm.resx">
+      <DependentUpon>UserSettingForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="wires.resx">
       <DependentUpon>wires.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="emkansanjiV1_TemporaryKey.pfx" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -264,9 +306,9 @@
     <None Include="App.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Templates\emkansanji.xlsx">
+    <Content Include="Templates\emkansanji.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

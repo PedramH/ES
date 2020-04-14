@@ -2,7 +2,10 @@
 Imports System.Data.OleDb
 Public Class ChangePasswordForm
     Private Async Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
         If TBpass.Text = TBpass2.Text Then
+            Me.Cursor = Cursors.WaitCursor
+
             Using cn = GetDatabaseCon()
                 Using cmd = cn.CreateCommand()
                     cmd.CommandText = "UPDATE users SET" &
@@ -14,7 +17,9 @@ Public Class ChangePasswordForm
                         cn.Close()
                         MsgBox("کلمه عبور با موفقیت تغییر کرد", vbInformation + MsgBoxStyle.MsgBoxRight, "تغییر کلمه عبور")
                         Logger.LogInfo("Password Changed")
+                        Me.Cursor = Cursors.Default
                     Catch ex As Exception
+                        Me.Cursor = Cursors.Default
                         MsgBox("خطا در اتصال به دیتابیس. پارامتر های ورودی را چک کرده و مجددا سعی کنید", vbCritical + vbMsgBoxRight, "خطا در اتصال")
                         Logger.LogFatal(ex.Message, ex)
                     End Try
@@ -36,6 +41,7 @@ Public Class ChangePasswordForm
 
     Private Async Sub BTPasswordReset_Click(sender As Object, e As EventArgs) Handles BTPasswordReset.Click
         Using cn = GetDatabaseCon()
+            Me.Cursor = Cursors.WaitCursor
             Using cmd = cn.CreateCommand()
                 cmd.CommandText = "UPDATE users SET" &
                      " users.password = '" & GetSaltedHash(TBpass2.Text, "salt") & "'" &
@@ -47,7 +53,9 @@ Public Class ChangePasswordForm
                     cn.Close()
                     MsgBox("کلمه عبور با موفقیت تغییر کرد", vbInformation + MsgBoxStyle.MsgBoxRight, "تغییر کلمه عبور")
                     Logger.LogInfo("Password Changed")
+                    Me.Cursor = Cursors.Default
                 Catch ex As Exception
+                    Me.Cursor = Cursors.Default
                     MsgBox("خطا در اتصال به دیتابیس. پارامتر های ورودی را چک کرده و مجددا سعی کنید", vbCritical + vbMsgBoxRight, "خطا در اتصال")
                     Logger.LogFatal(ex.Message, ex)
                 End Try

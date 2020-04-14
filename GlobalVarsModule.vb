@@ -6,21 +6,27 @@ Module GlobalVarsModule
     Public debugMode As Boolean = False
     Public db As String = "postgres" 'access or postgres
 
+    Public excelSheetPassword As String = "123456"
     '' -------------------------------------------------------  Configurations  -----------------------------------------------------
 
 
     Public connectionString As String = ConfigurationManager.ConnectionStrings("ConString").ConnectionString & "Jet OLEDB:Database Password=esdbpassword;"
     'Public postgresConString As String = "Host=198.143.181.131;Port=5432;Username=postgres;Password=picher;Database=mydb"
-    Public postgresConString As String = "Host=185.97.117.81;Port=5432;Username=postgres;Password=esdbpassword;Database=esdb" 'arvan-cloud
+    'Public postgresConString As String = "Host=185.97.117.81;Port=5432;Username=postgres;Password=esdbpassword;Database=esdb" 'arvan-cloud
+    Public postgresConString As String = "Host=192.168.1.17;Port=5432;Username=postgres;Password=esdbpassword;Database=esdb" 'Es-Server
 
 
     Public excelTemplateFilePath As String = ConfigurationManager.ConnectionStrings("excelPath").ConnectionString
     Public excelFilesBasePath As String = ConfigurationManager.ConnectionStrings("excelBasePath").ConnectionString
 
     '' TODO: Make these configurable
-    Public excelInventoryGarmPath As String = "D:\Academic\EnergySaz\Emkansanji\takeHome\موجودي مواد\garm.xlsx"
-    Public excelInventorySardPath As String = "D:\Academic\EnergySaz\Emkansanji\takeHome\موجودي مواد\sard.xlsx"
-    Public excelInventoryPurchasedPath As String = "D:\Academic\EnergySaz\Emkansanji\takeHome\موجودي مواد\purchased.xlsx"
+    'Public excelInventoryGarmPath As String = My.Settings.inventoryGarm
+    'Public excelInventorySardPath As String = My.Settings.inventorySard
+    'Public excelInventoryPurchasedPath As String = My.Settings.inventoryPurchase
+
+    Public excelInventoryGarmPath As String = "Z:\ES-ERP\mavad\garm.xlsx"
+    Public excelInventorySardPath As String = "Z:\ES-ERP\mavad\sard.xlsx"
+    Public excelInventoryPurchasedPath As String = "Z:\ES-ERP\mavad\purchased.xlsx"
 
 
     '' ----------------------------------------------------------  User Info  --------------------------------------------------------
@@ -49,7 +55,7 @@ Module GlobalVarsModule
      " emkansanji.r1_code AS [کد مفتول رزرو 1], emkansanji.r1_q AS [مقدار1], emkansanji.r2_code AS [کد مفتول رزرو 2], emkansanji.r2_q AS [مقدار 2], emkansanji.r3_code AS [کد مفتول رزرو 3], emkansanji.r3_q AS [مقدار 3], emkansanji.wireState AS [وضعیت موجودی مفتول], emkansanji.productReserve, " &
      " emkansanji.verificationNo AS [شماره تاییدیه], emkansanji.verificationDate AS [تاریخ تاییدیه], emkansanji.comment AS [توضیحات], emkansanji.pProcess AS [pProcess] , emkansanji.productReserve AS [productionReserve] ," &
      "springDataBase.productionProcess AS [productionProcess] , emkansanji.springInEachPackage AS [springInEachPackage] , emkansanji.packagingCost AS [packagingCost] , emkansanji.doable AS [doable] , emkansanji.whyNot AS [whyNot], " &
-     " emkansanji.buyWire AS [buyWire], emkansanji.buyMandrel AS [buyMandrel] , emkansanji.zarfiatSanji AS [zarfiatSanji], emkansanji.packageType AS [packageType], emkansanji.inspectionProcess AS [inspectionProcess] , emkansanji.orderType AS [orderType] , emkansanji.excelFilePath AS [excelFilePath] "
+     " emkansanji.buyWire AS [buyWire], emkansanji.buyMandrel AS [buyMandrel] , emkansanji.zarfiatSanji AS [zarfiatSanji], emkansanji.packageType AS [packageType], emkansanji.inspectionProcess AS [inspectionProcess] , emkansanji.orderType AS [orderType] , emkansanji.excelFilePath AS [excelFilePath] , emkansanji.customerProductSpecification AS [customerProductSpecification] "
 
     Public mandrelsColumnName As String = " ID AS [شماره شناسایی], mandrelCode AS [کد کالا] , mandrelDiameter AS [قطر شفت] "
 

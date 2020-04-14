@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -110,6 +110,78 @@ Namespace My
             End Get
             Set
                 Me("userGroup") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("760")>  _
+        Public Property stressThreashold() As Single
+            Get
+                Return CType(Me("stressThreashold"),Single)
+            End Get
+            Set
+                Me("stressThreashold") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("6200")>  _
+        Public Property wireLengthThreshold() As Single
+            Get
+                Return CType(Me("wireLengthThreshold"),Single)
+            End Get
+            Set
+                Me("wireLengthThreshold") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("""Z:\ES-ERP\mavad\garm.xlsx""")>  _
+        Public Property inventoryGarm() As String
+            Get
+                Return CType(Me("inventoryGarm"),String)
+            End Get
+            Set
+                Me("inventoryGarm") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("""Z:\ES-ERP\mavad\sard.xlsx""")>  _
+        Public Property inventorySard() As String
+            Get
+                Return CType(Me("inventorySard"),String)
+            End Get
+            Set
+                Me("inventorySard") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("""Z:\ES-ERP\mavad\purchased.xlsx""")>  _
+        Public Property inventoryPurchase() As String
+            Get
+                Return CType(Me("inventoryPurchase"),String)
+            End Get
+            Set
+                Me("inventoryPurchase") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property duplicateESExcel() As String
+            Get
+                Return CType(Me("duplicateESExcel"),String)
+            End Get
+            Set
+                Me("duplicateESExcel") = value
             End Set
         End Property
     End Class
