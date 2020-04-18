@@ -139,7 +139,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("""Z:\ES-ERP\mavad\garm.xlsx""")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Z:\ES-ERP\mavad\garm.xlsx")>  _
         Public Property inventoryGarm() As String
             Get
                 Return CType(Me("inventoryGarm"),String)
@@ -151,7 +151,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("""Z:\ES-ERP\mavad\sard.xlsx""")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Z:\ES-ERP\mavad\sard.xlsx")>  _
         Public Property inventorySard() As String
             Get
                 Return CType(Me("inventorySard"),String)
@@ -163,7 +163,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("""Z:\ES-ERP\mavad\purchased.xlsx""")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Z:\ES-ERP\mavad\purchased.xlsx")>  _
         Public Property inventoryPurchase() As String
             Get
                 Return CType(Me("inventoryPurchase"),String)
@@ -175,7 +175,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\erp\emkansanji")>  _
         Public Property duplicateESExcel() As String
             Get
                 Return CType(Me("duplicateESExcel"),String)

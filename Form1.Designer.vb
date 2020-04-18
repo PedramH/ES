@@ -65,6 +65,9 @@ Partial Class FrmNewEmkansanji
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TBOrderFolderPath = New System.Windows.Forms.TextBox()
+        Me.BTOpenFolder = New System.Windows.Forms.Button()
+        Me.TBExcelFilePath = New System.Windows.Forms.TextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.TBCustomerProductSpec = New System.Windows.Forms.TextBox()
         Me.RBMainOrder = New System.Windows.Forms.RadioButton()
@@ -127,7 +130,6 @@ Partial Class FrmNewEmkansanji
         Me.TBCustomerDwgNo = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TBExcelFilePath = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -606,6 +608,8 @@ Partial Class FrmNewEmkansanji
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.TBOrderFolderPath)
+        Me.GroupBox2.Controls.Add(Me.BTOpenFolder)
         Me.GroupBox2.Controls.Add(Me.TBExcelFilePath)
         Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.TBCustomerProductSpec)
@@ -658,6 +662,40 @@ Partial Class FrmNewEmkansanji
         Me.GroupBox2.TabIndex = 22
         Me.GroupBox2.TabStop = False
         '
+        'TBOrderFolderPath
+        '
+        Me.TBOrderFolderPath.Enabled = False
+        Me.TBOrderFolderPath.Location = New System.Drawing.Point(919, 453)
+        Me.TBOrderFolderPath.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBOrderFolderPath.Name = "TBOrderFolderPath"
+        Me.TBOrderFolderPath.Size = New System.Drawing.Size(122, 29)
+        Me.TBOrderFolderPath.TabIndex = 95
+        Me.TBOrderFolderPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBOrderFolderPath.Visible = False
+        '
+        'BTOpenFolder
+        '
+        Me.BTOpenFolder.Enabled = False
+        Me.BTOpenFolder.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTOpenFolder.Location = New System.Drawing.Point(477, 456)
+        Me.BTOpenFolder.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTOpenFolder.Name = "BTOpenFolder"
+        Me.BTOpenFolder.Size = New System.Drawing.Size(99, 33)
+        Me.BTOpenFolder.TabIndex = 94
+        Me.BTOpenFolder.Text = "پوشه سفارش"
+        Me.BTOpenFolder.UseVisualStyleBackColor = True
+        '
+        'TBExcelFilePath
+        '
+        Me.TBExcelFilePath.Enabled = False
+        Me.TBExcelFilePath.Location = New System.Drawing.Point(919, 422)
+        Me.TBExcelFilePath.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
+        Me.TBExcelFilePath.Name = "TBExcelFilePath"
+        Me.TBExcelFilePath.Size = New System.Drawing.Size(122, 29)
+        Me.TBExcelFilePath.TabIndex = 93
+        Me.TBExcelFilePath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TBExcelFilePath.Visible = False
+        '
         'Button2
         '
         Me.Button2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
@@ -672,7 +710,7 @@ Partial Class FrmNewEmkansanji
         'TBCustomerProductSpec
         '
         Me.TBCustomerProductSpec.Enabled = False
-        Me.TBCustomerProductSpec.Location = New System.Drawing.Point(919, 419)
+        Me.TBCustomerProductSpec.Location = New System.Drawing.Point(919, 390)
         Me.TBCustomerProductSpec.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerProductSpec.Name = "TBCustomerProductSpec"
         Me.TBCustomerProductSpec.Size = New System.Drawing.Size(122, 29)
@@ -872,7 +910,7 @@ Partial Class FrmNewEmkansanji
         'TBProductIDES
         '
         Me.TBProductIDES.Enabled = False
-        Me.TBProductIDES.Location = New System.Drawing.Point(919, 338)
+        Me.TBProductIDES.Location = New System.Drawing.Point(919, 325)
         Me.TBProductIDES.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBProductIDES.Name = "TBProductIDES"
         Me.TBProductIDES.Size = New System.Drawing.Size(122, 29)
@@ -1054,10 +1092,10 @@ Partial Class FrmNewEmkansanji
         '
         Me.BTOpenExcel.Enabled = False
         Me.BTOpenExcel.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTOpenExcel.Location = New System.Drawing.Point(543, 456)
+        Me.BTOpenExcel.Location = New System.Drawing.Point(578, 456)
         Me.BTOpenExcel.Margin = New System.Windows.Forms.Padding(1)
         Me.BTOpenExcel.Name = "BTOpenExcel"
-        Me.BTOpenExcel.Size = New System.Drawing.Size(127, 33)
+        Me.BTOpenExcel.Size = New System.Drawing.Size(92, 33)
         Me.BTOpenExcel.TabIndex = 14
         Me.BTOpenExcel.Text = "مشاهده فایل"
         Me.BTOpenExcel.UseVisualStyleBackColor = True
@@ -1259,7 +1297,7 @@ Partial Class FrmNewEmkansanji
         'TBCustomerID
         '
         Me.TBCustomerID.Enabled = False
-        Me.TBCustomerID.Location = New System.Drawing.Point(919, 380)
+        Me.TBCustomerID.Location = New System.Drawing.Point(919, 358)
         Me.TBCustomerID.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
         Me.TBCustomerID.Name = "TBCustomerID"
         Me.TBCustomerID.Size = New System.Drawing.Size(122, 29)
@@ -1328,17 +1366,6 @@ Partial Class FrmNewEmkansanji
         Me.Label7.TabIndex = 19
         Me.Label7.Text = "نام محصول مشتری"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TBExcelFilePath
-        '
-        Me.TBExcelFilePath.Enabled = False
-        Me.TBExcelFilePath.Location = New System.Drawing.Point(919, 456)
-        Me.TBExcelFilePath.Margin = New System.Windows.Forms.Padding(3, 1, 3, 1)
-        Me.TBExcelFilePath.Name = "TBExcelFilePath"
-        Me.TBExcelFilePath.Size = New System.Drawing.Size(122, 29)
-        Me.TBExcelFilePath.TabIndex = 93
-        Me.TBExcelFilePath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.TBExcelFilePath.Visible = False
         '
         'FrmNewEmkansanji
         '
@@ -1472,4 +1499,6 @@ Partial Class FrmNewEmkansanji
     Friend WithEvents BTSelectProduct As Button
     Friend WithEvents BTSelectCustomer As Button
     Friend WithEvents TBExcelFilePath As TextBox
+    Friend WithEvents TBOrderFolderPath As TextBox
+    Friend WithEvents BTOpenFolder As Button
 End Class

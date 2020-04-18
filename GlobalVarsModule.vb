@@ -14,19 +14,19 @@ Module GlobalVarsModule
     'Public postgresConString As String = "Host=198.143.181.131;Port=5432;Username=postgres;Password=picher;Database=mydb"
     'Public postgresConString As String = "Host=185.97.117.81;Port=5432;Username=postgres;Password=esdbpassword;Database=esdb" 'arvan-cloud
     Public postgresConString As String = "Host=192.168.1.17;Port=5432;Username=postgres;Password=esdbpassword;Database=esdb" 'Es-Server
-
+    'Public postgresConString As String = "Host=127.0.0.1;Port=5432;Username=postgres;Password=picher;Database=esdb" 'localhost test server
 
     Public excelTemplateFilePath As String = ConfigurationManager.ConnectionStrings("excelPath").ConnectionString
     Public excelFilesBasePath As String = ConfigurationManager.ConnectionStrings("excelBasePath").ConnectionString
 
     '' TODO: Make these configurable
-    'Public excelInventoryGarmPath As String = My.Settings.inventoryGarm
-    'Public excelInventorySardPath As String = My.Settings.inventorySard
-    'Public excelInventoryPurchasedPath As String = My.Settings.inventoryPurchase
+    Public excelInventoryGarmPath As String = My.Settings.inventoryGarm
+    Public excelInventorySardPath As String = My.Settings.inventorySard
+    Public excelInventoryPurchasedPath As String = My.Settings.inventoryPurchase
 
-    Public excelInventoryGarmPath As String = "Z:\ES-ERP\mavad\garm.xlsx"
-    Public excelInventorySardPath As String = "Z:\ES-ERP\mavad\sard.xlsx"
-    Public excelInventoryPurchasedPath As String = "Z:\ES-ERP\mavad\purchased.xlsx"
+    'Public excelInventoryGarmPath As String = "Z:\ES-ERP\mavad\garm.xlsx"
+    'Public excelInventorySardPath As String = "Z:\ES-ERP\mavad\sard.xlsx"
+    'Public excelInventoryPurchasedPath As String = "Z:\ES-ERP\mavad\purchased.xlsx"
 
 
     '' ----------------------------------------------------------  User Info  --------------------------------------------------------

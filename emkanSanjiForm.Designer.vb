@@ -192,6 +192,7 @@ Partial Class emkanSanjiForm
         Me.RMaftol2 = New System.Windows.Forms.RadioButton()
         Me.RMaftol1 = New System.Windows.Forms.RadioButton()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.BTOpenExcel2 = New System.Windows.Forms.Button()
         Me.LStatus = New System.Windows.Forms.Label()
         Me.CheckChangeExcel = New System.Windows.Forms.CheckBox()
         Me.BTModifyES = New System.Windows.Forms.Button()
@@ -243,7 +244,6 @@ Partial Class emkanSanjiForm
         Me.Label37 = New System.Windows.Forms.Label()
         Me.LOutsideDiameter = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
-        Me.BTOpenExcel2 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -336,6 +336,7 @@ Partial Class emkanSanjiForm
         Me.Button1.TabIndex = 71
         Me.Button1.Text = "تست"
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'BTEmkansanjiSearch
         '
@@ -2229,6 +2230,17 @@ Partial Class emkanSanjiForm
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "سایر مشخصات"
         '
+        'BTOpenExcel2
+        '
+        Me.BTOpenExcel2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
+        Me.BTOpenExcel2.Location = New System.Drawing.Point(919, 436)
+        Me.BTOpenExcel2.Margin = New System.Windows.Forms.Padding(1)
+        Me.BTOpenExcel2.Name = "BTOpenExcel2"
+        Me.BTOpenExcel2.Size = New System.Drawing.Size(127, 33)
+        Me.BTOpenExcel2.TabIndex = 103
+        Me.BTOpenExcel2.Text = "مشاهده فایل اکسل"
+        Me.BTOpenExcel2.UseVisualStyleBackColor = True
+        '
         'LStatus
         '
         Me.LStatus.AutoSize = True
@@ -2820,17 +2832,6 @@ Partial Class emkanSanjiForm
         Me.Label39.TabIndex = 78
         Me.Label39.Text = "قطر خارجی فنر : "
         Me.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'BTOpenExcel2
-        '
-        Me.BTOpenExcel2.Font = New System.Drawing.Font("B Traffic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(178, Byte))
-        Me.BTOpenExcel2.Location = New System.Drawing.Point(919, 436)
-        Me.BTOpenExcel2.Margin = New System.Windows.Forms.Padding(1)
-        Me.BTOpenExcel2.Name = "BTOpenExcel2"
-        Me.BTOpenExcel2.Size = New System.Drawing.Size(127, 33)
-        Me.BTOpenExcel2.TabIndex = 103
-        Me.BTOpenExcel2.Text = "مشاهده فایل اکسل"
-        Me.BTOpenExcel2.UseVisualStyleBackColor = True
         '
         'emkanSanjiForm
         '

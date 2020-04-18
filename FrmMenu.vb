@@ -2,9 +2,9 @@
     Private Sub FrmMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         M_user_info.Text = loggedInUserName
 
-        '' Disable Features that are not yes implemented
+        '' Disable Features that are not yet implemented
         M_production_plan.Enabled = False
-        M_production_data.Enabled = False
+        'M_production_data.Enabled = False
         M_production_shippment.Enabled = False
         '' ---------------------------------------------
 
@@ -85,7 +85,7 @@
         End If
         If loggedInUserGroup <> "Admin" And loggedInUserGroup <> "Tolid1" And loggedInUserGroup <> "Tolid2" Then
             ' M_warehouse_updateInventory.Enabled = False
-
+            M_production_data.Enabled = False
         End If
         If loggedInUserGroup <> "Admin" And loggedInUserGroup <> "Anbar" And loggedInUserGroup <> "Tolid1" And loggedInUserGroup <> "Tolid2" Then
             M_warehouse_productCode.Enabled = False
@@ -146,6 +146,10 @@
     End Sub
 
     Private Sub BTTest_Click(sender As Object, e As EventArgs) Handles BTTest.Click
+        ProductionStats.Show()
+    End Sub
+
+    Private Sub M_production_data_Click(sender As Object, e As EventArgs) Handles M_production_data.Click
         ProductionStats.Show()
     End Sub
 End Class

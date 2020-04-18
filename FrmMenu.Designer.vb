@@ -103,13 +103,13 @@ Partial Class FrmMenu
         'M_emkansanji_orders
         '
         Me.M_emkansanji_orders.Name = "M_emkansanji_orders"
-        Me.M_emkansanji_orders.Size = New System.Drawing.Size(162, 26)
+        Me.M_emkansanji_orders.Size = New System.Drawing.Size(180, 26)
         Me.M_emkansanji_orders.Text = "لیست سفارشات"
         '
         'M_emkansanji_new
         '
         Me.M_emkansanji_new.Name = "M_emkansanji_new"
-        Me.M_emkansanji_new.Size = New System.Drawing.Size(162, 26)
+        Me.M_emkansanji_new.Size = New System.Drawing.Size(180, 26)
         Me.M_emkansanji_new.Text = "امکان سنجی جدید"
         '
         'Menu_production
@@ -122,31 +122,31 @@ Partial Class FrmMenu
         'M_production_orders
         '
         Me.M_production_orders.Name = "M_production_orders"
-        Me.M_production_orders.Size = New System.Drawing.Size(179, 26)
+        Me.M_production_orders.Size = New System.Drawing.Size(180, 26)
         Me.M_production_orders.Text = "لیست سفارشات"
         '
         'M_prodcution_wireInventory
         '
         Me.M_prodcution_wireInventory.Name = "M_prodcution_wireInventory"
-        Me.M_prodcution_wireInventory.Size = New System.Drawing.Size(179, 26)
+        Me.M_prodcution_wireInventory.Size = New System.Drawing.Size(180, 26)
         Me.M_prodcution_wireInventory.Text = "موجودی مواد اولیه"
         '
         'M_production_data
         '
         Me.M_production_data.Name = "M_production_data"
-        Me.M_production_data.Size = New System.Drawing.Size(179, 26)
+        Me.M_production_data.Size = New System.Drawing.Size(180, 26)
         Me.M_production_data.Text = "آمار و موجودی تولید"
         '
         'M_production_shippment
         '
         Me.M_production_shippment.Name = "M_production_shippment"
-        Me.M_production_shippment.Size = New System.Drawing.Size(179, 26)
+        Me.M_production_shippment.Size = New System.Drawing.Size(180, 26)
         Me.M_production_shippment.Text = "ارسال محصول"
         '
         'M_production_plan
         '
         Me.M_production_plan.Name = "M_production_plan"
-        Me.M_production_plan.Size = New System.Drawing.Size(179, 26)
+        Me.M_production_plan.Size = New System.Drawing.Size(180, 26)
         Me.M_production_plan.Text = "برنامه تولید"
         '
         'Menu_customers
@@ -159,13 +159,13 @@ Partial Class FrmMenu
         'M_customers_list
         '
         Me.M_customers_list.Name = "M_customers_list"
-        Me.M_customers_list.Size = New System.Drawing.Size(162, 26)
+        Me.M_customers_list.Size = New System.Drawing.Size(180, 26)
         Me.M_customers_list.Text = "اطلاعت مشتریان"
         '
         'M_customer_new
         '
         Me.M_customer_new.Name = "M_customer_new"
-        Me.M_customer_new.Size = New System.Drawing.Size(162, 26)
+        Me.M_customer_new.Size = New System.Drawing.Size(180, 26)
         Me.M_customer_new.Text = "ثبت مشتری جدید"
         '
         'Menu_products

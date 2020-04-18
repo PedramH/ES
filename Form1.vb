@@ -718,9 +718,10 @@ Public Class FrmNewEmkansanji
             w.SaveAs(saveDuplicatePath & excelFileName) 'Save another file in the application directory
 
             Logger.LogInfo("Excel File Created with path (" + saveFilePath + ")")
+            TBOrderFolderPath.Text = path 'Path to the saved folder
             Return saveFilePath
         Catch ex As Exception
-            MsgBox("خطا در تکمیل قالب اکسل امکان سنجی. فایل اکسل را چک کرده و مجددا امتحان کنید", vbCritical + vbMsgBoxRight, "خطا")
+            MsgBox("خطا در تکمیل قالب اکسل امکان سنجی. فایل اکسل را چک کرده و مجددا امتحان کنید" + ex.Message, vbCritical + vbMsgBoxRight, "خطا")
             Logger.LogFatal(ex.Message, ex)
             Return "abort"
         Finally
@@ -791,6 +792,8 @@ Public Class FrmNewEmkansanji
         LStatus.Text = "در حال آماده سازی فایل اکسل امکان سنجی ..."
         Me.Cursor = Cursors.WaitCursor
 
+        If TBQuantity.Text = "" Then TBQuantity.Text = "0" 'To prevent null quantity order
+
         Dim saveFilePath = CreateOrderExcelFile()
 
         'Dim saveFilePath = Await Task(Of String).Run(Function() CreateOrderExcelFile())
@@ -818,6 +821,7 @@ Public Class FrmNewEmkansanji
                 Await con.OpenAsync()
                 Await cmd.ExecuteNonQueryAsync()
                 TBExcelFilePath.Text = saveFilePath
+
                 Logger.LogInfo("New EmkanSanji with Product ID = " + TBProductIDES.Text + " And Customer ID = " + TBCustomerID.Text)
                 MsgBox("ثبت امکان سنجی با موفقیت انجام شد", vbInformation + vbMsgBoxRight + RightToLeft, "امکان سنجی")
             Catch ex As Exception
@@ -917,8 +921,21 @@ Public Class FrmNewEmkansanji
     Private Sub TBExcelFilePath_TextChanged(sender As Object, e As EventArgs) Handles TBExcelFilePath.TextChanged
         If TBExcelFilePath.Text <> "" Then
             BTOpenExcel.Enabled = True
+            BTOpenFolder.Enabled = True
         Else
             BTOpenExcel.Enabled = False
+            BTOpenFolder.Enabled = False
         End If
+    End Sub
+
+    Private Sub BTOpenFolder_Click(sender As Object, e As EventArgs) Handles BTOpenFolder.Click
+        Me.Cursor = Cursors.WaitCursor
+        If System.IO.Directory.Exists(TBOrderFolderPath.Text) Then
+            Dim path = """" & TBOrderFolderPath.Text & """"
+            Process.Start(path)
+        Else
+            MsgBox("فایل اکسل در محل مورد نظر وجود ندارد", vbCritical, "خطا")
+        End If
+        Me.Cursor = Cursors.Default
     End Sub
 End Class

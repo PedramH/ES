@@ -481,6 +481,7 @@ Public Class wires
 
         End If
         For Each row As DataGridViewRow In DataGridView1.Rows()
+            On Error Resume Next '' TODO What the actual fuck
             Dim wire = row.Cells("عنوان").Value().ToString()
             If wire.Contains("Black") Then
                 row.Cells("عنوان").Style.BackColor = Color.Black

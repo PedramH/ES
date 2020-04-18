@@ -687,16 +687,18 @@ Public Class emkanSanjiForm
             Dim maxInLength = Int(TBPackageL.Text / LOutsideDiameter.Text)
             Dim maxInWidth = Int(TBPackageW.Text / LOutsideDiameter.Text)
             Dim NoOfRows = Int(TBPackageH.Text / LFreeLength.Text)
-
+            If NoOfRows = 0 Then NoOfRows = 1
             TBPackageCount.Text = maxInLength * maxInWidth * NoOfRows
             If LOrderQuantity.Text < TBPackageCount.Text Then
                 TBPackageCount.Text = LOrderQuantity.Text
             End If
-            Dim NoOfPackages = Int((LOrderQuantity.Text / TBPackageCount.Text) + 1)
+            Dim NoOfPackages = Math.Ceiling((LOrderQuantity.Text / TBPackageCount.Text))
+            Console.WriteLine(NoOfPackages)
             TBPCostForEach.Text = (Math.Round(((Val(TBPCost.Text) * NoOfPackages) / Val(LOrderQuantity.Text)) / 10000, 0) * 10000).ToString
         Catch ex As Exception
-            MsgBox(" پارامتر هار ورودی را کنترل کنید" + ex.Message, vbCritical + vbMsgBoxRight + RightToLeft, "خطا")
+            MsgBox(" پارامتر های ورودی را کنترل کنید" + ex.Message, vbCritical + vbMsgBoxRight + RightToLeft, "خطا")
         End Try
+
     End Sub
 
     Private Sub RBProducable_CheckedChanged(sender As Object, e As EventArgs) Handles RBProducable.CheckedChanged
@@ -1032,7 +1034,6 @@ Public Class emkanSanjiForm
             MsgBox("فایل اکسل در محل مورد نظر وجود ندارد", vbCritical, "خطا")
         End If
         Me.Cursor = Cursors.Default
-
     End Sub
 
     Private Async Sub BTModifyES_Click(sender As Object, e As EventArgs) Handles BTModifyES.Click
@@ -1120,6 +1121,7 @@ Public Class emkanSanjiForm
                             " pProcess = '" & productionProcess & "'," &
                              " customerID = '" & TBCustomerID.Text & "'," &
                               " customerProductName = '" & TBMCustomerProductName.Text & "'," &
+                              " customerProductSpecification = '" & TBCustomerProductSpec.Text & "'," &
                               " customerDwgNo = '" & TBMCustomerDwgNo.Text & "'," &
                               " quantity = '" & TBQuantity.Text & "'," &
                               " sampleQuantity = '" & TBSampleQuantity.Text & "'," &
@@ -1154,9 +1156,6 @@ Public Class emkanSanjiForm
                               " orderType = '" & orderType & "'," &
                              " verificationDate = '" & TBMVerificationDate.Text & "'" &
                              " WHERE ID = " & LemkansanjiID.Text & ";"
-
-
-
         Try
             If CheckChangeExcel.Checked Then
                 ModifyEmkansanjiExcelFile()
@@ -1184,6 +1183,17 @@ Public Class emkanSanjiForm
             MsgBox("فایل اکسل در محل مورد نظر وجود ندارد", vbCritical, "خطا")
         End If
         Me.Cursor = Cursors.Default
+    End Sub
+
+    Private Sub BTDeleteES_Click(sender As Object, e As EventArgs) Handles BTDeleteES.Click
+        Using cn = GetDatabaseCon()
+            Dim cmd = cn.createCommand()
+            cmd.commandtext = String.Format("UPDATE emkansanji SET excelFilePath = '' WHERE id = {0}", LemkansanjiID.Text)
+            cn.open()
+            cmd.executenonquery()
+            cn.close()
+            'Logger.LogInfo("Changed file path for order -> " & LemkansanjiID.Text)
+        End Using
     End Sub
 
 
